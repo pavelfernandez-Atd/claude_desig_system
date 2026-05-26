@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>tooltip-info — Adthena DS Demo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wdth,wght@75,300;75,400;75,600;100,300;100,400;100,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="tooltip-info.css">
+</head>
+<body style="padding:32px;background:#f0f2f5;font-family:'Open Sans',sans-serif">
+<div style="display:flex;gap:48px;flex-wrap:wrap;align-items:flex-start;padding-top:20px">
+  <div style="display:flex;flex-direction:column;align-items:center;gap:8px">
+    <div class="tooltip-info">
+      <div class="tooltip-info__body">Arrow bottom: tooltip appears above the trigger element.</div>
+      <svg class="tooltip-info__arrow" width="78" height="10" viewBox="0 0 78 10" fill="none">
+        <path d="M24 0H54C54 0 52.203 0 49 2.4096C45.7745 4.83616 42.0352 7.68387 40.1758 9.10226C39.4766 9.63566 38.5145 9.65177 37.8035 9.13418C36.0242 7.83892 32.5121 5.25297 29 2.5C25.8106 0 24 0 24 0Z" fill="white"/>
+      </svg>
+    </div>
+    <span style="font-size:11px;color:#858585;font-weight:600;text-transform:uppercase">Arrow Bottom</span>
+  </div>
+  <div style="display:flex;flex-direction:column-reverse;align-items:center;gap:8px">
+    <div class="tooltip-info tooltip-info--arrow-top">
+      <div class="tooltip-info__body">Arrow top: tooltip appears below the trigger element.</div>
+      <svg class="tooltip-info__arrow" width="78" height="10" viewBox="0 0 78 10" fill="none">
+        <path d="M24 0H54C54 0 52.203 0 49 2.4096C45.7745 4.83616 42.0352 7.68387 40.1758 9.10226C39.4766 9.63566 38.5145 9.65177 37.8035 9.13418C36.0242 7.83892 32.5121 5.25297 29 2.5C25.8106 0 24 0 24 0Z" fill="white"/>
+      </svg>
+    </div>
+    <span style="font-size:11px;color:#858585;font-weight:600;text-transform:uppercase">Arrow Top</span>
+  </div>
+</div>
+
+</body>
+</html>
