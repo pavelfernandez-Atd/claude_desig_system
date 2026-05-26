@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>gradient-bar-chart — Adthena DS Demo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wdth,wght@75,300;75,400;75,600;100,300;100,400;100,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="gradient-bar-chart.css">
+</head>
+<body style="padding:32px;background:#f0f2f5;font-family:'Open Sans',sans-serif">
+<div style="background:#fff;border-radius:12px;padding:24px;max-width:480px">
+  <div class="gbc">
+    <div class="gbc__row">
+      <div class="gbc__label">Bupa</div>
+      <div class="gbc__track">
+        <div class="gbc__fill" style="width:80%;background:linear-gradient(90deg,#4a9ef8,#acd5fb)">
+          <span class="gbc__val">80%</span>
+        </div>
+      </div>
+      <div class="gbc__tooltip"><span class="gbc__tooltip-text">Click Share: 80% · Impression Share: 72%</span></div>
+    </div>
+    <div class="gbc__row">
+      <div class="gbc__label">AXA Health</div>
+      <div class="gbc__track">
+        <div class="gbc__fill" style="width:62%;background:linear-gradient(90deg,#4a9ef8,#acd5fb)">
+          <span class="gbc__val">62%</span>
+        </div>
+      </div>
+    </div>
+    <div class="gbc__row">
+      <div class="gbc__label">Vitality</div>
+      <div class="gbc__track">
+        <div class="gbc__fill" style="width:48%;background:linear-gradient(90deg,#4a9ef8,#acd5fb)">
+          <span class="gbc__val">48%</span>
+        </div>
+      </div>
+    </div>
+    <div class="gbc__row">
+      <div class="gbc__label">WPA</div>
+      <div class="gbc__track">
+        <div class="gbc__fill" style="width:31%;background:linear-gradient(90deg,#4a9ef8,#acd5fb)">
+        </div>
+        <span class="gbc__val-outside">31%</span>
+      </div>
+    </div>
+    <div class="gbc__row">
+      <div class="gbc__label">Simply Health</div>
+      <div class="gbc__track">
+        <div class="gbc__fill" style="width:18%;background:linear-gradient(90deg,#4a9ef8,#acd5fb)">
+        </div>
+        <span class="gbc__val-outside">18%</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
