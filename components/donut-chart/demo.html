@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>donut-chart — Adthena DS Demo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wdth,wght@75,300;75,400;75,600;100,300;100,400;100,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="donut-chart.css">
+</head>
+<body style="padding:32px;background:#f0f2f5;font-family:'Open Sans',sans-serif">
+<div style="display:flex;gap:32px;flex-wrap:wrap;align-items:center">
+  <div>
+    <div class="donut-chart" id="donut-demo">
+      <svg class="donut-chart__svg" viewBox="0 0 248 248"></svg>
+      <div class="donut-chart__label">
+        <div class="donut-chart__value-row">
+          <span class="donut-chart__value">42</span>
+          <span class="donut-chart__unit">%</span>
+        </div>
+        <span class="donut-chart__subtitle">Share of<br>Impressions</span>
+      </div>
+    </div>
+  </div>
+  <div style="display:flex;flex-direction:column;gap:8px">
+    <div class="chart-legend-item">
+      <span class="chart-legend-item__dot" style="background:#4a9ef8"></span>
+      <span class="chart-legend-item__label chart-legend-item__label--brand">Your Brand</span>
+    </div>
+    <div class="chart-legend-item">
+      <span class="chart-legend-item__dot" style="background:#b3a2e7"></span>
+      <span class="chart-legend-item__label">Competitors</span>
+    </div>
+    <div class="chart-legend-item">
+      <span class="chart-legend-item__dot" style="background:#e0e5ef"></span>
+      <span class="chart-legend-item__label">Other</span>
+    </div>
+  </div>
+</div>
+<script src="donut-chart.js"></script>
+</body>
+</html>
