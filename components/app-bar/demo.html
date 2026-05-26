@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>app-bar — Adthena DS Demo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wdth,wght@75,300;75,400;75,600;100,300;100,400;100,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="app-bar.css">
+</head>
+<body style="padding:32px;background:#f0f2f5;font-family:'Open Sans',sans-serif">
+<div style="border-radius:8px;overflow:hidden">
+  <nav class="app-bar" aria-label="Main navigation">
+    <div class="app-bar__content">
+      <div class="app-bar__left">
+        <button class="app-bar__hamburger" aria-label="Toggle sidebar">
+          <svg width="16" height="11" viewBox="0 0 16 11" fill="none"><path stroke="white" stroke-width="1.5" stroke-linecap="round" d="M0 1.5h16M0 5.5h16M0 9.5h16"/></svg>
+        </button>
+        <div class="app-bar__vdivider"></div>
+        <div class="app-bar__logo" aria-label="Adthena">
+          <svg width="90" height="20" viewBox="0 0 113 26" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M40.2884 15.4986H46.6049L43.4567 7.75058L40.2884 15.4986ZM38.1286 20.7466H36.4L43.3921 5.14664H43.6104L50.5143 20.7466H48.7864L47.1813 16.8731H39.7336L38.1286 20.7466Z" fill="white"/><path fill-rule="evenodd" clip-rule="evenodd" d="M0 22.8909L9.81245 24.0115C9.64175 23.1359 9.55019 22.2335 9.55019 21.3083C9.55019 19.6522 9.83897 18.0634 10.3653 16.5876C9.03084 15.6612 7.86604 14.5054 6.92315 13.178L0 22.8909Z" fill="white"/></svg>
+        </div>
+      </div>
+      <div class="app-bar__center"></div>
+      <div class="app-bar__right">
+        <button class="app-bar__domain-btn" aria-label="Select domain">
+          <svg width="11" height="15" viewBox="0 0 11 15" fill="#5bb3f9"><path d="M5.5 0C2.5 0 0 2.5 0 5.5c0 4.2 5.5 9.5 5.5 9.5S11 9.7 11 5.5C11 2.5 8.5 0 5.5 0zm0 7.5a2 2 0 110-4 2 2 0 010 4z"/></svg>
+          <span class="app-bar__domain-text">Domain / Location</span>
+          <svg width="10" height="6" viewBox="0 0 10 6" fill="none"><path stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" d="M1 1l4 4 4-4"/></svg>
+        </button>
+        <div class="app-bar__vdivider"></div>
+        <div class="app-bar__icons">
+          <button class="app-bar__icon-btn" aria-label="Notifications">
+            <svg width="13" height="15" viewBox="0 0 13 15" fill="white"><path d="M6.5.5a5 5 0 00-5 5v3.5L.5 11v.5h12V11l-1-2V5.5a5 5 0 00-5-5zm-1.5 12a1.5 1.5 0 003 0z"/></svg>
+            <span class="app-bar__badge">3</span>
+          </button>
+          <button class="app-bar__icon-btn" aria-label="Settings">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="white"><path d="M5.7.8l-.4 1.5a4.5 4.5 0 00-1.3.8l-1.5-.5L.8 4.8l1.2.9a4.5 4.5 0 000 1.5L.8 8.2l1.7 3 1.5-.5c.4.3.8.6 1.3.8l.4 1.5h2.6l.4-1.5a4.5 4.5 0 001.3-.8l1.5.5 1.7-3-1.2-.9a4.5 4.5 0 000-1.5l1.2-.9-1.7-3-1.5.5a4.5 4.5 0 00-1.3-.8L8.3.8H5.7zM7 4.5a2.5 2.5 0 110 5 2.5 2.5 0 010-5z"/></svg>
+          </button>
+          <button class="app-bar__icon-btn app-bar__icon-btn--pill" aria-label="Profile">
+            <svg width="13" height="14" viewBox="0 0 13 14" fill="white"><circle cx="6.5" cy="4.5" r="3.5"/><path d="M0 13.5c0-3.6 2.9-6.5 6.5-6.5s6.5 2.9 6.5 6.5" fill="white"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+</div>
+<script src="app-bar.js"></script>
+</body>
+</html>
