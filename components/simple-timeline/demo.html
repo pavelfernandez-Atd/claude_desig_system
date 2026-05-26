@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>simple-timeline — Adthena DS Demo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wdth,wght@75,300;75,400;75,600;100,300;100,400;100,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="simple-timeline.css">
+</head>
+<body style="padding:32px;background:#f0f2f5;font-family:'Open Sans',sans-serif">
+<div style="background:#fff;border-radius:12px;padding:24px;max-width:600px">
+  <div class="simple-timeline">
+    <svg class="simple-timeline__svg" viewBox="0 0 600 120" xmlns="http://www.w3.org/2000/svg">
+      <!-- Grid lines -->
+      <line x1="40" y1="10" x2="40" y2="90" stroke="#dce3ef" stroke-width="1"/>
+      <line x1="160" y1="10" x2="160" y2="90" stroke="#dce3ef" stroke-width="1"/>
+      <line x1="280" y1="10" x2="280" y2="90" stroke="#dce3ef" stroke-width="1"/>
+      <line x1="400" y1="10" x2="400" y2="90" stroke="#dce3ef" stroke-width="1"/>
+      <line x1="520" y1="10" x2="520" y2="90" stroke="#dce3ef" stroke-width="1"/>
+      <!-- Horizontal grid -->
+      <line x1="40" y1="10" x2="540" y2="10" stroke="#dce3ef" stroke-width="1"/>
+      <line x1="40" y1="50" x2="540" y2="50" stroke="#dce3ef" stroke-width="1"/>
+      <line x1="40" y1="90" x2="540" y2="90" stroke="#dce3ef" stroke-width="1"/>
+      <!-- Y labels -->
+      <text x="32" y="14" text-anchor="end" font-family="Open Sans" font-size="11" fill="#858585">60%</text>
+      <text x="32" y="54" text-anchor="end" font-family="Open Sans" font-size="11" fill="#858585">30%</text>
+      <text x="32" y="94" text-anchor="end" font-family="Open Sans" font-size="11" fill="#858585">0%</text>
+      <!-- Line 1: Brand -->
+      <polyline points="40,30 160,25 280,35 400,20 520,15" fill="none" stroke="#4a9ef8" stroke-width="2"/>
+      <circle cx="40" cy="30" r="5.5" fill="#4a9ef8" stroke="white" stroke-width="2" style="cursor:pointer"/>
+      <circle cx="160" cy="25" r="5.5" fill="#4a9ef8" stroke="white" stroke-width="2" style="cursor:pointer"/>
+      <circle cx="280" cy="35" r="5.5" fill="#4a9ef8" stroke="white" stroke-width="2" style="cursor:pointer"/>
+      <circle cx="400" cy="20" r="5.5" fill="#4a9ef8" stroke="white" stroke-width="2" style="cursor:pointer"/>
+      <circle cx="520" cy="15" r="5.5" fill="#4a9ef8" stroke="white" stroke-width="2" style="cursor:pointer"/>
+      <!-- Line 2: Competitor -->
+      <polyline points="40,55 160,60 280,48 400,65 520,58" fill="none" stroke="#d47dd4" stroke-width="2"/>
+      <circle cx="40" cy="55" r="5.5" fill="#d47dd4" stroke="white" stroke-width="2" style="cursor:pointer"/>
+      <circle cx="160" cy="60" r="5.5" fill="#d47dd4" stroke="white" stroke-width="2" style="cursor:pointer"/>
+      <circle cx="280" cy="48" r="5.5" fill="#d47dd4" stroke="white" stroke-width="2" style="cursor:pointer"/>
+      <circle cx="400" cy="65" r="5.5" fill="#d47dd4" stroke="white" stroke-width="2" style="cursor:pointer"/>
+      <circle cx="520" cy="58" r="5.5" fill="#d47dd4" stroke="white" stroke-width="2" style="cursor:pointer"/>
+      <!-- X labels -->
+      <text x="40" y="108" text-anchor="middle" font-family="Open Sans" font-size="11" fill="#858585">1 Jan</text>
+      <text x="520" y="108" text-anchor="middle" font-family="Open Sans" font-size="11" fill="#858585">31 May</text>
+    </svg>
+    <div class="simple-timeline__tooltip" id="st-tip"></div>
+  </div>
+</div>
+
+</body>
+</html>
