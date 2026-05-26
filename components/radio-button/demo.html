@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Radio Button — Adthena Design System</title>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wdth,wght@75,300;75,400;75,600;100,300;100,400;100,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="radio-button.css">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+    body {
+      margin: 0;
+      padding: 40px 32px;
+      font-family: 'Open Sans', sans-serif;
+      background: #f4f7fb;
+      color: #27365b;
+    }
+    h1 {
+      font-size: 20px;
+      font-weight: 600;
+      color: #27365b;
+      margin: 0 0 4px;
+    }
+    .subtitle {
+      font-size: 13px;
+      color: #7a90b2;
+      margin: 0 0 40px;
+    }
+    .section-title {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.6px;
+      color: #858585;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+    .card {
+      background: #fff;
+      border-radius: 12px;
+      padding: 24px;
+      margin-bottom: 32px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+    }
+    .states-row {
+      display: flex;
+      gap: 32px;
+      flex-wrap: wrap;
+      align-items: flex-start;
+    }
+    .state-cell {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+    }
+    .state-label {
+      font-size: 11px;
+      color: #858585;
+    }
+    .groups-row {
+      display: flex;
+      gap: 48px;
+      flex-wrap: wrap;
+      align-items: flex-start;
+    }
+    .group-title {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      color: #858585;
+      margin-bottom: 12px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Radio Button</h1>
+  <p class="subtitle">Single-choice selection control · Adthena Design System · Figma node 88:1250</p>
+
+  <!-- All States -->
+  <div class="card">
+    <div class="section-title">All States</div>
+    <div class="states-row">
+
+      <div class="state-cell">
+        <div class="radio"><div class="radio__outer radio__outer--default"></div></div>
+        <span class="state-label">Default</span>
+      </div>
+
+      <div class="state-cell">
+        <div class="radio"><div class="radio__outer radio__outer--hovered"></div></div>
+        <span class="state-label">Hovered</span>
+      </div>
+
+      <div class="state-cell">
+        <div class="radio"><div class="radio__outer radio__outer--set"><div class="radio__inner"></div></div></div>
+        <span class="state-label">Set</span>
+      </div>
+
+      <div class="state-cell">
+        <div class="radio"><div class="radio__outer radio__outer--disabled"></div></div>
+        <span class="state-label">Disabled</span>
+      </div>
+
+      <div class="state-cell">
+        <div class="radio"><div class="radio__outer radio__outer--disabled-set"><div class="radio__inner"></div></div></div>
+        <span class="state-label">Disabled Set</span>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Interactive Groups -->
+  <div class="card">
+    <div class="section-title">Interactive Demo</div>
+    <div class="groups-row">
+
+      <!-- Normal -->
+      <div>
+        <div class="group-title">NORMAL</div>
+        <div class="radio-group" id="radio-demo-plan">
+          <label class="radio-row" onclick="radioSelect('plan', 0)">
+            <div class="radio"><div class="radio__outer radio__outer--set"><div class="radio__inner"></div></div></div>
+            <span class="radio-label">Option A</span>
+          </label>
+          <label class="radio-row" onclick="radioSelect('plan', 1)">
+            <div class="radio"><div class="radio__outer radio__outer--default"></div></div>
+            <span class="radio-label">Option B</span>
+          </label>
+          <label class="radio-row" onclick="radioSelect('plan', 2)">
+            <div class="radio"><div class="radio__outer radio__outer--default"></div></div>
+            <span class="radio-label">Option C</span>
+          </label>
+        </div>
+      </div>
+
+      <!-- Disabled -->
+      <div>
+        <div class="group-title">DISABLED</div>
+        <div class="radio-group">
+          <label class="radio-row radio-row--disabled">
+            <div class="radio"><div class="radio__outer radio__outer--disabled-set"><div class="radio__inner"></div></div></div>
+            <span class="radio-label radio-label--disabled">Option A</span>
+          </label>
+          <label class="radio-row radio-row--disabled">
+            <div class="radio"><div class="radio__outer radio__outer--disabled"></div></div>
+            <span class="radio-label radio-label--disabled">Option B</span>
+          </label>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script src="radio-button.js"></script>
+</body>
+</html>
