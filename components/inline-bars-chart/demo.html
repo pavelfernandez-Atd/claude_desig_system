@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>inline-bars-chart — Adthena DS Demo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wdth,wght@75,300;75,400;75,600;100,300;100,400;100,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="inline-bars-chart.css">
+</head>
+<body style="padding:32px;background:#f0f2f5;font-family:'Open Sans',sans-serif">
+<div style="background:#fff;border-radius:12px;padding:24px;max-width:640px">
+  <div class="ibc" id="ibc-demo">
+    <div class="ibc__rows">
+      <div class="ibc__row" style="padding:0">
+        <div class="ibc__label">
+          <span class="ibc__label-text">AXA Health</span>
+        </div>
+        <div class="ibc__bars-wrap">
+          <div class="ibc__bars">
+            <div class="ibc__bar" style="flex:8;background:#79cbd2" data-cat="Recommendations" data-pos="45%" data-neu="35%" data-neg="20%">8%</div>
+            <div class="ibc__bar" style="flex:34;background:#559cec" data-cat="Comparative" data-pos="33%" data-neu="22%" data-neg="44%">34%</div>
+            <div class="ibc__bar" style="flex:3;background:#e86492" data-cat="Cautionary" data-pos="12%" data-neu="18%" data-neg="70%">3%</div>
+            <div class="ibc__bar" style="flex:40;background:#d47dd4" data-cat="Commercial" data-pos="38%" data-neu="30%" data-neg="32%">40%</div>
+            <div class="ibc__bar" style="flex:15;background:#b3a2e7" data-cat="Informational" data-pos="55%" data-neu="28%" data-neg="17%">15%</div>
+          </div>
+          <div class="ibc__tooltip">
+            <div class="ibc__tooltip-title"></div>
+            <div class="ibc__tooltip-row"><div class="ibc__tooltip-dot" style="background:#40af46"></div><span class="ibc__tooltip-val ibc-pos"></span></div>
+            <div class="ibc__tooltip-row"><div class="ibc__tooltip-dot" style="background:#6aabf7"></div><span class="ibc__tooltip-val ibc-neu"></span></div>
+            <div class="ibc__tooltip-row"><div class="ibc__tooltip-dot" style="background:#e86492"></div><span class="ibc__tooltip-val ibc-neg"></span></div>
+            <div class="ibc__tooltip-divider"></div>
+            <button class="ibc__tooltip-btn">View Samples</button>
+          </div>
+        </div>
+      </div>
+      <div class="ibc__row" style="padding:0">
+        <div class="ibc__label">
+          <span class="ibc__label-text">Competitors Avg.</span>
+        </div>
+        <div class="ibc__bars-wrap">
+          <div class="ibc__bars">
+            <div class="ibc__bar" style="flex:22;background:#79cbd2" data-cat="Recommendations" data-pos="38%" data-neu="40%" data-neg="22%">22%</div>
+            <div class="ibc__bar" style="flex:12;background:#559cec" data-cat="Comparative" data-pos="28%" data-neu="30%" data-neg="42%">12%</div>
+            <div class="ibc__bar" style="flex:38;background:#e86492" data-cat="Cautionary" data-pos="10%" data-neu="15%" data-neg="75%">38%</div>
+            <div class="ibc__bar" style="flex:8;background:#d47dd4" data-cat="Commercial" data-pos="30%" data-neu="28%" data-neg="42%">8%</div>
+            <div class="ibc__bar" style="flex:20;background:#b3a2e7" data-cat="Informational" data-pos="48%" data-neu="32%" data-neg="20%">20%</div>
+          </div>
+          <div class="ibc__tooltip">
+            <div class="ibc__tooltip-title"></div>
+            <div class="ibc__tooltip-row"><div class="ibc__tooltip-dot" style="background:#40af46"></div><span class="ibc__tooltip-val ibc-pos"></span></div>
+            <div class="ibc__tooltip-row"><div class="ibc__tooltip-dot" style="background:#6aabf7"></div><span class="ibc__tooltip-val ibc-neu"></span></div>
+            <div class="ibc__tooltip-row"><div class="ibc__tooltip-dot" style="background:#e86492"></div><span class="ibc__tooltip-val ibc-neg"></span></div>
+            <div class="ibc__tooltip-divider"></div>
+            <button class="ibc__tooltip-btn">View Samples</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="ibc__legend">
+      <div class="ibc__legend-item"><div class="ibc__legend-dot" style="background:#79cbd2"></div><span class="ibc__legend-label">Recommendations</span></div>
+      <div class="ibc__legend-item"><div class="ibc__legend-dot" style="background:#559cec"></div><span class="ibc__legend-label">Comparative</span></div>
+      <div class="ibc__legend-item"><div class="ibc__legend-dot" style="background:#e86492"></div><span class="ibc__legend-label">Cautionary</span></div>
+      <div class="ibc__legend-item"><div class="ibc__legend-dot" style="background:#d47dd4"></div><span class="ibc__legend-label">Commercial</span></div>
+      <div class="ibc__legend-item"><div class="ibc__legend-dot" style="background:#b3a2e7"></div><span class="ibc__legend-label">Informational</span></div>
+    </div>
+  </div>
+</div>
+<script src="inline-bars-chart.js"></script>
+</body>
+</html>
