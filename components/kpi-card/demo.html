@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>kpi-card — Adthena DS Demo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wdth,wght@75,300;75,400;75,600;100,300;100,400;100,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="kpi-card.css">
+</head>
+<body style="padding:32px;background:#f0f2f5;font-family:'Open Sans',sans-serif">
+<svg width="0" height="0" style="position:absolute">
+  <defs>
+    <linearGradient id="grad-up" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#40af46" stop-opacity="0.25"/>
+      <stop offset="100%" stop-color="#40af46" stop-opacity="0.02"/>
+    </linearGradient>
+    <linearGradient id="grad-down" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#de5a5a" stop-opacity="0.25"/>
+      <stop offset="100%" stop-color="#de5a5a" stop-opacity="0.02"/>
+    </linearGradient>
+    <linearGradient id="grad-flat" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#6477a2" stop-opacity="0.18"/>
+      <stop offset="100%" stop-color="#6477a2" stop-opacity="0.02"/>
+    </linearGradient>
+  </defs>
+</svg>
+<div style="display:flex;gap:16px;flex-wrap:wrap">
+  <!-- Up -->
+  <div class="kpi-card" style="width:280px">
+    <div class="kpi-card__header">
+      <span class="kpi-card__label">Impression Share</span>
+    </div>
+    <div class="kpi-card__body">
+      <div class="kpi-card__row">
+        <div class="kpi-card__values">
+          <div class="kpi-card__bar"></div>
+          <span class="kpi-card__value">31</span>
+          <span class="kpi-card__delta kpi-card__delta--up">+3</span>
+        </div>
+        <div class="kpi-card__sparkline" data-color="#40af46">
+          <svg width="100%" height="44" viewBox="0 0 214 44" preserveAspectRatio="none">
+            <path d="M0,38 C50,34 100,26 140,18 C170,12 192,7 214,4" fill="none" stroke="#40af46" stroke-width="1.5"/>
+            <path d="M0,38 C50,34 100,26 140,18 C170,12 192,7 214,4 L214,44 L0,44Z" fill="url(#grad-up)"/>
+          </svg>
+        </div>
+      </div>
+      <span class="kpi-card__subtitle">vs previous period</span>
+    </div>
+  </div>
+  <!-- Down -->
+  <div class="kpi-card" style="width:280px">
+    <div class="kpi-card__header">
+      <span class="kpi-card__label">Click Share</span>
+    </div>
+    <div class="kpi-card__body">
+      <div class="kpi-card__row">
+        <div class="kpi-card__values">
+          <div class="kpi-card__bar"></div>
+          <span class="kpi-card__value">24</span>
+          <span class="kpi-card__delta kpi-card__delta--down">-5</span>
+        </div>
+        <div class="kpi-card__sparkline" data-color="#de5a5a">
+          <svg width="100%" height="44" viewBox="0 0 218 44" preserveAspectRatio="none">
+            <path d="M0,6 C50,10 100,18 140,26 C170,32 196,37 218,40" fill="none" stroke="#de5a5a" stroke-width="1.5"/>
+            <path d="M0,6 C50,10 100,18 140,26 C170,32 196,37 218,40 L218,44 L0,44Z" fill="url(#grad-down)"/>
+          </svg>
+        </div>
+      </div>
+      <span class="kpi-card__subtitle">vs previous period</span>
+    </div>
+  </div>
+  <!-- Flat -->
+  <div class="kpi-card" style="width:280px">
+    <div class="kpi-card__header">
+      <span class="kpi-card__label">Avg Position</span>
+    </div>
+    <div class="kpi-card__body">
+      <div class="kpi-card__row">
+        <div class="kpi-card__values kpi-card__values--full">
+          <div class="kpi-card__bar"></div>
+          <span class="kpi-card__value">2</span>
+          <span class="kpi-card__value-unit">.4</span>
+          <span class="kpi-card__delta kpi-card__delta--flat">—</span>
+          <div class="kpi-card__sparkline" style="margin-left:8px">
+            <svg width="100%" height="44" viewBox="0 0 235 44" preserveAspectRatio="none">
+              <path d="M0,22 C60,21 120,23 180,22 C200,22 215,22 235,22" fill="none" stroke="#6477a2" stroke-width="1.5"/>
+              <path d="M0,22 C60,21 120,23 180,22 C200,22 215,22 235,22 L235,44 L0,44Z" fill="url(#grad-flat)"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+      <span class="kpi-card__subtitle">vs previous period</span>
+    </div>
+  </div>
+</div>
+<script src="kpi-card.js"></script>
+</body>
+</html>
