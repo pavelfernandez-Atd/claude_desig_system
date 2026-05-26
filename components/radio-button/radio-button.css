@@ -1,0 +1,77 @@
+/**
+ * Radio Button  —  .radio
+ * Single-choice selection control with five visual states.
+ * Built from Figma node 88:1250.
+ *
+ * States: default | hovered | set | disabled | disabled-set
+ */
+
+/* ── Outer wrapper ────────────────────────────────────────────── */
+.radio {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
+
+/* ── Circle ───────────────────────────────────────────────────── */
+.radio__outer {
+  width: 16px;
+  height: 16px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  box-sizing: border-box;
+  transition: border-color 0.15s, background 0.15s;
+}
+
+.radio__outer--default      { border: 1.5px solid #496f97; }
+.radio__outer--hovered      { border: 1.5px solid #0c8dea; cursor: pointer; }
+.radio__outer--set          { background: #0c8dea; border: 1.5px solid #0c8dea; }
+.radio__outer--disabled     { border: 1.5px solid #bacfe2; }
+.radio__outer--disabled-set { background: #bacfe2; border: 1.5px solid #bacfe2; }
+
+/* ── Inner dot (Set states only) ─────────────────────────────── */
+.radio__inner {
+  width: 10px;
+  height: 10px;
+  border-radius: 6px;
+  background: #ffffff;
+  flex-shrink: 0;
+}
+
+/* ── Group layout ─────────────────────────────────────────────── */
+.radio-group {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.radio-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.radio-row--disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+/* ── Label text ───────────────────────────────────────────────── */
+.radio-label {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 14px;
+  color: #27365b;
+  line-height: 1;
+}
+
+.radio-label--disabled {
+  color: #bacfe2;
+}
