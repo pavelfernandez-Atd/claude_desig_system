@@ -1151,7 +1151,7 @@ const topTerms = [
     });
 
     // Hover dot (SVG circle, hidden until hover)
-    var dot = mk('circle', { r: 4, fill: '#e879b0', stroke: '#fff', 'stroke-width': 2, display: 'none' });
+    var dot = mk('circle', { r: 4, fill: '#e879b0', stroke: '#fff', 'stroke-width': 2, visibility: 'hidden' });
     svg.appendChild(dot);
 
     // Hover tooltip (absolutely positioned over the container)
@@ -1169,7 +1169,7 @@ const topTerms = [
       // Position dot at data point in SVG units
       dot.setAttribute('cx', xOf(idx).toFixed(1));
       dot.setAttribute('cy', yOf(data[idx]).toFixed(1));
-      dot.setAttribute('display', 'block');
+      dot.setAttribute('visibility', 'visible');
 
       // Position tooltip in CSS pixels (relative to container)
       var dotCssX = xOf(idx) / scaleX;
@@ -1185,7 +1185,7 @@ const topTerms = [
       tip.style.top = ty + 'px';
     });
     svg.addEventListener('mouseleave', function() {
-      dot.setAttribute('display', 'none');
+      dot.setAttribute('visibility', 'hidden');
       tip.style.display = 'none';
     });
   } catch(e) { console.warn('Timeline error:', e); }
