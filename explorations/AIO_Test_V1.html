@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>AI Overview — Adthena</title>
 <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wdth,wght@0,75,300..700;0,100,300..700;1,75,300..700;1,100,300..700&display=swap" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 body { font-family: 'Open Sans', Helvetica, sans-serif; background: #e5eef5; min-height: 100vh; }
@@ -1044,113 +1045,102 @@ const topTerms = [
   { term:"search optimization marketing", intent:"-",       impressions:"1,900",  freq:"100%", above:"30.9%", below:"69.1%" },
 ];
 
-// ── TIMELINE CHART (pure canvas, no external deps) ────────────────────────
+// ── TIMELINE CHART ────────────────────────────────────────────────────────
 (function buildTimeline() {
-  var canvas = document.getElementById('timelineChart');
-  if (!canvas) return;
-  var ctx = canvas.getContext('2d');
-  var PAD_L = 44, PAD_R = 12, PAD_T = 16, PAD_B = 28;
-  var tooltip = document.createElement('div');
-  tooltip.style.cssText = 'position:absolute;display:none;background:rgba(0,0,0,0.8);color:#fff;font:11px "Open Sans",Helvetica;border-radius:6px;padding:5px 10px;pointer-events:none;z-index:10;';
-  canvas.parentElement.style.position = 'relative';
-  canvas.parentElement.appendChild(tooltip);
+  const canvas = document.getElementById('timelineChart');
+  const ctx = canvas.getContext('2d');
 
-  var data = timelineFreq;
-  var n = data.length;
-  var minV = Math.min.apply(null, data);
-  var maxV = Math.max.apply(null, data);
-  var yMin = Math.floor(minV / 5) * 5;
-  var yMax = Math.ceil(maxV / 5) * 5;
-  if (yMax === yMin) { yMax = yMin + 10; }
-
-  function render() {
-    var rect = canvas.getBoundingClientRect();
-    var dpr = window.devicePixelRatio || 1;
-    var w = rect.width, h = rect.height;
-    if (!w || !h) return;
-    canvas.width  = w * dpr;
-    canvas.height = h * dpr;
-    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-
-    function xOf(i)   { return PAD_L + (i / (n - 1)) * (w - PAD_L - PAD_R); }
-    function yOf(v)   { return PAD_T + (1 - (v - yMin) / (yMax - yMin)) * (h - PAD_T - PAD_B); }
-
-    // weekend bands
-    ctx.fillStyle = 'rgba(235,235,235,0.5)';
-    var step = (w - PAD_L - PAD_R) / (n - 1);
-    weekendIdx.forEach(function(i) {
-      ctx.fillRect(xOf(i) - step / 2, PAD_T, step, h - PAD_T - PAD_B);
-    });
-
-    // horizontal grid lines
-    var ticks = [yMin, yMin + (yMax - yMin) * 0.25, yMin + (yMax - yMin) * 0.5, yMin + (yMax - yMin) * 0.75, yMax];
-    ctx.strokeStyle = '#e8eaf0'; ctx.lineWidth = 1;
-    ticks.forEach(function(v) {
-      var y = yOf(v);
-      ctx.beginPath(); ctx.moveTo(PAD_L, y); ctx.lineTo(w - PAD_R, y); ctx.stroke();
-    });
-
-    // y-axis labels (top and bottom only)
-    ctx.fillStyle = '#9e9e9e';
-    ctx.font = '12px "Open Sans",Helvetica';
-    ctx.textAlign = 'right'; ctx.textBaseline = 'middle';
-    ctx.fillText(yMax + '%', PAD_L - 4, yOf(yMax));
-    ctx.fillText(yMin + '%', PAD_L - 4, yOf(yMin));
-
-    // x-axis labels (first and last)
-    ctx.textAlign = 'center'; ctx.textBaseline = 'top';
-    ctx.fillText(timelineDates[0], xOf(0), h - PAD_B + 4);
-    ctx.fillText(timelineDates[n - 1], xOf(n - 1), h - PAD_B + 4);
-
-    // gradient fill
-    var grad = ctx.createLinearGradient(0, PAD_T, 0, h - PAD_B);
-    grad.addColorStop(0, 'rgba(244,184,220,0.55)');
-    grad.addColorStop(1, 'rgba(244,184,220,0.0)');
-    ctx.beginPath();
-    ctx.moveTo(xOf(0), yOf(data[0]));
-    for (var i = 1; i < n; i++) {
-      var x0 = xOf(i - 1), y0 = yOf(data[i - 1]);
-      var x1 = xOf(i),     y1 = yOf(data[i]);
-      var cpx = (x0 + x1) / 2;
-      ctx.bezierCurveTo(cpx, y0, cpx, y1, x1, y1);
-    }
-    ctx.lineTo(xOf(n - 1), h - PAD_B);
-    ctx.lineTo(xOf(0), h - PAD_B);
-    ctx.closePath();
-    ctx.fillStyle = grad; ctx.fill();
-
-    // line
-    ctx.beginPath();
-    ctx.moveTo(xOf(0), yOf(data[0]));
-    for (var i = 1; i < n; i++) {
-      var x0 = xOf(i - 1), y0 = yOf(data[i - 1]);
-      var x1 = xOf(i),     y1 = yOf(data[i]);
-      var cpx = (x0 + x1) / 2;
-      ctx.bezierCurveTo(cpx, y0, cpx, y1, x1, y1);
-    }
-    ctx.strokeStyle = '#e879b0'; ctx.lineWidth = 2; ctx.stroke();
-  }
-
-  render();
-  window.addEventListener('resize', render);
-
-  canvas.addEventListener('mousemove', function(e) {
-    var rect2 = canvas.getBoundingClientRect();
-    var w2 = rect2.width;
-    var mx = e.clientX - rect2.left;
-    var step = (w2 - PAD_L - PAD_R) / (n - 1);
-    var idx = Math.round((mx - PAD_L) / step);
-    idx = Math.max(0, Math.min(n - 1, idx));
-    var h2 = rect2.height;
-    function xOf2(i) { return PAD_L + (i / (n - 1)) * (w2 - PAD_L - PAD_R); }
-    tooltip.style.display = 'block';
-    tooltip.innerHTML = '<b>' + timelineDates[idx] + '</b><br><span style="color:#e879b0;">AIO Frequency: ' + data[idx].toFixed(1) + '%</span>';
-    var tx = xOf2(idx) + 8;
-    if (tx + 160 > w2) tx = xOf2(idx) - 168;
-    tooltip.style.left = tx + 'px';
-    tooltip.style.top = (h2 * 0.1) + 'px';
+  new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: timelineDates,
+      datasets: [
+        {
+          label: 'AIO Frequency',
+          data: timelineFreq,
+          borderColor: '#e879b0',
+          borderWidth: 2,
+          backgroundColor: (context) => {
+            const chart = context.chart;
+            const {ctx: c, chartArea} = chart;
+            if (!chartArea) return 'transparent';
+            const grad = c.createLinearGradient(0, chartArea.top, 0, chartArea.bottom);
+            grad.addColorStop(0, 'rgba(244,184,220,0.55)');
+            grad.addColorStop(1, 'rgba(244,184,220,0.0)');
+            return grad;
+          },
+          fill: true,
+          tension: 0.35,
+          pointRadius: 0,
+          pointHoverRadius: 5,
+          pointHoverBackgroundColor: '#e879b0',
+          pointHoverBorderColor: '#fff',
+          pointHoverBorderWidth: 2,
+        },
+      ]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      interaction: { mode: 'index', intersect: false },
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          backgroundColor: 'rgba(0,0,0,0.8)',
+          titleColor: '#fff',
+          titleFont: { family: "'Open Sans', Helvetica", size: 11, weight: '600' },
+          bodyColor: '#e879b0',
+          bodyFont: { family: "'Open Sans', Helvetica", size: 11 },
+          padding: { x: 10, y: 5 },
+          cornerRadius: 6,
+          callbacks: {
+            label: (ctx) => ` AIO Frequency: ${ctx.raw.toFixed(1)}%`
+          }
+        },
+      },
+      scales: {
+        x: {
+          grid: { display: false },
+          border: { display: false },
+          ticks: {
+            font: { family: "'Open Sans', Helvetica", size: 12 },
+            color: '#9e9e9e',
+            maxTicksLimit: 5,
+            maxRotation: 0,
+          }
+        },
+        y: {
+          grid: { color: '#e8eaf0', lineWidth: 1 },
+          border: { display: false, dash: [] },
+          ticks: {
+            font: { family: "'Open Sans', Helvetica", size: 12 },
+            color: '#9e9e9e',
+            callback: (v) => v + '%',
+            maxTicksLimit: 5,
+          },
+          min: 10,
+        }
+      }
+    },
+    plugins: [{
+      id: 'weekendBands',
+      beforeDraw(chart) {
+        const {ctx: c, chartArea, scales} = chart;
+        if (!chartArea || !scales.x) return;
+        c.save();
+        c.fillStyle = 'rgba(235,235,235,0.5)';
+        const xScale = scales.x;
+        for (let i = 0; i < timelineDates.length; i++) {
+          if (weekendIdx.includes(i)) {
+            const xLeft  = xScale.getPixelForValue(i) - (xScale.getPixelForValue(1) - xScale.getPixelForValue(0)) / 2;
+            const xRight = xLeft + (xScale.getPixelForValue(1) - xScale.getPixelForValue(0));
+            c.fillRect(xLeft, chartArea.top, xRight - xLeft, chartArea.bottom - chartArea.top);
+          }
+        }
+        c.restore();
+      }
+    }]
   });
-  canvas.addEventListener('mouseleave', function() { tooltip.style.display = 'none'; });
 })();
 
 // ── SPARKLINES (inline SVG, no deps) ──────────────────────────────────────
