@@ -309,7 +309,7 @@ Used at the bottom of chart cards for AI-generated observations.
 
 ## Icons & SVG Assets
 
-All icons and SVGs must be **inlined** — no external CDN references. Fetch the exact SVG from the component's `demo.html` or `[name].css` (see Step 1). Do not reference `c.animaapp.com` or any other external asset host.
+All icons and SVGs must be **inlined** — no external CDN references. Fetch the exact SVG from the component's `demo.html` or `[name].css` (see Step 1).
 
 **Adthena wordmark** — use this inline SVG wherever the logo appears:
 
