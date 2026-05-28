@@ -75,6 +75,49 @@ Or download it once and reference it locally:
 
 ---
 
+## Step 2 — Pre-code checklist (mandatory, every prototype)
+
+Before writing a single line of HTML or CSS, verify all three:
+
+- [ ] `<link rel="stylesheet" href="ds-components.css">` is the **first** stylesheet in `<head>`
+- [ ] Every component's HTML was copied **verbatim** from its `demo.html` — not typed from memory, not reconstructed from the README
+- [ ] No `<style>` block contains rules targeting **component class names** (`.app-bar`, `.kpi-card`, `.main-nav`, `.service-bar`, `.card-header`, `.ds-chip`, `.subtab`, `.mclc`, `.donut-chart`, `.ibc`, etc.) — those are already defined in `ds-components.css`
+
+**If any box is unchecked, stop and fix it before continuing.**
+
+The only CSS permitted in `<style>` is **page-level layout**: fixed positioning offsets, content area padding, grid/flex wrappers, and utility classes that have no equivalent in the DS. Never redefine what the DS already owns.
+
+### ❌ Wrong — rewriting component CSS inline:
+
+```html
+<style>
+  .kpi-card { background: white; border-radius: 12px; padding: 16px; }
+  .app-bar { background: #063059; height: 50px; position: fixed; }
+</style>
+```
+
+### ✅ Right — linking the stylesheet, copying markup verbatim:
+
+```html
+<head>
+  <link rel="stylesheet" href="ds-components.css">
+  <!-- page-level layout only below -->
+  <style>
+    .content { padding-top: 74px; padding-left: 278px; }
+  </style>
+</head>
+<body>
+  <!-- copied verbatim from app-bar/demo.html -->
+  <nav class="app-bar">
+    <div class="app-bar__content"> … </div>
+  </nav>
+  <!-- copied verbatim from kpi-card/demo.html -->
+  <div class="kpi-card"> … </div>
+</body>
+```
+
+---
+
 ## Design Tokens
 
 ### Colours
