@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>AI Overview — Adthena</title>
 <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wdth,wght@0,75,300..700;0,100,300..700;1,75,300..700;1,100,300..700&display=swap" rel="stylesheet" />
-<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 body { font-family: 'Open Sans', Helvetica, sans-serif; background: #e5eef5; min-height: 100vh; }
@@ -188,6 +187,8 @@ body { font-family: 'Open Sans', Helvetica, sans-serif; background: #e5eef5; min
 
 /* ── Timeline chart ── */
 .timeline-container { position: relative; height: 260px; }
+#timelineChart { width: 100%; height: 100%; display: block; }
+@keyframes tlDraw { to { stroke-dashoffset: 0; } }
 
 /* ── Intent / bar charts ── */
 .bar-chart-row { display: flex; flex-direction: column; gap: 10px; }
@@ -559,7 +560,7 @@ svg.icon { width: 16px; height: 16px; }
       </div>
     </div>
     <div class="timeline-container">
-      <canvas id="timelineChart"></canvas>
+      <svg id="timelineChart"></svg>
     </div>
     <!-- legend -->
     <div style="display:flex;justify-content:center;gap:24px;margin-top:12px;">
@@ -1045,200 +1046,126 @@ const topTerms = [
   { term:"search optimization marketing", intent:"-",       impressions:"1,900",  freq:"100%", above:"30.9%", below:"69.1%" },
 ];
 
-// ── TIMELINE CHART — Chart.js with animated canvas fallback ───────────────
+// ── TIMELINE CHART (SVG, no external deps) ────────────────────────────────
 (function buildTimeline() {
-  const canvas = document.getElementById('timelineChart');
+  var svg = document.getElementById('timelineChart');
+  if (!svg) return;
+  try {
+    var data = timelineFreq, n = data.length;
+    var minV = Math.min.apply(null, data), maxV = Math.max.apply(null, data);
+    var yMin = Math.floor(minV / 5) * 5, yMax = Math.ceil(maxV / 5) * 5;
+    var PL = 44, PR = 12, PT = 16, PB = 28;
 
-  // Chart.js path (works locally; blocked by CSP on htmlpreview)
-  if (typeof Chart !== 'undefined') {
-    const ctx = canvas.getContext('2d');
-    new Chart(ctx, {
-      type: 'line',
-      data: {
-        labels: timelineDates,
-        datasets: [{
-          label: 'AIO Frequency',
-          data: timelineFreq,
-          borderColor: '#e879b0',
-          borderWidth: 2,
-          backgroundColor: (context) => {
-            const chart = context.chart;
-            const {ctx: c, chartArea} = chart;
-            if (!chartArea) return 'transparent';
-            const grad = c.createLinearGradient(0, chartArea.top, 0, chartArea.bottom);
-            grad.addColorStop(0, 'rgba(244,184,220,0.55)');
-            grad.addColorStop(1, 'rgba(244,184,220,0.0)');
-            return grad;
-          },
-          fill: true, tension: 0.35, pointRadius: 0,
-          pointHoverRadius: 5, pointHoverBackgroundColor: '#e879b0',
-          pointHoverBorderColor: '#fff', pointHoverBorderWidth: 2,
-        }]
-      },
-      options: {
-        responsive: true, maintainAspectRatio: false,
-        interaction: { mode: 'index', intersect: false },
-        plugins: {
-          legend: { display: false },
-          tooltip: {
-            backgroundColor: 'rgba(0,0,0,0.8)', titleColor: '#fff',
-            titleFont: { family: "'Open Sans', Helvetica", size: 11, weight: '600' },
-            bodyColor: '#e879b0', bodyFont: { family: "'Open Sans', Helvetica", size: 11 },
-            padding: { x: 10, y: 5 }, cornerRadius: 6,
-            callbacks: { label: (ctx) => ` AIO Frequency: ${ctx.raw.toFixed(1)}%` }
-          },
-        },
-        scales: {
-          x: {
-            grid: { display: false }, border: { display: false },
-            ticks: { font: { family: "'Open Sans', Helvetica", size: 12 }, color: '#9e9e9e', maxTicksLimit: 5, maxRotation: 0 }
-          },
-          y: {
-            grid: { color: '#e8eaf0', lineWidth: 1 }, border: { display: false },
-            ticks: { font: { family: "'Open Sans', Helvetica", size: 12 }, color: '#9e9e9e', callback: (v) => v + '%', maxTicksLimit: 5 },
-            min: 10,
-          }
-        }
-      },
-      plugins: [{
-        id: 'weekendBands',
-        beforeDraw(chart) {
-          const {ctx: c, chartArea, scales} = chart;
-          if (!chartArea || !scales.x) return;
-          c.save(); c.fillStyle = 'rgba(235,235,235,0.5)';
-          const xScale = scales.x;
-          for (let i = 0; i < timelineDates.length; i++) {
-            if (weekendIdx.includes(i)) {
-              const xLeft  = xScale.getPixelForValue(i) - (xScale.getPixelForValue(1) - xScale.getPixelForValue(0)) / 2;
-              const xRight = xLeft + (xScale.getPixelForValue(1) - xScale.getPixelForValue(0));
-              c.fillRect(xLeft, chartArea.top, xRight - xLeft, chartArea.bottom - chartArea.top);
-            }
-          }
-          c.restore();
-        }
-      }]
-    });
-    return;
-  }
+    // Use actual container dimensions for the viewBox — script runs after layout
+    var rect = svg.parentElement.getBoundingClientRect();
+    var W = rect.width || 800, H = rect.height || 260;
+    svg.setAttribute('viewBox', '0 0 ' + W + ' ' + H);
 
-  // ── Animated canvas fallback (no external deps) ──────────────────────────
-  const PAD_L = 44, PAD_R = 12, PAD_T = 16, PAD_B = 28;
-  const ctx = canvas.getContext('2d');
-  const data = timelineFreq, n = data.length;
-  const minV = Math.min(...data), maxV = Math.max(...data);
-  const yMin = Math.floor(minV / 5) * 5, yMax = Math.ceil(maxV / 5) * 5;
-
-  // Tooltip div
-  const tip = document.createElement('div');
-  tip.style.cssText = 'position:absolute;display:none;background:rgba(0,0,0,0.8);color:#fff;font:11px "Open Sans",Helvetica;border-radius:6px;padding:5px 10px;pointer-events:none;z-index:10;white-space:nowrap;';
-  canvas.parentElement.style.position = 'relative';
-  canvas.parentElement.appendChild(tip);
-
-  // Build smooth bezier control points
-  function catmull(pts) {
-    const out = [];
-    for (let i = 0; i < pts.length; i++) {
-      const p0 = pts[Math.max(i - 1, 0)], p1 = pts[i];
-      const p2 = pts[Math.min(i + 1, pts.length - 1)], p3 = pts[Math.min(i + 2, pts.length - 1)];
-      out.push({ cp1x: p1[0] + (p2[0] - p0[0]) / 6, cp1y: p1[1] + (p2[1] - p0[1]) / 6,
-                 cp2x: p2[0] - (p3[0] - p1[0]) / 6, cp2y: p2[1] - (p3[1] - p1[1]) / 6 });
+    var ns = 'http://www.w3.org/2000/svg';
+    function mk(tag, attrs) {
+      var e = document.createElementNS(ns, tag);
+      for (var k in attrs) e.setAttribute(k, attrs[k]);
+      return e;
     }
-    return out;
-  }
 
-  function draw(progress) {
-    const dpr = window.devicePixelRatio || 1;
-    const W = canvas.clientWidth, H = canvas.clientHeight;
-    canvas.width = W * dpr; canvas.height = H * dpr;
-    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    function xOf(i) { return PL + (i / (n - 1)) * (W - PL - PR); }
+    function yOf(v) { return PT + (1 - (v - yMin) / (yMax - yMin)) * (H - PT - PB); }
 
-    const xOf = i  => PAD_L + (i / (n - 1)) * (W - PAD_L - PAD_R);
-    const yOf = v  => PAD_T + (1 - (v - yMin) / (yMax - yMin)) * (H - PAD_T - PAD_B);
+    // Smooth cubic bezier path (catmull-rom → cubic)
+    function makePath(pts) {
+      var d = 'M ' + pts[0][0].toFixed(1) + ' ' + pts[0][1].toFixed(1);
+      for (var i = 0; i < pts.length - 1; i++) {
+        var p0 = pts[Math.max(i - 1, 0)], p1 = pts[i];
+        var p2 = pts[i + 1], p3 = pts[Math.min(i + 2, pts.length - 1)];
+        var c1x = (p1[0] + (p2[0] - p0[0]) / 6).toFixed(1);
+        var c1y = (p1[1] + (p2[1] - p0[1]) / 6).toFixed(1);
+        var c2x = (p2[0] - (p3[0] - p1[0]) / 6).toFixed(1);
+        var c2y = (p2[1] - (p3[1] - p1[1]) / 6).toFixed(1);
+        d += ' C ' + c1x + ' ' + c1y + ',' + c2x + ' ' + c2y + ',' + p2[0].toFixed(1) + ' ' + p2[1].toFixed(1);
+      }
+      return d;
+    }
+
+    var pts = data.map(function(v, i) { return [xOf(i), yOf(v)]; });
+    var linePath = makePath(pts);
+    var areaPath = linePath + ' L ' + xOf(n - 1).toFixed(1) + ' ' + (H - PB) + ' L ' + xOf(0).toFixed(1) + ' ' + (H - PB) + ' Z';
+
+    // Defs: gradient
+    var defs = mk('defs', {});
+    var grad = mk('linearGradient', { id: 'tlGrad', x1: 0, y1: 0, x2: 0, y2: 1 });
+    var s1 = mk('stop', { offset: '0%', 'stop-color': '#f4b8dc', 'stop-opacity': 0.55 });
+    var s2 = mk('stop', { offset: '100%', 'stop-color': '#f4b8dc', 'stop-opacity': 0 });
+    grad.appendChild(s1); grad.appendChild(s2); defs.appendChild(grad);
+    svg.appendChild(defs);
 
     // Weekend bands
-    const step = (W - PAD_L - PAD_R) / (n - 1);
-    ctx.fillStyle = 'rgba(235,235,235,0.5)';
-    weekendIdx.forEach(i => ctx.fillRect(xOf(i) - step / 2, PAD_T, step, H - PAD_T - PAD_B));
+    var step = (W - PL - PR) / (n - 1);
+    weekendIdx.forEach(function(i) {
+      svg.appendChild(mk('rect', {
+        x: (xOf(i) - step / 2).toFixed(1), y: PT,
+        width: step.toFixed(1), height: H - PT - PB,
+        fill: '#ebebeb', 'fill-opacity': 0.5
+      }));
+    });
 
     // Grid lines
-    ctx.strokeStyle = '#e8eaf0'; ctx.lineWidth = 1;
-    [0, 0.25, 0.5, 0.75, 1].forEach(t => {
-      const y = yOf(yMin + t * (yMax - yMin));
-      ctx.beginPath(); ctx.moveTo(PAD_L, y); ctx.lineTo(W - PAD_R, y); ctx.stroke();
+    [0, 0.25, 0.5, 0.75, 1].forEach(function(t) {
+      var y = yOf(yMin + t * (yMax - yMin)).toFixed(1);
+      svg.appendChild(mk('line', { x1: PL, y1: y, x2: W - PR, y2: y, stroke: '#e8eaf0', 'stroke-width': 1 }));
     });
 
     // Axis labels
-    ctx.fillStyle = '#9e9e9e'; ctx.font = '12px "Open Sans",Helvetica';
-    ctx.textAlign = 'right'; ctx.textBaseline = 'middle';
-    ctx.fillText(yMax + '%', PAD_L - 4, yOf(yMax));
-    ctx.fillText(yMin + '%', PAD_L - 4, yOf(yMin));
-    ctx.textAlign = 'center'; ctx.textBaseline = 'top';
-    ctx.fillText(timelineDates[0], xOf(0), H - PAD_B + 4);
-    ctx.fillText(timelineDates[n - 1], xOf(n - 1), H - PAD_B + 4);
-
-    // Compute all points and smooth control points
-    const pts = data.map((v, i) => [xOf(i), yOf(v)]);
-    const cps = catmull(pts);
-
-    // How many segments to draw based on progress
-    const totalSegs = n - 1;
-    const segsVisible = progress * totalSegs;
-    const fullSegs = Math.floor(segsVisible);
-    const partial = segsVisible - fullSegs;
-
-    // Clip to animated region
-    ctx.save();
-    ctx.beginPath();
-    ctx.rect(PAD_L, 0, xOf(fullSegs) + partial * (xOf(Math.min(fullSegs + 1, n - 1)) - xOf(fullSegs)) - PAD_L + 2, H);
-    ctx.clip();
-
-    // Gradient fill under curve
-    const grad = ctx.createLinearGradient(0, PAD_T, 0, H - PAD_B);
-    grad.addColorStop(0, 'rgba(244,184,220,0.55)');
-    grad.addColorStop(1, 'rgba(244,184,220,0.0)');
-    ctx.beginPath();
-    ctx.moveTo(pts[0][0], pts[0][1]);
-    for (let i = 0; i < Math.min(fullSegs + 1, n - 1); i++) {
-      ctx.bezierCurveTo(cps[i].cp1x, cps[i].cp1y, cps[i].cp2x, cps[i].cp2y, pts[i + 1][0], pts[i + 1][1]);
+    function lbl(text, x, y, anchor) {
+      var t = mk('text', { x: x, y: y, fill: '#9e9e9e', 'font-family': 'Open Sans,Helvetica', 'font-size': 11, 'text-anchor': anchor });
+      t.textContent = text;
+      return t;
     }
-    ctx.lineTo(pts[Math.min(fullSegs + 1, n - 1)][0], H - PAD_B);
-    ctx.lineTo(pts[0][0], H - PAD_B);
-    ctx.closePath();
-    ctx.fillStyle = grad; ctx.fill();
+    svg.appendChild(lbl(yMax + '%', PL - 4, yOf(yMax) + 4, 'end'));
+    svg.appendChild(lbl(yMin + '%', PL - 4, yOf(yMin) + 4, 'end'));
+    svg.appendChild(lbl(timelineDates[0], xOf(0), H - 4, 'middle'));
+    svg.appendChild(lbl(timelineDates[n - 1], xOf(n - 1), H - 4, 'middle'));
 
-    // Line
-    ctx.beginPath();
-    ctx.moveTo(pts[0][0], pts[0][1]);
-    for (let i = 0; i < Math.min(fullSegs + 1, n - 1); i++) {
-      ctx.bezierCurveTo(cps[i].cp1x, cps[i].cp1y, cps[i].cp2x, cps[i].cp2y, pts[i + 1][0], pts[i + 1][1]);
-    }
-    ctx.strokeStyle = '#e879b0'; ctx.lineWidth = 2; ctx.lineJoin = 'round'; ctx.stroke();
-    ctx.restore();
-  }
+    // Area fill (static, fades in via opacity)
+    var area = mk('path', { d: areaPath, fill: 'url(#tlGrad)', opacity: 0 });
+    svg.appendChild(area);
 
-  // Animate with easeInOut
-  const duration = 1000, start = performance.now();
-  (function frame(now) {
-    const t = Math.min((now - start) / duration, 1);
-    const ease = t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
-    draw(ease);
-    if (t < 1) requestAnimationFrame(frame);
-  })(start);
+    // Line (animated via stroke-dashoffset)
+    var line = mk('path', {
+      d: linePath, fill: 'none',
+      stroke: '#e879b0', 'stroke-width': 2,
+      'stroke-linecap': 'round', 'stroke-linejoin': 'round'
+    });
+    svg.appendChild(line);
 
-  window.addEventListener('resize', () => draw(1));
+    // Kick off draw animation after paint
+    requestAnimationFrame(function() {
+      var len = line.getTotalLength();
+      line.setAttribute('stroke-dasharray', len);
+      line.setAttribute('stroke-dashoffset', len);
+      line.style.transition = 'stroke-dashoffset 1s ease-out';
+      area.style.transition = 'opacity 0.8s ease-out 0.2s';
+      requestAnimationFrame(function() {
+        line.setAttribute('stroke-dashoffset', 0);
+        area.setAttribute('opacity', 1);
+      });
+    });
 
-  // Hover tooltip
-  canvas.addEventListener('mousemove', e => {
-    const r = canvas.getBoundingClientRect();
-    const W = canvas.clientWidth;
-    const idx = Math.max(0, Math.min(n - 1, Math.round((e.clientX - r.left - PAD_L) / ((W - PAD_L - PAD_R) / (n - 1)))));
-    tip.style.display = 'block';
-    tip.innerHTML = `<b>${timelineDates[idx]}</b><br><span style="color:#e879b0">AIO Frequency: ${data[idx].toFixed(1)}%</span>`;
-    const tx = (e.clientX - r.left) + 10;
-    tip.style.left = (tx + 160 > W ? tx - 180 : tx) + 'px';
-    tip.style.top = (canvas.clientHeight * 0.1) + 'px';
-  });
-  canvas.addEventListener('mouseleave', () => tip.style.display = 'none');
+    // Hover tooltip
+    var tip = document.createElement('div');
+    tip.style.cssText = 'position:absolute;display:none;background:rgba(0,0,0,0.8);color:#fff;font:11px "Open Sans",Helvetica;border-radius:6px;padding:5px 10px;pointer-events:none;z-index:10;white-space:nowrap;';
+    svg.parentElement.appendChild(tip);
+    svg.addEventListener('mousemove', function(e) {
+      var r = svg.getBoundingClientRect();
+      var svgX = (e.clientX - r.left) * W / r.width;
+      var idx = Math.max(0, Math.min(n - 1, Math.round((svgX - PL) / ((W - PL - PR) / (n - 1)))));
+      tip.style.display = 'block';
+      tip.innerHTML = '<b>' + timelineDates[idx] + '</b><br><span style="color:#e879b0">AIO Frequency: ' + data[idx].toFixed(1) + '%</span>';
+      var tx = (e.clientX - r.left) + 10;
+      tip.style.left = (tx + 160 > r.width ? tx - 180 : tx) + 'px';
+      tip.style.top = '20px';
+    });
+    svg.addEventListener('mouseleave', function() { tip.style.display = 'none'; });
+  } catch(e) { console.warn('Timeline error:', e); }
 })();
 
 // ── SPARKLINES (inline SVG, no deps) ──────────────────────────────────────
