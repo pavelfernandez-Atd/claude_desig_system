@@ -1150,21 +1150,44 @@ const topTerms = [
       });
     });
 
-    // Hover tooltip
+    // Hover dot (SVG circle, hidden until hover)
+    var dot = mk('circle', { r: 4, fill: '#e879b0', stroke: '#fff', 'stroke-width': 2, display: 'none' });
+    svg.appendChild(dot);
+
+    // Hover tooltip (absolutely positioned over the container)
     var tip = document.createElement('div');
     tip.style.cssText = 'position:absolute;display:none;background:rgba(0,0,0,0.8);color:#fff;font:11px "Open Sans",Helvetica;border-radius:6px;padding:5px 10px;pointer-events:none;z-index:10;white-space:nowrap;';
     svg.parentElement.appendChild(tip);
+
     svg.addEventListener('mousemove', function(e) {
       var r = svg.getBoundingClientRect();
-      var svgX = (e.clientX - r.left) * W / r.width;
+      var scaleX = W / r.width;
+      var scaleY = H / r.height;
+      var svgX = (e.clientX - r.left) * scaleX;
       var idx = Math.max(0, Math.min(n - 1, Math.round((svgX - PL) / ((W - PL - PR) / (n - 1)))));
+
+      // Position dot at data point in SVG units
+      dot.setAttribute('cx', xOf(idx).toFixed(1));
+      dot.setAttribute('cy', yOf(data[idx]).toFixed(1));
+      dot.setAttribute('display', 'block');
+
+      // Position tooltip in CSS pixels (relative to container)
+      var dotCssX = xOf(idx) / scaleX;
+      var dotCssY = yOf(data[idx]) / scaleY;
       tip.style.display = 'block';
       tip.innerHTML = '<b>' + timelineDates[idx] + '</b><br><span style="color:#e879b0">AIO Frequency: ' + data[idx].toFixed(1) + '%</span>';
-      var tx = (e.clientX - r.left) + 10;
-      tip.style.left = (tx + 160 > r.width ? tx - 180 : tx) + 'px';
-      tip.style.top = '20px';
+      // Flip left if near right edge, flip down if near top
+      var tx = dotCssX + 12;
+      if (tx + 180 > r.width) tx = dotCssX - 190;
+      var ty = dotCssY - 44;
+      if (ty < 4) ty = dotCssY + 12;
+      tip.style.left = tx + 'px';
+      tip.style.top = ty + 'px';
     });
-    svg.addEventListener('mouseleave', function() { tip.style.display = 'none'; });
+    svg.addEventListener('mouseleave', function() {
+      dot.setAttribute('display', 'none');
+      tip.style.display = 'none';
+    });
   } catch(e) { console.warn('Timeline error:', e); }
 })();
 
