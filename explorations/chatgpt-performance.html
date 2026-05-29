@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wdth,wght@75,300;75,400;75,600;100,300;100,400;100,600&display=swap" rel="stylesheet">
   <!-- DS Components — must be first, never re-define component class names below -->
-  <link rel="stylesheet" href="app/styleguide/ds-components.css">
+  <link rel="stylesheet" href="ds-components.css">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     body { font-family: 'Open Sans', Helvetica, sans-serif; background: #e5eef5; min-height: 100vh; font-size: 14px; color: rgba(0,0,0,0.87); }
@@ -51,22 +51,10 @@
     .pg-trend-wrap    { position: relative; width: 100%; height: 220px; }
     .pg-trend-canvas  { width: 100%; height: 100%; display: block; }
     .pg-trend-tooltip { position: absolute; pointer-events: none; background: rgba(0,0,0,0.8); color: white; border-radius: 6px; padding: 6px 10px; font-size: 12px; line-height: 1.5; display: none; white-space: nowrap; }
-    .pg-legend        { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 12px; }
+    .pg-legend        { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 12px; justify-content: center; }
     .pg-legend__item  { display: flex; align-items: center; gap: 6px; font-size: 12px; color: rgba(0,0,0,0.6); cursor: pointer; }
     .pg-legend__dot   { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
 
-    /* ── Donut section ── */
-    .pg-donut-wrap          { display: flex; align-items: center; gap: 24px; justify-content: center; }
-    .pg-donut-ring          { position: relative; width: 160px; height: 160px; flex-shrink: 0; }
-    .pg-donut-ring svg      { width: 100%; height: 100%; }
-    .pg-donut-center        { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; }
-    .pg-donut-val           { font-size: 32px; font-weight: 300; color: #27365b; letter-spacing: -2px; line-height: 1; }
-    .pg-donut-unit          { font-size: 16px; font-weight: 300; color: #27365b; }
-    .pg-donut-sub           { font-size: 11px; color: rgba(0,0,0,0.5); text-align: center; margin-top: 2px; line-height: 1.3; }
-    .pg-donut-legend        { display: flex; flex-direction: column; gap: 10px; }
-    .pg-donut-legend__item  { display: flex; align-items: center; gap: 8px; font-size: 13px; color: rgba(0,0,0,0.7); }
-    .pg-donut-legend__dot   { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
-    .pg-donut-legend__val   { font-weight: 600; color: rgba(0,0,0,0.87); margin-left: auto; }
 
     /* ── Performance table ── */
     .pg-table                 { width: 100%; border-collapse: collapse; }
@@ -240,29 +228,12 @@
               </div>
               <span style="font-size:12px;font-weight:400;color:#181818;flex:1;padding:0 4px 0 0">LLM Ads Report</span>
             </div>
-            <!-- Chat GTP Ads — nested group header -->
-            <div style="display:flex;flex-direction:column;align-items:flex-start;width:100%">
-              <div style="display:flex;height:24px;align-items:center;width:100%;border-radius:4px;cursor:pointer" onmouseenter="this.style.background='#ddeeff'" onmouseleave="this.style.background='transparent'">
-                <div style="display:flex;align-items:center;padding:0 12px 0 16px;align-self:stretch;flex-shrink:0">
-                  <div style="width:1px;align-self:stretch;background:#c4c4c4"></div>
-                </div>
-                <span style="font-size:12px;font-weight:600;color:#052f59;flex:1;padding:0 4px 0 0">Chat GTP Ads</span>
+            <!-- Chat GTP Ads — collapsed -->
+            <div style="display:flex;height:24px;align-items:center;width:100%;border-radius:4px;cursor:pointer" onmouseenter="this.style.background='#ddeeff'" onmouseleave="this.style.background='transparent'">
+              <div style="display:flex;align-items:center;padding:0 12px 0 16px;align-self:stretch;flex-shrink:0">
+                <div style="width:1px;align-self:stretch;background:#c4c4c4"></div>
               </div>
-              <!-- Second-level items: pl-[17px] indent -->
-              <div style="display:flex;flex-direction:column;padding-left:17px;width:100%">
-                <div style="display:flex;height:24px;align-items:center;width:100%;border-radius:4px;cursor:pointer" onmouseenter="this.style.background='#ddeeff'" onmouseleave="this.style.background='transparent'">
-                  <div style="display:flex;align-items:center;padding:0 12px 0 16px;align-self:stretch;flex-shrink:0">
-                    <div style="width:1px;align-self:stretch;background:#c4c4c4"></div>
-                  </div>
-                  <span style="font-size:12px;font-weight:400;color:#181818;flex:1">Account Report</span>
-                </div>
-                <div style="display:flex;height:24px;align-items:center;width:100%;border-radius:4px;cursor:pointer" onmouseenter="this.style.background='#ddeeff'" onmouseleave="this.style.background='transparent'">
-                  <div style="display:flex;align-items:center;padding:0 12px 0 16px;align-self:stretch;flex-shrink:0">
-                    <div style="width:1px;align-self:stretch;background:#c4c4c4"></div>
-                  </div>
-                  <span style="font-size:12px;font-weight:400;color:#181818;flex:1">Industry Landscape</span>
-                </div>
-              </div>
+              <span style="font-size:12px;font-weight:400;color:#181818;flex:1;padding:0 4px 0 0">Chat GTP Ads</span>
             </div>
           </div>
         </div>
@@ -522,21 +493,81 @@
             <div class="pg-ch__subtitle">ChatGPT · Top 5 domains</div>
           </div>
         </div>
-        <div class="pg-donut-wrap">
-          <div class="pg-donut-ring">
-            <svg viewBox="0 0 160 160" id="donutSvg"></svg>
-            <div class="pg-donut-center">
-              <span class="pg-donut-val">28<span class="pg-donut-unit">%</span></span>
-              <span class="pg-donut-sub">Adthena<br>share</span>
+        <!-- donut-chart — static SVG verbatim from styleguide (white inner fill + outer ring + segments) -->
+        <div style="display:flex;gap:24px;align-items:center;justify-content:center">
+          <div class="donut-chart">
+            <svg class="donut-chart__svg" viewBox="0 0 248 248" xmlns="http://www.w3.org/2000/svg">
+              <!-- white inner fill (creates the hole) -->
+              <circle cx="124" cy="124" r="85" fill="#ffffff"/>
+              <!-- outer decorative ring -->
+              <circle cx="124" cy="124" r="114" fill="none" stroke="#fafafa" stroke-width="21"/>
+              <!-- background ring -->
+              <circle cx="124" cy="124" r="94" fill="none" stroke="#eef0f6" stroke-width="18"/>
+              <!-- adthena.com 22.6% · drawn=130.4 offset=0 -->
+              <circle cx="124" cy="124" r="94" fill="none" stroke="#4a9ef8" stroke-width="18" stroke-dasharray="130.4 590.6" stroke-dashoffset="0" transform="rotate(-90,124,124)"/>
+              <!-- reddit.com 30.7% · drawn=178.4 offset=-133.4 -->
+              <circle cx="124" cy="124" r="94" fill="none" stroke="#b3a2e7" stroke-width="18" stroke-dasharray="178.4 590.6" stroke-dashoffset="-133.4" transform="rotate(-90,124,124)"/>
+              <!-- techradar.com 21.1% · drawn=121.8 offset=-314.9 -->
+              <circle cx="124" cy="124" r="94" fill="none" stroke="#d47dd4" stroke-width="18" stroke-dasharray="121.8 590.6" stroke-dashoffset="-314.9" transform="rotate(-90,124,124)"/>
+              <!-- spyfu.com 13.2% · drawn=75.3 offset=-439.7 -->
+              <circle cx="124" cy="124" r="94" fill="none" stroke="#e86492" stroke-width="18" stroke-dasharray="75.3 590.6" stroke-dashoffset="-439.7" transform="rotate(-90,124,124)"/>
+              <!-- semrush.com 12.3% · drawn=69.7 offset=-518.0 -->
+              <circle cx="124" cy="124" r="94" fill="none" stroke="#8ac8b1" stroke-width="18" stroke-dasharray="69.7 590.6" stroke-dashoffset="-518.0" transform="rotate(-90,124,124)"/>
+            </svg>
+            <div class="donut-chart__label">
+              <div class="donut-chart__value-row">
+                <span class="donut-chart__value">23</span>
+                <span class="donut-chart__unit">%</span>
+              </div>
+              <span class="donut-chart__subtitle">Adthena<br>share</span>
             </div>
           </div>
-          <div class="pg-donut-legend" id="donutLegend"></div>
+          <!-- chart-legend-item — verbatim from repo demo.html -->
+          <div style="display:flex;flex-direction:column;gap:8px">
+            <div class="chart-legend-item">
+              <span class="chart-legend-item__dot" style="background:#4a9ef8"></span>
+              <span class="chart-legend-item__label chart-legend-item__label--brand">adthena.com</span>
+              <span style="font-size:12px;font-weight:600;color:rgba(0,0,0,0.87);margin-left:12px">22.6%</span>
+            </div>
+            <div class="chart-legend-item">
+              <span class="chart-legend-item__dot" style="background:#b3a2e7"></span>
+              <span class="chart-legend-item__label">reddit.com</span>
+              <span style="font-size:12px;font-weight:600;color:rgba(0,0,0,0.87);margin-left:12px">30.7%</span>
+            </div>
+            <div class="chart-legend-item">
+              <span class="chart-legend-item__dot" style="background:#d47dd4"></span>
+              <span class="chart-legend-item__label">techradar.com</span>
+              <span style="font-size:12px;font-weight:600;color:rgba(0,0,0,0.87);margin-left:12px">21.1%</span>
+            </div>
+            <div class="chart-legend-item">
+              <span class="chart-legend-item__dot" style="background:#e86492"></span>
+              <span class="chart-legend-item__label">spyfu.com</span>
+              <span style="font-size:12px;font-weight:600;color:rgba(0,0,0,0.87);margin-left:12px">13.2%</span>
+            </div>
+            <div class="chart-legend-item">
+              <span class="chart-legend-item__dot" style="background:#8ac8b1"></span>
+              <span class="chart-legend-item__label">semrush.com</span>
+              <span style="font-size:12px;font-weight:600;color:rgba(0,0,0,0.87);margin-left:12px">12.3%</span>
+            </div>
+          </div>
         </div>
       </div>
 
       <!-- Avg Citation Position by Domain -->
-      <div class="pg-card">
-        <div class="pg-slabel">Avg. Citation Position</div>
+      <!-- card-header component — verbatim from card-header/demo.html -->
+      <div style="background:white;border-radius:12px;overflow:hidden">
+        <div class="card-header">
+          <div class="card-header__roundel">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6" stroke="white" stroke-width="1.3"/><path d="M8 5v3.5l2 1.5" stroke="white" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <div class="card-header__title-section">
+            <div class="card-header__title-row">
+              <span class="card-header__title">Avg. Citation Position</span>
+            </div>
+            <span class="card-header__subtitle">ChatGPT · Top domains · lower is better</span>
+          </div>
+        </div>
+        <!-- avg-position component — verbatim from avg-position/demo.html -->
         <div id="positionList"></div>
       </div>
 
@@ -570,6 +601,20 @@
           </thead>
           <tbody id="perfTableBody"></tbody>
         </table>
+        <div style="margin-top:16px">
+          <div class="insight-banner">
+            <div class="insight-banner__icon-wrap">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+                <circle cx="12" cy="12" r="9" stroke="white" stroke-width="1.8"/>
+                <path stroke="white" stroke-width="1.8" stroke-linecap="round" d="M12 8v4M12 16h.01"/>
+              </svg>
+            </div>
+            <div class="insight-banner__text">
+              <span class="insight-banner__label">INSIGHTS</span>
+              <p class="insight-banner__body">Adthena ranks <strong>#2</strong> in performance score but trails reddit.com in citation frequency by 2.1 pts. SpyFu leads on avg. position at 3.1 — tighter targeting on "paid search tool comparison" prompts could close the gap.</p>
+            </div>
+          </div>
+        </div>
       </div>
 
       <!-- Prompt Group Performance -->
@@ -841,57 +886,27 @@ const trendData = {
   });
 })();
 
-// ══ DONUT CHART ══
-(function() {
-  const items = [
-    { domain:'adthena.com',  freq:0.0573, color:'#b3a2e7' },
-    { domain:'reddit.com',   freq:0.0779, color:'#64abfb' },
-    { domain:'techradar.com',freq:0.0536, color:'#d47dd4' },
-    { domain:'spyfu.com',    freq:0.0336, color:'#e86492' },
-    { domain:'semrush.com',  freq:0.0312, color:'#8ac8b1' },
-  ];
-  const total = items.reduce((s,d) => s + d.freq, 0);
-  const cx = 80, cy = 80, r = 62, t = 18, gap = 2;
-  const svg = document.getElementById('donutSvg');
-  let angle = -90;
-  items.forEach(d => {
-    const pct = d.freq / total;
-    const sweep = pct * 360 - gap;
-    const sr = angle * Math.PI / 180;
-    const er = (angle + sweep) * Math.PI / 180;
-    const x1 = cx + r * Math.cos(sr), y1 = cy + r * Math.sin(sr);
-    const x2 = cx + r * Math.cos(er), y2 = cy + r * Math.sin(er);
-    const ir = r - t;
-    const ix1 = cx + ir * Math.cos(er), iy1 = cy + ir * Math.sin(er);
-    const ix2 = cx + ir * Math.cos(sr), iy2 = cy + ir * Math.sin(sr);
-    const large = sweep > 180 ? 1 : 0;
-    const path = document.createElementNS('http://www.w3.org/2000/svg','path');
-    path.setAttribute('d',`M${x1},${y1} A${r},${r} 0 ${large},1 ${x2},${y2} L${ix1},${iy1} A${ir},${ir} 0 ${large},0 ${ix2},${iy2} Z`);
-    path.setAttribute('fill', d.domain === 'adthena.com' ? d.color : d.color + 'cc');
-    svg.appendChild(path);
-    angle += sweep + gap;
-  });
-  const legend = document.getElementById('donutLegend');
-  items.forEach(d => {
-    const pct = (d.freq / total * 100).toFixed(1);
-    const label = d.domain === 'adthena.com' ? `<strong>${d.domain}</strong>` : d.domain;
-    legend.innerHTML += `<div class="pg-donut-legend__item"><div class="pg-donut-legend__dot" style="background:${d.color}"></div><span>${label}</span><span class="pg-donut-legend__val">${pct}%</span></div>`;
-  });
-})();
+// ══ DONUT CHART — static SVG, no JS needed ══
 
-// ══ POSITION LIST ══
+// ══ POSITION LIST — avg-position component, verbatim from avg-position/demo.html ══
 (function() {
   const el = document.getElementById('positionList');
-  const items = domainPerf.map(d => ({ domain:d.domain, pos:d.pos, brand:d.domain==='adthena.com', color:COLORS[d.domain]||'#d3dbe6' }))
-    .sort((a,b) => a.pos - b.pos).slice(0,7);
-  items.forEach(item => {
-    const posClass = item.pos <= 4 ? 'pg-pos--good' : item.pos <= 7 ? 'pg-pos--mid' : 'pg-pos--low';
-    el.innerHTML += `
-      <div class="pg-hrow">
-        <span class="pg-hrow__name" style="${item.brand?'font-weight:700;color:#1565c0':''}">${item.domain}</span>
-        <span class="pg-pos ${posClass}">${item.pos.toFixed(1)}</span>
-      </div>`;
+  const sorted = domainPerf.slice().sort((a,b) => a.pos - b.pos).slice(0,7);
+  const favicon = d => `<img src="https://www.google.com/s2/favicons?domain=${d}&sz=32" width="16" height="16" alt="" style="display:block;border-radius:2px">`;
+  let rows = '';
+  sorted.forEach((d, i) => {
+    const brand = d.domain === 'adthena.com';
+    const numClass = 'cit-pos__num' + (brand ? ' cit-pos__num--brand' : '');
+    const domClass = 'cit-pos__domain' + (brand ? ' cit-pos__domain--brand' : '');
+    const deltaClass = d.pos <= 4.5 ? 'cit-pos__delta--up' : d.pos <= 6 ? 'cit-pos__delta--flat' : 'cit-pos__delta--down';
+    rows += `<div class="cit-pos__row">
+      <span class="${numClass}">${i + 1}</span>
+      <div class="cit-pos__favicon">${favicon(d.domain)}</div>
+      <div class="${domClass}">${d.domain}</div>
+      <span class="cit-pos__delta ${deltaClass}">${d.pos.toFixed(1)}</span>
+    </div>`;
   });
+  el.innerHTML = '<div class="cit-pos__list">' + rows + '</div>';
 })();
 
 // ══ CITATION TREND CHART ══
