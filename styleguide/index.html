@@ -1288,6 +1288,103 @@
 
     .mentions-sample__filter-btn { display:inline-flex; align-items:center; gap:4px; height:40px; padding:0 12px; border-radius:6px; font-family:var(--font-base); font-size:14px; font-weight:600; color:#3079bd; background:transparent; border:none; cursor:pointer; flex-shrink:0; }
     .mentions-sample__filter-btn.is-active { background:#eaf2fc; }
+
+    /* === Widget Header (.wh) — Figma node 169:2345 === */
+    .wh { display:flex; align-items:center; gap:8px; padding:24px; background:#ffffff; border-radius:12px; }
+    .wh__thumb { width:32px; height:32px; border-radius:50%; background:#93a1b6; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+    .wh__thumb svg { width:20px; height:20px; color:#fff; }
+    .wh__body { flex:1; min-width:0; display:flex; flex-direction:column; gap:2px; }
+    .wh__title { font-family:var(--font-base); font-size:16px; font-weight:600; color:rgba(0,0,0,0.87); line-height:17px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+    .wh__subtitle { font-family:var(--font-base); font-size:13px; font-weight:400; color:#6b6b6b; line-height:14px; }
+    .wh__actions { display:flex; align-items:center; gap:8px; padding-left:12px; flex-shrink:0; }
+    .wh__btn { width:30px; height:30px; border-radius:6px; border:none; background:transparent; cursor:pointer; display:flex; align-items:center; justify-content:center; color:#6b6b6b; transition:background 0.15s, color 0.15s; }
+    .wh__btn:hover { background:rgba(0,0,0,0.06); color:#27365b; }
+
+    /* === Dashboard Widget — drag/elevation state === */
+    .dw-card {
+      background:#fff; border-radius:12px; padding:24px;
+      box-shadow: none;
+      transition: box-shadow 0.2s ease;
+    }
+    .dw-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.12), 0 1px 4px rgba(0,0,0,0.06); }
+    .dw-card.is-settings-open { box-shadow: 0 0 0 2px #0c8dea, 0 4px 16px rgba(0,0,0,0.12), 0 1px 4px rgba(0,0,0,0.06); }
+    .dw-card .wh { padding:0 0 20px 0; }
+    .dw-drag-handle {
+      display: flex; align-items: center; justify-content: center;
+      width: 0; overflow: hidden; opacity: 0; flex-shrink: 0;
+      color: #0c8dea; cursor: grab;
+      transition: width 0.2s ease, opacity 0.2s ease;
+    }
+    .dw-card:hover .dw-drag-handle { width: 24px; opacity: 1; }
+    .dw-drag-handle:active { cursor: grabbing; }
+
+    /* === Dashboard Widget — Settings Panel === */
+    .dw-settings-overlay {
+      position:fixed; inset:0; background:rgba(0,0,0,0.2); z-index:200;
+      opacity:0; pointer-events:none; transition:opacity 0.25s ease;
+    }
+    .dw-settings-overlay.is-open { opacity:1; pointer-events:all; }
+    .dw-settings-panel {
+      position:fixed; top:0; right:0; bottom:0; width:320px;
+      background:#fff; z-index:201;
+      box-shadow:-4px 0 24px rgba(0,0,0,0.12);
+      transform:translateX(100%);
+      transition:transform 0.28s cubic-bezier(0.4,0,0.2,1);
+      display:flex; flex-direction:column;
+      font-family:'Open Sans',Helvetica,sans-serif;
+    }
+    .dw-settings-panel.is-open { transform:translateX(0); }
+    .dw-settings-panel__header {
+      display:flex; align-items:center; justify-content:space-between;
+      padding:20px 20px 16px; border-bottom:1px solid #e8edf5; flex-shrink:0;
+    }
+    .dw-settings-panel__title { font-size:15px; font-weight:600; color:rgba(0,0,0,0.87); }
+    .dw-settings-panel__close {
+      width:28px; height:28px; border-radius:6px; border:none;
+      background:transparent; cursor:pointer; display:flex; align-items:center; justify-content:center;
+      color:#6b6b6b; transition:background 0.15s;
+    }
+    .dw-settings-panel__close:hover { background:rgba(0,0,0,0.06); color:#27365b; }
+    .dw-settings-panel__body { flex:1; overflow-y:auto; padding:20px; display:flex; flex-direction:column; gap:24px; }
+    .dw-settings-section__label {
+      font-size:11px; font-weight:600; color:#485982;
+      letter-spacing:0.5px; text-transform:uppercase; margin-bottom:10px;
+    }
+    .dw-settings-option {
+      display:flex; align-items:center; gap:10px;
+      padding:8px 10px; border-radius:8px; cursor:pointer;
+      font-size:13px; color:#27365b; transition:background 0.12s; user-select:none;
+    }
+    .dw-settings-option:hover { background:#f4f7fb; }
+    .dw-settings-option__radio {
+      width:16px; height:16px; border-radius:50%; border:2px solid #b0bac9;
+      flex-shrink:0; display:flex; align-items:center; justify-content:center;
+      transition:border-color 0.15s, background 0.15s;
+    }
+    .dw-settings-option.is-selected .dw-settings-option__radio {
+      border-color:#0c8dea; background:#0c8dea;
+    }
+    .dw-settings-option.is-selected .dw-settings-option__radio::after {
+      content:''; width:6px; height:6px; border-radius:50%; background:#fff;
+    }
+    .dw-settings-option.is-selected { font-weight:600; color:#0c8dea; }
+    .dw-settings-divider { height:1px; background:#e8edf5; }
+    .dw-settings-panel__footer {
+      padding:16px 20px; border-top:1px solid #e8edf5;
+      display:flex; gap:10px; flex-shrink:0;
+    }
+    .dw-settings-btn-apply {
+      flex:1; padding:9px; border-radius:8px; border:none;
+      background:#1565c0; color:#fff; font-size:13px; font-weight:600;
+      cursor:pointer; font-family:'Open Sans',Helvetica,sans-serif; transition:background 0.15s;
+    }
+    .dw-settings-btn-apply:hover { background:#0f4786; }
+    .dw-settings-btn-cancel {
+      padding:9px 16px; border-radius:8px;
+      border:1px solid #d0d8e8; background:#fff; color:#485982;
+      font-size:13px; cursor:pointer; font-family:'Open Sans',Helvetica,sans-serif; transition:background 0.15s;
+    }
+    .dw-settings-btn-cancel:hover { background:#f4f7fb; }
     .ms-filter-wrap { position:relative; display:inline-flex; }
     .ms-filter-dropdown { display:none; position:absolute; top:calc(100% + 6px); right:0; background:#fff; border-radius:8px; box-shadow:0 0 4px rgba(0,0,0,0.2); padding:16px; flex-direction:row; gap:0; align-items:flex-start; z-index:200; }
     .ms-filter-dropdown.is-open { display:flex; }
@@ -2484,6 +2581,8 @@
       <div class="comp-sidebar-group" data-group="cards">
         <a class="comp-sidebar-link active" data-component="kpi-card" style="cursor:pointer">KPI Card</a>
         <a class="comp-sidebar-link" data-component="card-header" style="cursor:pointer">Card Header</a>
+        <a class="comp-sidebar-link" data-component="widget-header" style="cursor:pointer">Widget Header</a>
+        <a class="comp-sidebar-link" data-component="dashboard-widget" style="cursor:pointer">Dashboard Widget</a>
       </div>
       <div class="comp-sidebar-group" data-group="charts" style="display:none">
         <a class="comp-sidebar-link" data-component="multi-chart-lines" style="cursor:pointer">Multi-Chart Lines</a>
@@ -4719,6 +4818,707 @@
 </section>
       </div>
 
+      <!-- ═══════════════════════════════════════════════════════════ -->
+      <!-- WIDGET HEADER                                               -->
+      <!-- ═══════════════════════════════════════════════════════════ -->
+      <div class="comp-panel" id="comp-panel-widget-header" style="display:none">
+<section id="widget-header">
+  <div class="section-header">
+    <h2>Widget Header</h2>
+    <div class="divider"></div>
+  </div>
+  <p style="font-size:13px;color:var(--text-secondary-var);margin-bottom:24px">The top section of every content card. Combines a coloured roundel icon, title, and optional subtitle on the left with icon-only action buttons on the right. Built from Figma node <code>169:2345</code> via the Figma MCP workflow.</p>
+
+  <!-- GitHub + Demo links -->
+  <div style="display:flex;gap:8px;margin-bottom:24px;flex-wrap:wrap">
+    <a href="https://github.com/pavelfernandez-Atd/claude_desig_system/tree/main/components/widget-header"
+       target="_blank" rel="noopener noreferrer"
+       onclick="window.open(this.href,'_blank','noopener');return false;"
+       style="display:inline-flex;align-items:center;gap:6px;padding:6px 12px;border-radius:6px;background:#24292f;color:#fff;font-size:12px;font-weight:600;text-decoration:none;font-family:'Open Sans',sans-serif">
+      <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+      View on GitHub
+    </a>
+    <a href="https://htmlpreview.github.io/?https://github.com/pavelfernandez-Atd/claude_desig_system/blob/main/components/widget-header/demo.html"
+       target="_blank" rel="noopener noreferrer"
+       onclick="window.open(this.href,'_blank','noopener');return false;"
+       style="display:inline-flex;align-items:center;gap:6px;padding:6px 12px;border-radius:6px;background:#0969da;color:#fff;font-size:12px;font-weight:600;text-decoration:none;font-family:'Open Sans',sans-serif">
+      <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M8 1a7 7 0 100 14A7 7 0 008 1zM0 8a8 8 0 1116 0A8 8 0 010 8zm6.5-.25A.75.75 0 017.25 7h1a.75.75 0 01.75.75v2.75h.25a.75.75 0 010 1.5h-2a.75.75 0 010-1.5h.25v-2h-.25a.75.75 0 01-.75-.75zM8 6a1 1 0 100-2 1 1 0 000 2z"/></svg>
+      Preview Demo
+    </a>
+  </div>
+
+  <!-- Shared icon defs -->
+  <svg width="0" height="0" style="position:absolute;overflow:hidden">
+    <defs>
+      <symbol id="wh-icon-pin" viewBox="0 0 20 20" fill="none">
+        <path d="M10 2a5.5 5.5 0 0 1 5.5 5.5c0 3.5-5.5 10.5-5.5 10.5S4.5 11 4.5 7.5A5.5 5.5 0 0 1 10 2z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+        <circle cx="10" cy="7.5" r="2" stroke="currentColor" stroke-width="1.5"/>
+      </symbol>
+      <symbol id="wh-icon-chart" viewBox="0 0 20 20" fill="none">
+        <path d="M3 15 7 9l4 3 4-6 2 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </symbol>
+      <symbol id="wh-icon-star" viewBox="0 0 20 20" fill="none">
+        <path d="M10 2l2.4 4.9 5.4.8-3.9 3.8.9 5.3L10 14.3l-4.8 2.5.9-5.3L2.2 7.7l5.4-.8L10 2z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+      </symbol>
+      <symbol id="wh-icon-search" viewBox="0 0 20 20" fill="none">
+        <circle cx="9" cy="9" r="5.5" stroke="currentColor" stroke-width="1.5"/>
+        <path d="M13 13l3.5 3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+      </symbol>
+      <symbol id="wh-icon-settings" viewBox="0 0 16 16" fill="none">
+        <circle cx="8" cy="8" r="2.5" stroke="currentColor" stroke-width="1.5"/>
+        <path d="M8 1.5v1M8 13.5v1M1.5 8h1M13.5 8h1M3.4 3.4l.7.7M11.9 11.9l.7.7M3.4 12.6l.7-.7M11.9 4.1l.7-.7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+      </symbol>
+      <symbol id="wh-icon-info" viewBox="0 0 16 16" fill="none">
+        <circle cx="8" cy="8" r="6.5" stroke="currentColor" stroke-width="1.5"/>
+        <path d="M8 7.5v4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        <circle cx="8" cy="5.5" r=".75" fill="currentColor"/>
+      </symbol>
+      <symbol id="wh-icon-download" viewBox="0 0 16 16" fill="none">
+        <path d="M8 2v8M5.5 8l2.5 2.5L10.5 8M3 13h10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </symbol>
+    </defs>
+  </svg>
+
+  <!-- ① LIVE PREVIEW ───────────────────────────────────────────── -->
+  <div style="margin-bottom:40px">
+    <div class="sub-label">Live Preview</div>
+    <div style="background:#e4eef4;padding:20px;border-radius:12px">
+      <div class="wh">
+        <div class="wh__thumb">
+          <svg viewBox="0 0 20 20" fill="none"><use href="#wh-icon-pin"/></svg>
+        </div>
+        <div class="wh__body">
+          <span class="wh__title">Competitive Share</span>
+          <span class="wh__subtitle">Brand visibility across all monitored categories</span>
+        </div>
+        <div class="wh__actions">
+          <button class="wh__btn" title="Settings">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><use href="#wh-icon-settings"/></svg>
+          </button>
+          <button class="wh__btn" title="Info">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><use href="#wh-icon-info"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ② ALL VARIANTS ──────────────────────────────────────────── -->
+  <div style="margin-bottom:40px">
+    <div class="sub-label">Variants</div>
+    <div style="background:#e4eef4;padding:20px;border-radius:12px;display:flex;flex-direction:column;gap:12px">
+
+      <!-- With subtitle + settings + info -->
+      <div>
+        <span style="font-size:10px;font-weight:600;letter-spacing:0.5px;color:#858585;font-family:'Open Sans',sans-serif;text-transform:uppercase;display:block;margin-bottom:6px">Default — title + subtitle + settings + info</span>
+        <div class="wh">
+          <div class="wh__thumb"><svg viewBox="0 0 20 20" fill="none"><use href="#wh-icon-pin"/></svg></div>
+          <div class="wh__body">
+            <span class="wh__title">Title goes here</span>
+            <span class="wh__subtitle">A descriptive body text comes here</span>
+          </div>
+          <div class="wh__actions">
+            <button class="wh__btn" title="Settings"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><use href="#wh-icon-settings"/></svg></button>
+            <button class="wh__btn" title="Info"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><use href="#wh-icon-info"/></svg></button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Title only, info only -->
+      <div>
+        <span style="font-size:10px;font-weight:600;letter-spacing:0.5px;color:#858585;font-family:'Open Sans',sans-serif;text-transform:uppercase;display:block;margin-bottom:6px">Title only + info</span>
+        <div class="wh">
+          <div class="wh__thumb"><svg viewBox="0 0 20 20" fill="none"><use href="#wh-icon-chart"/></svg></div>
+          <div class="wh__body">
+            <span class="wh__title">Growing Fastest</span>
+          </div>
+          <div class="wh__actions">
+            <button class="wh__btn" title="Info"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><use href="#wh-icon-info"/></svg></button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Download + info -->
+      <div>
+        <span style="font-size:10px;font-weight:600;letter-spacing:0.5px;color:#858585;font-family:'Open Sans',sans-serif;text-transform:uppercase;display:block;margin-bottom:6px">Download + info</span>
+        <div class="wh">
+          <div class="wh__thumb"><svg viewBox="0 0 20 20" fill="none"><use href="#wh-icon-star"/></svg></div>
+          <div class="wh__body">
+            <span class="wh__title">Top Advertisers</span>
+            <span class="wh__subtitle">Ranked by impression share this period</span>
+          </div>
+          <div class="wh__actions">
+            <button class="wh__btn" title="Download"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><use href="#wh-icon-download"/></svg></button>
+            <button class="wh__btn" title="Info"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><use href="#wh-icon-info"/></svg></button>
+          </div>
+        </div>
+      </div>
+
+      <!-- No actions -->
+      <div>
+        <span style="font-size:10px;font-weight:600;letter-spacing:0.5px;color:#858585;font-family:'Open Sans',sans-serif;text-transform:uppercase;display:block;margin-bottom:6px">No actions</span>
+        <div class="wh">
+          <div class="wh__thumb"><svg viewBox="0 0 20 20" fill="none"><use href="#wh-icon-search"/></svg></div>
+          <div class="wh__body">
+            <span class="wh__title">Intent Topics</span>
+            <span class="wh__subtitle">Search intent breakdown by category</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ③ INTERACTIVE DEMO ──────────────────────────────────────── -->
+  <div style="margin-bottom:40px">
+    <div class="sub-label">Interactive Demo</div>
+    <div style="background:#e4eef4;padding:20px;border-radius:12px">
+
+      <!-- Controls -->
+      <div style="display:flex;gap:16px;flex-wrap:wrap;margin-bottom:16px;padding:16px;background:#fff;border-radius:8px;align-items:flex-end">
+        <div>
+          <label style="display:block;font-size:11px;font-weight:600;color:#485982;margin-bottom:4px;font-family:'Open Sans',sans-serif;text-transform:uppercase;letter-spacing:0.4px">Title</label>
+          <input id="wh-demo-title" type="text" value="Competitive Share"
+            style="font-family:'Open Sans',sans-serif;font-size:13px;border:1px solid #dce3ef;border-radius:6px;padding:6px 10px;width:200px;color:#27365b;outline:none">
+        </div>
+        <div>
+          <label style="display:block;font-size:11px;font-weight:600;color:#485982;margin-bottom:4px;font-family:'Open Sans',sans-serif;text-transform:uppercase;letter-spacing:0.4px">Subtitle</label>
+          <input id="wh-demo-subtitle" type="text" value="Brand visibility across all monitored categories"
+            style="font-family:'Open Sans',sans-serif;font-size:13px;border:1px solid #dce3ef;border-radius:6px;padding:6px 10px;width:300px;color:#27365b;outline:none">
+        </div>
+        <div>
+          <label style="display:block;font-size:11px;font-weight:600;color:#485982;margin-bottom:4px;font-family:'Open Sans',sans-serif;text-transform:uppercase;letter-spacing:0.4px">Icon</label>
+          <select id="wh-demo-icon"
+            style="font-family:'Open Sans',sans-serif;font-size:13px;border:1px solid #dce3ef;border-radius:6px;padding:6px 10px;color:#27365b;outline:none;background:#fff">
+            <option value="pin">Pin</option>
+            <option value="chart">Chart</option>
+            <option value="star">Star</option>
+            <option value="search">Search</option>
+          </select>
+        </div>
+        <div>
+          <label style="display:block;font-size:11px;font-weight:600;color:#485982;margin-bottom:4px;font-family:'Open Sans',sans-serif;text-transform:uppercase;letter-spacing:0.4px">Subtitle</label>
+          <label style="display:flex;align-items:center;gap:6px;font-size:13px;color:#27365b;font-family:'Open Sans',sans-serif;cursor:pointer">
+            <input type="checkbox" id="wh-demo-show-subtitle" checked> Show
+          </label>
+        </div>
+      </div>
+
+      <!-- Live preview -->
+      <div class="wh" id="wh-demo-preview">
+        <div class="wh__thumb">
+          <svg id="wh-demo-icon-el" viewBox="0 0 20 20" fill="none"><use id="wh-demo-icon-use" href="#wh-icon-pin"/></svg>
+        </div>
+        <div class="wh__body">
+          <span class="wh__title" id="wh-demo-title-el">Competitive Share</span>
+          <span class="wh__subtitle" id="wh-demo-subtitle-el">Brand visibility across all monitored categories</span>
+        </div>
+        <div class="wh__actions">
+          <button class="wh__btn" title="Settings"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><use href="#wh-icon-settings"/></svg></button>
+          <button class="wh__btn" title="Info"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><use href="#wh-icon-info"/></svg></button>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      (function() {
+        var titleInp    = document.getElementById('wh-demo-title');
+        var subtitleInp = document.getElementById('wh-demo-subtitle');
+        var iconSel     = document.getElementById('wh-demo-icon');
+        var showSub     = document.getElementById('wh-demo-show-subtitle');
+        var titleEl     = document.getElementById('wh-demo-title-el');
+        var subtitleEl  = document.getElementById('wh-demo-subtitle-el');
+        var iconUse     = document.getElementById('wh-demo-icon-use');
+
+        function update() {
+          titleEl.textContent = titleInp.value || 'Title goes here';
+          subtitleEl.textContent = subtitleInp.value;
+          subtitleEl.style.display = showSub.checked ? '' : 'none';
+          iconUse.setAttribute('href', '#wh-icon-' + iconSel.value);
+        }
+        titleInp.addEventListener('input', update);
+        subtitleInp.addEventListener('input', update);
+        iconSel.addEventListener('change', update);
+        showSub.addEventListener('change', update);
+      })();
+    </script>
+  </div>
+
+  <!-- ④ DESIGN TOKENS ────────────────────────────────────────── -->
+  <div style="margin-bottom:40px">
+    <div class="sub-label">Design Tokens</div>
+    <table style="width:100%;border-collapse:collapse;font-family:var(--font-base);font-size:13px">
+      <thead>
+        <tr style="background:#f7faff">
+          <th style="padding:10px 12px;text-align:left;color:#496f97;font-weight:600;border-bottom:1px solid #e8edf5">Token</th>
+          <th style="padding:10px 12px;text-align:left;color:#496f97;font-weight:600;border-bottom:1px solid #e8edf5">Value</th>
+          <th style="padding:10px 12px;text-align:left;color:#496f97;font-weight:600;border-bottom:1px solid #e8edf5">Usage</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="border-bottom:1px solid #f0f3f8"><td style="padding:8px 12px;color:#485982">Component height</td><td style="padding:8px 12px"><code style="background:#f4f6fb;padding:2px 6px;border-radius:4px;font-size:12px">96px</code></td><td style="padding:8px 12px;color:#6b6b6b">Fixed total height (padding 24px top + bottom)</td></tr>
+        <tr style="border-bottom:1px solid #f0f3f8"><td style="padding:8px 12px;color:#485982">Padding</td><td style="padding:8px 12px"><code style="background:#f4f6fb;padding:2px 6px;border-radius:4px;font-size:12px">24px</code></td><td style="padding:8px 12px;color:#6b6b6b">All sides</td></tr>
+        <tr style="border-bottom:1px solid #f0f3f8"><td style="padding:8px 12px;color:#485982">Gap (row)</td><td style="padding:8px 12px"><code style="background:#f4f6fb;padding:2px 6px;border-radius:4px;font-size:12px">8px</code></td><td style="padding:8px 12px;color:#6b6b6b">Between thumb, body, and actions</td></tr>
+        <tr style="border-bottom:1px solid #f0f3f8"><td style="padding:8px 12px;color:#485982">Roundel size</td><td style="padding:8px 12px"><code style="background:#f4f6fb;padding:2px 6px;border-radius:4px;font-size:12px">32 × 32px</code></td><td style="padding:8px 12px;color:#6b6b6b">Icon circle — full pill radius</td></tr>
+        <tr style="border-bottom:1px solid #f0f3f8"><td style="padding:8px 12px;color:#485982">neutral/neutral-100</td><td style="padding:8px 12px"><span style="display:inline-block;width:12px;height:12px;border-radius:2px;background:#93a1b6;vertical-align:middle;margin-right:6px"></span><code style="background:#f4f6fb;padding:2px 6px;border-radius:4px;font-size:12px">#93a1b6</code></td><td style="padding:8px 12px;color:#6b6b6b">Roundel background (default)</td></tr>
+        <tr style="border-bottom:1px solid #f0f3f8"><td style="padding:8px 12px;color:#485982">Icon size</td><td style="padding:8px 12px"><code style="background:#f4f6fb;padding:2px 6px;border-radius:4px;font-size:12px">20 × 20px</code></td><td style="padding:8px 12px;color:#6b6b6b">Thumb icon — always white</td></tr>
+        <tr style="border-bottom:1px solid #f0f3f8"><td style="padding:8px 12px;color:#485982">Title — size</td><td style="padding:8px 12px"><code style="background:#f4f6fb;padding:2px 6px;border-radius:4px;font-size:12px">16px / 600 / 17px lh</code></td><td style="padding:8px 12px;color:#6b6b6b">text/primary rgba(0,0,0,0.87)</td></tr>
+        <tr style="border-bottom:1px solid #f0f3f8"><td style="padding:8px 12px;color:#485982">Title — gap to subtitle</td><td style="padding:8px 12px"><code style="background:#f4f6fb;padding:2px 6px;border-radius:4px;font-size:12px">2px</code></td><td style="padding:8px 12px;color:#6b6b6b">Flex column gap</td></tr>
+        <tr style="border-bottom:1px solid #f0f3f8"><td style="padding:8px 12px;color:#485982">Subtitle — size</td><td style="padding:8px 12px"><code style="background:#f4f6fb;padding:2px 6px;border-radius:4px;font-size:12px">13px / 400 / 14px lh</code></td><td style="padding:8px 12px;color:#6b6b6b">text/secondary #6b6b6b</td></tr>
+        <tr style="border-bottom:1px solid #f0f3f8"><td style="padding:8px 12px;color:#485982">Action button size</td><td style="padding:8px 12px"><code style="background:#f4f6fb;padding:2px 6px;border-radius:4px;font-size:12px">30 × 30px</code></td><td style="padding:8px 12px;color:#6b6b6b">Transparent background, 6px radius</td></tr>
+        <tr style="border-bottom:1px solid #f0f3f8"><td style="padding:8px 12px;color:#485982">Action button gap</td><td style="padding:8px 12px"><code style="background:#f4f6fb;padding:2px 6px;border-radius:4px;font-size:12px">8px</code></td><td style="padding:8px 12px;color:#6b6b6b">Between action buttons</td></tr>
+        <tr style="border-bottom:1px solid #f0f3f8"><td style="padding:8px 12px;color:#485982">Action icon size</td><td style="padding:8px 12px"><code style="background:#f4f6fb;padding:2px 6px;border-radius:4px;font-size:12px">16 × 16px</code></td><td style="padding:8px 12px;color:#6b6b6b">Inside action button</td></tr>
+        <tr style="border-bottom:1px solid #f0f3f8"><td style="padding:8px 12px;color:#485982">Action icon — default</td><td style="padding:8px 12px"><span style="display:inline-block;width:12px;height:12px;border-radius:2px;background:#6b6b6b;vertical-align:middle;margin-right:6px"></span><code style="background:#f4f6fb;padding:2px 6px;border-radius:4px;font-size:12px">#6b6b6b</code></td><td style="padding:8px 12px;color:#6b6b6b">text/secondary</td></tr>
+        <tr><td style="padding:8px 12px;color:#485982">Action icon — hover</td><td style="padding:8px 12px"><span style="display:inline-block;width:12px;height:12px;border-radius:2px;background:#27365b;vertical-align:middle;margin-right:6px"></span><code style="background:#f4f6fb;padding:2px 6px;border-radius:4px;font-size:12px">#27365b</code></td><td style="padding:8px 12px;color:#6b6b6b">text/body + rgba(0,0,0,0.06) bg</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ⑤ CSS CLASSES ───────────────────────────────────────────── -->
+  <div style="margin-bottom:40px">
+    <div class="sub-label">CSS Classes</div>
+    <table style="width:100%;border-collapse:collapse;font-family:var(--font-base);font-size:13px">
+      <thead>
+        <tr style="background:#f7faff">
+          <th style="padding:10px 12px;text-align:left;color:#496f97;font-weight:600;border-bottom:1px solid #e8edf5">Class</th>
+          <th style="padding:10px 12px;text-align:left;color:#496f97;font-weight:600;border-bottom:1px solid #e8edf5">Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="border-bottom:1px solid #f0f3f8"><td style="padding:8px 12px"><code style="background:#f4f6fb;padding:2px 6px;border-radius:4px;font-size:12px">.wh</code></td><td style="padding:8px 12px;color:#6b6b6b">Root flex row — white background, 24px padding, 12px radius</td></tr>
+        <tr style="border-bottom:1px solid #f0f3f8"><td style="padding:8px 12px"><code style="background:#f4f6fb;padding:2px 6px;border-radius:4px;font-size:12px">.wh__thumb</code></td><td style="padding:8px 12px;color:#6b6b6b">32×32px circle — #93a1b6 background, centres the icon</td></tr>
+        <tr style="border-bottom:1px solid #f0f3f8"><td style="padding:8px 12px"><code style="background:#f4f6fb;padding:2px 6px;border-radius:4px;font-size:12px">.wh__body</code></td><td style="padding:8px 12px;color:#6b6b6b">Flex-1 column — holds .wh__title and optional .wh__subtitle</td></tr>
+        <tr style="border-bottom:1px solid #f0f3f8"><td style="padding:8px 12px"><code style="background:#f4f6fb;padding:2px 6px;border-radius:4px;font-size:12px">.wh__title</code></td><td style="padding:8px 12px;color:#6b6b6b">16px semibold, rgba(0,0,0,0.87), single line with overflow ellipsis</td></tr>
+        <tr style="border-bottom:1px solid #f0f3f8"><td style="padding:8px 12px"><code style="background:#f4f6fb;padding:2px 6px;border-radius:4px;font-size:12px">.wh__subtitle</code></td><td style="padding:8px 12px;color:#6b6b6b">13px regular, #6b6b6b — optional; omit element to show title only</td></tr>
+        <tr style="border-bottom:1px solid #f0f3f8"><td style="padding:8px 12px"><code style="background:#f4f6fb;padding:2px 6px;border-radius:4px;font-size:12px">.wh__actions</code></td><td style="padding:8px 12px;color:#6b6b6b">Right-side flex group — 8px gap, 12px left padding</td></tr>
+        <tr><td style="padding:8px 12px"><code style="background:#f4f6fb;padding:2px 6px;border-radius:4px;font-size:12px">.wh__btn</code></td><td style="padding:8px 12px;color:#6b6b6b">30×30px icon button — transparent bg, hover adds rgba(0,0,0,0.06)</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ⑥ ANATOMY ────────────────────────────────────────────────── -->
+  <div style="margin-bottom:40px">
+    <div class="sub-label">Anatomy</div>
+    <div style="background:#f4f7fb;padding:32px 24px 24px;border-radius:12px">
+      <div style="position:relative;display:inline-block;width:100%">
+        <div class="wh" style="pointer-events:none;user-select:none">
+          <div class="wh__thumb"><svg viewBox="0 0 20 20" fill="none"><use href="#wh-icon-pin"/></svg></div>
+          <div class="wh__body">
+            <span class="wh__title">Title goes here</span>
+            <span class="wh__subtitle">A descriptive body text comes here</span>
+          </div>
+          <div class="wh__actions">
+            <button class="wh__btn" style="pointer-events:none"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><use href="#wh-icon-settings"/></svg></button>
+            <button class="wh__btn" style="pointer-events:none"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><use href="#wh-icon-info"/></svg></button>
+          </div>
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:20px">
+        <div style="background:#fff;border-radius:8px;padding:12px;font-family:'Open Sans',sans-serif">
+          <div style="font-size:11px;font-weight:600;color:#485982;margin-bottom:4px">A · Thumb</div>
+          <div style="font-size:12px;color:#6b6b6b">32×32px circle<br>#93a1b6 bg<br>20×20px icon</div>
+        </div>
+        <div style="background:#fff;border-radius:8px;padding:12px;font-family:'Open Sans',sans-serif">
+          <div style="font-size:11px;font-weight:600;color:#485982;margin-bottom:4px">B · Title</div>
+          <div style="font-size:12px;color:#6b6b6b">16px / 600<br>rgba(0,0,0,.87)<br>lh 17px</div>
+        </div>
+        <div style="background:#fff;border-radius:8px;padding:12px;font-family:'Open Sans',sans-serif">
+          <div style="font-size:11px;font-weight:600;color:#485982;margin-bottom:4px">C · Subtitle</div>
+          <div style="font-size:12px;color:#6b6b6b">13px / 400<br>#6b6b6b<br>lh 14px · optional</div>
+        </div>
+        <div style="background:#fff;border-radius:8px;padding:12px;font-family:'Open Sans',sans-serif">
+          <div style="font-size:11px;font-weight:600;color:#485982;margin-bottom:4px">D · Actions</div>
+          <div style="font-size:12px;color:#6b6b6b">30×30px buttons<br>16×16px icons<br>8px gap</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</section>
+      </div><!-- /comp-panel-widget-header -->
+
+      <!-- ═══════════════════════════════════════════════════════════ -->
+      <!-- DASHBOARD WIDGET                                           -->
+      <!-- ═══════════════════════════════════════════════════════════ -->
+      <div class="comp-panel" id="comp-panel-dashboard-widget" style="display:none">
+
+        <!-- reusable SVG icon symbols (scoped to this panel) -->
+        <svg width="0" height="0" style="position:absolute;overflow:hidden">
+          <defs>
+            <symbol id="dw-icon-pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+              <circle cx="12" cy="10" r="3"/>
+            </symbol>
+            <symbol id="dw-icon-settings" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="3"/>
+              <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+            </symbol>
+            <symbol id="dw-icon-info" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"/>
+              <line x1="12" y1="8" x2="12" y2="8"/>
+              <line x1="12" y1="12" x2="12" y2="16"/>
+            </symbol>
+            <symbol id="dw-icon-download" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+              <polyline points="7 10 12 15 17 10"/>
+              <line x1="12" y1="15" x2="12" y2="3"/>
+            </symbol>
+          </defs>
+        </svg>
+
+        <h2>Dashboard Widget</h2>
+        <p style="font-size:13px;color:var(--text-secondary-var);margin-bottom:24px">
+          A complete self-contained card combining a Widget Header at the top with a Stacked Timeline chart below — the standard pattern for any time-series dashboard card.
+        </p>
+
+        <!-- ① LIVE PREVIEW -->
+        <div class="comp-section-label">Live Preview</div>
+        <div style="background:#e5eef5;border-radius:12px;padding:24px;margin-bottom:32px">
+          <div class="dw-card">
+
+            <!-- Widget Header — drag handle is first child in the flex row -->
+            <div class="wh" style="padding:0 0 20px 0">
+              <!-- drag handle: width:0 → 20px on hover, slides content right -->
+              <div class="dw-drag-handle" title="Drag to reorder">
+                <svg width="14" height="18" viewBox="0 0 10 14" fill="currentColor">
+                  <circle cx="2.5" cy="2"  r="1.5"/><circle cx="7.5" cy="2"  r="1.5"/>
+                  <circle cx="2.5" cy="7"  r="1.5"/><circle cx="7.5" cy="7"  r="1.5"/>
+                  <circle cx="2.5" cy="12" r="1.5"/><circle cx="7.5" cy="12" r="1.5"/>
+                </svg>
+              </div>
+              <div class="wh__thumb">
+                <svg><use href="#dw-icon-pin"/></svg>
+              </div>
+              <div class="wh__body">
+                <span class="wh__title">Competitive Share</span>
+                <span class="wh__subtitle">Brand visibility across all monitored categories</span>
+              </div>
+              <div class="wh__actions">
+                <button class="wh__btn" title="Settings"><svg width="18" height="18"><use href="#dw-icon-settings"/></svg></button>
+                <button class="wh__btn" title="Download"><svg width="18" height="18"><use href="#dw-icon-download"/></svg></button>
+                <button class="wh__btn" title="Info"><svg width="18" height="18"><use href="#dw-icon-info"/></svg></button>
+              </div>
+            </div>
+
+            <!-- Stacked Timeline -->
+            <div class="stacked-timeline">
+              <svg id="dw-svg" class="stacked-timeline__svg" viewBox="0 0 740 215" xmlns="http://www.w3.org/2000/svg">
+                <line x1="36" y1="18"  x2="728" y2="18"  stroke="#dce3ef" stroke-width="1"/>
+                <line x1="36" y1="61"  x2="728" y2="61"  stroke="#dce3ef" stroke-width="1"/>
+                <line x1="36" y1="103" x2="728" y2="103" stroke="#dce3ef" stroke-width="1"/>
+                <line x1="36" y1="146" x2="728" y2="146" stroke="#dce3ef" stroke-width="1"/>
+                <line x1="36" y1="188" x2="728" y2="188" stroke="#dce3ef" stroke-width="1"/>
+                <text x="32" y="22"  text-anchor="end" class="dw-axis-label" font-family="'Open Sans Condensed','Open Sans',sans-serif" font-stretch="condensed" font-size="13" fill="rgba(0,0,0,0.6)">100%</text>
+                <text x="32" y="107" text-anchor="end" class="dw-axis-label" font-family="'Open Sans Condensed','Open Sans',sans-serif" font-stretch="condensed" font-size="13" fill="rgba(0,0,0,0.6)">50%</text>
+                <text x="32" y="192" text-anchor="end" class="dw-axis-label" font-family="'Open Sans Condensed','Open Sans',sans-serif" font-stretch="condensed" font-size="13" fill="rgba(0,0,0,0.6)">0%</text>
+                <!-- Band 1 — Ads Below AIO — Crimson -->
+                <polygon points="36,188 180,188 312,188 445,188 578,188 728,188 728,146 578,152 445,151 312,147 180,154 36,151" fill="#e86492" fill-opacity="0.9"/>
+                <!-- Band 2 — Ads Inside AIO — Purple -->
+                <polygon points="36,151 180,154 312,147 445,151 578,152 728,146 728,108 578,120 445,117 312,112 180,122 36,120" fill="#b3a2e7" fill-opacity="0.9"/>
+                <!-- Band 3 — Ads Above AIO — Green -->
+                <polygon points="36,120 180,122 312,112 445,117 578,120 728,108 728,71 578,78 445,74 312,66 180,72 36,69" fill="#8ac8b1" fill-opacity="0.9"/>
+                <!-- Band 4 — No Ads -->
+                <polygon points="36,69 180,72 312,66 445,74 578,78 728,71 728,18 578,18 445,18 312,18 180,18 36,18" fill="#E4E8F2" fill-opacity="0.9"/>
+                <!-- boundary lines -->
+                <polyline points="36,151 180,154 312,147 445,151 578,152 728,146" fill="none" stroke="#f2a8c4" stroke-width="1.5"/>
+                <polyline points="36,120 180,122 312,112 445,117 578,120 728,108" fill="none" stroke="#cfc8f1" stroke-width="1.5"/>
+                <polyline points="36,69  180,72  312,66  445,74  578,78  728,71"  fill="none" stroke="#aedece" stroke-width="1.5"/>
+                <!-- indicator line -->
+                <line id="dw-indicator" x1="0" y1="18" x2="0" y2="188" stroke="rgba(0,0,0,0.35)" stroke-width="1" stroke-dasharray="3,2" style="display:none"/>
+                <!-- hover dots — Below -->
+                <circle class="dw-dot" data-col="0" cx="36"  cy="151" r="5.5" fill="#e86492" stroke="white" stroke-width="2" opacity="0"/>
+                <circle class="dw-dot" data-col="1" cx="180" cy="154" r="5.5" fill="#e86492" stroke="white" stroke-width="2" opacity="0"/>
+                <circle class="dw-dot" data-col="2" cx="312" cy="147" r="5.5" fill="#e86492" stroke="white" stroke-width="2" opacity="0"/>
+                <circle class="dw-dot" data-col="3" cx="445" cy="151" r="5.5" fill="#e86492" stroke="white" stroke-width="2" opacity="0"/>
+                <circle class="dw-dot" data-col="4" cx="578" cy="152" r="5.5" fill="#e86492" stroke="white" stroke-width="2" opacity="0"/>
+                <circle class="dw-dot" data-col="5" cx="728" cy="146" r="5.5" fill="#e86492" stroke="white" stroke-width="2" opacity="0"/>
+                <!-- hover dots — Inside -->
+                <circle class="dw-dot" data-col="0" cx="36"  cy="120" r="5.5" fill="#b3a2e7" stroke="white" stroke-width="2" opacity="0"/>
+                <circle class="dw-dot" data-col="1" cx="180" cy="122" r="5.5" fill="#b3a2e7" stroke="white" stroke-width="2" opacity="0"/>
+                <circle class="dw-dot" data-col="2" cx="312" cy="112" r="5.5" fill="#b3a2e7" stroke="white" stroke-width="2" opacity="0"/>
+                <circle class="dw-dot" data-col="3" cx="445" cy="117" r="5.5" fill="#b3a2e7" stroke="white" stroke-width="2" opacity="0"/>
+                <circle class="dw-dot" data-col="4" cx="578" cy="120" r="5.5" fill="#b3a2e7" stroke="white" stroke-width="2" opacity="0"/>
+                <circle class="dw-dot" data-col="5" cx="728" cy="108" r="5.5" fill="#b3a2e7" stroke="white" stroke-width="2" opacity="0"/>
+                <!-- hover dots — Above -->
+                <circle class="dw-dot" data-col="0" cx="36"  cy="69"  r="5.5" fill="#8ac8b1" stroke="white" stroke-width="2" opacity="0"/>
+                <circle class="dw-dot" data-col="1" cx="180" cy="72"  r="5.5" fill="#8ac8b1" stroke="white" stroke-width="2" opacity="0"/>
+                <circle class="dw-dot" data-col="2" cx="312" cy="66"  r="5.5" fill="#8ac8b1" stroke="white" stroke-width="2" opacity="0"/>
+                <circle class="dw-dot" data-col="3" cx="445" cy="74"  r="5.5" fill="#8ac8b1" stroke="white" stroke-width="2" opacity="0"/>
+                <circle class="dw-dot" data-col="4" cx="578" cy="78"  r="5.5" fill="#8ac8b1" stroke="white" stroke-width="2" opacity="0"/>
+                <circle class="dw-dot" data-col="5" cx="728" cy="71"  r="5.5" fill="#8ac8b1" stroke="white" stroke-width="2" opacity="0"/>
+                <!-- hover dots — No Ads -->
+                <circle class="dw-dot" data-col="0" cx="36"  cy="18"  r="5.5" fill="#E4E8F2" stroke="#aabcce" stroke-width="2" opacity="0"/>
+                <circle class="dw-dot" data-col="1" cx="180" cy="18"  r="5.5" fill="#E4E8F2" stroke="#aabcce" stroke-width="2" opacity="0"/>
+                <circle class="dw-dot" data-col="2" cx="312" cy="18"  r="5.5" fill="#E4E8F2" stroke="#aabcce" stroke-width="2" opacity="0"/>
+                <circle class="dw-dot" data-col="3" cx="445" cy="18"  r="5.5" fill="#E4E8F2" stroke="#aabcce" stroke-width="2" opacity="0"/>
+                <circle class="dw-dot" data-col="4" cx="578" cy="18"  r="5.5" fill="#E4E8F2" stroke="#aabcce" stroke-width="2" opacity="0"/>
+                <circle class="dw-dot" data-col="5" cx="728" cy="18"  r="5.5" fill="#E4E8F2" stroke="#aabcce" stroke-width="2" opacity="0"/>
+                <!-- hit rect -->
+                <rect id="dw-hit" x="36" y="18" width="692" height="170" fill="transparent" style="cursor:crosshair"/>
+                <!-- X axis labels -->
+                <text x="36"  y="210" text-anchor="start" class="dw-axis-label" font-family="'Open Sans Condensed','Open Sans',sans-serif" font-stretch="condensed" font-size="13" fill="rgba(0,0,0,0.6)">1 Jan, 2026</text>
+                <text x="728" y="210" text-anchor="end"   class="dw-axis-label" font-family="'Open Sans Condensed','Open Sans',sans-serif" font-stretch="condensed" font-size="13" fill="rgba(0,0,0,0.6)">1 Jun, 2026</text>
+              </svg>
+              <div class="stacked-timeline__legend">
+                <div class="stacked-timeline__legend-item"><svg width="8" height="8" viewBox="0 0 8 8"><circle cx="4" cy="4" r="4" fill="#8ac8b1"/></svg>Ads Above AIO</div>
+                <div class="stacked-timeline__legend-item"><svg width="8" height="8" viewBox="0 0 8 8"><circle cx="4" cy="4" r="4" fill="#b3a2e7"/></svg>Ads Inside AIO</div>
+                <div class="stacked-timeline__legend-item"><svg width="8" height="8" viewBox="0 0 8 8"><circle cx="4" cy="4" r="4" fill="#e86492"/></svg>Ads Below AIO</div>
+                <div class="stacked-timeline__legend-item"><svg width="8" height="8" viewBox="0 0 8 8"><circle cx="4" cy="4" r="4" fill="#E4E8F2"/></svg>No Ads</div>
+              </div>
+            </div>
+          </div>
+          <div id="dw-tooltip" class="stacked-timeline__tooltip"></div>
+        </div>
+
+        <!-- Settings overlay + sliding panel -->
+        <div class="dw-settings-overlay" id="dw-overlay"></div>
+        <div class="dw-settings-panel" id="dw-settings-panel">
+          <div class="dw-settings-panel__header">
+            <span class="dw-settings-panel__title">Widget Settings</span>
+            <button class="dw-settings-panel__close" id="dw-settings-close" title="Close">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            </button>
+          </div>
+          <div class="dw-settings-panel__body">
+
+            <!-- Metric -->
+            <div>
+              <div class="dw-settings-section__label">Metric</div>
+              <div id="dw-metric-opts">
+                <div class="dw-settings-option is-selected" data-group="metric" data-value="clicks">
+                  <div class="dw-settings-option__radio"></div>Share of Clicks
+                </div>
+                <div class="dw-settings-option" data-group="metric" data-value="spend">
+                  <div class="dw-settings-option__radio"></div>Share of Spend
+                </div>
+                <div class="dw-settings-option" data-group="metric" data-value="impressions">
+                  <div class="dw-settings-option__radio"></div>Share of Impressions
+                </div>
+                <div class="dw-settings-option" data-group="metric" data-value="frequency">
+                  <div class="dw-settings-option__radio"></div>Frequency
+                </div>
+                <div class="dw-settings-option" data-group="metric" data-value="avg-position">
+                  <div class="dw-settings-option__radio"></div>Avg Position
+                </div>
+                <div class="dw-settings-option" data-group="metric" data-value="avg-cpc">
+                  <div class="dw-settings-option__radio"></div>Avg CPC
+                </div>
+                <div class="dw-settings-option" data-group="metric" data-value="spend-efficiency">
+                  <div class="dw-settings-option__radio"></div>Spend Efficiency
+                </div>
+              </div>
+            </div>
+
+            <div class="dw-settings-divider"></div>
+
+            <!-- Visualisation -->
+            <div>
+              <div class="dw-settings-section__label">Visualisation</div>
+              <div id="dw-vis-opts">
+                <div class="dw-settings-option is-selected" data-group="vis" data-value="stacked-bars">
+                  <div class="dw-settings-option__radio"></div>Stacked Bars
+                </div>
+                <div class="dw-settings-option" data-group="vis" data-value="line-timeline">
+                  <div class="dw-settings-option__radio"></div>Line Timeline
+                </div>
+                <div class="dw-settings-option" data-group="vis" data-value="bars">
+                  <div class="dw-settings-option__radio"></div>Bars
+                </div>
+                <div class="dw-settings-option" data-group="vis" data-value="table">
+                  <div class="dw-settings-option__radio"></div>Table
+                </div>
+              </div>
+            </div>
+
+            <div class="dw-settings-divider"></div>
+
+            <!-- Compare to previous period -->
+            <div>
+              <div class="dw-settings-section__label">Compare</div>
+              <div class="ds-toggle-row" style="padding:4px 10px">
+                <div class="ds-toggle" id="dw-compare-toggle"><div class="ds-toggle__thumb"></div></div>
+                <span class="ds-toggle-row__label">Compare to previous period</span>
+              </div>
+            </div>
+
+          </div>
+          <div class="dw-settings-panel__footer">
+            <button class="dw-settings-btn-cancel" id="dw-settings-cancel">Cancel</button>
+            <button class="dw-settings-btn-apply" id="dw-settings-apply">Apply</button>
+          </div>
+        </div>
+
+        <!-- ② STATES -->
+        <div class="comp-section-label" style="margin-bottom:16px">States</div>
+        <div style="display:flex;flex-direction:column;gap:16px;margin-bottom:32px">
+
+          <!-- Default state -->
+          <div>
+            <div style="font-size:10px;font-weight:600;color:#858585;letter-spacing:0.4px;text-transform:uppercase;margin-bottom:8px">Default</div>
+            <div style="background:#e5eef5;border-radius:12px;padding:24px">
+              <div class="dw-card">
+                <div class="wh" style="padding:0 0 20px 0">
+                  <!-- drag handle hidden (width:0) -->
+                  <div class="dw-drag-handle"></div>
+                  <div class="wh__thumb"><svg><use href="#dw-icon-pin"/></svg></div>
+                  <div class="wh__body">
+                    <span class="wh__title">Competitive Share</span>
+                    <span class="wh__subtitle">Brand visibility across all monitored categories</span>
+                  </div>
+                  <div class="wh__actions">
+                    <button class="wh__btn" title="Settings"><svg width="18" height="18"><use href="#dw-icon-settings"/></svg></button>
+                    <button class="wh__btn" title="Download"><svg width="18" height="18"><use href="#dw-icon-download"/></svg></button>
+                    <button class="wh__btn" title="Info"><svg width="18" height="18"><use href="#dw-icon-info"/></svg></button>
+                  </div>
+                </div>
+                <div style="height:80px;background:linear-gradient(to top,#e86492 0 22%,#b3a2e7 22% 40%,#8ac8b1 40% 70%,#E4E8F2 70% 100%);border-radius:4px;opacity:0.85"></div>
+              </div>
+            </div>
+            <div style="font-size:11px;color:#6b6b6b;margin-top:8px">No shadow · Drag handle hidden · Default cursor</div>
+          </div>
+
+          <!-- Hovered / Draggable state -->
+          <div>
+            <div style="font-size:10px;font-weight:600;color:#858585;letter-spacing:0.4px;text-transform:uppercase;margin-bottom:8px">Hovered — Draggable</div>
+            <div style="background:#e5eef5;border-radius:12px;padding:24px">
+              <div class="dw-card" style="box-shadow:0 4px 16px rgba(0,0,0,0.12),0 1px 4px rgba(0,0,0,0.06)">
+                <div class="wh" style="padding:0 0 20px 0">
+                  <!-- drag handle fully visible -->
+                  <div class="dw-drag-handle" style="width:24px;opacity:1;cursor:grab">
+                    <svg width="14" height="18" viewBox="0 0 10 14" fill="currentColor">
+                      <circle cx="2.5" cy="2"  r="1.5"/><circle cx="7.5" cy="2"  r="1.5"/>
+                      <circle cx="2.5" cy="7"  r="1.5"/><circle cx="7.5" cy="7"  r="1.5"/>
+                      <circle cx="2.5" cy="12" r="1.5"/><circle cx="7.5" cy="12" r="1.5"/>
+                    </svg>
+                  </div>
+                  <div class="wh__thumb"><svg><use href="#dw-icon-pin"/></svg></div>
+                  <div class="wh__body">
+                    <span class="wh__title">Competitive Share</span>
+                    <span class="wh__subtitle">Brand visibility across all monitored categories</span>
+                  </div>
+                  <div class="wh__actions">
+                    <button class="wh__btn" title="Settings"><svg width="18" height="18"><use href="#dw-icon-settings"/></svg></button>
+                    <button class="wh__btn" title="Download"><svg width="18" height="18"><use href="#dw-icon-download"/></svg></button>
+                    <button class="wh__btn" title="Info"><svg width="18" height="18"><use href="#dw-icon-info"/></svg></button>
+                  </div>
+                </div>
+                <div style="height:80px;background:linear-gradient(to top,#e86492 0 22%,#b3a2e7 22% 40%,#8ac8b1 40% 70%,#E4E8F2 70% 100%);border-radius:4px;opacity:0.85"></div>
+              </div>
+            </div>
+            <div style="font-size:11px;color:#6b6b6b;margin-top:8px">Elevation shadow · Drag handle visible · <code>cursor:grab</code></div>
+          </div>
+
+        </div>
+
+        <!-- ③ ANATOMY -->
+        <div class="comp-section-label" style="margin-bottom:16px">Anatomy</div>
+        <div style="background:#f4f7fb;border-radius:12px;padding:24px;margin-bottom:32px">
+          <div style="background:#fff;border-radius:12px;padding:24px;position:relative">
+            <!-- Widget Header row with callout -->
+            <div class="wh" style="padding:0 0 20px 0;position:relative">
+              <div class="wh__thumb"><svg><use href="#dw-icon-pin"/></svg></div>
+              <div class="wh__body">
+                <span class="wh__title">Widget Title</span>
+                <span class="wh__subtitle">A descriptive subtitle text here</span>
+              </div>
+              <div class="wh__actions">
+                <button class="wh__btn" title="Settings"><svg width="18" height="18"><use href="#dw-icon-settings"/></svg></button>
+                <button class="wh__btn" title="Info"><svg width="18" height="18"><use href="#dw-icon-info"/></svg></button>
+              </div>
+            </div>
+            <!-- Stacked Timeline simplified -->
+            <div style="height:80px;background:linear-gradient(to top,#e86492 0 22%,#b3a2e7 22% 40%,#8ac8b1 40% 70%,#E4E8F2 70% 100%);border-radius:4px;opacity:0.85"></div>
+          </div>
+          <!-- Callout labels -->
+          <div style="display:flex;gap:32px;margin-top:20px;flex-wrap:wrap">
+            <div style="display:flex;align-items:flex-start;gap:8px">
+              <span style="font-size:11px;font-weight:700;color:#fff;background:#3079bd;border-radius:50%;width:18px;height:18px;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0">A</span>
+              <div>
+                <div style="font-size:12px;font-weight:600;color:#27365b">Widget Header</div>
+                <div style="font-size:11px;color:#858585">.wh — roundel + title + actions<br>padding-bottom: 20px</div>
+              </div>
+            </div>
+            <div style="display:flex;align-items:flex-start;gap:8px">
+              <span style="font-size:11px;font-weight:700;color:#fff;background:#3079bd;border-radius:50%;width:18px;height:18px;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0">B</span>
+              <div>
+                <div style="font-size:12px;font-weight:600;color:#27365b">Stacked Timeline</div>
+                <div style="font-size:11px;color:#858585">.stacked-timeline — SVG chart<br>+ legend below</div>
+              </div>
+            </div>
+            <div style="display:flex;align-items:flex-start;gap:8px">
+              <span style="font-size:11px;font-weight:700;color:#fff;background:#3079bd;border-radius:50%;width:18px;height:18px;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0">C</span>
+              <div>
+                <div style="font-size:12px;font-weight:600;color:#27365b">Card shell</div>
+                <div style="font-size:11px;color:#858585">bg #fff · radius 12px<br>padding 24px</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ③ USAGE -->
+        <div class="comp-section-label" style="margin-bottom:12px">HTML Structure</div>
+        <div style="background:#1e2640;border-radius:8px;padding:20px;margin-bottom:32px;overflow-x:auto">
+          <pre style="margin:0;font-family:'Courier New',monospace;font-size:12px;line-height:1.7;color:#c8d3e0;white-space:pre"><span style="color:#6b8cba">&lt;!-- Dashboard Widget card --&gt;</span>
+<span style="color:#8ac8b1">&lt;div</span> <span style="color:#b3a2e7">class</span>=<span style="color:#e8c97a">"dw-card"</span><span style="color:#8ac8b1">&gt;</span>
+
+  <span style="color:#6b8cba">&lt;!-- A: Widget Header --&gt;</span>
+  <span style="color:#8ac8b1">&lt;div</span> <span style="color:#b3a2e7">class</span>=<span style="color:#e8c97a">"wh"</span><span style="color:#8ac8b1">&gt;</span>
+    <span style="color:#8ac8b1">&lt;div</span> <span style="color:#b3a2e7">class</span>=<span style="color:#e8c97a">"wh__thumb"</span><span style="color:#8ac8b1">&gt;</span>…<span style="color:#8ac8b1">&lt;/div&gt;</span>
+    <span style="color:#8ac8b1">&lt;div</span> <span style="color:#b3a2e7">class</span>=<span style="color:#e8c97a">"wh__body"</span><span style="color:#8ac8b1">&gt;</span>…<span style="color:#8ac8b1">&lt;/div&gt;</span>
+    <span style="color:#8ac8b1">&lt;div</span> <span style="color:#b3a2e7">class</span>=<span style="color:#e8c97a">"wh__actions"</span><span style="color:#8ac8b1">&gt;</span>…<span style="color:#8ac8b1">&lt;/div&gt;</span>
+  <span style="color:#8ac8b1">&lt;/div&gt;</span>
+
+  <span style="color:#6b8cba">&lt;!-- B: Stacked Timeline --&gt;</span>
+  <span style="color:#8ac8b1">&lt;div</span> <span style="color:#b3a2e7">class</span>=<span style="color:#e8c97a">"stacked-timeline"</span><span style="color:#8ac8b1">&gt;</span>
+    <span style="color:#8ac8b1">&lt;svg</span> <span style="color:#b3a2e7">class</span>=<span style="color:#e8c97a">"stacked-timeline__svg"</span> <span style="color:#b3a2e7">viewBox</span>=<span style="color:#e8c97a">"0 0 740 215"</span><span style="color:#8ac8b1">&gt;</span>…<span style="color:#8ac8b1">&lt;/svg&gt;</span>
+    <span style="color:#8ac8b1">&lt;div</span> <span style="color:#b3a2e7">class</span>=<span style="color:#e8c97a">"stacked-timeline__legend"</span><span style="color:#8ac8b1">&gt;</span>…<span style="color:#8ac8b1">&lt;/div&gt;</span>
+  <span style="color:#8ac8b1">&lt;/div&gt;</span>
+
+<span style="color:#8ac8b1">&lt;/div&gt;</span></pre>
+        </div>
+
+        <!-- ④ DESIGN TOKENS -->
+        <div class="comp-section-label" style="margin-bottom:12px">Design Tokens</div>
+        <table class="comp-token-table" style="margin-bottom:32px">
+          <thead><tr><th>Token</th><th>Value</th><th>Usage</th></tr></thead>
+          <tbody>
+            <tr><td>Card bg</td><td>#ffffff</td><td>Outer card background</td></tr>
+            <tr><td>Card radius</td><td>12px</td><td>Outer card border-radius</td></tr>
+            <tr><td>Card padding</td><td>24px</td><td>All sides of the white card</td></tr>
+            <tr><td>Header bottom gap</td><td>20px</td><td>Space between .wh and chart</td></tr>
+            <tr><td>Roundel bg</td><td>#93a1b6</td><td>.wh__thumb background</td></tr>
+            <tr><td>Title</td><td>16px / 600 / rgba(0,0,0,0.87)</td><td>.wh__title</td></tr>
+            <tr><td>Subtitle</td><td>13px / 400 / #6b6b6b</td><td>.wh__subtitle</td></tr>
+            <tr><td>Above AIO</td><td>#8ac8b1</td><td>Stacked band — top</td></tr>
+            <tr><td>Inside AIO</td><td>#b3a2e7</td><td>Stacked band — mid</td></tr>
+            <tr><td>Below AIO</td><td>#e86492</td><td>Stacked band — bottom</td></tr>
+            <tr><td>No Ads</td><td>#E4E8F2</td><td>Stacked band — top cap</td></tr>
+            <tr><td>Grid lines</td><td>#dce3ef</td><td>Horizontal axis lines</td></tr>
+            <tr><td>Legend text</td><td>#38476a / 13px / 300</td><td>.stacked-timeline__legend-item</td></tr>
+            <tr><td>Legend gap</td><td>12px top / 20px between items</td><td>.stacked-timeline__legend</td></tr>
+          </tbody>
+        </table>
+
+        <!-- ⑤ CSS CLASSES -->
+        <div class="comp-section-label" style="margin-bottom:12px">CSS Classes</div>
+        <table class="comp-token-table" style="margin-bottom:0">
+          <thead><tr><th>Class</th><th>Description</th></tr></thead>
+          <tbody>
+            <tr><td><code>.wh</code></td><td>Widget Header root — flex row, padding-bottom 20px when used inside .dw-card</td></tr>
+            <tr><td><code>.wh__thumb</code></td><td>32×32px roundel — #93a1b6 background, white icon</td></tr>
+            <tr><td><code>.wh__body</code></td><td>Flex column — title + subtitle</td></tr>
+            <tr><td><code>.wh__title</code></td><td>16px semibold heading, truncates with ellipsis</td></tr>
+            <tr><td><code>.wh__subtitle</code></td><td>13px regular secondary text — omit element if not needed</td></tr>
+            <tr><td><code>.wh__actions</code></td><td>Right-side icon button group</td></tr>
+            <tr><td><code>.stacked-timeline</code></td><td>Chart root — display:block; width:100%</td></tr>
+            <tr><td><code>.stacked-timeline__svg</code></td><td>SVG element — width:100%; scales via viewBox</td></tr>
+            <tr><td><code>.stacked-timeline__legend</code></td><td>Centred flex row of legend items, margin-top:12px</td></tr>
+            <tr><td><code>.stacked-timeline__legend-item</code></td><td>Colour dot + label — 13px, #38476a</td></tr>
+          </tbody>
+        </table>
+
+      </div><!-- /comp-panel-dashboard-widget -->
+
       <div class="comp-panel" id="comp-panel-multi-chart-lines" style="display:none">
 <section id="multi-chart-lines">
   <div class="section-header">
@@ -6632,16 +7432,16 @@
           <!-- horizontal grid lines at 0% / 25% / 50% / 75% / 100%
                yOf(pct) = 188 − (pct/100) × 170
                yOf(100)=18  yOf(75)=61  yOf(50)=103  yOf(25)=146  yOf(0)=188 -->
-          <line x1="48" y1="18"  x2="710" y2="18"  stroke="#dce3ef" stroke-width="1"/>
-          <line x1="48" y1="61"  x2="710" y2="61"  stroke="#dce3ef" stroke-width="1"/>
-          <line x1="48" y1="103" x2="710" y2="103" stroke="#dce3ef" stroke-width="1"/>
-          <line x1="48" y1="146" x2="710" y2="146" stroke="#dce3ef" stroke-width="1"/>
-          <line x1="48" y1="188" x2="710" y2="188" stroke="#dce3ef" stroke-width="1"/>
+          <line x1="36" y1="18"  x2="728" y2="18"  stroke="#dce3ef" stroke-width="1"/>
+          <line x1="36" y1="61"  x2="728" y2="61"  stroke="#dce3ef" stroke-width="1"/>
+          <line x1="36" y1="103" x2="728" y2="103" stroke="#dce3ef" stroke-width="1"/>
+          <line x1="36" y1="146" x2="728" y2="146" stroke="#dce3ef" stroke-width="1"/>
+          <line x1="36" y1="188" x2="728" y2="188" stroke="#dce3ef" stroke-width="1"/>
 
           <!-- Y-axis labels -->
-          <text x="43" y="22"  text-anchor="end" class="slt-axis-label" font-family="'Open Sans Condensed','Open Sans',sans-serif" font-stretch="condensed" font-size="13" fill="rgba(0,0,0,0.6)">100%</text>
-          <text x="43" y="107" text-anchor="end" class="slt-axis-label" font-family="'Open Sans Condensed','Open Sans',sans-serif" font-stretch="condensed" font-size="13" fill="rgba(0,0,0,0.6)">50%</text>
-          <text x="43" y="192" text-anchor="end" class="slt-axis-label" font-family="'Open Sans Condensed','Open Sans',sans-serif" font-stretch="condensed" font-size="13" fill="rgba(0,0,0,0.6)">0%</text>
+          <text x="32" y="22"  text-anchor="end" class="slt-axis-label" font-family="'Open Sans Condensed','Open Sans',sans-serif" font-stretch="condensed" font-size="13" fill="rgba(0,0,0,0.6)">100%</text>
+          <text x="32" y="107" text-anchor="end" class="slt-axis-label" font-family="'Open Sans Condensed','Open Sans',sans-serif" font-stretch="condensed" font-size="13" fill="rgba(0,0,0,0.6)">50%</text>
+          <text x="32" y="192" text-anchor="end" class="slt-axis-label" font-family="'Open Sans Condensed','Open Sans',sans-serif" font-stretch="condensed" font-size="13" fill="rgba(0,0,0,0.6)">0%</text>
 
           <!-- ─── stacked area polygons (drawn bottom-to-top) ────────
                X positions (6 dates): x0=48  x1=180  x2=312  x3=445  x4=578  x5=710
@@ -6659,32 +7459,32 @@
 
           <!-- Band 1 — Ads Below AIO — Crimson #e86492 (bottom) -->
           <polygon
-            points="48,188 180,188 312,188 445,188 578,188 710,188
-                    710,146 578,152 445,151 312,147 180,154 48,151"
+            points="36,188 180,188 312,188 445,188 578,188 728,188
+                    728,146 578,152 445,151 312,147 180,154 36,151"
             fill="#e86492" fill-opacity="0.9"/>
 
           <!-- Band 2 — Ads Inside AIO — Purple #b3a2e7 -->
           <polygon
-            points="48,151 180,154 312,147 445,151 578,152 710,146
-                    710,108 578,120 445,117 312,112 180,122 48,120"
+            points="36,151 180,154 312,147 445,151 578,152 728,146
+                    728,108 578,120 445,117 312,112 180,122 36,120"
             fill="#b3a2e7" fill-opacity="0.9"/>
 
           <!-- Band 3 — Ads Above AIO — Green #8ac8b1 -->
           <polygon
-            points="48,120 180,122 312,112 445,117 578,120 710,108
-                    710,71 578,78 445,74 312,66 180,72 48,69"
+            points="36,120 180,122 312,112 445,117 578,120 728,108
+                    728,71 578,78 445,74 312,66 180,72 36,69"
             fill="#8ac8b1" fill-opacity="0.9"/>
 
           <!-- Band 4 — No Ads — Neutral/50 #E4E8F2 (top) -->
           <polygon
-            points="48,69 180,72 312,66 445,74 578,78 710,71
-                    710,18 578,18 445,18 312,18 180,18 48,18"
+            points="36,69 180,72 312,66 445,74 578,78 728,71
+                    728,18 578,18 445,18 312,18 180,18 36,18"
             fill="#E4E8F2" fill-opacity="0.9"/>
 
           <!-- boundary lines between bands — lighter monochromatic shade of the band below -->
-          <polyline points="48,151 180,154 312,147 445,151 578,152 710,146" fill="none" stroke="#f2a8c4" stroke-width="1.5"/>
-          <polyline points="48,120 180,122 312,112 445,117 578,120 710,108" fill="none" stroke="#cfc8f1" stroke-width="1.5"/>
-          <polyline points="48,69  180,72  312,66  445,74  578,78  710,71"  fill="none" stroke="#aedece" stroke-width="1.5"/>
+          <polyline points="36,151 180,154 312,147 445,151 578,152 728,146" fill="none" stroke="#f2a8c4" stroke-width="1.5"/>
+          <polyline points="36,120 180,122 312,112 445,117 578,120 728,108" fill="none" stroke="#cfc8f1" stroke-width="1.5"/>
+          <polyline points="36,69  180,72  312,66  445,74  578,78  728,71"  fill="none" stroke="#aedece" stroke-width="1.5"/>
 
           <!-- vertical indicator line (managed by JS) — rendered before dots so dots sit on top -->
           <line id="slt-indicator" x1="0" y1="18" x2="0" y2="188"
@@ -6693,40 +7493,40 @@
 
           <!-- hover dots — shown by JS on nearest column (r=5.5, white stroke 2px) -->
           <!-- Ads Below AIO boundary top: y=[151,154,147,151,152,146] -->
-          <circle class="slt-dot" data-col="0" cx="48"  cy="151" r="5.5" fill="#e86492" stroke="white" stroke-width="2" opacity="0"/>
+          <circle class="slt-dot" data-col="0" cx="36"  cy="151" r="5.5" fill="#e86492" stroke="white" stroke-width="2" opacity="0"/>
           <circle class="slt-dot" data-col="1" cx="180" cy="154" r="5.5" fill="#e86492" stroke="white" stroke-width="2" opacity="0"/>
           <circle class="slt-dot" data-col="2" cx="312" cy="147" r="5.5" fill="#e86492" stroke="white" stroke-width="2" opacity="0"/>
           <circle class="slt-dot" data-col="3" cx="445" cy="151" r="5.5" fill="#e86492" stroke="white" stroke-width="2" opacity="0"/>
           <circle class="slt-dot" data-col="4" cx="578" cy="152" r="5.5" fill="#e86492" stroke="white" stroke-width="2" opacity="0"/>
-          <circle class="slt-dot" data-col="5" cx="710" cy="146" r="5.5" fill="#e86492" stroke="white" stroke-width="2" opacity="0"/>
+          <circle class="slt-dot" data-col="5" cx="728" cy="146" r="5.5" fill="#e86492" stroke="white" stroke-width="2" opacity="0"/>
           <!-- Ads Inside AIO boundary top: y=[120,122,112,117,120,108] -->
-          <circle class="slt-dot" data-col="0" cx="48"  cy="120" r="5.5" fill="#b3a2e7" stroke="white" stroke-width="2" opacity="0"/>
+          <circle class="slt-dot" data-col="0" cx="36"  cy="120" r="5.5" fill="#b3a2e7" stroke="white" stroke-width="2" opacity="0"/>
           <circle class="slt-dot" data-col="1" cx="180" cy="122" r="5.5" fill="#b3a2e7" stroke="white" stroke-width="2" opacity="0"/>
           <circle class="slt-dot" data-col="2" cx="312" cy="112" r="5.5" fill="#b3a2e7" stroke="white" stroke-width="2" opacity="0"/>
           <circle class="slt-dot" data-col="3" cx="445" cy="117" r="5.5" fill="#b3a2e7" stroke="white" stroke-width="2" opacity="0"/>
           <circle class="slt-dot" data-col="4" cx="578" cy="120" r="5.5" fill="#b3a2e7" stroke="white" stroke-width="2" opacity="0"/>
-          <circle class="slt-dot" data-col="5" cx="710" cy="108" r="5.5" fill="#b3a2e7" stroke="white" stroke-width="2" opacity="0"/>
+          <circle class="slt-dot" data-col="5" cx="728" cy="108" r="5.5" fill="#b3a2e7" stroke="white" stroke-width="2" opacity="0"/>
           <!-- Ads Above AIO boundary top: y=[69,72,66,74,78,71] -->
-          <circle class="slt-dot" data-col="0" cx="48"  cy="69"  r="5.5" fill="#8ac8b1" stroke="white" stroke-width="2" opacity="0"/>
+          <circle class="slt-dot" data-col="0" cx="36"  cy="69"  r="5.5" fill="#8ac8b1" stroke="white" stroke-width="2" opacity="0"/>
           <circle class="slt-dot" data-col="1" cx="180" cy="72"  r="5.5" fill="#8ac8b1" stroke="white" stroke-width="2" opacity="0"/>
           <circle class="slt-dot" data-col="2" cx="312" cy="66"  r="5.5" fill="#8ac8b1" stroke="white" stroke-width="2" opacity="0"/>
           <circle class="slt-dot" data-col="3" cx="445" cy="74"  r="5.5" fill="#8ac8b1" stroke="white" stroke-width="2" opacity="0"/>
           <circle class="slt-dot" data-col="4" cx="578" cy="78"  r="5.5" fill="#8ac8b1" stroke="white" stroke-width="2" opacity="0"/>
-          <circle class="slt-dot" data-col="5" cx="710" cy="71"  r="5.5" fill="#8ac8b1" stroke="white" stroke-width="2" opacity="0"/>
+          <circle class="slt-dot" data-col="5" cx="728" cy="71"  r="5.5" fill="#8ac8b1" stroke="white" stroke-width="2" opacity="0"/>
           <!-- No Ads boundary top: y=18 (always 100%) -->
-          <circle class="slt-dot" data-col="0" cx="48"  cy="18"  r="5.5" fill="#E4E8F2" stroke="#aabcce" stroke-width="2" opacity="0"/>
+          <circle class="slt-dot" data-col="0" cx="36"  cy="18"  r="5.5" fill="#E4E8F2" stroke="#aabcce" stroke-width="2" opacity="0"/>
           <circle class="slt-dot" data-col="1" cx="180" cy="18"  r="5.5" fill="#E4E8F2" stroke="#aabcce" stroke-width="2" opacity="0"/>
           <circle class="slt-dot" data-col="2" cx="312" cy="18"  r="5.5" fill="#E4E8F2" stroke="#aabcce" stroke-width="2" opacity="0"/>
           <circle class="slt-dot" data-col="3" cx="445" cy="18"  r="5.5" fill="#E4E8F2" stroke="#aabcce" stroke-width="2" opacity="0"/>
           <circle class="slt-dot" data-col="4" cx="578" cy="18"  r="5.5" fill="#E4E8F2" stroke="#aabcce" stroke-width="2" opacity="0"/>
-          <circle class="slt-dot" data-col="5" cx="710" cy="18"  r="5.5" fill="#E4E8F2" stroke="#aabcce" stroke-width="2" opacity="0"/>
+          <circle class="slt-dot" data-col="5" cx="728" cy="18"  r="5.5" fill="#E4E8F2" stroke="#aabcce" stroke-width="2" opacity="0"/>
 
           <!-- invisible hit rect for hover interaction -->
-          <rect id="slt-hit" x="48" y="18" width="662" height="170" fill="transparent" style="cursor:crosshair"/>
+          <rect id="slt-hit" x="36" y="18" width="692" height="170" fill="transparent" style="cursor:crosshair"/>
 
           <!-- X-axis date labels -->
-          <text x="48"  y="210" text-anchor="start" class="slt-axis-label" font-family="'Open Sans Condensed','Open Sans',sans-serif" font-stretch="condensed" font-size="13" fill="rgba(0,0,0,0.6)">1 Jan, 2026</text>
-          <text x="710" y="210" text-anchor="end"   class="slt-axis-label" font-family="'Open Sans Condensed','Open Sans',sans-serif" font-stretch="condensed" font-size="13" fill="rgba(0,0,0,0.6)">1 Jun, 2026</text>
+          <text x="36"  y="210" text-anchor="start" class="slt-axis-label" font-family="'Open Sans Condensed','Open Sans',sans-serif" font-stretch="condensed" font-size="13" fill="rgba(0,0,0,0.6)">1 Jan, 2026</text>
+          <text x="728" y="210" text-anchor="end"   class="slt-axis-label" font-family="'Open Sans Condensed','Open Sans',sans-serif" font-stretch="condensed" font-size="13" fill="rgba(0,0,0,0.6)">1 Jun, 2026</text>
         </svg>
 
         <!-- chart legend -->
@@ -6772,94 +7572,94 @@
         <svg id="sltc-svg" class="stacked-timeline__svg" viewBox="0 0 740 215" xmlns="http://www.w3.org/2000/svg">
 
           <!-- grid lines at 0% / 25% / 50% / 75% / 100% -->
-          <line x1="48" y1="18"  x2="710" y2="18"  stroke="#dce3ef" stroke-width="1"/>
-          <line x1="48" y1="61"  x2="710" y2="61"  stroke="#dce3ef" stroke-width="1"/>
-          <line x1="48" y1="103" x2="710" y2="103" stroke="#dce3ef" stroke-width="1"/>
-          <line x1="48" y1="146" x2="710" y2="146" stroke="#dce3ef" stroke-width="1"/>
-          <line x1="48" y1="188" x2="710" y2="188" stroke="#dce3ef" stroke-width="1"/>
+          <line x1="36" y1="18"  x2="728" y2="18"  stroke="#dce3ef" stroke-width="1"/>
+          <line x1="36" y1="61"  x2="728" y2="61"  stroke="#dce3ef" stroke-width="1"/>
+          <line x1="36" y1="103" x2="728" y2="103" stroke="#dce3ef" stroke-width="1"/>
+          <line x1="36" y1="146" x2="728" y2="146" stroke="#dce3ef" stroke-width="1"/>
+          <line x1="36" y1="188" x2="728" y2="188" stroke="#dce3ef" stroke-width="1"/>
 
           <!-- Y-axis labels -->
-          <text x="43" y="22"  text-anchor="end" class="slt-axis-label" font-family="'Open Sans Condensed','Open Sans',sans-serif" font-stretch="condensed" font-size="13" fill="rgba(0,0,0,0.6)">100%</text>
-          <text x="43" y="107" text-anchor="end" class="slt-axis-label" font-family="'Open Sans Condensed','Open Sans',sans-serif" font-stretch="condensed" font-size="13" fill="rgba(0,0,0,0.6)">50%</text>
-          <text x="43" y="192" text-anchor="end" class="slt-axis-label" font-family="'Open Sans Condensed','Open Sans',sans-serif" font-stretch="condensed" font-size="13" fill="rgba(0,0,0,0.6)">0%</text>
+          <text x="32" y="22"  text-anchor="end" class="slt-axis-label" font-family="'Open Sans Condensed','Open Sans',sans-serif" font-stretch="condensed" font-size="13" fill="rgba(0,0,0,0.6)">100%</text>
+          <text x="32" y="107" text-anchor="end" class="slt-axis-label" font-family="'Open Sans Condensed','Open Sans',sans-serif" font-stretch="condensed" font-size="13" fill="rgba(0,0,0,0.6)">50%</text>
+          <text x="32" y="192" text-anchor="end" class="slt-axis-label" font-family="'Open Sans Condensed','Open Sans',sans-serif" font-stretch="condensed" font-size="13" fill="rgba(0,0,0,0.6)">0%</text>
 
           <!-- Band 1 — Ads Below AIO — #e86492 (bottom) -->
-          <polygon points="48,188 180,188 312,188 445,188 578,188 710,188 710,146 578,152 445,151 312,147 180,154 48,151" fill="#e86492" fill-opacity="0.9"/>
+          <polygon points="36,188 180,188 312,188 445,188 578,188 728,188 728,146 578,152 445,151 312,147 180,154 36,151" fill="#e86492" fill-opacity="0.9"/>
           <!-- Band 2 — Ads Inside AIO — #b3a2e7 -->
-          <polygon points="48,151 180,154 312,147 445,151 578,152 710,146 710,108 578,120 445,117 312,112 180,122 48,120" fill="#b3a2e7" fill-opacity="0.9"/>
+          <polygon points="36,151 180,154 312,147 445,151 578,152 728,146 728,108 578,120 445,117 312,112 180,122 36,120" fill="#b3a2e7" fill-opacity="0.9"/>
           <!-- Band 3 — Ads Above AIO — #8ac8b1 -->
-          <polygon points="48,120 180,122 312,112 445,117 578,120 710,108 710,71 578,78 445,74 312,66 180,72 48,69" fill="#8ac8b1" fill-opacity="0.9"/>
+          <polygon points="36,120 180,122 312,112 445,117 578,120 728,108 728,71 578,78 445,74 312,66 180,72 36,69" fill="#8ac8b1" fill-opacity="0.9"/>
           <!-- Band 4 — No Ads — #E4E8F2 (top) -->
-          <polygon points="48,69 180,72 312,66 445,74 578,78 710,71 710,18 578,18 445,18 312,18 180,18 48,18" fill="#E4E8F2" fill-opacity="0.9"/>
+          <polygon points="36,69 180,72 312,66 445,74 578,78 728,71 728,18 578,18 445,18 312,18 180,18 36,18" fill="#E4E8F2" fill-opacity="0.9"/>
 
           <!-- boundary lines between main bands — lighter monochromatic shade of the band below -->
-          <polyline points="48,151 180,154 312,147 445,151 578,152 710,146" fill="none" stroke="#f2a8c4" stroke-width="1.5"/>
-          <polyline points="48,120 180,122 312,112 445,117 578,120 710,108" fill="none" stroke="#cfc8f1" stroke-width="1.5"/>
-          <polyline points="48,69  180,72  312,66  445,74  578,78  710,71"  fill="none" stroke="#aedece" stroke-width="1.5"/>
+          <polyline points="36,151 180,154 312,147 445,151 578,152 728,146" fill="none" stroke="#f2a8c4" stroke-width="1.5"/>
+          <polyline points="36,120 180,122 312,112 445,117 578,120 728,108" fill="none" stroke="#cfc8f1" stroke-width="1.5"/>
+          <polyline points="36,69  180,72  312,66  445,74  578,78  728,71"  fill="none" stroke="#aedece" stroke-width="1.5"/>
 
           <!-- Comparison dotted lines — Industry Average (round dots) -->
-          <polyline points="48,140 180,142 312,137 445,144 578,147 710,140" fill="none" stroke="#b82d5a" stroke-width="2" stroke-dasharray="0.1,5" stroke-linecap="round" opacity="0.9"/>
-          <polyline points="48,103 180,106 312,98 445,106 578,112 710,101"  fill="none" stroke="#6a4ec0" stroke-width="2" stroke-dasharray="0.1,5" stroke-linecap="round" opacity="0.9"/>
-          <polyline points="48,60  180,62  312,57  445,62  578,66  710,60"   fill="none" stroke="#3a9478" stroke-width="2" stroke-dasharray="0.1,5" stroke-linecap="round" opacity="0.9"/>
+          <polyline points="36,140 180,142 312,137 445,144 578,147 728,140" fill="none" stroke="#b82d5a" stroke-width="2" stroke-dasharray="0.1,5" stroke-linecap="round" opacity="0.9"/>
+          <polyline points="36,103 180,106 312,98 445,106 578,112 728,101"  fill="none" stroke="#6a4ec0" stroke-width="2" stroke-dasharray="0.1,5" stroke-linecap="round" opacity="0.9"/>
+          <polyline points="36,60  180,62  312,57  445,62  578,66  728,60"   fill="none" stroke="#3a9478" stroke-width="2" stroke-dasharray="0.1,5" stroke-linecap="round" opacity="0.9"/>
 
           <!-- vertical indicator line — before dots -->
           <line id="sltc-indicator" x1="0" y1="18" x2="0" y2="188" stroke="rgba(0,0,0,0.35)" stroke-width="1" stroke-dasharray="3,2" style="display:none"/>
 
           <!-- Main dots — filled, r=5.5 -->
-          <circle class="sltc-dot" data-col="0" cx="48"  cy="151" r="5.5" fill="#e86492" stroke="white" stroke-width="2" opacity="0"/>
+          <circle class="sltc-dot" data-col="0" cx="36"  cy="151" r="5.5" fill="#e86492" stroke="white" stroke-width="2" opacity="0"/>
           <circle class="sltc-dot" data-col="1" cx="180" cy="154" r="5.5" fill="#e86492" stroke="white" stroke-width="2" opacity="0"/>
           <circle class="sltc-dot" data-col="2" cx="312" cy="147" r="5.5" fill="#e86492" stroke="white" stroke-width="2" opacity="0"/>
           <circle class="sltc-dot" data-col="3" cx="445" cy="151" r="5.5" fill="#e86492" stroke="white" stroke-width="2" opacity="0"/>
           <circle class="sltc-dot" data-col="4" cx="578" cy="152" r="5.5" fill="#e86492" stroke="white" stroke-width="2" opacity="0"/>
-          <circle class="sltc-dot" data-col="5" cx="710" cy="146" r="5.5" fill="#e86492" stroke="white" stroke-width="2" opacity="0"/>
-          <circle class="sltc-dot" data-col="0" cx="48"  cy="120" r="5.5" fill="#b3a2e7" stroke="white" stroke-width="2" opacity="0"/>
+          <circle class="sltc-dot" data-col="5" cx="728" cy="146" r="5.5" fill="#e86492" stroke="white" stroke-width="2" opacity="0"/>
+          <circle class="sltc-dot" data-col="0" cx="36"  cy="120" r="5.5" fill="#b3a2e7" stroke="white" stroke-width="2" opacity="0"/>
           <circle class="sltc-dot" data-col="1" cx="180" cy="122" r="5.5" fill="#b3a2e7" stroke="white" stroke-width="2" opacity="0"/>
           <circle class="sltc-dot" data-col="2" cx="312" cy="112" r="5.5" fill="#b3a2e7" stroke="white" stroke-width="2" opacity="0"/>
           <circle class="sltc-dot" data-col="3" cx="445" cy="117" r="5.5" fill="#b3a2e7" stroke="white" stroke-width="2" opacity="0"/>
           <circle class="sltc-dot" data-col="4" cx="578" cy="120" r="5.5" fill="#b3a2e7" stroke="white" stroke-width="2" opacity="0"/>
-          <circle class="sltc-dot" data-col="5" cx="710" cy="108" r="5.5" fill="#b3a2e7" stroke="white" stroke-width="2" opacity="0"/>
-          <circle class="sltc-dot" data-col="0" cx="48"  cy="69"  r="5.5" fill="#8ac8b1" stroke="white" stroke-width="2" opacity="0"/>
+          <circle class="sltc-dot" data-col="5" cx="728" cy="108" r="5.5" fill="#b3a2e7" stroke="white" stroke-width="2" opacity="0"/>
+          <circle class="sltc-dot" data-col="0" cx="36"  cy="69"  r="5.5" fill="#8ac8b1" stroke="white" stroke-width="2" opacity="0"/>
           <circle class="sltc-dot" data-col="1" cx="180" cy="72"  r="5.5" fill="#8ac8b1" stroke="white" stroke-width="2" opacity="0"/>
           <circle class="sltc-dot" data-col="2" cx="312" cy="66"  r="5.5" fill="#8ac8b1" stroke="white" stroke-width="2" opacity="0"/>
           <circle class="sltc-dot" data-col="3" cx="445" cy="74"  r="5.5" fill="#8ac8b1" stroke="white" stroke-width="2" opacity="0"/>
           <circle class="sltc-dot" data-col="4" cx="578" cy="78"  r="5.5" fill="#8ac8b1" stroke="white" stroke-width="2" opacity="0"/>
-          <circle class="sltc-dot" data-col="5" cx="710" cy="71"  r="5.5" fill="#8ac8b1" stroke="white" stroke-width="2" opacity="0"/>
-          <circle class="sltc-dot" data-col="0" cx="48"  cy="18"  r="5.5" fill="#E4E8F2" stroke="#aabcce" stroke-width="2" opacity="0"/>
+          <circle class="sltc-dot" data-col="5" cx="728" cy="71"  r="5.5" fill="#8ac8b1" stroke="white" stroke-width="2" opacity="0"/>
+          <circle class="sltc-dot" data-col="0" cx="36"  cy="18"  r="5.5" fill="#E4E8F2" stroke="#aabcce" stroke-width="2" opacity="0"/>
           <circle class="sltc-dot" data-col="1" cx="180" cy="18"  r="5.5" fill="#E4E8F2" stroke="#aabcce" stroke-width="2" opacity="0"/>
           <circle class="sltc-dot" data-col="2" cx="312" cy="18"  r="5.5" fill="#E4E8F2" stroke="#aabcce" stroke-width="2" opacity="0"/>
           <circle class="sltc-dot" data-col="3" cx="445" cy="18"  r="5.5" fill="#E4E8F2" stroke="#aabcce" stroke-width="2" opacity="0"/>
           <circle class="sltc-dot" data-col="4" cx="578" cy="18"  r="5.5" fill="#E4E8F2" stroke="#aabcce" stroke-width="2" opacity="0"/>
-          <circle class="sltc-dot" data-col="5" cx="710" cy="18"  r="5.5" fill="#E4E8F2" stroke="#aabcce" stroke-width="2" opacity="0"/>
+          <circle class="sltc-dot" data-col="5" cx="728" cy="18"  r="5.5" fill="#E4E8F2" stroke="#aabcce" stroke-width="2" opacity="0"/>
 
           <!-- Comparison dots — hollow (white fill, coloured stroke) r=4.5 -->
           <!-- Below boundary y=[140,142,137,144,147,140] -->
-          <circle class="sltc-comp-dot" data-col="0" cx="48"  cy="140" r="4.5" fill="white" stroke="#b82d5a" stroke-width="2.5" opacity="0"/>
+          <circle class="sltc-comp-dot" data-col="0" cx="36"  cy="140" r="4.5" fill="white" stroke="#b82d5a" stroke-width="2.5" opacity="0"/>
           <circle class="sltc-comp-dot" data-col="1" cx="180" cy="142" r="4.5" fill="white" stroke="#b82d5a" stroke-width="2.5" opacity="0"/>
           <circle class="sltc-comp-dot" data-col="2" cx="312" cy="137" r="4.5" fill="white" stroke="#b82d5a" stroke-width="2.5" opacity="0"/>
           <circle class="sltc-comp-dot" data-col="3" cx="445" cy="144" r="4.5" fill="white" stroke="#b82d5a" stroke-width="2.5" opacity="0"/>
           <circle class="sltc-comp-dot" data-col="4" cx="578" cy="147" r="4.5" fill="white" stroke="#b82d5a" stroke-width="2.5" opacity="0"/>
-          <circle class="sltc-comp-dot" data-col="5" cx="710" cy="140" r="4.5" fill="white" stroke="#b82d5a" stroke-width="2.5" opacity="0"/>
+          <circle class="sltc-comp-dot" data-col="5" cx="728" cy="140" r="4.5" fill="white" stroke="#b82d5a" stroke-width="2.5" opacity="0"/>
           <!-- Inside boundary y=[103,106,98,106,112,101] -->
-          <circle class="sltc-comp-dot" data-col="0" cx="48"  cy="103" r="4.5" fill="white" stroke="#6a4ec0" stroke-width="2.5" opacity="0"/>
+          <circle class="sltc-comp-dot" data-col="0" cx="36"  cy="103" r="4.5" fill="white" stroke="#6a4ec0" stroke-width="2.5" opacity="0"/>
           <circle class="sltc-comp-dot" data-col="1" cx="180" cy="106" r="4.5" fill="white" stroke="#6a4ec0" stroke-width="2.5" opacity="0"/>
           <circle class="sltc-comp-dot" data-col="2" cx="312" cy="98"  r="4.5" fill="white" stroke="#6a4ec0" stroke-width="2.5" opacity="0"/>
           <circle class="sltc-comp-dot" data-col="3" cx="445" cy="106" r="4.5" fill="white" stroke="#6a4ec0" stroke-width="2.5" opacity="0"/>
           <circle class="sltc-comp-dot" data-col="4" cx="578" cy="112" r="4.5" fill="white" stroke="#6a4ec0" stroke-width="2.5" opacity="0"/>
-          <circle class="sltc-comp-dot" data-col="5" cx="710" cy="101" r="4.5" fill="white" stroke="#6a4ec0" stroke-width="2.5" opacity="0"/>
+          <circle class="sltc-comp-dot" data-col="5" cx="728" cy="101" r="4.5" fill="white" stroke="#6a4ec0" stroke-width="2.5" opacity="0"/>
           <!-- Above boundary y=[60,62,57,62,66,60] -->
-          <circle class="sltc-comp-dot" data-col="0" cx="48"  cy="60" r="4.5" fill="white" stroke="#3a9478" stroke-width="2.5" opacity="0"/>
+          <circle class="sltc-comp-dot" data-col="0" cx="36"  cy="60" r="4.5" fill="white" stroke="#3a9478" stroke-width="2.5" opacity="0"/>
           <circle class="sltc-comp-dot" data-col="1" cx="180" cy="62" r="4.5" fill="white" stroke="#3a9478" stroke-width="2.5" opacity="0"/>
           <circle class="sltc-comp-dot" data-col="2" cx="312" cy="57" r="4.5" fill="white" stroke="#3a9478" stroke-width="2.5" opacity="0"/>
           <circle class="sltc-comp-dot" data-col="3" cx="445" cy="62" r="4.5" fill="white" stroke="#3a9478" stroke-width="2.5" opacity="0"/>
           <circle class="sltc-comp-dot" data-col="4" cx="578" cy="66" r="4.5" fill="white" stroke="#3a9478" stroke-width="2.5" opacity="0"/>
-          <circle class="sltc-comp-dot" data-col="5" cx="710" cy="60" r="4.5" fill="white" stroke="#3a9478" stroke-width="2.5" opacity="0"/>
+          <circle class="sltc-comp-dot" data-col="5" cx="728" cy="60" r="4.5" fill="white" stroke="#3a9478" stroke-width="2.5" opacity="0"/>
 
           <!-- invisible hit rect -->
-          <rect id="sltc-hit" x="48" y="18" width="662" height="170" fill="transparent" style="cursor:crosshair"/>
+          <rect id="sltc-hit" x="36" y="18" width="692" height="170" fill="transparent" style="cursor:crosshair"/>
 
           <!-- X-axis labels -->
-          <text x="48"  y="210" text-anchor="start" class="slt-axis-label" font-family="'Open Sans Condensed','Open Sans',sans-serif" font-stretch="condensed" font-size="13" fill="rgba(0,0,0,0.6)">1 Jan, 2026</text>
-          <text x="710" y="210" text-anchor="end"   class="slt-axis-label" font-family="'Open Sans Condensed','Open Sans',sans-serif" font-stretch="condensed" font-size="13" fill="rgba(0,0,0,0.6)">1 Jun, 2026</text>
+          <text x="36"  y="210" text-anchor="start" class="slt-axis-label" font-family="'Open Sans Condensed','Open Sans',sans-serif" font-stretch="condensed" font-size="13" fill="rgba(0,0,0,0.6)">1 Jan, 2026</text>
+          <text x="728" y="210" text-anchor="end"   class="slt-axis-label" font-family="'Open Sans Condensed','Open Sans',sans-serif" font-stretch="condensed" font-size="13" fill="rgba(0,0,0,0.6)">1 Jun, 2026</text>
         </svg>
 
         <!-- Legend: single row -->
@@ -6958,7 +7758,7 @@
   if (!svg || !hit || !tip) return;
 
   var DATES = ['1 Jan, 2026','1 Feb, 2026','1 Mar, 2026','1 Apr, 2026','1 May, 2026','1 Jun, 2026'];
-  var XS    = [48, 180, 312, 445, 578, 710]; // SVG coordinate space
+  var XS    = [36, 180, 312, 445, 578, 728]; // SVG coordinate space
 
   var SERIES = [
     { name:'Ads Below AIO',   color:'#e86492', values:[22,20,24,22,21,25] },
@@ -7022,7 +7822,7 @@
   if (!svg || !hit || !tip) return;
 
   var DATES = ['1 Jan, 2026','1 Feb, 2026','1 Mar, 2026','1 Apr, 2026','1 May, 2026','1 Jun, 2026'];
-  var XS    = [48, 180, 312, 445, 578, 710];
+  var XS    = [36, 180, 312, 445, 578, 728];
 
   var SERIES = [
     { name:'Ads Below AIO',   color:'#e86492', values:[22,20,24,22,21,25] },
@@ -7108,6 +7908,125 @@
   window.sltUpdateAxisLabels = updateAll;
   updateAll();
   window.addEventListener('resize', updateAll);
+})();
+</script>
+<script>
+// Dashboard Widget — stacked timeline hover interaction
+(function(){
+  var svg       = document.getElementById('dw-svg');
+  var hit       = document.getElementById('dw-hit');
+  var indicator = document.getElementById('dw-indicator');
+  var tip       = document.getElementById('dw-tooltip');
+  if (!svg || !hit || !tip) return;
+  var dots = svg.querySelectorAll('.dw-dot');
+
+  var DATES = ['1 Jan, 2026','1 Feb, 2026','1 Mar, 2026','1 Apr, 2026','1 May, 2026','1 Jun, 2026'];
+  var XS    = [36, 180, 312, 445, 578, 728];
+  var SERIES = [
+    { name:'Ads Below AIO',  color:'#e86492', values:[22,20,24,22,21,25] },
+    { name:'Ads Inside AIO', color:'#b3a2e7', values:[18,19,21,20,19,22] },
+    { name:'Ads Above AIO',  color:'#8ac8b1', values:[30,29,27,25,25,22] },
+    { name:'No Ads',         color:'#E4E8F2', values:[30,32,28,33,35,31] }
+  ];
+
+  function svgX(e) {
+    var r = svg.getBoundingClientRect();
+    return (e.clientX - r.left) * (740 / r.width);
+  }
+  function nearest(sx) {
+    var best = 0, dist = Infinity;
+    XS.forEach(function(x, i) { var d = Math.abs(x - sx); if (d < dist) { dist = d; best = i; } });
+    return best;
+  }
+
+  hit.addEventListener('mousemove', function(e) {
+    var idx = nearest(svgX(e));
+    indicator.setAttribute('x1', XS[idx]); indicator.setAttribute('x2', XS[idx]);
+    indicator.style.display = 'block';
+    dots.forEach(function(d) { d.setAttribute('opacity', d.dataset.col == idx ? '1' : '0'); });
+    var html = '<div style="font-size:11px;font-weight:600;color:rgba(255,255,255,0.7);margin-bottom:6px;letter-spacing:0.3px">' + DATES[idx] + '</div>';
+    SERIES.forEach(function(s) {
+      html += '<div style="display:flex;align-items:center;gap:7px;font-size:12px;color:#fff;line-height:1.8">'
+        + '<span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:' + s.color + ';flex-shrink:0"></span>'
+        + '<span style="flex:1;white-space:nowrap">' + s.name + '</span>'
+        + '<span style="font-weight:600;padding-left:10px">' + s.values[idx] + '%</span></div>';
+    });
+    tip.innerHTML = html;
+    tip.style.display = 'block';
+    tip.style.left    = (e.clientX + 16) + 'px';
+    tip.style.top     = (e.clientY - 70) + 'px';
+  });
+
+  hit.addEventListener('mouseleave', function() {
+    tip.style.display = 'none'; indicator.style.display = 'none';
+    dots.forEach(function(d) { d.setAttribute('opacity', '0'); });
+  });
+
+  // Scale axis labels to true 13px
+  function scaleDwLabels() {
+    var r = svg.getBoundingClientRect();
+    if (!r.width) return;
+    var px = (13 / (r.width / 740)).toFixed(2);
+    svg.querySelectorAll('.dw-axis-label').forEach(function(t) { t.setAttribute('font-size', px); });
+  }
+  scaleDwLabels();
+  window.addEventListener('resize', scaleDwLabels);
+})();
+</script>
+<script>
+// Dashboard Widget — Settings Panel
+(function() {
+  var overlay  = document.getElementById('dw-overlay');
+  var panel    = document.getElementById('dw-settings-panel');
+  var closeBtn = document.getElementById('dw-settings-close');
+  var cancelBtn= document.getElementById('dw-settings-cancel');
+  var applyBtn = document.getElementById('dw-settings-apply');
+  var toggleEl = document.getElementById('dw-compare-toggle');
+  if (!overlay || !panel) return;
+
+  // Open panel when any settings button inside .dw-card is clicked
+  var activeCard = null;
+  var settingsBtns = document.querySelectorAll('.dw-card .wh__btn[title="Settings"]');
+  settingsBtns.forEach(function(btn) {
+    btn.addEventListener('click', function(e) {
+      e.stopPropagation();
+      activeCard = btn.closest('.dw-card');
+      openPanel();
+    });
+  });
+
+  function openPanel()  {
+    overlay.classList.add('is-open');
+    panel.classList.add('is-open');
+    if (activeCard) activeCard.classList.add('is-settings-open');
+  }
+  function closePanel() {
+    overlay.classList.remove('is-open');
+    panel.classList.remove('is-open');
+    if (activeCard) { activeCard.classList.remove('is-settings-open'); activeCard = null; }
+  }
+
+  overlay.addEventListener('click', closePanel);
+  closeBtn.addEventListener('click', closePanel);
+  cancelBtn.addEventListener('click', closePanel);
+  applyBtn.addEventListener('click', closePanel);
+
+  // Radio-style single-select within each group
+  document.querySelectorAll('.dw-settings-option').forEach(function(opt) {
+    opt.addEventListener('click', function() {
+      var group = opt.dataset.group;
+      document.querySelectorAll('.dw-settings-option[data-group="' + group + '"]')
+        .forEach(function(o) { o.classList.remove('is-selected'); });
+      opt.classList.add('is-selected');
+    });
+  });
+
+  // Toggle — Compare to previous period
+  if (toggleEl) {
+    toggleEl.addEventListener('click', function() {
+      toggleEl.classList.toggle('ds-toggle--on');
+    });
+  }
 })();
 </script>
       </div>

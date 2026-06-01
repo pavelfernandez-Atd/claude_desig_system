@@ -1,0 +1,88 @@
+/* ============================================================
+   Widget Header — Adthena Design System
+   Figma node: 169:2345 (file: ugMYx2Jf3KY7uZmha2U0WP)
+   ============================================================ */
+
+/* ── Base layout ─────────────────────────────────────────────── */
+.wh {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 24px;
+  background: #ffffff;
+  border-radius: 12px;
+}
+
+/* ── Roundel icon ────────────────────────────────────────────── */
+.wh__thumb {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #93a1b6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.wh__thumb svg {
+  width: 20px;
+  height: 20px;
+  color: #fff;
+}
+
+/* ── Title + subtitle ────────────────────────────────────────── */
+.wh__body {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.wh__title {
+  font-family: 'Open Sans', Helvetica, sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  color: rgba(0, 0, 0, 0.87);
+  line-height: 17px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.wh__subtitle {
+  font-family: 'Open Sans', Helvetica, sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  color: #6b6b6b;
+  line-height: 14px;
+}
+
+/* ── Action buttons ──────────────────────────────────────────── */
+.wh__actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding-left: 12px;
+  flex-shrink: 0;
+}
+
+.wh__btn {
+  width: 30px;
+  height: 30px;
+  border-radius: 6px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #6b6b6b;
+  transition: background 0.15s, color 0.15s;
+}
+
+.wh__btn:hover {
+  background: rgba(0, 0, 0, 0.06);
+  color: #27365b;
+}
