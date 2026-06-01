@@ -6588,7 +6588,7 @@
 <style>
   .stacked-timeline { display:block; width:100%; position:relative }
   .stacked-timeline__svg { width:100%; height:auto; display:block }
-  .stacked-timeline__legend { display:flex; justify-content:center; flex-wrap:wrap; gap:20px; margin-top:14px }
+  .stacked-timeline__legend { display:flex; justify-content:center; flex-wrap:wrap; gap:20px; margin-top:12px }
   .stacked-timeline__legend-item { display:inline-flex; align-items:center; gap:6px; font-family:'Open Sans',sans-serif; font-size:13px; font-weight:400; font-stretch:condensed; color:#38476a }
   .stacked-timeline__tooltip { position:fixed; background:rgba(0,0,0,0.82); border-radius:6px; padding:8px 12px; pointer-events:none; z-index:9999; display:none; min-width:170px }
   .slt-legend-group { display:flex; align-items:center; flex-wrap:wrap; gap:16px }
@@ -6624,6 +6624,7 @@
   <div style="margin-bottom:40px">
     <div class="sub-label">Live Demo · 4 series · Jan–Jun 2026 · values sum to 100%</div>
     <div style="background:#e4eef4;padding:20px;border-radius:12px">
+      <div style="background:#ffffff;border-radius:8px;padding:16px">
       <div class="stacked-timeline">
         <!-- viewBox: 740 × 215. Plot area: x 48→710, y 18(top=100%)→188(bottom=0%), h=170 -->
         <svg id="slt-svg" class="stacked-timeline__svg" viewBox="0 0 740 215" xmlns="http://www.w3.org/2000/svg">
@@ -6674,11 +6675,11 @@
                     710,71 578,78 445,74 312,66 180,72 48,69"
             fill="#8ac8b1" fill-opacity="0.9"/>
 
-          <!-- Band 4 — No Ads — Neutral/50 #f9fbff (top) -->
+          <!-- Band 4 — No Ads — Neutral/50 #E4E8F2 (top) -->
           <polygon
             points="48,69 180,72 312,66 445,74 578,78 710,71
                     710,18 578,18 445,18 312,18 180,18 48,18"
-            fill="#f9fbff" fill-opacity="0.9"/>
+            fill="#E4E8F2" fill-opacity="0.9"/>
 
           <!-- white boundary lines between bands -->
           <polyline points="48,151 180,154 312,147 445,151 578,152 710,146" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="1.5"/>
@@ -6713,12 +6714,12 @@
           <circle class="slt-dot" data-col="4" cx="578" cy="78"  r="5.5" fill="#8ac8b1" stroke="white" stroke-width="2" opacity="0"/>
           <circle class="slt-dot" data-col="5" cx="710" cy="71"  r="5.5" fill="#8ac8b1" stroke="white" stroke-width="2" opacity="0"/>
           <!-- No Ads boundary top: y=18 (always 100%) -->
-          <circle class="slt-dot" data-col="0" cx="48"  cy="18"  r="5.5" fill="#f9fbff" stroke="#aabcce" stroke-width="2" opacity="0"/>
-          <circle class="slt-dot" data-col="1" cx="180" cy="18"  r="5.5" fill="#f9fbff" stroke="#aabcce" stroke-width="2" opacity="0"/>
-          <circle class="slt-dot" data-col="2" cx="312" cy="18"  r="5.5" fill="#f9fbff" stroke="#aabcce" stroke-width="2" opacity="0"/>
-          <circle class="slt-dot" data-col="3" cx="445" cy="18"  r="5.5" fill="#f9fbff" stroke="#aabcce" stroke-width="2" opacity="0"/>
-          <circle class="slt-dot" data-col="4" cx="578" cy="18"  r="5.5" fill="#f9fbff" stroke="#aabcce" stroke-width="2" opacity="0"/>
-          <circle class="slt-dot" data-col="5" cx="710" cy="18"  r="5.5" fill="#f9fbff" stroke="#aabcce" stroke-width="2" opacity="0"/>
+          <circle class="slt-dot" data-col="0" cx="48"  cy="18"  r="5.5" fill="#E4E8F2" stroke="#aabcce" stroke-width="2" opacity="0"/>
+          <circle class="slt-dot" data-col="1" cx="180" cy="18"  r="5.5" fill="#E4E8F2" stroke="#aabcce" stroke-width="2" opacity="0"/>
+          <circle class="slt-dot" data-col="2" cx="312" cy="18"  r="5.5" fill="#E4E8F2" stroke="#aabcce" stroke-width="2" opacity="0"/>
+          <circle class="slt-dot" data-col="3" cx="445" cy="18"  r="5.5" fill="#E4E8F2" stroke="#aabcce" stroke-width="2" opacity="0"/>
+          <circle class="slt-dot" data-col="4" cx="578" cy="18"  r="5.5" fill="#E4E8F2" stroke="#aabcce" stroke-width="2" opacity="0"/>
+          <circle class="slt-dot" data-col="5" cx="710" cy="18"  r="5.5" fill="#E4E8F2" stroke="#aabcce" stroke-width="2" opacity="0"/>
 
           <!-- invisible hit rect for hover interaction -->
           <rect id="slt-hit" x="48" y="18" width="662" height="170" fill="transparent" style="cursor:crosshair"/>
@@ -6743,11 +6744,12 @@
             Ads Below AIO
           </div>
           <div class="stacked-timeline__legend-item">
-            <svg width="8" height="8" viewBox="0 0 8 8"><circle cx="4" cy="4" r="4" fill="#f9fbff"/></svg>
+            <svg width="8" height="8" viewBox="0 0 8 8"><circle cx="4" cy="4" r="4" fill="#E4E8F2"/></svg>
             No Ads
           </div>
         </div>
       </div>
+      </div><!-- /white container -->
       <!-- tooltip — populated by JS -->
       <div id="slt-tooltip" class="stacked-timeline__tooltip"></div>
     </div>
@@ -6757,6 +6759,7 @@
   <div style="margin-bottom:40px">
     <div class="sub-label">Variant · With comparison lines · vs. Industry Average (dotted)</div>
     <div style="background:#e4eef4;padding:20px;border-radius:12px">
+      <div style="background:#ffffff;border-radius:8px;padding:16px">
       <div class="stacked-timeline">
         <!--
           YOUR DATA — same as base demo
@@ -6786,8 +6789,8 @@
           <polygon points="48,151 180,154 312,147 445,151 578,152 710,146 710,108 578,120 445,117 312,112 180,122 48,120" fill="#b3a2e7" fill-opacity="0.9"/>
           <!-- Band 3 — Ads Above AIO — #8ac8b1 -->
           <polygon points="48,120 180,122 312,112 445,117 578,120 710,108 710,71 578,78 445,74 312,66 180,72 48,69" fill="#8ac8b1" fill-opacity="0.9"/>
-          <!-- Band 4 — No Ads — #f9fbff (top) -->
-          <polygon points="48,69 180,72 312,66 445,74 578,78 710,71 710,18 578,18 445,18 312,18 180,18 48,18" fill="#f9fbff" fill-opacity="0.9"/>
+          <!-- Band 4 — No Ads — #E4E8F2 (top) -->
+          <polygon points="48,69 180,72 312,66 445,74 578,78 710,71 710,18 578,18 445,18 312,18 180,18 48,18" fill="#E4E8F2" fill-opacity="0.9"/>
 
           <!-- white boundary lines between main bands -->
           <polyline points="48,151 180,154 312,147 445,151 578,152 710,146" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="1.5"/>
@@ -6821,12 +6824,12 @@
           <circle class="sltc-dot" data-col="3" cx="445" cy="74"  r="5.5" fill="#8ac8b1" stroke="white" stroke-width="2" opacity="0"/>
           <circle class="sltc-dot" data-col="4" cx="578" cy="78"  r="5.5" fill="#8ac8b1" stroke="white" stroke-width="2" opacity="0"/>
           <circle class="sltc-dot" data-col="5" cx="710" cy="71"  r="5.5" fill="#8ac8b1" stroke="white" stroke-width="2" opacity="0"/>
-          <circle class="sltc-dot" data-col="0" cx="48"  cy="18"  r="5.5" fill="#f9fbff" stroke="#aabcce" stroke-width="2" opacity="0"/>
-          <circle class="sltc-dot" data-col="1" cx="180" cy="18"  r="5.5" fill="#f9fbff" stroke="#aabcce" stroke-width="2" opacity="0"/>
-          <circle class="sltc-dot" data-col="2" cx="312" cy="18"  r="5.5" fill="#f9fbff" stroke="#aabcce" stroke-width="2" opacity="0"/>
-          <circle class="sltc-dot" data-col="3" cx="445" cy="18"  r="5.5" fill="#f9fbff" stroke="#aabcce" stroke-width="2" opacity="0"/>
-          <circle class="sltc-dot" data-col="4" cx="578" cy="18"  r="5.5" fill="#f9fbff" stroke="#aabcce" stroke-width="2" opacity="0"/>
-          <circle class="sltc-dot" data-col="5" cx="710" cy="18"  r="5.5" fill="#f9fbff" stroke="#aabcce" stroke-width="2" opacity="0"/>
+          <circle class="sltc-dot" data-col="0" cx="48"  cy="18"  r="5.5" fill="#E4E8F2" stroke="#aabcce" stroke-width="2" opacity="0"/>
+          <circle class="sltc-dot" data-col="1" cx="180" cy="18"  r="5.5" fill="#E4E8F2" stroke="#aabcce" stroke-width="2" opacity="0"/>
+          <circle class="sltc-dot" data-col="2" cx="312" cy="18"  r="5.5" fill="#E4E8F2" stroke="#aabcce" stroke-width="2" opacity="0"/>
+          <circle class="sltc-dot" data-col="3" cx="445" cy="18"  r="5.5" fill="#E4E8F2" stroke="#aabcce" stroke-width="2" opacity="0"/>
+          <circle class="sltc-dot" data-col="4" cx="578" cy="18"  r="5.5" fill="#E4E8F2" stroke="#aabcce" stroke-width="2" opacity="0"/>
+          <circle class="sltc-dot" data-col="5" cx="710" cy="18"  r="5.5" fill="#E4E8F2" stroke="#aabcce" stroke-width="2" opacity="0"/>
 
           <!-- Comparison dots — hollow (white fill, coloured stroke) r=4.5 -->
           <!-- Below boundary y=[140,142,137,144,147,140] -->
@@ -6860,12 +6863,12 @@
         </svg>
 
         <!-- Legend: single row -->
-        <div class="stacked-timeline__legend" style="gap:10px;align-items:center;justify-content:center;flex-wrap:wrap;margin-top:16px">
+        <div class="stacked-timeline__legend" style="gap:10px;align-items:center;justify-content:center;flex-wrap:wrap;margin-top:12px">
           <span class="slt-legend-group-label">You</span>
           <div class="stacked-timeline__legend-item"><svg width="8" height="8" viewBox="0 0 8 8"><circle cx="4" cy="4" r="4" fill="#8ac8b1"/></svg>Above</div>
           <div class="stacked-timeline__legend-item"><svg width="8" height="8" viewBox="0 0 8 8"><circle cx="4" cy="4" r="4" fill="#b3a2e7"/></svg>Inside</div>
           <div class="stacked-timeline__legend-item"><svg width="8" height="8" viewBox="0 0 8 8"><circle cx="4" cy="4" r="4" fill="#e86492"/></svg>Below</div>
-          <div class="stacked-timeline__legend-item"><svg width="8" height="8" viewBox="0 0 8 8"><circle cx="4" cy="4" r="4" fill="#f9fbff"/></svg>No Ads</div>
+          <div class="stacked-timeline__legend-item"><svg width="8" height="8" viewBox="0 0 8 8"><circle cx="4" cy="4" r="4" fill="#E4E8F2"/></svg>No Ads</div>
           <div class="slt-legend-divider"></div>
           <span class="slt-legend-group-label">Top 10 Comp.</span>
           <div class="stacked-timeline__legend-item"><svg width="20" height="8" viewBox="0 0 20 8"><line x1="0" y1="4" x2="20" y2="4" stroke="#8ac8b1" stroke-width="2" stroke-dasharray="5,3"/></svg>Above</div>
@@ -6873,6 +6876,7 @@
           <div class="stacked-timeline__legend-item"><svg width="20" height="8" viewBox="0 0 20 8"><line x1="0" y1="4" x2="20" y2="4" stroke="#e86492" stroke-width="2" stroke-dasharray="5,3"/></svg>Below</div>
         </div>
       </div>
+      </div><!-- /white container -->
       <div id="sltc-tooltip" class="stacked-timeline__tooltip"></div>
     </div>
   </div>
@@ -6905,7 +6909,7 @@
     <div class="sub-label">Series colours (DS chart palette — indices 01–04)</div>
     <div style="display:flex;flex-wrap:wrap;gap:8px">
       <div style="display:flex;align-items:center;gap:6px;font-size:12px;color:#485982;background:#fff;border:1px solid #e0e6f0;border-radius:6px;padding:6px 10px">
-        <span style="display:inline-block;width:24px;height:10px;background:#f9fbff;border-radius:2px"></span> neutral/50 · bottom band (No Ads)
+        <span style="display:inline-block;width:24px;height:10px;background:#E4E8F2;border-radius:2px"></span> neutral/50 · bottom band (No Ads)
       </div>
       <div style="display:flex;align-items:center;gap:6px;font-size:12px;color:#485982;background:#fff;border:1px solid #e0e6f0;border-radius:6px;padding:6px 10px">
         <span style="display:inline-block;width:24px;height:10px;background:#64abfb;border-radius:2px"></span> 02 Blue
@@ -6960,7 +6964,7 @@
     { name:'Ads Below AIO',   color:'#e86492', values:[22,20,24,22,21,25] },
     { name:'Ads Inside AIO',  color:'#b3a2e7', values:[18,19,21,20,19,22] },
     { name:'Ads Above AIO',   color:'#8ac8b1', values:[30,29,27,25,25,22] },
-    { name:'No Ads',          color:'#f9fbff', values:[30,32,28,33,35,31] }
+    { name:'No Ads',          color:'#E4E8F2', values:[30,32,28,33,35,31] }
   ];
 
   function svgX(e) {
@@ -7024,14 +7028,14 @@
     { name:'Ads Below AIO',   color:'#e86492', values:[22,20,24,22,21,25] },
     { name:'Ads Inside AIO',  color:'#b3a2e7', values:[18,19,21,20,19,22] },
     { name:'Ads Above AIO',   color:'#8ac8b1', values:[30,29,27,25,25,22] },
-    { name:'No Ads',          color:'#f9fbff', values:[30,32,28,33,35,31] }
+    { name:'No Ads',          color:'#E4E8F2', values:[30,32,28,33,35,31] }
   ];
 
   var COMP = [
     { name:'Ads Below AIO',   color:'#e86492', values:[28,27,30,26,24,28] },
     { name:'Ads Inside AIO',  color:'#b3a2e7', values:[22,21,23,22,21,23] },
     { name:'Ads Above AIO',   color:'#8ac8b1', values:[25,26,24,26,27,24] },
-    { name:'No Ads',          color:'#f9fbff', values:[25,26,23,26,28,25] }
+    { name:'No Ads',          color:'#E4E8F2', values:[25,26,23,26,28,25] }
   ];
 
   function svgX(e) {
