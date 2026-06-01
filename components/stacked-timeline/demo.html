@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stacked Timeline — Adthena DS</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wdth,wght@0,75,300..700;0,100,300..700;1,75,300..700;1,100,300..700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="stacked-timeline.css">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: #e5eef5;
+      font-family: 'Open Sans', sans-serif;
+      padding: 32px;
+      min-height: 100vh;
+    }
+    .demo-card {
+      background: #fff;
+      border-radius: 12px;
+      padding: 24px;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    .demo-card__title {
+      font-size: 16px;
+      font-weight: 600;
+      color: rgba(0,0,0,0.87);
+      margin-bottom: 4px;
+    }
+    .demo-card__sub {
+      font-size: 13px;
+      color: #6b6b6b;
+      margin-bottom: 20px;
+    }
+    .demo-bg {
+      background: #e4eef4;
+      border-radius: 12px;
+      padding: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="demo-card">
+    <div class="demo-card__title">Stacked Timeline</div>
+    <div class="demo-card__sub">4 series · Jan–Jun 2026 · values sum to 100%</div>
+
+    <div class="demo-bg">
+      <div class="stacked-timeline">
+        <!--
+          viewBox: 740 × 215
+          Plot area: x 48→710, y 18(top=100%)→188(bottom=0%), h=170
+          yOf(pct) = 188 − (pct/100) × 170
+
+          Series (bottom→top):
+            Ads Below AIO  #e86492  [22,20,24,22,21,25]
+            Ads Inside AIO #b3a2e7  [18,19,21,20,19,22]
+            Ads Above AIO  #8ac8b1  [30,29,27,25,25,22]
+            No Ads         #c0cde0  [30,32,28,33,35,31]
+
+          Cumulative stacks:
+            Below only  [22,20,24,22,21,25] → y=[151,154,147,151,152,146]
+            +Inside     [40,39,45,42,40,47] → y=[120,122,112,117,120,108]
+            +Above      [70,68,72,67,65,69] → y=[ 69, 72, 66, 74, 78, 71]
+            +No Ads=100%                    → y=18
+        -->
+        <svg id="slt-svg" class="stacked-timeline__svg" viewBox="0 0 740 215" xmlns="http://www.w3.org/2000/svg">
+
+          <!-- grid lines at 0% / 25% / 50% / 75% / 100% -->
+          <line x1="48" y1="18"  x2="710" y2="18"  stroke="#dce3ef" stroke-width="1"/>
+          <line x1="48" y1="61"  x2="710" y2="61"  stroke="#dce3ef" stroke-width="1"/>
+          <line x1="48" y1="103" x2="710" y2="103" stroke="#dce3ef" stroke-width="1"/>
+          <line x1="48" y1="146" x2="710" y2="146" stroke="#dce3ef" stroke-width="1"/>
+          <line x1="48" y1="188" x2="710" y2="188" stroke="#dce3ef" stroke-width="1"/>
+
+          <!-- Y-axis labels -->
+          <text x="43" y="22"  text-anchor="end" font-family="Open Sans,sans-serif" font-stretch="condensed" font-size="13" fill="#38476a">100%</text>
+          <text x="43" y="107" text-anchor="end" font-family="Open Sans,sans-serif" font-stretch="condensed" font-size="13" fill="#38476a">50%</text>
+          <text x="43" y="192" text-anchor="end" font-family="Open Sans,sans-serif" font-stretch="condensed" font-size="13" fill="#38476a">0%</text>
+
+          <!-- Band 1 — Ads Below AIO — Crimson #e86492 (bottom) -->
+          <polygon
+            points="48,188 180,188 312,188 445,188 578,188 710,188
+                    710,146 578,152 445,151 312,147 180,154 48,151"
+            fill="#e86492" fill-opacity="0.9"/>
+
+          <!-- Band 2 — Ads Inside AIO — Purple #b3a2e7 -->
+          <polygon
+            points="48,151 180,154 312,147 445,151 578,152 710,146
+                    710,108 578,120 445,117 312,112 180,122 48,120"
+            fill="#b3a2e7" fill-opacity="0.9"/>
+
+          <!-- Band 3 — Ads Above AIO — Green #8ac8b1 -->
+          <polygon
+            points="48,120 180,122 312,112 445,117 578,120 710,108
+                    710,71 578,78 445,74 312,66 180,72 48,69"
+            fill="#8ac8b1" fill-opacity="0.9"/>
+
+          <!-- Band 4 — No Ads — Neutral/50 #c0cde0 (top) -->
+          <polygon
+            points="48,69 180,72 312,66 445,74 578,78 710,71
+                    710,18 578,18 445,18 312,18 180,18 48,18"
+            fill="#c0cde0" fill-opacity="0.9"/>
+
+          <!-- white boundary lines between bands -->
+          <polyline points="48,151 180,154 312,147 445,151 578,152 710,146" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="1.5"/>
+          <polyline points="48,120 180,122 312,112 445,117 578,120 710,108" fill="none" stroke="rgba(255,255,255,0.6)" stroke-width="1.5"/>
+          <polyline points="48,69  180,72  312,66  445,74  578,78  710,71"  fill="none" stroke="rgba(255,255,255,0.6)" stroke-width="1.5"/>
+
+          <!-- vertical indicator line — rendered before dots -->
+          <line id="slt-indicator" x1="0" y1="18" x2="0" y2="188"
+                stroke="rgba(0,0,0,0.35)" stroke-width="1" stroke-dasharray="3,2"
+                style="display:none"/>
+
+          <!-- hover dots (r=5.5, white stroke 2px) -->
+          <!-- Ads Below AIO tops: y=[151,154,147,151,152,146] -->
+          <circle class="slt-dot" data-col="0" cx="48"  cy="151" r="5.5" fill="#e86492" stroke="white" stroke-width="2" opacity="0"/>
+          <circle class="slt-dot" data-col="1" cx="180" cy="154" r="5.5" fill="#e86492" stroke="white" stroke-width="2" opacity="0"/>
+          <circle class="slt-dot" data-col="2" cx="312" cy="147" r="5.5" fill="#e86492" stroke="white" stroke-width="2" opacity="0"/>
+          <circle class="slt-dot" data-col="3" cx="445" cy="151" r="5.5" fill="#e86492" stroke="white" stroke-width="2" opacity="0"/>
+          <circle class="slt-dot" data-col="4" cx="578" cy="152" r="5.5" fill="#e86492" stroke="white" stroke-width="2" opacity="0"/>
+          <circle class="slt-dot" data-col="5" cx="710" cy="146" r="5.5" fill="#e86492" stroke="white" stroke-width="2" opacity="0"/>
+          <!-- Ads Inside AIO tops: y=[120,122,112,117,120,108] -->
+          <circle class="slt-dot" data-col="0" cx="48"  cy="120" r="5.5" fill="#b3a2e7" stroke="white" stroke-width="2" opacity="0"/>
+          <circle class="slt-dot" data-col="1" cx="180" cy="122" r="5.5" fill="#b3a2e7" stroke="white" stroke-width="2" opacity="0"/>
+          <circle class="slt-dot" data-col="2" cx="312" cy="112" r="5.5" fill="#b3a2e7" stroke="white" stroke-width="2" opacity="0"/>
+          <circle class="slt-dot" data-col="3" cx="445" cy="117" r="5.5" fill="#b3a2e7" stroke="white" stroke-width="2" opacity="0"/>
+          <circle class="slt-dot" data-col="4" cx="578" cy="120" r="5.5" fill="#b3a2e7" stroke="white" stroke-width="2" opacity="0"/>
+          <circle class="slt-dot" data-col="5" cx="710" cy="108" r="5.5" fill="#b3a2e7" stroke="white" stroke-width="2" opacity="0"/>
+          <!-- Ads Above AIO tops: y=[69,72,66,74,78,71] -->
+          <circle class="slt-dot" data-col="0" cx="48"  cy="69"  r="5.5" fill="#8ac8b1" stroke="white" stroke-width="2" opacity="0"/>
+          <circle class="slt-dot" data-col="1" cx="180" cy="72"  r="5.5" fill="#8ac8b1" stroke="white" stroke-width="2" opacity="0"/>
+          <circle class="slt-dot" data-col="2" cx="312" cy="66"  r="5.5" fill="#8ac8b1" stroke="white" stroke-width="2" opacity="0"/>
+          <circle class="slt-dot" data-col="3" cx="445" cy="74"  r="5.5" fill="#8ac8b1" stroke="white" stroke-width="2" opacity="0"/>
+          <circle class="slt-dot" data-col="4" cx="578" cy="78"  r="5.5" fill="#8ac8b1" stroke="white" stroke-width="2" opacity="0"/>
+          <circle class="slt-dot" data-col="5" cx="710" cy="71"  r="5.5" fill="#8ac8b1" stroke="white" stroke-width="2" opacity="0"/>
+          <!-- No Ads tops: y=18 (always 100%) -->
+          <circle class="slt-dot" data-col="0" cx="48"  cy="18"  r="5.5" fill="#c0cde0" stroke="white" stroke-width="2" opacity="0"/>
+          <circle class="slt-dot" data-col="1" cx="180" cy="18"  r="5.5" fill="#c0cde0" stroke="white" stroke-width="2" opacity="0"/>
+          <circle class="slt-dot" data-col="2" cx="312" cy="18"  r="5.5" fill="#c0cde0" stroke="white" stroke-width="2" opacity="0"/>
+          <circle class="slt-dot" data-col="3" cx="445" cy="18"  r="5.5" fill="#c0cde0" stroke="white" stroke-width="2" opacity="0"/>
+          <circle class="slt-dot" data-col="4" cx="578" cy="18"  r="5.5" fill="#c0cde0" stroke="white" stroke-width="2" opacity="0"/>
+          <circle class="slt-dot" data-col="5" cx="710" cy="18"  r="5.5" fill="#c0cde0" stroke="white" stroke-width="2" opacity="0"/>
+
+          <!-- invisible hit rect for hover -->
+          <rect id="slt-hit" x="48" y="18" width="662" height="170" fill="transparent" style="cursor:crosshair"/>
+
+          <!-- X-axis labels -->
+          <text x="48"  y="210" text-anchor="start" font-family="Open Sans,sans-serif" font-stretch="condensed" font-size="13" fill="#38476a">1 Jan, 2026</text>
+          <text x="710" y="210" text-anchor="end"   font-family="Open Sans,sans-serif" font-stretch="condensed" font-size="13" fill="#38476a">1 Jun, 2026</text>
+        </svg>
+
+        <div class="stacked-timeline__legend">
+          <div class="stacked-timeline__legend-item">
+            <svg width="8" height="8" viewBox="0 0 8 8"><circle cx="4" cy="4" r="4" fill="#8ac8b1"/></svg>
+            Ads Above AIO
+          </div>
+          <div class="stacked-timeline__legend-item">
+            <svg width="8" height="8" viewBox="0 0 8 8"><circle cx="4" cy="4" r="4" fill="#b3a2e7"/></svg>
+            Ads Inside AIO
+          </div>
+          <div class="stacked-timeline__legend-item">
+            <svg width="8" height="8" viewBox="0 0 8 8"><circle cx="4" cy="4" r="4" fill="#e86492"/></svg>
+            Ads Below AIO
+          </div>
+          <div class="stacked-timeline__legend-item">
+            <svg width="8" height="8" viewBox="0 0 8 8"><circle cx="4" cy="4" r="4" fill="#c0cde0"/></svg>
+            No Ads
+          </div>
+        </div>
+      </div>
+      <div id="slt-tooltip" class="stacked-timeline__tooltip"></div>
+    </div>
+  </div>
+
+  <script>
+  (function(){
+    var svg       = document.getElementById('slt-svg');
+    var hit       = document.getElementById('slt-hit');
+    var indicator = document.getElementById('slt-indicator');
+    var tip       = document.getElementById('slt-tooltip');
+    var dots      = svg.querySelectorAll('.slt-dot');
+    if (!svg || !hit || !tip) return;
+
+    var DATES = ['1 Jan, 2026','1 Feb, 2026','1 Mar, 2026','1 Apr, 2026','1 May, 2026','1 Jun, 2026'];
+    var XS    = [48, 180, 312, 445, 578, 710];
+
+    var SERIES = [
+      { name:'Ads Below AIO',   color:'#e86492', values:[22,20,24,22,21,25] },
+      { name:'Ads Inside AIO',  color:'#b3a2e7', values:[18,19,21,20,19,22] },
+      { name:'Ads Above AIO',   color:'#8ac8b1', values:[30,29,27,25,25,22] },
+      { name:'No Ads',          color:'#c0cde0', values:[30,32,28,33,35,31] }
+    ];
+
+    function svgX(e) {
+      var r = svg.getBoundingClientRect();
+      return (e.clientX - r.left) * (740 / r.width);
+    }
+
+    function nearest(sx) {
+      var best = 0, dist = Infinity;
+      XS.forEach(function(x, i) { var d = Math.abs(x - sx); if (d < dist) { dist = d; best = i; } });
+      return best;
+    }
+
+    hit.addEventListener('mousemove', function(e) {
+      var idx = nearest(svgX(e));
+
+      indicator.setAttribute('x1', XS[idx]);
+      indicator.setAttribute('x2', XS[idx]);
+      indicator.style.display = 'block';
+
+      dots.forEach(function(d) {
+        d.setAttribute('opacity', d.dataset.col == idx ? '1' : '0');
+      });
+
+      var html = '<div style="font-size:11px;font-weight:600;color:rgba(255,255,255,0.7);margin-bottom:6px;letter-spacing:0.3px">' + DATES[idx] + '</div>';
+      SERIES.forEach(function(s) {
+        html += '<div style="display:flex;align-items:center;gap:7px;font-size:12px;color:#fff;line-height:1.8">'
+          + '<span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:' + s.color + ';flex-shrink:0"></span>'
+          + '<span style="flex:1;white-space:nowrap">' + s.name + '</span>'
+          + '<span style="font-weight:600;padding-left:10px">' + s.values[idx] + '%</span>'
+          + '</div>';
+      });
+
+      tip.innerHTML = html;
+      tip.style.display  = 'block';
+      tip.style.left     = (e.clientX + 16) + 'px';
+      tip.style.top      = (e.clientY - 70) + 'px';
+    });
+
+    hit.addEventListener('mouseleave', function() {
+      tip.style.display       = 'none';
+      indicator.style.display = 'none';
+      dots.forEach(function(d) { d.setAttribute('opacity', '0'); });
+    });
+  })();
+  </script>
+</body>
+</html>
