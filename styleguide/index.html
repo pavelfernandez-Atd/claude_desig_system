@@ -6606,10 +6606,10 @@
           <!-- ─── stacked area polygons (drawn bottom-to-top) ────────
                X positions (6 dates): x0=48  x1=180  x2=312  x3=445  x4=578  x5=710
                Series values (independent ad frequency %):
-                 booking.com       [20,22,18,24,26,21]
-                 expedia.co.uk     [12,11,13,12,11,14]
-                 hotels.com        [ 8, 9,10, 9, 8,10]
-                 tripadvisor.co.uk [13,12,11,10,11, 9]
+                 No Ads          [20,22,18,24,26,21]
+                 Ads Below AIO   [12,11,13,12,11,14]
+                 Ads Inside AIO  [ 8, 9,10, 9, 8,10]
+                 Ads Above AIO   [13,12,11,10,11, 9]
                Cumulative stacks (yOf = 188 − val/60 × 170):
                  booking only      [20,22,18,24,26,21] → y=[131,126,137,120,114,129]
                  +expedia          [32,33,31,36,37,35] → y=[ 97, 95,100, 86, 83, 89]
@@ -6618,25 +6618,25 @@
                Combined totals peak at 56% — chart top (60%) has visible empty space above
           ─────────────────────────────────────────────────────────── -->
 
-          <!-- Band 1 — booking.com — Purple #b3a2e7 (series 01) -->
+          <!-- Band 1 — No Ads — Purple #b3a2e7 (series 01) -->
           <polygon
             points="48,188 180,188 312,188 445,188 578,188 710,188
                     710,129 578,114 445,120 312,137 180,126 48,131"
             fill="#b3a2e7" fill-opacity="0.9"/>
 
-          <!-- Band 2 — expedia.co.uk — Blue #64abfb (series 02) -->
+          <!-- Band 2 — Ads Below AIO — Blue #64abfb (series 02) -->
           <polygon
             points="48,131 180,126 312,137 445,120 578,114 710,129
                     710,89 578,83 445,86 312,100 180,95 48,97"
             fill="#64abfb" fill-opacity="0.9"/>
 
-          <!-- Band 3 — hotels.com — Magenta #d47dd4 (series 03) -->
+          <!-- Band 3 — Ads Inside AIO — Magenta #d47dd4 (series 03) -->
           <polygon
             points="48,97 180,95 312,100 445,86 578,83 710,89
                     710,61 578,61 445,61 312,72 180,69 48,75"
             fill="#d47dd4" fill-opacity="0.9"/>
 
-          <!-- Band 4 — tripadvisor.co.uk — Crimson #e86492 (series 04) -->
+          <!-- Band 4 — Ads Above AIO — Crimson #e86492 (series 04) -->
           <polygon
             points="48,75 180,69 312,72 445,61 578,61 710,61
                     710,35 578,29 445,32 312,41 180,35 48,38"
@@ -6664,19 +6664,19 @@
         <div class="stacked-timeline__legend">
           <div class="stacked-timeline__legend-item">
             <svg width="8" height="8" viewBox="0 0 8 8"><circle cx="4" cy="4" r="4" fill="#b3a2e7"/></svg>
-            booking.com
+            No Ads
           </div>
           <div class="stacked-timeline__legend-item">
             <svg width="8" height="8" viewBox="0 0 8 8"><circle cx="4" cy="4" r="4" fill="#64abfb"/></svg>
-            expedia.co.uk
+            Ads Below AIO
           </div>
           <div class="stacked-timeline__legend-item">
             <svg width="8" height="8" viewBox="0 0 8 8"><circle cx="4" cy="4" r="4" fill="#d47dd4"/></svg>
-            hotels.com
+            Ads Inside AIO
           </div>
           <div class="stacked-timeline__legend-item">
             <svg width="8" height="8" viewBox="0 0 8 8"><circle cx="4" cy="4" r="4" fill="#e86492"/></svg>
-            tripadvisor.co.uk
+            Ads Above AIO
           </div>
         </div>
       </div>
@@ -6764,10 +6764,10 @@
   var XS    = [48, 180, 312, 445, 578, 710]; // SVG coordinate space
 
   var SERIES = [
-    { name:'booking.com',       color:'#b3a2e7', values:[20,22,18,24,26,21] },
-    { name:'expedia.co.uk',     color:'#64abfb', values:[12,11,13,12,11,14] },
-    { name:'hotels.com',        color:'#d47dd4', values:[8, 9, 10,9, 8, 10] },
-    { name:'tripadvisor.co.uk', color:'#e86492', values:[13,12,11,10,11,9]  }
+    { name:'No Ads',          color:'#b3a2e7', values:[20,22,18,24,26,21] },
+    { name:'Ads Below AIO',   color:'#64abfb', values:[12,11,13,12,11,14] },
+    { name:'Ads Inside AIO',  color:'#d47dd4', values:[8, 9, 10,9, 8, 10] },
+    { name:'Ads Above AIO',   color:'#e86492', values:[13,12,11,10,11,9]  }
   ];
 
   function svgX(e) {
