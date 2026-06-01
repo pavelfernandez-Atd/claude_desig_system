@@ -1,0 +1,41 @@
+.stacked-timeline {
+  display: block;
+  width: 100%;
+  position: relative;
+}
+
+.stacked-timeline__svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.stacked-timeline__legend {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin-top: 14px;
+}
+
+.stacked-timeline__legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  font-stretch: condensed;
+  color: #38476a;
+}
+
+.stacked-timeline__tooltip {
+  position: fixed;
+  background: rgba(0, 0, 0, 0.82);
+  border-radius: 6px;
+  padding: 8px 12px;
+  pointer-events: none;
+  z-index: 9999;
+  display: none;
+  min-width: 170px;
+}
