@@ -1,0 +1,138 @@
+/* ============================================================
+   Toggle — Adthena Design System
+   Figma node: 167:1041 (file: ugMYx2Jf3KY7uZmha2U0WP)
+   ============================================================ */
+
+/* ── Base track ─────────────────────────────────────────────── */
+.ds-toggle {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  width: 35px;
+  height: 20px;
+  border-radius: 200px;
+  background: #7A8FAB;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: background 0.18s;
+  user-select: none;
+}
+
+.ds-toggle__thumb {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #ffffff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
+  transition: left 0.18s;
+}
+
+/* ── On state ───────────────────────────────────────────────── */
+.ds-toggle--on {
+  background: #0c8dea; /* primary.main */
+}
+.ds-toggle--on .ds-toggle__thumb {
+  left: 17px;
+}
+
+/* ── Hovered ────────────────────────────────────────────────── */
+.ds-toggle--hovered {
+  background: #6B7FA0;
+}
+.ds-toggle--on.ds-toggle--hovered {
+  background: #007DB8;
+}
+
+/* ── Pressed ────────────────────────────────────────────────── */
+.ds-toggle--pressed {
+  background: #6B7FA0;
+}
+.ds-toggle--on.ds-toggle--pressed {
+  background: #093C6B; /* Brand/Navy */
+}
+
+/* ── Disabled ───────────────────────────────────────────────── */
+.ds-toggle--disabled {
+  background: #C8D3E0;
+  cursor: default;
+  pointer-events: none;
+}
+.ds-toggle--disabled .ds-toggle__thumb {
+  box-shadow: none;
+}
+.ds-toggle--on.ds-toggle--disabled {
+  background: #70AECE;
+}
+
+/* ── Interactive input (native checkbox) ────────────────────── */
+.ds-toggle-input {
+  appearance: none;
+  -webkit-appearance: none;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  width: 35px;
+  height: 20px;
+  border-radius: 200px;
+  background: #7A8FAB;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: background 0.18s;
+  box-sizing: content-box;
+  margin: 0;
+  vertical-align: middle;
+}
+.ds-toggle-input::after {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #ffffff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
+  transition: left 0.18s;
+}
+.ds-toggle-input:hover          { background: #6B7FA0; }
+.ds-toggle-input:checked        { background: #0c8dea; }
+.ds-toggle-input:checked:hover  { background: #007DB8; }
+.ds-toggle-input:active         { background: #6B7FA0; }
+.ds-toggle-input:checked:active { background: #093C6B; }
+.ds-toggle-input:checked::after { left: 17px; }
+.ds-toggle-input:disabled               { background: #C8D3E0; cursor: default; }
+.ds-toggle-input:disabled::after        { box-shadow: none; }
+.ds-toggle-input:checked:disabled       { background: #70AECE; }
+.ds-toggle-input:checked:disabled::after { left: 17px; }
+
+/* ── Label variants ─────────────────────────────────────────── */
+.ds-toggle-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  font-family: 'Open Sans', Helvetica, sans-serif;
+  font-size: 14px;
+  color: #2b2b2b;
+}
+.ds-toggle-label--disabled {
+  cursor: default;
+  color: #9e9e9e;
+}
+
+/* With-label variant (static display) */
+.ds-toggle-row {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.ds-toggle-row__label {
+  font-family: 'Open Sans', Helvetica, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  color: #38476a; /* neutral/700 */
+  line-height: 1;
+}
