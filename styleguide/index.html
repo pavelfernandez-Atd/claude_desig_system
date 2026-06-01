@@ -1251,6 +1251,41 @@
     .ds-checkbox-label { display:inline-flex; align-items:center; gap:8px; cursor:pointer; font-family:var(--font-base); font-size:14px; color:#2b2b2b; }
     .ds-checkbox-label--disabled { cursor:default; color:#9e9e9e; }
 
+    /* === Toggle (.ds-toggle) — Figma node 167:1041 === */
+    .ds-toggle { position:relative; display:inline-flex; align-items:center; width:35px; height:20px; border-radius:200px; background:#7A8FAB; cursor:pointer; flex-shrink:0; transition:background 0.18s; user-select:none; }
+    .ds-toggle__thumb { position:absolute; top:2px; left:2px; width:16px; height:16px; border-radius:50%; background:#ffffff; box-shadow:0 1px 3px rgba(0,0,0,0.25); transition:left 0.18s; }
+    /* On state */
+    .ds-toggle--on { background:#0c8dea; }
+    .ds-toggle--on .ds-toggle__thumb { left:17px; }
+    /* Hovered */
+    .ds-toggle--hovered { background:#6B7FA0; }
+    .ds-toggle--on.ds-toggle--hovered { background:#007DB8; }
+    /* Pressed */
+    .ds-toggle--pressed { background:#6B7FA0; }
+    .ds-toggle--on.ds-toggle--pressed { background:#093C6B; }
+    /* Disabled */
+    .ds-toggle--disabled { background:#C8D3E0; cursor:default; pointer-events:none; }
+    .ds-toggle--disabled .ds-toggle__thumb { box-shadow:none; }
+    .ds-toggle--on.ds-toggle--disabled { background:#70AECE; }
+    /* Interactive input (real checkbox, CSS-driven) */
+    .ds-toggle-input { appearance:none; -webkit-appearance:none; position:relative; display:inline-flex; align-items:center; width:35px; height:20px; border-radius:200px; background:#7A8FAB; cursor:pointer; flex-shrink:0; transition:background 0.18s; box-sizing:content-box; margin:0; vertical-align:middle; }
+    .ds-toggle-input::after { content:''; position:absolute; top:2px; left:2px; width:16px; height:16px; border-radius:50%; background:#ffffff; box-shadow:0 1px 3px rgba(0,0,0,0.25); transition:left 0.18s; }
+    .ds-toggle-input:hover { background:#6B7FA0; }
+    .ds-toggle-input:checked { background:#0c8dea; }
+    .ds-toggle-input:checked:hover { background:#007DB8; }
+    .ds-toggle-input:checked::after { left:17px; }
+    .ds-toggle-input:active { background:#6B7FA0; }
+    .ds-toggle-input:checked:active { background:#093C6B; }
+    .ds-toggle-input:disabled { background:#C8D3E0; cursor:default; }
+    .ds-toggle-input:disabled::after { box-shadow:none; }
+    .ds-toggle-input:checked:disabled { background:#70AECE; }
+    .ds-toggle-input:checked:disabled::after { left:17px; }
+    .ds-toggle-label { display:inline-flex; align-items:center; gap:8px; cursor:pointer; font-family:var(--font-base); font-size:14px; color:#2b2b2b; }
+    .ds-toggle-label--disabled { cursor:default; color:#9e9e9e; }
+    /* Toggle + label row (static display variant) */
+    .ds-toggle-row { display:inline-flex; align-items:center; gap:8px; }
+    .ds-toggle-row__label { font-family:var(--font-base); font-size:14px; font-weight:400; color:#38476a; line-height:1; }
+
     .mentions-sample__filter-btn { display:inline-flex; align-items:center; gap:4px; height:40px; padding:0 12px; border-radius:6px; font-family:var(--font-base); font-size:14px; font-weight:600; color:#3079bd; background:transparent; border:none; cursor:pointer; flex-shrink:0; }
     .mentions-sample__filter-btn.is-active { background:#eaf2fc; }
     .ms-filter-wrap { position:relative; display:inline-flex; }
@@ -2472,6 +2507,7 @@
       <div class="comp-sidebar-group" data-group="inputters" style="display:none">
         <a class="comp-sidebar-link" data-component="checkbox" style="cursor:pointer">Checkbox</a>
         <a class="comp-sidebar-link" data-component="radio-button" style="cursor:pointer">Radio Button</a>
+        <a class="comp-sidebar-link" data-component="toggle" style="cursor:pointer">Toggle</a>
         <a class="comp-sidebar-link" data-component="figma-workflow" style="cursor:pointer">Figma MCP Workflow</a>
       </div>
 
@@ -6198,7 +6234,7 @@
         <tr><td>Y formula</td><td>y = 188 − (value% / maxValue%) × 170</td></tr>
         <tr><td>X spacing</td><td>Evenly distribute N points across 48→710</td></tr>
         <tr><td>Gridlines</td><td>stroke #dce3ef, width 1 — at 0%, 33%, 66%, 100% of range</td></tr>
-        <tr><td>Axis label font</td><td>13px condensed #38476a · Y: top value + 0% only · X: first + last date only</td></tr>
+        <tr><td>Axis label font</td><td>13px condensed rgba(0,0,0,0.6) · Y: top value + 0% only · X: first + last date only · font-size adjusted by JS to compensate SVG scale</td></tr>
         <tr><td>X-axis date format</td><td>'D Mon, YYYY' — e.g. 1 Dec, 2025</td></tr>
         <tr><td>Line stroke-width</td><td>2.5px · stroke-linecap/linejoin: round</td></tr>
         <tr><td>Data-point dot</td><td>r 5.5, fill = series colour, stroke white 2px</td></tr>
@@ -6556,7 +6592,7 @@
   .stacked-timeline__legend-item { display:inline-flex; align-items:center; gap:6px; font-family:'Open Sans',sans-serif; font-size:13px; font-weight:400; font-stretch:condensed; color:#38476a }
   .stacked-timeline__tooltip { position:fixed; background:rgba(0,0,0,0.82); border-radius:6px; padding:8px 12px; pointer-events:none; z-index:9999; display:none; min-width:170px }
   .slt-legend-group { display:flex; align-items:center; flex-wrap:wrap; gap:16px }
-  .slt-legend-group-label { font-family:'Open Sans',sans-serif; font-size:11px; font-weight:600; font-stretch:condensed; color:#6b6b6b; letter-spacing:0.4px; text-transform:uppercase; white-space:nowrap }
+  .slt-legend-group-label { font-family:'Open Sans',sans-serif; font-size:11px; font-weight:600; font-stretch:condensed; color:#6b6b6b; letter-spacing:0.4px; white-space:nowrap }
   .slt-legend-divider { width:1px; height:14px; background:rgba(0,0,0,0.15); flex-shrink:0 }
 </style>
 <section id="stacked-timeline">
@@ -6602,9 +6638,9 @@
           <line x1="48" y1="188" x2="710" y2="188" stroke="#dce3ef" stroke-width="1"/>
 
           <!-- Y-axis labels -->
-          <text x="43" y="22"  text-anchor="end" font-family="Open Sans,sans-serif" font-stretch="condensed" font-size="13" fill="#38476a">100%</text>
-          <text x="43" y="107" text-anchor="end" font-family="Open Sans,sans-serif" font-stretch="condensed" font-size="13" fill="#38476a">50%</text>
-          <text x="43" y="192" text-anchor="end" font-family="Open Sans,sans-serif" font-stretch="condensed" font-size="13" fill="#38476a">0%</text>
+          <text x="43" y="22"  text-anchor="end" class="slt-axis-label" font-family="'Open Sans Condensed','Open Sans',sans-serif" font-stretch="condensed" font-size="13" fill="rgba(0,0,0,0.6)">100%</text>
+          <text x="43" y="107" text-anchor="end" class="slt-axis-label" font-family="'Open Sans Condensed','Open Sans',sans-serif" font-stretch="condensed" font-size="13" fill="rgba(0,0,0,0.6)">50%</text>
+          <text x="43" y="192" text-anchor="end" class="slt-axis-label" font-family="'Open Sans Condensed','Open Sans',sans-serif" font-stretch="condensed" font-size="13" fill="rgba(0,0,0,0.6)">0%</text>
 
           <!-- ─── stacked area polygons (drawn bottom-to-top) ────────
                X positions (6 dates): x0=48  x1=180  x2=312  x3=445  x4=578  x5=710
@@ -6688,8 +6724,8 @@
           <rect id="slt-hit" x="48" y="18" width="662" height="170" fill="transparent" style="cursor:crosshair"/>
 
           <!-- X-axis date labels -->
-          <text x="48"  y="210" text-anchor="start" font-family="Open Sans,sans-serif" font-stretch="condensed" font-size="13" fill="#38476a">1 Jan, 2026</text>
-          <text x="710" y="210" text-anchor="end"   font-family="Open Sans,sans-serif" font-stretch="condensed" font-size="13" fill="#38476a">1 Jun, 2026</text>
+          <text x="48"  y="210" text-anchor="start" class="slt-axis-label" font-family="'Open Sans Condensed','Open Sans',sans-serif" font-stretch="condensed" font-size="13" fill="rgba(0,0,0,0.6)">1 Jan, 2026</text>
+          <text x="710" y="210" text-anchor="end"   class="slt-axis-label" font-family="'Open Sans Condensed','Open Sans',sans-serif" font-stretch="condensed" font-size="13" fill="rgba(0,0,0,0.6)">1 Jun, 2026</text>
         </svg>
 
         <!-- chart legend -->
@@ -6740,9 +6776,9 @@
           <line x1="48" y1="188" x2="710" y2="188" stroke="#dce3ef" stroke-width="1"/>
 
           <!-- Y-axis labels -->
-          <text x="43" y="22"  text-anchor="end" font-family="Open Sans,sans-serif" font-stretch="condensed" font-size="13" fill="#38476a">100%</text>
-          <text x="43" y="107" text-anchor="end" font-family="Open Sans,sans-serif" font-stretch="condensed" font-size="13" fill="#38476a">50%</text>
-          <text x="43" y="192" text-anchor="end" font-family="Open Sans,sans-serif" font-stretch="condensed" font-size="13" fill="#38476a">0%</text>
+          <text x="43" y="22"  text-anchor="end" class="slt-axis-label" font-family="'Open Sans Condensed','Open Sans',sans-serif" font-stretch="condensed" font-size="13" fill="rgba(0,0,0,0.6)">100%</text>
+          <text x="43" y="107" text-anchor="end" class="slt-axis-label" font-family="'Open Sans Condensed','Open Sans',sans-serif" font-stretch="condensed" font-size="13" fill="rgba(0,0,0,0.6)">50%</text>
+          <text x="43" y="192" text-anchor="end" class="slt-axis-label" font-family="'Open Sans Condensed','Open Sans',sans-serif" font-stretch="condensed" font-size="13" fill="rgba(0,0,0,0.6)">0%</text>
 
           <!-- Band 1 — Ads Below AIO — #e86492 (bottom) -->
           <polygon points="48,188 180,188 312,188 445,188 578,188 710,188 710,146 578,152 445,151 312,147 180,154 48,151" fill="#e86492" fill-opacity="0.9"/>
@@ -6819,21 +6855,19 @@
           <rect id="sltc-hit" x="48" y="18" width="662" height="170" fill="transparent" style="cursor:crosshair"/>
 
           <!-- X-axis labels -->
-          <text x="48"  y="210" text-anchor="start" font-family="Open Sans,sans-serif" font-stretch="condensed" font-size="13" fill="#38476a">1 Jan, 2026</text>
-          <text x="710" y="210" text-anchor="end"   font-family="Open Sans,sans-serif" font-stretch="condensed" font-size="13" fill="#38476a">1 Jun, 2026</text>
+          <text x="48"  y="210" text-anchor="start" class="slt-axis-label" font-family="'Open Sans Condensed','Open Sans',sans-serif" font-stretch="condensed" font-size="13" fill="rgba(0,0,0,0.6)">1 Jan, 2026</text>
+          <text x="710" y="210" text-anchor="end"   class="slt-axis-label" font-family="'Open Sans Condensed','Open Sans',sans-serif" font-stretch="condensed" font-size="13" fill="rgba(0,0,0,0.6)">1 Jun, 2026</text>
         </svg>
 
         <!-- Legend: single row -->
         <div class="stacked-timeline__legend" style="gap:10px;align-items:center;justify-content:center;flex-wrap:wrap;margin-top:16px">
           <span class="slt-legend-group-label">You</span>
-          <div class="slt-legend-divider"></div>
           <div class="stacked-timeline__legend-item"><svg width="8" height="8" viewBox="0 0 8 8"><circle cx="4" cy="4" r="4" fill="#8ac8b1"/></svg>Above</div>
           <div class="stacked-timeline__legend-item"><svg width="8" height="8" viewBox="0 0 8 8"><circle cx="4" cy="4" r="4" fill="#b3a2e7"/></svg>Inside</div>
           <div class="stacked-timeline__legend-item"><svg width="8" height="8" viewBox="0 0 8 8"><circle cx="4" cy="4" r="4" fill="#e86492"/></svg>Below</div>
           <div class="stacked-timeline__legend-item"><svg width="8" height="8" viewBox="0 0 8 8"><circle cx="4" cy="4" r="4" fill="#f9fbff"/></svg>No Ads</div>
           <div class="slt-legend-divider"></div>
           <span class="slt-legend-group-label">Top 10 Comp.</span>
-          <div class="slt-legend-divider"></div>
           <div class="stacked-timeline__legend-item"><svg width="20" height="8" viewBox="0 0 20 8"><line x1="0" y1="4" x2="20" y2="4" stroke="#8ac8b1" stroke-width="2" stroke-dasharray="5,3"/></svg>Above</div>
           <div class="stacked-timeline__legend-item"><svg width="20" height="8" viewBox="0 0 20 8"><line x1="0" y1="4" x2="20" y2="4" stroke="#b3a2e7" stroke-width="2" stroke-dasharray="5,3"/></svg>Inside</div>
           <div class="stacked-timeline__legend-item"><svg width="20" height="8" viewBox="0 0 20 8"><line x1="0" y1="4" x2="20" y2="4" stroke="#e86492" stroke-width="2" stroke-dasharray="5,3"/></svg>Below</div>
@@ -7050,6 +7084,26 @@
     dots.forEach(function(d)     { d.setAttribute('opacity', '0'); });
     compDots.forEach(function(d) { d.setAttribute('opacity', '0'); });
   });
+})();
+</script>
+<script>
+// Stacked Timeline — keep axis labels at a true 13px regardless of SVG scale
+(function(){
+  var VB_WIDTH = 740;
+  function updateFontSize(svgId) {
+    var svg = document.getElementById(svgId);
+    if (!svg) return;
+    var scale = svg.getBoundingClientRect().width / VB_WIDTH;
+    if (!scale) return;
+    var svgPx = (13 / scale).toFixed(2);
+    svg.querySelectorAll('.slt-axis-label').forEach(function(t) {
+      t.setAttribute('font-size', svgPx);
+    });
+  }
+  function updateAll() { updateFontSize('slt-svg'); updateFontSize('sltc-svg'); }
+  window.sltUpdateAxisLabels = updateAll;
+  updateAll();
+  window.addEventListener('resize', updateAll);
 })();
 </script>
       </div>
@@ -8974,6 +9028,251 @@ Prioritise authority reinforcement in declining citation segments</textarea>
       </div><!-- /comp-panel-radio-button -->
 
       <!-- ═══════════════════════════════════════════════════════════ -->
+      <!-- TOGGLE                                                       -->
+      <!-- ═══════════════════════════════════════════════════════════ -->
+      <div class="comp-panel" id="comp-panel-toggle" style="display:none">
+<section id="toggle">
+  <div class="section-header">
+    <h2>Toggle</h2>
+    <div class="divider"></div>
+  </div>
+  <p style="font-size:13px;color:var(--text-secondary-var);margin-bottom:24px">A binary on/off control. Gives users immediate feedback of a state change — no form submission required. Supports eight visual states across two values (On / Off) and four interaction states (Default, Hovered, Pressed, Disabled). Built from Figma node <code>167:1041</code> via the Figma MCP workflow.</p>
+
+  <!-- GitHub + Demo links -->
+  <div style="display:flex;gap:8px;margin-bottom:24px;flex-wrap:wrap">
+    <a href="https://github.com/pavelfernandez-Atd/claude_desig_system/tree/main/components/toggle"
+       target="_blank" rel="noopener noreferrer"
+       onclick="window.open(this.href,'_blank','noopener');return false;"
+       style="display:inline-flex;align-items:center;gap:6px;padding:6px 12px;border-radius:6px;background:#24292f;color:#fff;font-size:12px;font-weight:600;text-decoration:none;font-family:'Open Sans',sans-serif">
+      <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+      View on GitHub
+    </a>
+    <a href="https://htmlpreview.github.io/?https://github.com/pavelfernandez-Atd/claude_desig_system/blob/main/components/toggle/demo.html"
+       target="_blank" rel="noopener noreferrer"
+       onclick="window.open(this.href,'_blank','noopener');return false;"
+       style="display:inline-flex;align-items:center;gap:6px;padding:6px 12px;border-radius:6px;background:#0969da;color:#fff;font-size:12px;font-weight:600;text-decoration:none;font-family:'Open Sans',sans-serif">
+      <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M8 1a7 7 0 100 14A7 7 0 008 1zM0 8a8 8 0 1116 0A8 8 0 010 8zm6.5-.25A.75.75 0 017.25 7h1a.75.75 0 01.75.75v2.75h.25a.75.75 0 010 1.5h-2a.75.75 0 010-1.5h.25v-2h-.25a.75.75 0 01-.75-.75zM8 6a1 1 0 100-2 1 1 0 000 2z"/></svg>
+      Preview Demo
+    </a>
+  </div>
+
+  <!-- ① ALL STATES ─────────────────────────────────────────────── -->
+  <div style="margin-bottom:40px">
+    <div class="sub-label">All States</div>
+    <div style="background:#f4f7fb;padding:24px;border-radius:12px">
+
+      <!-- Grid header -->
+      <div style="display:grid;grid-template-columns:100px repeat(4,72px);gap:0;margin-bottom:12px;padding-left:0">
+        <div></div>
+        <div style="font-size:11px;font-weight:600;color:#858585;font-family:'Open Sans',sans-serif;letter-spacing:0.4px">DEFAULT</div>
+        <div style="font-size:11px;font-weight:600;color:#858585;font-family:'Open Sans',sans-serif;letter-spacing:0.4px">HOVERED</div>
+        <div style="font-size:11px;font-weight:600;color:#858585;font-family:'Open Sans',sans-serif;letter-spacing:0.4px">PRESSED</div>
+        <div style="font-size:11px;font-weight:600;color:#858585;font-family:'Open Sans',sans-serif;letter-spacing:0.4px">DISABLED</div>
+      </div>
+
+      <!-- Off row -->
+      <div style="display:grid;grid-template-columns:100px repeat(4,72px);gap:0;align-items:center;margin-bottom:16px">
+        <div style="font-size:12px;font-weight:600;color:#485982;font-family:'Open Sans',sans-serif">Off</div>
+        <div><div class="ds-toggle"><div class="ds-toggle__thumb"></div></div></div>
+        <div><div class="ds-toggle ds-toggle--hovered"><div class="ds-toggle__thumb"></div></div></div>
+        <div><div class="ds-toggle ds-toggle--pressed"><div class="ds-toggle__thumb"></div></div></div>
+        <div><div class="ds-toggle ds-toggle--disabled"><div class="ds-toggle__thumb"></div></div></div>
+      </div>
+
+      <!-- On row -->
+      <div style="display:grid;grid-template-columns:100px repeat(4,72px);gap:0;align-items:center">
+        <div style="font-size:12px;font-weight:600;color:#485982;font-family:'Open Sans',sans-serif">On</div>
+        <div><div class="ds-toggle ds-toggle--on"><div class="ds-toggle__thumb"></div></div></div>
+        <div><div class="ds-toggle ds-toggle--on ds-toggle--hovered"><div class="ds-toggle__thumb"></div></div></div>
+        <div><div class="ds-toggle ds-toggle--on ds-toggle--pressed"><div class="ds-toggle__thumb"></div></div></div>
+        <div><div class="ds-toggle ds-toggle--on ds-toggle--disabled"><div class="ds-toggle__thumb"></div></div></div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ① b  VARIANT — WITH LABEL ──────────────────────────────── -->
+  <div style="margin-bottom:40px">
+    <div class="sub-label">Variant — With Label</div>
+    <div style="background:#f4f7fb;padding:24px;border-radius:12px;display:flex;flex-direction:column;gap:20px">
+
+      <!-- Off -->
+      <div style="display:flex;flex-direction:column;gap:6px">
+        <span style="font-size:11px;font-weight:600;color:#858585;font-family:'Open Sans',sans-serif;letter-spacing:0.4px">OFF</span>
+        <div class="ds-toggle-row">
+          <div class="ds-toggle"><div class="ds-toggle__thumb"></div></div>
+          <span class="ds-toggle-row__label">Gap Analysis</span>
+        </div>
+      </div>
+
+      <!-- On -->
+      <div style="display:flex;flex-direction:column;gap:6px">
+        <span style="font-size:11px;font-weight:600;color:#858585;font-family:'Open Sans',sans-serif;letter-spacing:0.4px">ON</span>
+        <div class="ds-toggle-row">
+          <div class="ds-toggle ds-toggle--on"><div class="ds-toggle__thumb"></div></div>
+          <span class="ds-toggle-row__label">Gap Analysis</span>
+        </div>
+      </div>
+
+      <!-- Disabled off -->
+      <div style="display:flex;flex-direction:column;gap:6px">
+        <span style="font-size:11px;font-weight:600;color:#858585;font-family:'Open Sans',sans-serif;letter-spacing:0.4px">DISABLED</span>
+        <div class="ds-toggle-row">
+          <div class="ds-toggle ds-toggle--disabled"><div class="ds-toggle__thumb"></div></div>
+          <span class="ds-toggle-row__label" style="color:#b0bac9">Gap Analysis</span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Markup snippet -->
+    <pre style="margin-top:12px;padding:16px;background:#1e2535;color:#c9d1d9;border-radius:8px;font-size:12px;line-height:1.6;overflow-x:auto;font-family:'Fira Mono','Courier New',monospace"><code><span style="color:#8b949e">&lt;!-- Off with label --&gt;</span>
+&lt;<span style="color:#7ee787">div</span> <span style="color:#79c0ff">class</span>=<span style="color:#a5d6ff">"ds-toggle-row"</span>&gt;
+  &lt;<span style="color:#7ee787">div</span> <span style="color:#79c0ff">class</span>=<span style="color:#a5d6ff">"ds-toggle"</span>&gt;&lt;<span style="color:#7ee787">div</span> <span style="color:#79c0ff">class</span>=<span style="color:#a5d6ff">"ds-toggle__thumb"</span>&gt;&lt;/<span style="color:#7ee787">div</span>&gt;&lt;/<span style="color:#7ee787">div</span>&gt;
+  &lt;<span style="color:#7ee787">span</span> <span style="color:#79c0ff">class</span>=<span style="color:#a5d6ff">"ds-toggle-row__label"</span>&gt;Gap Analysis&lt;/<span style="color:#7ee787">span</span>&gt;
+&lt;/<span style="color:#7ee787">div</span>&gt;
+
+<span style="color:#8b949e">&lt;!-- On with label --&gt;</span>
+&lt;<span style="color:#7ee787">div</span> <span style="color:#79c0ff">class</span>=<span style="color:#a5d6ff">"ds-toggle-row"</span>&gt;
+  &lt;<span style="color:#7ee787">div</span> <span style="color:#79c0ff">class</span>=<span style="color:#a5d6ff">"ds-toggle ds-toggle--on"</span>&gt;&lt;<span style="color:#7ee787">div</span> <span style="color:#79c0ff">class</span>=<span style="color:#a5d6ff">"ds-toggle__thumb"</span>&gt;&lt;/<span style="color:#7ee787">div</span>&gt;&lt;/<span style="color:#7ee787">div</span>&gt;
+  &lt;<span style="color:#7ee787">span</span> <span style="color:#79c0ff">class</span>=<span style="color:#a5d6ff">"ds-toggle-row__label"</span>&gt;Gap Analysis&lt;/<span style="color:#7ee787">span</span>&gt;
+&lt;/<span style="color:#7ee787">div</span>&gt;</code></pre>
+  </div>
+
+  <!-- ② INTERACTIVE DEMO ──────────────────────────────────────── -->
+  <div style="margin-bottom:40px">
+    <div class="sub-label">Interactive Demo</div>
+    <div style="background:#f4f7fb;padding:24px;border-radius:12px;display:flex;flex-direction:column;gap:16px">
+
+      <label class="ds-toggle-label">
+        <input type="checkbox" class="ds-toggle-input" id="toggle-demo-1">
+        <span style="font-size:14px;color:#27365b;font-family:'Open Sans',sans-serif" id="toggle-demo-1-lbl">Gap Analysis — Off</span>
+      </label>
+
+      <label class="ds-toggle-label">
+        <input type="checkbox" class="ds-toggle-input" id="toggle-demo-2" checked>
+        <span style="font-size:14px;color:#27365b;font-family:'Open Sans',sans-serif" id="toggle-demo-2-lbl">Show Competitors — On</span>
+      </label>
+
+      <label class="ds-toggle-label">
+        <input type="checkbox" class="ds-toggle-input" id="toggle-demo-3">
+        <span style="font-size:14px;color:#27365b;font-family:'Open Sans',sans-serif" id="toggle-demo-3-lbl">Weekly Digest — Off</span>
+      </label>
+
+      <label class="ds-toggle-label ds-toggle-label--disabled">
+        <input type="checkbox" class="ds-toggle-input" disabled>
+        <span style="font-size:14px;font-family:'Open Sans',sans-serif">AI Insights — disabled, off</span>
+      </label>
+
+      <label class="ds-toggle-label ds-toggle-label--disabled">
+        <input type="checkbox" class="ds-toggle-input" disabled checked>
+        <span style="font-size:14px;font-family:'Open Sans',sans-serif">Auto-refresh — disabled, on</span>
+      </label>
+
+    </div>
+    <script>
+      (function() {
+        var pairs = [
+          ['toggle-demo-1', 'Gap Analysis'],
+          ['toggle-demo-2', 'Show Competitors'],
+          ['toggle-demo-3', 'Weekly Digest']
+        ];
+        pairs.forEach(function(p) {
+          var inp = document.getElementById(p[0]);
+          var lbl = document.getElementById(p[0] + '-lbl');
+          if (!inp || !lbl) return;
+          inp.addEventListener('change', function() {
+            lbl.textContent = p[1] + (inp.checked ? ' — On' : ' — Off');
+          });
+        });
+      })();
+    </script>
+  </div>
+
+  <!-- ③ DESIGN TOKENS ────────────────────────────────────────── -->
+  <div style="margin-bottom:40px">
+    <div class="sub-label">Design Tokens</div>
+    <table style="width:100%;border-collapse:collapse;font-family:var(--font-base);font-size:13px">
+      <thead>
+        <tr style="background:#f7faff">
+          <th style="padding:10px 12px;text-align:left;color:#496f97;font-weight:600;border-bottom:1px solid #e8edf5">Token</th>
+          <th style="padding:10px 12px;text-align:left;color:#496f97;font-weight:600;border-bottom:1px solid #e8edf5">Value</th>
+          <th style="padding:10px 12px;text-align:left;color:#496f97;font-weight:600;border-bottom:1px solid #e8edf5">Usage</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="border-bottom:1px solid #f0f3f8"><td style="padding:8px 12px;color:#485982">Track size</td><td style="padding:8px 12px"><code style="background:#f4f6fb;padding:2px 6px;border-radius:4px;font-size:12px">35 × 20px</code></td><td style="padding:8px 12px;color:#6b6b6b">Pill width × height — all states</td></tr>
+        <tr style="border-bottom:1px solid #f0f3f8"><td style="padding:8px 12px;color:#485982">Track radius</td><td style="padding:8px 12px"><code style="background:#f4f6fb;padding:2px 6px;border-radius:4px;font-size:12px">200px</code></td><td style="padding:8px 12px;color:#6b6b6b">Full pill</td></tr>
+        <tr style="border-bottom:1px solid #f0f3f8"><td style="padding:8px 12px;color:#485982">Thumb size</td><td style="padding:8px 12px"><code style="background:#f4f6fb;padding:2px 6px;border-radius:4px;font-size:12px">16 × 16px</code></td><td style="padding:8px 12px;color:#6b6b6b">White circle offset 2px from edge</td></tr>
+        <tr style="border-bottom:1px solid #f0f3f8"><td style="padding:8px 12px;color:#485982">primary.main — On</td><td style="padding:8px 12px"><span style="display:inline-block;width:12px;height:12px;border-radius:2px;background:#0c8dea;vertical-align:middle;margin-right:6px"></span><code style="background:#f4f6fb;padding:2px 6px;border-radius:4px;font-size:12px">#0c8dea</code></td><td style="padding:8px 12px;color:#6b6b6b">Track — On Default</td></tr>
+        <tr style="border-bottom:1px solid #f0f3f8"><td style="padding:8px 12px;color:#485982">Brand/Mid blue — On hover</td><td style="padding:8px 12px"><span style="display:inline-block;width:12px;height:12px;border-radius:2px;background:#007DB8;vertical-align:middle;margin-right:6px"></span><code style="background:#f4f6fb;padding:2px 6px;border-radius:4px;font-size:12px">#007DB8</code></td><td style="padding:8px 12px;color:#6b6b6b">Track — On Hovered</td></tr>
+        <tr style="border-bottom:1px solid #f0f3f8"><td style="padding:8px 12px;color:#485982">Brand/Navy — On pressed</td><td style="padding:8px 12px"><span style="display:inline-block;width:12px;height:12px;border-radius:2px;background:#093C6B;vertical-align:middle;margin-right:6px"></span><code style="background:#f4f6fb;padding:2px 6px;border-radius:4px;font-size:12px">#093C6B</code></td><td style="padding:8px 12px;color:#6b6b6b">Track — On Pressed</td></tr>
+        <tr style="border-bottom:1px solid #f0f3f8"><td style="padding:8px 12px;color:#485982">Off track — default</td><td style="padding:8px 12px"><span style="display:inline-block;width:12px;height:12px;border-radius:2px;background:#7A8FAB;vertical-align:middle;margin-right:6px"></span><code style="background:#f4f6fb;padding:2px 6px;border-radius:4px;font-size:12px">#7A8FAB</code></td><td style="padding:8px 12px;color:#6b6b6b">Track — Off Default</td></tr>
+        <tr style="border-bottom:1px solid #f0f3f8"><td style="padding:8px 12px;color:#485982">Off track — hover / pressed</td><td style="padding:8px 12px"><span style="display:inline-block;width:12px;height:12px;border-radius:2px;background:#6B7FA0;vertical-align:middle;margin-right:6px"></span><code style="background:#f4f6fb;padding:2px 6px;border-radius:4px;font-size:12px">#6B7FA0</code></td><td style="padding:8px 12px;color:#6b6b6b">Track — Off Hovered &amp; Pressed</td></tr>
+        <tr style="border-bottom:1px solid #f0f3f8"><td style="padding:8px 12px;color:#485982">Disabled — off</td><td style="padding:8px 12px"><span style="display:inline-block;width:12px;height:12px;border-radius:2px;background:#C8D3E0;vertical-align:middle;margin-right:6px"></span><code style="background:#f4f6fb;padding:2px 6px;border-radius:4px;font-size:12px">#C8D3E0</code></td><td style="padding:8px 12px;color:#6b6b6b">Track — Off Disabled</td></tr>
+        <tr style="border-bottom:1px solid #f0f3f8"><td style="padding:8px 12px;color:#485982">Disabled — on</td><td style="padding:8px 12px"><span style="display:inline-block;width:12px;height:12px;border-radius:2px;background:#70AECE;vertical-align:middle;margin-right:6px"></span><code style="background:#f4f6fb;padding:2px 6px;border-radius:4px;font-size:12px">#70AECE</code></td><td style="padding:8px 12px;color:#6b6b6b">Track — On Disabled</td></tr>
+        <tr style="border-bottom:1px solid #f0f3f8"><td style="padding:8px 12px;color:#485982">Background/White — thumb</td><td style="padding:8px 12px"><span style="display:inline-block;width:12px;height:12px;border-radius:2px;background:#ffffff;border:1px solid #dce3ef;vertical-align:middle;margin-right:6px"></span><code style="background:#f4f6fb;padding:2px 6px;border-radius:4px;font-size:12px">#FFFFFF</code></td><td style="padding:8px 12px;color:#6b6b6b">Thumb — all states</td></tr>
+        <tr><td style="padding:8px 12px;color:#485982">Thumb shadow</td><td style="padding:8px 12px"><code style="background:#f4f6fb;padding:2px 6px;border-radius:4px;font-size:12px">0 1px 3px rgba(0,0,0,.25)</code></td><td style="padding:8px 12px;color:#6b6b6b">Enabled states only</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ④ CSS CLASSES ───────────────────────────────────────────── -->
+  <div style="margin-bottom:40px">
+    <div class="sub-label">CSS Classes</div>
+    <table style="width:100%;border-collapse:collapse;font-family:var(--font-base);font-size:13px">
+      <thead>
+        <tr style="background:#f7faff">
+          <th style="padding:10px 12px;text-align:left;color:#496f97;font-weight:600;border-bottom:1px solid #e8edf5">Class</th>
+          <th style="padding:10px 12px;text-align:left;color:#496f97;font-weight:600;border-bottom:1px solid #e8edf5">Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="border-bottom:1px solid #f0f3f8"><td style="padding:8px 12px"><code style="background:#f4f6fb;padding:2px 6px;border-radius:4px;font-size:12px">.ds-toggle</code></td><td style="padding:8px 12px;color:#6b6b6b">Base pill track — 35×20px, Off Default state</td></tr>
+        <tr style="border-bottom:1px solid #f0f3f8"><td style="padding:8px 12px"><code style="background:#f4f6fb;padding:2px 6px;border-radius:4px;font-size:12px">.ds-toggle__thumb</code></td><td style="padding:8px 12px;color:#6b6b6b">White circle inside the track — position driven by modifier classes</td></tr>
+        <tr style="border-bottom:1px solid #f0f3f8"><td style="padding:8px 12px"><code style="background:#f4f6fb;padding:2px 6px;border-radius:4px;font-size:12px">.ds-toggle--on</code></td><td style="padding:8px 12px;color:#6b6b6b">On state — blue track (#0c8dea / primary.main), thumb slides right</td></tr>
+        <tr style="border-bottom:1px solid #f0f3f8"><td style="padding:8px 12px"><code style="background:#f4f6fb;padding:2px 6px;border-radius:4px;font-size:12px">.ds-toggle--hovered</code></td><td style="padding:8px 12px;color:#6b6b6b">Hover appearance override — use in static state demos</td></tr>
+        <tr style="border-bottom:1px solid #f0f3f8"><td style="padding:8px 12px"><code style="background:#f4f6fb;padding:2px 6px;border-radius:4px;font-size:12px">.ds-toggle--pressed</code></td><td style="padding:8px 12px;color:#6b6b6b">Pressed / active appearance override</td></tr>
+        <tr style="border-bottom:1px solid #f0f3f8"><td style="padding:8px 12px"><code style="background:#f4f6fb;padding:2px 6px;border-radius:4px;font-size:12px">.ds-toggle--disabled</code></td><td style="padding:8px 12px;color:#6b6b6b">Muted track, no pointer, thumb shadowless</td></tr>
+        <tr style="border-bottom:1px solid #f0f3f8"><td style="padding:8px 12px"><code style="background:#f4f6fb;padding:2px 6px;border-radius:4px;font-size:12px">.ds-toggle-input</code></td><td style="padding:8px 12px;color:#6b6b6b">Native &lt;input type="checkbox"&gt; styled to match — use for real interactivity</td></tr>
+        <tr style="border-bottom:1px solid #f0f3f8"><td style="padding:8px 12px"><code style="background:#f4f6fb;padding:2px 6px;border-radius:4px;font-size:12px">.ds-toggle-label</code></td><td style="padding:8px 12px;color:#6b6b6b">Flex label wrapping .ds-toggle-input + text</td></tr>
+        <tr style="border-bottom:1px solid #f0f3f8"><td style="padding:8px 12px"><code style="background:#f4f6fb;padding:2px 6px;border-radius:4px;font-size:12px">.ds-toggle-label--disabled</code></td><td style="padding:8px 12px;color:#6b6b6b">Muted label text for disabled rows</td></tr>
+        <tr style="border-bottom:1px solid #f0f3f8"><td style="padding:8px 12px"><code style="background:#f4f6fb;padding:2px 6px;border-radius:4px;font-size:12px">.ds-toggle-row</code></td><td style="padding:8px 12px;color:#6b6b6b">Flex wrapper for static toggle + label — gap 8px, aligned center</td></tr>
+        <tr><td style="padding:8px 12px"><code style="background:#f4f6fb;padding:2px 6px;border-radius:4px;font-size:12px">.ds-toggle-row__label</code></td><td style="padding:8px 12px;color:#6b6b6b">Label text — 14px regular, neutral/700 (#38476a)</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ⑤ ANATOMY ────────────────────────────────────────────────── -->
+  <div style="margin-bottom:40px">
+    <div class="sub-label">Anatomy</div>
+    <div style="background:#f4f7fb;padding:24px;border-radius:12px">
+      <div style="display:inline-flex;position:relative;align-items:center;margin-bottom:40px">
+        <div class="ds-toggle ds-toggle--on" id="anatomy-toggle" style="cursor:default"><div class="ds-toggle__thumb"></div></div>
+        <!-- Label A — track -->
+        <svg style="position:absolute;left:-80px;top:50%;overflow:visible;pointer-events:none" width="1" height="1">
+          <line x1="0" y1="0" x2="70" y2="0" stroke="#9aaec5" stroke-width="1" stroke-dasharray="3,2"/>
+          <circle cx="0" cy="0" r="3" fill="#9aaec5"/>
+        </svg>
+        <span style="position:absolute;left:-160px;top:50%;transform:translateY(-50%);font-size:11px;color:#6b6b6b;font-family:'Open Sans',sans-serif;white-space:nowrap">Track<br><code style="font-size:10px">35 × 20px</code></span>
+        <!-- Label B — thumb -->
+        <svg style="position:absolute;right:-80px;top:50%;overflow:visible;pointer-events:none" width="1" height="1">
+          <line x1="0" y1="0" x2="70" y2="0" stroke="#9aaec5" stroke-width="1" stroke-dasharray="3,2"/>
+          <circle cx="70" cy="0" r="3" fill="#9aaec5"/>
+        </svg>
+        <span style="position:absolute;right:-210px;top:50%;transform:translateY(-50%);font-size:11px;color:#6b6b6b;font-family:'Open Sans',sans-serif;white-space:nowrap">Thumb<br><code style="font-size:10px">16 × 16px, offset 2px</code></span>
+      </div>
+      <div style="margin-top:8px;font-size:12px;color:#858585;font-family:'Open Sans',sans-serif">
+        Thumb sits 2px from the near edge when Off, and 17px from the left when On.<br>
+        Track and thumb both transition at <code>0.18s ease</code>.
+      </div>
+    </div>
+  </div>
+
+</section>
+      </div><!-- /comp-panel-toggle -->
+
+      <!-- ═══════════════════════════════════════════════════════════ -->
       <!-- FIGMA MCP WORKFLOW                                          -->
       <!-- ═══════════════════════════════════════════════════════════ -->
       <div class="comp-panel" id="comp-panel-figma-workflow" style="display:none">
@@ -9592,6 +9891,7 @@ Prioritise authority reinforcement in declining citation segments</textarea>
     document.querySelectorAll('.comp-panel').forEach(p => p.style.display = 'none');
     const panel = document.getElementById('comp-panel-' + comp);
     if (panel) panel.style.display = '';
+    if (comp === 'stacked-timeline') { requestAnimationFrame(function(){ if(window.sltUpdateAxisLabels) window.sltUpdateAxisLabels(); }); }
     window.scrollTo({ top: 0, behavior: 'instant' });
   }
 
