@@ -75,9 +75,9 @@
           <line x1="48" y1="188" x2="710" y2="188" stroke="#dce3ef" stroke-width="1"/>
 
           <!-- Y-axis labels -->
-          <text x="43" y="22"  text-anchor="end" font-family="Open Sans,sans-serif" font-stretch="condensed" font-size="13" fill="#38476a">100%</text>
-          <text x="43" y="107" text-anchor="end" font-family="Open Sans,sans-serif" font-stretch="condensed" font-size="13" fill="#38476a">50%</text>
-          <text x="43" y="192" text-anchor="end" font-family="Open Sans,sans-serif" font-stretch="condensed" font-size="13" fill="#38476a">0%</text>
+          <text x="43" y="22"  text-anchor="end" class="slt-axis-label" font-family="'Open Sans Condensed','Open Sans',sans-serif" font-stretch="condensed" font-size="13" fill="rgba(0,0,0,0.6)">100%</text>
+          <text x="43" y="107" text-anchor="end" class="slt-axis-label" font-family="'Open Sans Condensed','Open Sans',sans-serif" font-stretch="condensed" font-size="13" fill="rgba(0,0,0,0.6)">50%</text>
+          <text x="43" y="192" text-anchor="end" class="slt-axis-label" font-family="'Open Sans Condensed','Open Sans',sans-serif" font-stretch="condensed" font-size="13" fill="rgba(0,0,0,0.6)">0%</text>
 
           <!-- Band 1 — Ads Below AIO — Crimson #e86492 (bottom) -->
           <polygon
@@ -147,8 +147,8 @@
           <rect id="slt-hit" x="48" y="18" width="662" height="170" fill="transparent" style="cursor:crosshair"/>
 
           <!-- X-axis labels -->
-          <text x="48"  y="210" text-anchor="start" font-family="Open Sans,sans-serif" font-stretch="condensed" font-size="13" fill="#38476a">1 Jan, 2026</text>
-          <text x="710" y="210" text-anchor="end"   font-family="Open Sans,sans-serif" font-stretch="condensed" font-size="13" fill="#38476a">1 Jun, 2026</text>
+          <text x="48"  y="210" text-anchor="start" class="slt-axis-label" font-family="'Open Sans Condensed','Open Sans',sans-serif" font-stretch="condensed" font-size="13" fill="rgba(0,0,0,0.6)">1 Jan, 2026</text>
+          <text x="710" y="210" text-anchor="end"   class="slt-axis-label" font-family="'Open Sans Condensed','Open Sans',sans-serif" font-stretch="condensed" font-size="13" fill="rgba(0,0,0,0.6)">1 Jun, 2026</text>
         </svg>
 
         <div class="stacked-timeline__legend">
@@ -237,5 +237,25 @@
     });
   })();
   </script>
+
+  <script>
+// Keep axis labels at a true 13px regardless of SVG scale
+(function(){
+  var VB_WIDTH = 740;
+  function updateFontSize(svgId) {
+    var svg = document.getElementById(svgId);
+    if (!svg) return;
+    var scale = svg.getBoundingClientRect().width / VB_WIDTH;
+    if (!scale) return;
+    var svgPx = (13 / scale).toFixed(2);
+    svg.querySelectorAll('.slt-axis-label').forEach(function(t) {
+      t.setAttribute('font-size', svgPx);
+    });
+  }
+  function updateAll() { updateFontSize('slt-svg'); updateFontSize('sltc-svg'); }
+  updateAll();
+  window.addEventListener('resize', updateAll);
+})();
+</script>
 </body>
 </html>
