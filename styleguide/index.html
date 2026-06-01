@@ -1385,6 +1385,23 @@
       font-size:13px; cursor:pointer; font-family:'Open Sans',Helvetica,sans-serif; transition:background 0.15s;
     }
     .dw-settings-btn-cancel:hover { background:#f4f7fb; }
+    .dw-settings-panel__widget-name { font-size:12px; font-weight:400; color:#6b6b6b; margin-top:2px; }
+    .dw-settings-btn-delete { width:100%; padding:9px; border-radius:8px; border:1px solid #ffd0d0; background:#fff5f5; color:#c62828; font-size:13px; font-weight:600; cursor:pointer; font-family:'Open Sans',Helvetica,sans-serif; transition:background 0.15s,border-color 0.15s; display:flex; align-items:center; justify-content:center; gap:6px; }
+    .dw-settings-btn-delete:hover { background:#ffe8e8; border-color:#e57373; }
+    /* Confirmation modal */
+    .dw-confirm-overlay { position:fixed; inset:0; background:rgba(0,0,0,0.4); z-index:210; display:flex; align-items:center; justify-content:center; opacity:0; pointer-events:none; transition:opacity 0.2s ease; }
+    .dw-confirm-overlay.is-open { opacity:1; pointer-events:all; }
+    .dw-confirm-dialog { background:#fff; border-radius:12px; padding:24px; width:340px; box-shadow:0 8px 32px rgba(0,0,0,0.18); transform:scale(0.95); transition:transform 0.2s ease; }
+    .dw-confirm-overlay.is-open .dw-confirm-dialog { transform:scale(1); }
+    .dw-confirm-dialog__icon { width:40px; height:40px; border-radius:50%; background:#fff5f5; display:flex; align-items:center; justify-content:center; margin-bottom:16px; color:#c62828; }
+    .dw-confirm-dialog__title { font-size:16px; font-weight:600; color:rgba(0,0,0,0.87); margin-bottom:8px; }
+    .dw-confirm-dialog__body { font-size:13px; color:#6b6b6b; line-height:1.5; margin-bottom:20px; }
+    .dw-confirm-dialog__body strong { color:rgba(0,0,0,0.87); font-weight:600; }
+    .dw-confirm-dialog__actions { display:flex; gap:10px; }
+    .dw-confirm-btn-cancel { flex:1; padding:9px; border-radius:8px; border:1px solid #d0d8e8; background:#fff; color:#485982; font-size:13px; cursor:pointer; font-family:'Open Sans',Helvetica,sans-serif; transition:background 0.15s; }
+    .dw-confirm-btn-cancel:hover { background:#f4f7fb; }
+    .dw-confirm-btn-delete { flex:1; padding:9px; border-radius:8px; border:none; background:#c62828; color:#fff; font-size:13px; font-weight:600; cursor:pointer; font-family:'Open Sans',Helvetica,sans-serif; transition:background 0.15s; }
+    .dw-confirm-btn-delete:hover { background:#b71c1c; }
     .ms-filter-wrap { position:relative; display:inline-flex; }
     .ms-filter-dropdown { display:none; position:absolute; top:calc(100% + 6px); right:0; background:#fff; border-radius:8px; box-shadow:0 0 4px rgba(0,0,0,0.2); padding:16px; flex-direction:row; gap:0; align-items:flex-start; z-index:200; }
     .ms-filter-dropdown.is-open { display:flex; }
@@ -5274,7 +5291,10 @@
         <div class="dw-settings-overlay" id="dw-overlay"></div>
         <div class="dw-settings-panel" id="dw-settings-panel">
           <div class="dw-settings-panel__header">
-            <span class="dw-settings-panel__title">Widget Settings</span>
+            <div>
+              <span class="dw-settings-panel__title">Widget Settings</span>
+              <div class="dw-settings-panel__widget-name" id="dw-panel-widget-name"></div>
+            </div>
             <button class="dw-settings-panel__close" id="dw-settings-close" title="Close">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
             </button>
@@ -5342,9 +5362,32 @@
             </div>
 
           </div>
-          <div class="dw-settings-panel__footer">
-            <button class="dw-settings-btn-cancel" id="dw-settings-cancel">Cancel</button>
-            <button class="dw-settings-btn-apply" id="dw-settings-apply">Apply</button>
+          <div class="dw-settings-panel__footer" style="flex-direction:column">
+            <div style="display:flex;gap:10px;width:100%">
+              <button class="dw-settings-btn-cancel" id="dw-settings-cancel">Cancel</button>
+              <button class="dw-settings-btn-apply" id="dw-settings-apply">Apply</button>
+            </div>
+            <button class="dw-settings-btn-delete" id="dw-settings-delete">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/></svg>
+              Delete Widget
+            </button>
+          </div>
+        </div>
+
+        <!-- Confirmation modal — Delete Widget -->
+        <div class="dw-confirm-overlay" id="dw-confirm-overlay">
+          <div class="dw-confirm-dialog" id="dw-confirm-dialog">
+            <div class="dw-confirm-dialog__icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/></svg>
+            </div>
+            <div class="dw-confirm-dialog__title">Delete widget?</div>
+            <div class="dw-confirm-dialog__body">
+              <strong id="dw-confirm-widget-name"></strong> will be removed from your dashboard. This action cannot be undone.
+            </div>
+            <div class="dw-confirm-dialog__actions">
+              <button class="dw-confirm-btn-cancel" id="dw-confirm-cancel">Cancel</button>
+              <button class="dw-confirm-btn-delete" id="dw-confirm-delete">Delete</button>
+            </div>
           </div>
         </div>
 
@@ -7976,18 +8019,25 @@
 <script>
 // Dashboard Widget — Settings Panel
 (function() {
-  var overlay  = document.getElementById('dw-overlay');
-  var panel    = document.getElementById('dw-settings-panel');
-  var closeBtn = document.getElementById('dw-settings-close');
-  var cancelBtn= document.getElementById('dw-settings-cancel');
-  var applyBtn = document.getElementById('dw-settings-apply');
-  var toggleEl = document.getElementById('dw-compare-toggle');
+  var overlay         = document.getElementById('dw-overlay');
+  var panel           = document.getElementById('dw-settings-panel');
+  var closeBtn        = document.getElementById('dw-settings-close');
+  var cancelBtn       = document.getElementById('dw-settings-cancel');
+  var applyBtn        = document.getElementById('dw-settings-apply');
+  var deleteBtn       = document.getElementById('dw-settings-delete');
+  var toggleEl        = document.getElementById('dw-compare-toggle');
+  var panelWidgetName = document.getElementById('dw-panel-widget-name');
+  var confirmOverlay  = document.getElementById('dw-confirm-overlay');
+  var confirmDialog   = document.getElementById('dw-confirm-dialog');
+  var confirmNameEl   = document.getElementById('dw-confirm-widget-name');
+  var confirmCancel   = document.getElementById('dw-confirm-cancel');
+  var confirmDelete   = document.getElementById('dw-confirm-delete');
   if (!overlay || !panel) return;
 
-  // Open panel when any settings button inside .dw-card is clicked
   var activeCard = null;
-  var settingsBtns = document.querySelectorAll('.dw-card .wh__btn[title="Settings"]');
-  settingsBtns.forEach(function(btn) {
+
+  // Open panel when any settings button inside .dw-card is clicked
+  document.querySelectorAll('.dw-card .wh__btn[title="Settings"]').forEach(function(btn) {
     btn.addEventListener('click', function(e) {
       e.stopPropagation();
       activeCard = btn.closest('.dw-card');
@@ -7995,11 +8045,19 @@
     });
   });
 
-  function openPanel()  {
+  function getWidgetName() {
+    if (!activeCard) return 'Widget';
+    var el = activeCard.querySelector('.wh__title');
+    return el ? el.textContent.trim() : 'Widget';
+  }
+
+  function openPanel() {
+    if (panelWidgetName) panelWidgetName.textContent = getWidgetName();
     overlay.classList.add('is-open');
     panel.classList.add('is-open');
     if (activeCard) activeCard.classList.add('is-settings-open');
   }
+
   function closePanel() {
     overlay.classList.remove('is-open');
     panel.classList.remove('is-open');
@@ -8011,11 +8069,11 @@
   cancelBtn.addEventListener('click', closePanel);
   applyBtn.addEventListener('click', closePanel);
 
-  // Radio-style single-select within each group
-  document.querySelectorAll('.dw-settings-option').forEach(function(opt) {
+  // Radio groups — exactly one selected per group at a time
+  document.querySelectorAll('#dw-settings-panel .dw-settings-option').forEach(function(opt) {
     opt.addEventListener('click', function() {
       var group = opt.dataset.group;
-      document.querySelectorAll('.dw-settings-option[data-group="' + group + '"]')
+      document.querySelectorAll('#dw-settings-panel .dw-settings-option[data-group="' + group + '"]')
         .forEach(function(o) { o.classList.remove('is-selected'); });
       opt.classList.add('is-selected');
     });
@@ -8025,6 +8083,43 @@
   if (toggleEl) {
     toggleEl.addEventListener('click', function() {
       toggleEl.classList.toggle('ds-toggle--on');
+    });
+  }
+
+  // Delete Widget — open confirmation modal
+  if (deleteBtn) {
+    deleteBtn.addEventListener('click', function() {
+      if (confirmNameEl) confirmNameEl.textContent = getWidgetName();
+      if (confirmOverlay) confirmOverlay.classList.add('is-open');
+    });
+  }
+
+  // Confirmation modal — close on backdrop click
+  if (confirmOverlay) {
+    confirmOverlay.addEventListener('click', function(e) {
+      if (e.target === confirmOverlay) confirmOverlay.classList.remove('is-open');
+    });
+  }
+
+  // Confirmation modal — Cancel
+  if (confirmCancel) {
+    confirmCancel.addEventListener('click', function() {
+      confirmOverlay.classList.remove('is-open');
+    });
+  }
+
+  // Confirmation modal — Confirm delete
+  if (confirmDelete) {
+    confirmDelete.addEventListener('click', function() {
+      var cardToDelete = activeCard;
+      confirmOverlay.classList.remove('is-open');
+      closePanel();
+      if (cardToDelete) {
+        cardToDelete.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+        cardToDelete.style.opacity = '0';
+        cardToDelete.style.transform = 'scale(0.97)';
+        setTimeout(function() { cardToDelete.style.display = 'none'; }, 320);
+      }
     });
   }
 })();
