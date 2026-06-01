@@ -54,7 +54,6 @@
       font-stretch: condensed;
       color: #6b6b6b;
       letter-spacing: 0.4px;
-      text-transform: uppercase;
       white-space: nowrap;
     }
     .slt-legend-divider {
@@ -80,7 +79,7 @@
           Ads Below AIO  #e86492  [22,20,24,22,21,25]
           Ads Inside AIO #b3a2e7  [18,19,21,20,19,22]
           Ads Above AIO  #8ac8b1  [30,29,27,25,25,22]
-          No Ads         #f9fbff  [30,32,28,33,35,31]
+          No Ads         #E4E8F2  [30,32,28,33,35,31]
 
           Main cumulative boundaries:
             Below   → y=[151,154,147,151,152,146]
@@ -130,11 +129,11 @@
                     710,71 578,78 445,74 312,66 180,72 48,69"
             fill="#8ac8b1" fill-opacity="0.9"/>
 
-          <!-- Band 4 — No Ads — Neutral/50 #f9fbff (top) -->
+          <!-- Band 4 — No Ads — Neutral/50 #E4E8F2 (top) -->
           <polygon
             points="48,69 180,72 312,66 445,74 578,78 710,71
                     710,18 578,18 445,18 312,18 180,18 48,18"
-            fill="#f9fbff" fill-opacity="0.9"/>
+            fill="#E4E8F2" fill-opacity="0.9"/>
 
           <!-- white boundary lines between main bands -->
           <polyline points="48,151 180,154 312,147 445,151 578,152 710,146" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="1.5"/>
@@ -186,12 +185,12 @@
           <circle class="sltc-dot" data-col="4" cx="578" cy="78"  r="5.5" fill="#8ac8b1" stroke="white" stroke-width="2" opacity="0"/>
           <circle class="sltc-dot" data-col="5" cx="710" cy="71"  r="5.5" fill="#8ac8b1" stroke="white" stroke-width="2" opacity="0"/>
           <!-- No Ads tops: y=18 (always 100%) -->
-          <circle class="sltc-dot" data-col="0" cx="48"  cy="18"  r="5.5" fill="#f9fbff" stroke="#aabcce" stroke-width="2" opacity="0"/>
-          <circle class="sltc-dot" data-col="1" cx="180" cy="18"  r="5.5" fill="#f9fbff" stroke="#aabcce" stroke-width="2" opacity="0"/>
-          <circle class="sltc-dot" data-col="2" cx="312" cy="18"  r="5.5" fill="#f9fbff" stroke="#aabcce" stroke-width="2" opacity="0"/>
-          <circle class="sltc-dot" data-col="3" cx="445" cy="18"  r="5.5" fill="#f9fbff" stroke="#aabcce" stroke-width="2" opacity="0"/>
-          <circle class="sltc-dot" data-col="4" cx="578" cy="18"  r="5.5" fill="#f9fbff" stroke="#aabcce" stroke-width="2" opacity="0"/>
-          <circle class="sltc-dot" data-col="5" cx="710" cy="18"  r="5.5" fill="#f9fbff" stroke="#aabcce" stroke-width="2" opacity="0"/>
+          <circle class="sltc-dot" data-col="0" cx="48"  cy="18"  r="5.5" fill="#E4E8F2" stroke="#aabcce" stroke-width="2" opacity="0"/>
+          <circle class="sltc-dot" data-col="1" cx="180" cy="18"  r="5.5" fill="#E4E8F2" stroke="#aabcce" stroke-width="2" opacity="0"/>
+          <circle class="sltc-dot" data-col="2" cx="312" cy="18"  r="5.5" fill="#E4E8F2" stroke="#aabcce" stroke-width="2" opacity="0"/>
+          <circle class="sltc-dot" data-col="3" cx="445" cy="18"  r="5.5" fill="#E4E8F2" stroke="#aabcce" stroke-width="2" opacity="0"/>
+          <circle class="sltc-dot" data-col="4" cx="578" cy="18"  r="5.5" fill="#E4E8F2" stroke="#aabcce" stroke-width="2" opacity="0"/>
+          <circle class="sltc-dot" data-col="5" cx="710" cy="18"  r="5.5" fill="#E4E8F2" stroke="#aabcce" stroke-width="2" opacity="0"/>
 
           <!-- ═══ COMPARISON DOTS — hollow (white fill, coloured stroke) ═══ -->
           <!-- Below boundary: y=[140,142,137,144,147,140] -->
@@ -227,14 +226,12 @@
         <!-- Legend: single row -->
         <div class="stacked-timeline__legend" style="gap:10px;align-items:center;justify-content:center;flex-wrap:wrap">
           <span class="slt-legend-group-label">You</span>
-          <div class="slt-legend-divider"></div>
           <div class="stacked-timeline__legend-item"><svg width="8" height="8" viewBox="0 0 8 8"><circle cx="4" cy="4" r="4" fill="#8ac8b1"/></svg>Above</div>
           <div class="stacked-timeline__legend-item"><svg width="8" height="8" viewBox="0 0 8 8"><circle cx="4" cy="4" r="4" fill="#b3a2e7"/></svg>Inside</div>
           <div class="stacked-timeline__legend-item"><svg width="8" height="8" viewBox="0 0 8 8"><circle cx="4" cy="4" r="4" fill="#e86492"/></svg>Below</div>
-          <div class="stacked-timeline__legend-item"><svg width="8" height="8" viewBox="0 0 8 8"><circle cx="4" cy="4" r="4" fill="#f9fbff"/></svg>No Ads</div>
+          <div class="stacked-timeline__legend-item"><svg width="8" height="8" viewBox="0 0 8 8"><circle cx="4" cy="4" r="4" fill="#E4E8F2"/></svg>No Ads</div>
           <div class="slt-legend-divider"></div>
           <span class="slt-legend-group-label">Top 10 Comp.</span>
-          <div class="slt-legend-divider"></div>
           <div class="stacked-timeline__legend-item"><svg width="20" height="8" viewBox="0 0 20 8"><line x1="0" y1="4" x2="20" y2="4" stroke="#8ac8b1" stroke-width="2" stroke-dasharray="5,3"/></svg>Above</div>
           <div class="stacked-timeline__legend-item"><svg width="20" height="8" viewBox="0 0 20 8"><line x1="0" y1="4" x2="20" y2="4" stroke="#b3a2e7" stroke-width="2" stroke-dasharray="5,3"/></svg>Inside</div>
           <div class="stacked-timeline__legend-item"><svg width="20" height="8" viewBox="0 0 20 8"><line x1="0" y1="4" x2="20" y2="4" stroke="#e86492" stroke-width="2" stroke-dasharray="5,3"/></svg>Below</div>
@@ -261,14 +258,14 @@
       { name:'Ads Below AIO',   color:'#e86492', values:[22,20,24,22,21,25] },
       { name:'Ads Inside AIO',  color:'#b3a2e7', values:[18,19,21,20,19,22] },
       { name:'Ads Above AIO',   color:'#8ac8b1', values:[30,29,27,25,25,22] },
-      { name:'No Ads',          color:'#f9fbff', values:[30,32,28,33,35,31] }
+      { name:'No Ads',          color:'#E4E8F2', values:[30,32,28,33,35,31] }
     ];
 
     var COMP = [
       { name:'Ads Below AIO',   color:'#e86492', values:[28,27,30,26,24,28] },
       { name:'Ads Inside AIO',  color:'#b3a2e7', values:[22,21,23,22,21,23] },
       { name:'Ads Above AIO',   color:'#8ac8b1', values:[25,26,24,26,27,24] },
-      { name:'No Ads',          color:'#f9fbff', values:[25,26,23,26,28,25] }
+      { name:'No Ads',          color:'#E4E8F2', values:[25,26,23,26,28,25] }
     ];
 
     function svgX(e) {
