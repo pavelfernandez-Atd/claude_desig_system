@@ -6618,34 +6618,64 @@
                Combined totals peak at 56% — chart top (60%) has visible empty space above
           ─────────────────────────────────────────────────────────── -->
 
-          <!-- Band 1 — No Ads — Purple #b3a2e7 (series 01) -->
+          <!-- Band 1 — No Ads — Neutral/50 #c0cde0 -->
           <polygon
             points="48,188 180,188 312,188 445,188 578,188 710,188
                     710,129 578,114 445,120 312,137 180,126 48,131"
-            fill="#b3a2e7" fill-opacity="0.9"/>
+            fill="#c0cde0" fill-opacity="0.9"/>
 
-          <!-- Band 2 — Ads Below AIO — Blue #64abfb (series 02) -->
+          <!-- Band 2 — Ads Below AIO — Crimson #e86492 (series 04) -->
           <polygon
             points="48,131 180,126 312,137 445,120 578,114 710,129
                     710,89 578,83 445,86 312,100 180,95 48,97"
-            fill="#64abfb" fill-opacity="0.9"/>
+            fill="#e86492" fill-opacity="0.9"/>
 
-          <!-- Band 3 — Ads Inside AIO — Magenta #d47dd4 (series 03) -->
+          <!-- Band 3 — Ads Inside AIO — Purple #b3a2e7 (series 01) -->
           <polygon
             points="48,97 180,95 312,100 445,86 578,83 710,89
                     710,61 578,61 445,61 312,72 180,69 48,75"
-            fill="#d47dd4" fill-opacity="0.9"/>
+            fill="#b3a2e7" fill-opacity="0.9"/>
 
-          <!-- Band 4 — Ads Above AIO — Crimson #e86492 (series 04) -->
+          <!-- Band 4 — Ads Above AIO — Green #8ac8b1 (series 05) -->
           <polygon
             points="48,75 180,69 312,72 445,61 578,61 710,61
                     710,35 578,29 445,32 312,41 180,35 48,38"
-            fill="#e86492" fill-opacity="0.9"/>
+            fill="#8ac8b1" fill-opacity="0.9"/>
 
           <!-- white boundary lines between bands -->
-          <polyline points="48,131 180,126 312,137 445,120 578,114 710,129" fill="none" stroke="rgba(255,255,255,0.6)" stroke-width="1.5"/>
+          <polyline points="48,131 180,126 312,137 445,120 578,114 710,129" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="1.5"/>
           <polyline points="48,97  180,95  312,100 445,86  578,83  710,89"  fill="none" stroke="rgba(255,255,255,0.6)" stroke-width="1.5"/>
           <polyline points="48,75  180,69  312,72  445,61  578,61  710,61"  fill="none" stroke="rgba(255,255,255,0.6)" stroke-width="1.5"/>
+
+          <!-- hover dots — shown by JS on nearest column (r=5.5, white stroke 2px) -->
+          <!-- No Ads boundary top: y=[131,126,137,120,114,129] -->
+          <circle class="slt-dot" data-col="0" cx="48"  cy="131" r="5.5" fill="#c0cde0" stroke="white" stroke-width="2" opacity="0"/>
+          <circle class="slt-dot" data-col="1" cx="180" cy="126" r="5.5" fill="#c0cde0" stroke="white" stroke-width="2" opacity="0"/>
+          <circle class="slt-dot" data-col="2" cx="312" cy="137" r="5.5" fill="#c0cde0" stroke="white" stroke-width="2" opacity="0"/>
+          <circle class="slt-dot" data-col="3" cx="445" cy="120" r="5.5" fill="#c0cde0" stroke="white" stroke-width="2" opacity="0"/>
+          <circle class="slt-dot" data-col="4" cx="578" cy="114" r="5.5" fill="#c0cde0" stroke="white" stroke-width="2" opacity="0"/>
+          <circle class="slt-dot" data-col="5" cx="710" cy="129" r="5.5" fill="#c0cde0" stroke="white" stroke-width="2" opacity="0"/>
+          <!-- Ads Below AIO boundary top: y=[97,95,100,86,83,89] -->
+          <circle class="slt-dot" data-col="0" cx="48"  cy="97"  r="5.5" fill="#e86492" stroke="white" stroke-width="2" opacity="0"/>
+          <circle class="slt-dot" data-col="1" cx="180" cy="95"  r="5.5" fill="#e86492" stroke="white" stroke-width="2" opacity="0"/>
+          <circle class="slt-dot" data-col="2" cx="312" cy="100" r="5.5" fill="#e86492" stroke="white" stroke-width="2" opacity="0"/>
+          <circle class="slt-dot" data-col="3" cx="445" cy="86"  r="5.5" fill="#e86492" stroke="white" stroke-width="2" opacity="0"/>
+          <circle class="slt-dot" data-col="4" cx="578" cy="83"  r="5.5" fill="#e86492" stroke="white" stroke-width="2" opacity="0"/>
+          <circle class="slt-dot" data-col="5" cx="710" cy="89"  r="5.5" fill="#e86492" stroke="white" stroke-width="2" opacity="0"/>
+          <!-- Ads Inside AIO boundary top: y=[75,69,72,61,61,61] -->
+          <circle class="slt-dot" data-col="0" cx="48"  cy="75"  r="5.5" fill="#b3a2e7" stroke="white" stroke-width="2" opacity="0"/>
+          <circle class="slt-dot" data-col="1" cx="180" cy="69"  r="5.5" fill="#b3a2e7" stroke="white" stroke-width="2" opacity="0"/>
+          <circle class="slt-dot" data-col="2" cx="312" cy="72"  r="5.5" fill="#b3a2e7" stroke="white" stroke-width="2" opacity="0"/>
+          <circle class="slt-dot" data-col="3" cx="445" cy="61"  r="5.5" fill="#b3a2e7" stroke="white" stroke-width="2" opacity="0"/>
+          <circle class="slt-dot" data-col="4" cx="578" cy="61"  r="5.5" fill="#b3a2e7" stroke="white" stroke-width="2" opacity="0"/>
+          <circle class="slt-dot" data-col="5" cx="710" cy="61"  r="5.5" fill="#b3a2e7" stroke="white" stroke-width="2" opacity="0"/>
+          <!-- Ads Above AIO boundary top: y=[38,35,41,32,29,35] -->
+          <circle class="slt-dot" data-col="0" cx="48"  cy="38"  r="5.5" fill="#8ac8b1" stroke="white" stroke-width="2" opacity="0"/>
+          <circle class="slt-dot" data-col="1" cx="180" cy="35"  r="5.5" fill="#8ac8b1" stroke="white" stroke-width="2" opacity="0"/>
+          <circle class="slt-dot" data-col="2" cx="312" cy="41"  r="5.5" fill="#8ac8b1" stroke="white" stroke-width="2" opacity="0"/>
+          <circle class="slt-dot" data-col="3" cx="445" cy="32"  r="5.5" fill="#8ac8b1" stroke="white" stroke-width="2" opacity="0"/>
+          <circle class="slt-dot" data-col="4" cx="578" cy="29"  r="5.5" fill="#8ac8b1" stroke="white" stroke-width="2" opacity="0"/>
+          <circle class="slt-dot" data-col="5" cx="710" cy="35"  r="5.5" fill="#8ac8b1" stroke="white" stroke-width="2" opacity="0"/>
 
           <!-- vertical indicator line (managed by JS) -->
           <line id="slt-indicator" x1="0" y1="18" x2="0" y2="188"
@@ -6663,19 +6693,19 @@
         <!-- chart legend -->
         <div class="stacked-timeline__legend">
           <div class="stacked-timeline__legend-item">
-            <svg width="8" height="8" viewBox="0 0 8 8"><circle cx="4" cy="4" r="4" fill="#b3a2e7"/></svg>
+            <svg width="8" height="8" viewBox="0 0 8 8"><circle cx="4" cy="4" r="4" fill="#c0cde0"/></svg>
             No Ads
           </div>
           <div class="stacked-timeline__legend-item">
-            <svg width="8" height="8" viewBox="0 0 8 8"><circle cx="4" cy="4" r="4" fill="#64abfb"/></svg>
+            <svg width="8" height="8" viewBox="0 0 8 8"><circle cx="4" cy="4" r="4" fill="#e86492"/></svg>
             Ads Below AIO
           </div>
           <div class="stacked-timeline__legend-item">
-            <svg width="8" height="8" viewBox="0 0 8 8"><circle cx="4" cy="4" r="4" fill="#d47dd4"/></svg>
+            <svg width="8" height="8" viewBox="0 0 8 8"><circle cx="4" cy="4" r="4" fill="#b3a2e7"/></svg>
             Ads Inside AIO
           </div>
           <div class="stacked-timeline__legend-item">
-            <svg width="8" height="8" viewBox="0 0 8 8"><circle cx="4" cy="4" r="4" fill="#e86492"/></svg>
+            <svg width="8" height="8" viewBox="0 0 8 8"><circle cx="4" cy="4" r="4" fill="#8ac8b1"/></svg>
             Ads Above AIO
           </div>
         </div>
@@ -6713,7 +6743,7 @@
     <div class="sub-label">Series colours (DS chart palette — indices 01–04)</div>
     <div style="display:flex;flex-wrap:wrap;gap:8px">
       <div style="display:flex;align-items:center;gap:6px;font-size:12px;color:#485982;background:#fff;border:1px solid #e0e6f0;border-radius:6px;padding:6px 10px">
-        <span style="display:inline-block;width:24px;height:10px;background:#b3a2e7;border-radius:2px"></span> 01 Purple · bottom band
+        <span style="display:inline-block;width:24px;height:10px;background:#c0cde0;border-radius:2px"></span> neutral/50 · bottom band (No Ads)
       </div>
       <div style="display:flex;align-items:center;gap:6px;font-size:12px;color:#485982;background:#fff;border:1px solid #e0e6f0;border-radius:6px;padding:6px 10px">
         <span style="display:inline-block;width:24px;height:10px;background:#64abfb;border-radius:2px"></span> 02 Blue
@@ -6758,16 +6788,17 @@
   var hit       = document.getElementById('slt-hit');
   var indicator = document.getElementById('slt-indicator');
   var tip       = document.getElementById('slt-tooltip');
+  var dots      = svg.querySelectorAll('.slt-dot');
   if (!svg || !hit || !tip) return;
 
   var DATES = ['1 Jan, 2026','1 Feb, 2026','1 Mar, 2026','1 Apr, 2026','1 May, 2026','1 Jun, 2026'];
   var XS    = [48, 180, 312, 445, 578, 710]; // SVG coordinate space
 
   var SERIES = [
-    { name:'No Ads',          color:'#b3a2e7', values:[20,22,18,24,26,21] },
-    { name:'Ads Below AIO',   color:'#64abfb', values:[12,11,13,12,11,14] },
-    { name:'Ads Inside AIO',  color:'#d47dd4', values:[8, 9, 10,9, 8, 10] },
-    { name:'Ads Above AIO',   color:'#e86492', values:[13,12,11,10,11,9]  }
+    { name:'No Ads',          color:'#c0cde0', values:[20,22,18,24,26,21] },
+    { name:'Ads Below AIO',   color:'#e86492', values:[12,11,13,12,11,14] },
+    { name:'Ads Inside AIO',  color:'#b3a2e7', values:[8, 9, 10,9, 8, 10] },
+    { name:'Ads Above AIO',   color:'#8ac8b1', values:[13,12,11,10,11,9]  }
   ];
 
   function svgX(e) {
@@ -6788,6 +6819,10 @@
     indicator.setAttribute('x2', XS[idx]);
     indicator.style.display = 'block';
 
+    dots.forEach(function(d) {
+      d.setAttribute('opacity', d.dataset.col == idx ? '1' : '0');
+    });
+
     var html = '<div style="font-size:11px;font-weight:600;color:rgba(255,255,255,0.7);margin-bottom:6px;letter-spacing:0.3px">' + DATES[idx] + '</div>';
     SERIES.forEach(function(s) {
       html += '<div style="display:flex;align-items:center;gap:7px;font-size:12px;color:#fff;line-height:1.8">'
@@ -6806,6 +6841,7 @@
   hit.addEventListener('mouseleave', function() {
     tip.style.display       = 'none';
     indicator.style.display = 'none';
+    dots.forEach(function(d) { d.setAttribute('opacity', '0'); });
   });
 })();
 </script>
