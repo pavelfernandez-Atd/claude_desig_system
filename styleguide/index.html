@@ -6561,7 +6561,7 @@
     <h2>Stacked Timeline</h2>
     <div class="divider"></div>
   </div>
-  <p style="font-size:13px;color:var(--text-secondary-var);margin-bottom:24px">A stacked area chart showing how multiple series combine over time. Each band represents one series; bands stack vertically so the total height of all bands equals the combined total (typically 100%). Hover anywhere on the chart to see all series values for that date.</p>
+  <p style="font-size:13px;color:var(--text-secondary-var);margin-bottom:24px">A stacked area chart showing how multiple independent series combine over time. Each band represents one series' absolute value; bands stack so you can read both individual contributions and the running total at a glance. The empty space above the top band is intentional — it shows that the combined total does not fill the full scale. Hover anywhere on the chart to see all series values for that date.</p>
 
   <!-- GitHub + Demo links -->
   <div style="display:flex;gap:8px;margin-bottom:24px;flex-wrap:wrap">
@@ -6583,60 +6583,69 @@
 
   <!-- ① LIVE DEMO ─────────────────────────────────────────────────── -->
   <div style="margin-bottom:40px">
-    <div class="sub-label">Live Demo · 4 series · Jan–Jun 2026 · values sum to 100%</div>
+    <div class="sub-label">Live Demo · 4 series · Jan–Jun 2026 · ad frequency % (independent values)</div>
     <div style="background:#e4eef4;padding:20px;border-radius:12px">
       <div class="stacked-timeline">
         <!-- viewBox: 740 × 215. Plot area: x 48→710, y 18(top=100%)→188(bottom=0%), h=170 -->
         <svg id="slt-svg" class="stacked-timeline__svg" viewBox="0 0 740 215" xmlns="http://www.w3.org/2000/svg">
 
-          <!-- horizontal grid lines at 0% / 25% / 50% / 75% / 100% -->
+          <!-- horizontal grid lines at 0% / 15% / 30% / 45% / 60%
+               Y_MAX = 60%  →  yOf(pct) = 188 − (pct/60) × 170
+               yOf(60)=18   yOf(45)=61   yOf(30)=103   yOf(15)=146   yOf(0)=188 -->
           <line x1="48" y1="18"  x2="710" y2="18"  stroke="#dce3ef" stroke-width="1"/>
           <line x1="48" y1="61"  x2="710" y2="61"  stroke="#dce3ef" stroke-width="1"/>
           <line x1="48" y1="103" x2="710" y2="103" stroke="#dce3ef" stroke-width="1"/>
           <line x1="48" y1="146" x2="710" y2="146" stroke="#dce3ef" stroke-width="1"/>
           <line x1="48" y1="188" x2="710" y2="188" stroke="#dce3ef" stroke-width="1"/>
 
-          <!-- Y-axis labels: top and bottom only -->
-          <text x="43" y="22"  text-anchor="end" font-family="Open Sans,sans-serif" font-stretch="condensed" font-size="13" fill="#38476a">100%</text>
+          <!-- Y-axis labels -->
+          <text x="43" y="22"  text-anchor="end" font-family="Open Sans,sans-serif" font-stretch="condensed" font-size="13" fill="#38476a">60%</text>
+          <text x="43" y="107" text-anchor="end" font-family="Open Sans,sans-serif" font-stretch="condensed" font-size="13" fill="#38476a">30%</text>
           <text x="43" y="192" text-anchor="end" font-family="Open Sans,sans-serif" font-stretch="condensed" font-size="13" fill="#38476a">0%</text>
 
           <!-- ─── stacked area polygons (drawn bottom-to-top) ────────
-               X positions (6 dates):  x0=48  x1=180  x2=312  x3=445  x4=578  x5=710
-               Cumulative tops (y = 188 - pct/100 * 170):
-                 booking only      [30,32,28,33,35,31] → y=[137,134,140,132,129,135]
-                 +expedia          [52,52,52,55,56,56] → y=[100,100,100, 95, 93, 93]
-                 +hotels           [70,71,73,75,75,78] → y=[ 69, 67, 64, 61, 61, 55]
-                 +tripadvisor=100%                     → y=18
+               X positions (6 dates): x0=48  x1=180  x2=312  x3=445  x4=578  x5=710
+               Series values (independent ad frequency %):
+                 booking.com       [20,22,18,24,26,21]
+                 expedia.co.uk     [12,11,13,12,11,14]
+                 hotels.com        [ 8, 9,10, 9, 8,10]
+                 tripadvisor.co.uk [13,12,11,10,11, 9]
+               Cumulative stacks (yOf = 188 − val/60 × 170):
+                 booking only      [20,22,18,24,26,21] → y=[131,126,137,120,114,129]
+                 +expedia          [32,33,31,36,37,35] → y=[ 97, 95,100, 86, 83, 89]
+                 +hotels           [40,42,41,45,45,45] → y=[ 75, 69, 72, 61, 61, 61]
+                 +tripadvisor      [53,54,52,55,56,54] → y=[ 38, 35, 41, 32, 29, 35]
+               Combined totals peak at 56% — chart top (60%) has visible empty space above
           ─────────────────────────────────────────────────────────── -->
 
           <!-- Band 1 — booking.com — Purple #b3a2e7 (series 01) -->
           <polygon
             points="48,188 180,188 312,188 445,188 578,188 710,188
-                    710,135 578,129 445,132 312,140 180,134 48,137"
+                    710,129 578,114 445,120 312,137 180,126 48,131"
             fill="#b3a2e7" fill-opacity="0.9"/>
 
           <!-- Band 2 — expedia.co.uk — Blue #64abfb (series 02) -->
           <polygon
-            points="48,137 180,134 312,140 445,132 578,129 710,135
-                    710,93 578,93 445,95 312,100 180,100 48,100"
+            points="48,131 180,126 312,137 445,120 578,114 710,129
+                    710,89 578,83 445,86 312,100 180,95 48,97"
             fill="#64abfb" fill-opacity="0.9"/>
 
           <!-- Band 3 — hotels.com — Magenta #d47dd4 (series 03) -->
           <polygon
-            points="48,100 180,100 312,100 445,95 578,93 710,93
-                    710,55 578,61 445,61 312,64 180,67 48,69"
+            points="48,97 180,95 312,100 445,86 578,83 710,89
+                    710,61 578,61 445,61 312,72 180,69 48,75"
             fill="#d47dd4" fill-opacity="0.9"/>
 
           <!-- Band 4 — tripadvisor.co.uk — Crimson #e86492 (series 04) -->
           <polygon
-            points="48,69 180,67 312,64 445,61 578,61 710,55
-                    710,18 578,18 445,18 312,18 180,18 48,18"
+            points="48,75 180,69 312,72 445,61 578,61 710,61
+                    710,35 578,29 445,32 312,41 180,35 48,38"
             fill="#e86492" fill-opacity="0.9"/>
 
           <!-- white boundary lines between bands -->
-          <polyline points="48,137 180,134 312,140 445,132 578,129 710,135" fill="none" stroke="rgba(255,255,255,0.6)" stroke-width="1.5"/>
-          <polyline points="48,100 180,100 312,100 445,95  578,93  710,93"  fill="none" stroke="rgba(255,255,255,0.6)" stroke-width="1.5"/>
-          <polyline points="48,69  180,67  312,64  445,61  578,61  710,55"  fill="none" stroke="rgba(255,255,255,0.6)" stroke-width="1.5"/>
+          <polyline points="48,131 180,126 312,137 445,120 578,114 710,129" fill="none" stroke="rgba(255,255,255,0.6)" stroke-width="1.5"/>
+          <polyline points="48,97  180,95  312,100 445,86  578,83  710,89"  fill="none" stroke="rgba(255,255,255,0.6)" stroke-width="1.5"/>
+          <polyline points="48,75  180,69  312,72  445,61  578,61  710,61"  fill="none" stroke="rgba(255,255,255,0.6)" stroke-width="1.5"/>
 
           <!-- vertical indicator line (managed by JS) -->
           <line id="slt-indicator" x1="0" y1="18" x2="0" y2="188"
@@ -6685,10 +6694,10 @@
         <tr><td>viewBox</td><td>0 0 740 215</td></tr>
         <tr><td>Plot area x</td><td>48 → 710 (width 662)</td></tr>
         <tr><td>Plot area y</td><td>18 (top = 100%) → 188 (bottom = 0%), height 170</td></tr>
-        <tr><td>Y formula</td><td>y = 188 − (cumulativePct / maxPct) × 170</td></tr>
+        <tr><td>Y formula</td><td>y = 188 − (cumulativePct / Y_MAX) × 170  —  set Y_MAX above the data peak to leave visible headroom</td></tr>
         <tr><td>X spacing</td><td>Evenly distribute N dates across 48 → 710</td></tr>
-        <tr><td>Grid lines</td><td>Horizontal only — stroke #dce3ef, width 1 — at 0% / 25% / 50% / 75% / 100%</td></tr>
-        <tr><td>Y labels</td><td>13px condensed #38476a — top value (100%) and 0% only</td></tr>
+        <tr><td>Grid lines</td><td>Horizontal only — stroke #dce3ef, width 1 — at evenly-spaced % ticks up to Y_MAX (e.g. 0% / 15% / 30% / 45% / 60%)</td></tr>
+        <tr><td>Y labels</td><td>13px condensed #38476a — Y_MAX, midpoint, and 0% only</td></tr>
         <tr><td>X labels</td><td>13px condensed #38476a — first and last date only · format: 'D Mon, YYYY'</td></tr>
         <tr><td>Band shape</td><td>&lt;polygon&gt; — walk forward along lower boundary, then reverse along upper boundary</td></tr>
         <tr><td>Band fill-opacity</td><td>0.9 — slight translucency lets grid lines read through at edges</td></tr>
@@ -6716,7 +6725,7 @@
         <span style="display:inline-block;width:24px;height:10px;background:#e86492;border-radius:2px"></span> 04 Crimson · top band
       </div>
     </div>
-    <p style="font-size:12px;color:#6b6b6b;margin-top:10px">Assign colours in DS index order. With 4+ series, the bottom band gets colour 01 and each band above increments. Colour 11 Olive (<code>#c8d09c</code>) or Neutral (<code>#d3dbe6</code>) is used for an "Other / remaining" band when not all contributors are individually tracked.</p>
+    <p style="font-size:12px;color:#6b6b6b;margin-top:10px">Assign colours in DS index order. With 4 series, the bottom band gets colour 01 and each band above increments. Colour 11 Olive (<code>#c8d09c</code>) or Neutral (<code>#d3dbe6</code>) is used for an "Other / remaining" band when not all contributors are individually tracked. The empty space above all bands reflects the unused portion of the Y scale — it is a deliberate affordance communicating that values are independent, not normalised to 100%.</p>
   </div>
 
   <!-- ④ CSS CLASSES ────────────────────────────────────────────────── -->
@@ -6739,7 +6748,7 @@
     <div style="width:28px;height:28px;background:#b1d1f6;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0">
       <svg width="18" height="18" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M10.0156 3.5C7.67188 3.5 5.54688 4.75 4.35938 6.75C3.20313 8.78125 3.20313 11.25 4.35938 13.25C5.54688 15.2813 7.67188 16.5 10.0156 16.5C12.3281 16.5 14.4531 15.2813 15.6406 13.25C16.7969 11.25 16.7969 8.78125 15.6406 6.75C14.4531 4.75 12.3281 3.5 10.0156 3.5ZM10.0156 18C7.14063 18 4.51563 16.5 3.07813 14C1.64062 11.5313 1.64062 8.5 3.07813 6C4.51563 3.53125 7.14063 2 10.0156 2C12.8594 2 15.4844 3.53125 16.9219 6C18.3594 8.5 18.3594 11.5313 16.9219 14C15.4844 16.5 12.8594 18 10.0156 18ZM10.0156 6C10.4219 6 10.7656 6.34375 10.7656 6.75V10.25C10.7656 10.6875 10.4219 11 10.0156 11C9.57813 11 9.26563 10.6875 9.26563 10.25V6.75C9.26563 6.34375 9.57813 6 10.0156 6ZM11.0156 13C11.0156 13.5625 10.5469 14 10.0156 14C9.45313 14 9.01563 13.5625 9.01563 13C9.01563 12.4688 9.45313 12 10.0156 12C10.5469 12 11.0156 12.4688 11.0156 13Z" fill="white"/></svg>
     </div>
-    <p style="font-size:13px;color:#6b6b6b;line-height:1.6;margin:0">Use a stacked timeline when you need to show both the individual contribution of each series <em>and</em> the combined total evolving over time. For pure share comparisons across competitors without a meaningful total, prefer the Simple Timeline. <span style="font-weight:600">Coming soon.</span></p>
+    <p style="font-size:13px;color:#6b6b6b;line-height:1.6;margin:0">Use a stacked timeline when you need to show both each series' absolute value <em>and</em> their running total evolving over time. The visible headroom above the top band is a key affordance — if your values always sum to 100%, use a proportional variant and fill the chart completely. For pure share comparisons with no meaningful combined total, prefer the Simple Timeline. <span style="font-weight:600">Coming soon.</span></p>
   </div>
 
 </section>
@@ -6755,10 +6764,10 @@
   var XS    = [48, 180, 312, 445, 578, 710]; // SVG coordinate space
 
   var SERIES = [
-    { name:'booking.com',       color:'#b3a2e7', values:[30,32,28,33,35,31] },
-    { name:'expedia.co.uk',     color:'#64abfb', values:[22,20,24,22,21,25] },
-    { name:'hotels.com',        color:'#d47dd4', values:[18,19,21,20,19,22] },
-    { name:'tripadvisor.co.uk', color:'#e86492', values:[30,29,27,25,25,22] }
+    { name:'booking.com',       color:'#b3a2e7', values:[20,22,18,24,26,21] },
+    { name:'expedia.co.uk',     color:'#64abfb', values:[12,11,13,12,11,14] },
+    { name:'hotels.com',        color:'#d47dd4', values:[8, 9, 10,9, 8, 10] },
+    { name:'tripadvisor.co.uk', color:'#e86492', values:[13,12,11,10,11,9]  }
   ];
 
   function svgX(e) {
