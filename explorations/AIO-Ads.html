@@ -761,7 +761,7 @@
         <div id="cpt-tooltip" style="display:none;position:fixed;background:rgba(38,50,80,0.95);border-radius:6px;padding:8px 12px;pointer-events:none;z-index:9999;min-width:175px;"></div>
       </div>
       <!-- legend -->
-      <div id="cpt-legend" style="display:flex;flex-wrap:wrap;justify-content:center;gap:6px 14px;margin-top:12px;padding:0 4px 8px;"></div>
+      <div id="cpt-legend" style="display:flex;flex-wrap:wrap;justify-content:center;gap:2px 12px;margin-top:12px;padding:0 4px 8px;"></div>
     </div>
     </div><!-- end white card wrapper -->
     <!-- end Competitor Position Timeline card -->
@@ -2087,6 +2087,7 @@
   }
 
   var currentPos = 'above';
+  var hiddenSeries = {};  // ci → true when hidden
 
   function render(pos) {
     currentPos = pos;
@@ -2094,16 +2095,11 @@
     linesG.innerHTML = '';
 
     series.forEach(function(vals, ci) {
+      if (hiddenSeries[ci]) return; // skip hidden
       var col   = COLORS[ci];
       var linePath = buildPath(vals);
-      var fillPath = linePath + ' L'+X1+','+Y1+' L'+X0+','+Y1+' Z';
-      var gid = 'cpt-g'+ci;
-
-      // gradient def (append to svg defs or inline)
       var ns = 'http://www.w3.org/2000/svg';
       var g = document.createElementNS(ns, 'g');
-
-      // line
       var line = document.createElementNS(ns, 'path');
       line.setAttribute('d', linePath);
       line.setAttribute('fill', 'none');
@@ -2112,7 +2108,6 @@
       line.setAttribute('stroke-linecap', 'round');
       line.setAttribute('stroke-linejoin', 'round');
       line.dataset.ci = ci;
-
       g.appendChild(line);
       linesG.appendChild(g);
     });
@@ -2134,11 +2129,23 @@
     COMPETITORS.forEach(function(domain, ci) {
       var col = COLORS[ci];
       var item = document.createElement('div');
-      item.style.cssText = 'display:flex;align-items:center;gap:5px;font-family:\'Open Sans\',sans-serif;font-size:12px;font-weight:300;color:#38476a;white-space:nowrap;cursor:pointer;';
+      item.className = 'chart-legend-item' + (hiddenSeries[ci] ? ' csd-series--off' : '');
+      item.style.cssText = 'cursor:pointer;';
       item.dataset.ci = ci;
-      item.innerHTML = '<svg width="16" height="8" viewBox="0 0 16 8" style="flex-shrink:0"><line x1="0" y1="4" x2="16" y2="4" stroke="'+col+'" stroke-width="2" stroke-linecap="round"/></svg>'
-        + '<img src="https://www.google.com/s2/favicons?domain='+domain+'&sz=16" width="12" height="12" style="border-radius:2px;flex-shrink:0;">'
-        + '<span>'+domain+'</span>';
+      item.innerHTML =
+        '<img class="chart-legend-item__favicon" src="https://www.google.com/s2/favicons?domain='+domain+'&sz=16">'
+        + '<span class="chart-legend-item__dot" style="background:'+col+';"></span>'
+        + '<span class="chart-legend-item__label">'+domain+'</span>';
+      item.addEventListener('click', function() {
+        var idx = parseInt(item.dataset.ci);
+        if (hiddenSeries[idx]) {
+          delete hiddenSeries[idx];
+        } else {
+          hiddenSeries[idx] = true;
+        }
+        item.classList.toggle('csd-series--off');
+        render(currentPos); // redraw without the toggled series
+      });
       legend.appendChild(item);
     });
   }
