@@ -807,23 +807,16 @@
       <div style="padding:0 24px;">
 
         <!-- column headers -->
-        <div style="display:grid;grid-template-columns:200px 1fr 180px;gap:0;border-bottom:1px solid rgba(0,0,0,0.08);padding-bottom:8px;margin-bottom:2px;">
+        <div style="display:grid;grid-template-columns:200px 1fr 180px;gap:0;align-items:center;border-bottom:1px solid rgba(0,0,0,0.08);padding-bottom:8px;margin-bottom:2px;" id="clb-header">
           <span style="font-family:'Open Sans',sans-serif;font-size:11px;font-weight:600;color:#6477a2;text-transform:uppercase;letter-spacing:0.4px;">Competitor</span>
-          <div style="display:grid;grid-template-columns:1fr 52px 52px 52px;align-items:center;gap:8px;">
+          <div style="display:grid;grid-template-columns:1fr 68px 68px 68px;align-items:center;gap:16px;">
             <span style="font-family:'Open Sans',sans-serif;font-size:11px;font-weight:600;color:#6477a2;text-transform:uppercase;letter-spacing:0.4px;">Position mix</span>
-            <span style="font-family:'Open Sans',sans-serif;font-size:11px;font-weight:600;color:#8ac8b1;text-transform:uppercase;letter-spacing:0.4px;text-align:right;">Above</span>
-            <span style="font-family:'Open Sans',sans-serif;font-size:11px;font-weight:600;color:#b3a2e7;text-transform:uppercase;letter-spacing:0.4px;text-align:right;">Inside</span>
-            <span style="font-family:'Open Sans',sans-serif;font-size:11px;font-weight:600;color:#e86492;text-transform:uppercase;letter-spacing:0.4px;text-align:right;">Below</span>
+            <span class="clb-sort-col" data-col="above" style="font-family:'Open Sans',sans-serif;font-size:11px;font-weight:600;color:#8ac8b1;text-transform:uppercase;letter-spacing:0.4px;cursor:pointer;user-select:none;display:inline-flex;align-items:center;gap:3px;">Above<svg class="clb-sort-icon" width="10" height="12" viewBox="0 0 10 12" fill="none" style="opacity:0.7;flex-shrink:0;"><path d="M5 1v10M2 4l3-3 3 3M2 8l3 3 3-3" stroke="#6477a2" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            <span class="clb-sort-col" data-col="inside" style="font-family:'Open Sans',sans-serif;font-size:11px;font-weight:600;color:#b3a2e7;text-transform:uppercase;letter-spacing:0.4px;cursor:pointer;user-select:none;display:inline-flex;align-items:center;gap:3px;">Inside<svg class="clb-sort-icon" width="10" height="12" viewBox="0 0 10 12" fill="none" style="opacity:0.7;flex-shrink:0;"><path d="M5 1v10M2 4l3-3 3 3M2 8l3 3 3-3" stroke="#6477a2" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            <span class="clb-sort-col" data-col="below" style="font-family:'Open Sans',sans-serif;font-size:11px;font-weight:600;color:#e86492;text-transform:uppercase;letter-spacing:0.4px;cursor:pointer;user-select:none;display:inline-flex;align-items:center;gap:3px;">Below<svg class="clb-sort-icon" width="10" height="12" viewBox="0 0 10 12" fill="none" style="opacity:0.7;flex-shrink:0;"><path d="M5 1v10M2 4l3-3 3 3M2 8l3 3 3-3" stroke="#6477a2" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
           </div>
-          <div style="display:grid;grid-template-columns:1fr 20px;align-items:center;gap:8px;padding-left:20px;">
-            <span style="font-family:'Open Sans',sans-serif;font-size:11px;font-weight:600;color:#6477a2;text-transform:uppercase;letter-spacing:0.4px;">Est. AIO Impressions</span>
-            <div style="position:relative;display:inline-flex;" id="clb-imp-info-wrap">
-              <svg id="clb-imp-info-btn" width="13" height="13" viewBox="0 0 16 16" fill="none" style="cursor:pointer;flex-shrink:0;"><circle cx="8" cy="8" r="6.5" stroke="#3079bd" stroke-width="1.5"/><path d="M8 7v4.5M8 5.5v.5" stroke="#3079bd" stroke-width="1.5" stroke-linecap="round"/></svg>
-              <div id="clb-imp-info-tip" style="display:none;position:absolute;top:calc(100% + 6px);right:0;background:#fff;border-radius:8px;box-shadow:0 2px 14px rgba(0,0,0,0.15);padding:12px 14px;width:230px;z-index:500;font-family:'Open Sans',sans-serif;font-size:12px;color:rgba(0,0,0,0.7);line-height:1.5;">
-                <strong style="display:block;margin-bottom:4px;color:rgba(0,0,0,0.87);">Est. AIO Impressions</strong>
-                Estimated number of ad impressions delivered inside AI Overview results. Pending confirmation against production data. <span style="font-weight:600;">To be confirmed.</span>
-              </div>
-            </div>
+          <div style="padding-left:20px;">
+            <span class="clb-sort-col" data-col="impr" style="font-family:'Open Sans',sans-serif;font-size:11px;font-weight:600;color:#6477a2;text-transform:uppercase;letter-spacing:0.4px;cursor:pointer;user-select:none;display:inline-flex;align-items:center;gap:3px;">Est. AIO Impressions<svg class="clb-sort-icon" width="10" height="12" viewBox="0 0 10 12" fill="none" style="opacity:0.7;flex-shrink:0;"><path d="M5 1v10M2 8l3 3 3-3" stroke="#6477a2" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
           </div>
         </div>
 
@@ -2224,7 +2217,7 @@
 <script>
 // ── Competitor Leaderboard ────────────────────────────────────────────────
 (function(){
-  var ROWS = [
+  var DATA = [
     { domain:'amazon.com',      above:31, inside:22, below:18, impr:2840000 },
     { domain:'walmart.com',     above:27, inside:19, below:24, impr:2310000 },
     { domain:'target.com',      above:25, inside:21, below:20, impr:1970000 },
@@ -2240,8 +2233,9 @@
   var container = document.getElementById('clb-rows');
   if (!container) return;
 
-  // impression bar max (for scaling)
-  var maxImpr = Math.max.apply(null, ROWS.map(function(r){ return r.impr; }));
+  var maxImpr = Math.max.apply(null, DATA.map(function(r){ return r.impr; }));
+  var sortCol  = 'impr';
+  var sortDir  = 'desc'; // current sort
 
   function fmt(n) {
     if (n >= 1000000) return (n/1000000).toFixed(1) + 'M';
@@ -2249,48 +2243,90 @@
     return n;
   }
 
-  ROWS.forEach(function(row, i) {
-    var total = row.above + row.inside + row.below;
-    var pAbove  = (row.above  / total * 100).toFixed(1);
-    var pInside = (row.inside / total * 100).toFixed(1);
-    var pBelow  = (row.below  / total * 100).toFixed(1);
-    var imprPct = (row.impr / maxImpr * 100).toFixed(1);
-    var isLast  = i === ROWS.length - 1;
+  function pct(num, total) { return (num / total * 100).toFixed(1); }
 
-    var el = document.createElement('div');
-    el.style.cssText = 'display:grid;grid-template-columns:200px 1fr 180px;gap:0;align-items:center;padding:10px 0;'
-      + (isLast ? '' : 'border-bottom:1px solid rgba(0,0,0,0.05);');
+  function renderRows() {
+    // sort a copy
+    var rows = DATA.slice().sort(function(a, b) {
+      var va, vb;
+      if (sortCol === 'above' || sortCol === 'inside' || sortCol === 'below') {
+        var ta = a.above + a.inside + a.below;
+        var tb = b.above + b.inside + b.below;
+        va = ta ? a[sortCol] / ta : 0;
+        vb = tb ? b[sortCol] / tb : 0;
+      } else {
+        va = a[sortCol]; vb = b[sortCol];
+      }
+      return sortDir === 'desc' ? vb - va : va - vb;
+    });
 
-    // col 1 — competitor
-    var col1 = '<div style="display:flex;align-items:center;gap:8px;">'
-      + '<img src="https://www.google.com/s2/favicons?domain='+row.domain+'&sz=16" width="16" height="16" style="border-radius:3px;flex-shrink:0;">'
-      + '<span style="font-family:\'Open Sans\',sans-serif;font-size:13px;color:rgba(0,0,0,0.87);">'+row.domain+'</span>'
-      + '</div>';
+    container.innerHTML = '';
+    rows.forEach(function(row, i) {
+      var total   = row.above + row.inside + row.below;
+      var pAbove  = pct(row.above,  total);
+      var pInside = pct(row.inside, total);
+      var pBelow  = pct(row.below,  total);
+      var imprPct = (row.impr / maxImpr * 100).toFixed(1);
+      var isLast  = i === rows.length - 1;
 
-    // col 2 — stacked bar + pct values
-    var col2 = '<div style="display:grid;grid-template-columns:1fr 52px 52px 52px;align-items:center;gap:8px;">'
-      + '<div class="clb-mix-bar" style="height:8px;border-radius:200px;overflow:hidden;display:flex;background:#f0f2f7;cursor:default;"'
-      +   ' data-above="'+pAbove+'" data-inside="'+pInside+'" data-below="'+pBelow+'" data-domain="'+row.domain+'">'
-      +   '<div style="width:'+pAbove+'%;background:#8ac8b1;transition:width 600ms ease-out;height:100%;"></div>'
-      +   '<div style="width:'+pInside+'%;background:#b3a2e7;transition:width 600ms ease-out;height:100%;"></div>'
-      +   '<div style="width:'+pBelow+'%;background:#e86492;transition:width 600ms ease-out;height:100%;"></div>'
-      + '</div>'
-      + '<span style="font-family:\'Open Sans\',sans-serif;font-size:12px;color:#38476a;text-align:right;">'+pAbove+'%</span>'
-      + '<span style="font-family:\'Open Sans\',sans-serif;font-size:12px;color:#38476a;text-align:right;">'+pInside+'%</span>'
-      + '<span style="font-family:\'Open Sans\',sans-serif;font-size:12px;color:#38476a;text-align:right;">'+pBelow+'%</span>'
-      + '</div>';
+      var el = document.createElement('div');
+      el.style.cssText = 'display:grid;grid-template-columns:200px 1fr 180px;gap:0;align-items:center;padding:10px 0;'
+        + (isLast ? '' : 'border-bottom:1px solid rgba(0,0,0,0.05);');
 
-    // col 3 — impression bar + value (mirrors header: padding-left:20px, bar fills 1fr, value 44px)
-    var col3 = '<div style="display:grid;grid-template-columns:1fr 44px;align-items:center;gap:8px;padding-left:20px;">'
-      + '<div style="height:6px;border-radius:200px;background:#f0f2f7;overflow:hidden;">'
-      +   '<div style="width:'+imprPct+'%;height:100%;background:#64abfb;border-radius:200px;transition:width 700ms ease-out;"></div>'
-      + '</div>'
-      + '<span style="font-family:\'Open Sans\',sans-serif;font-size:12px;color:#38476a;text-align:right;">'+fmt(row.impr)+'</span>'
-      + '</div>';
+      var col1 = '<div style="display:flex;align-items:center;gap:8px;">'
+        + '<img src="https://www.google.com/s2/favicons?domain='+row.domain+'&sz=16" width="16" height="16" style="border-radius:3px;flex-shrink:0;">'
+        + '<span style="font-family:\'Open Sans\',sans-serif;font-size:13px;color:rgba(0,0,0,0.87);">'+row.domain+'</span>'
+        + '</div>';
 
-    el.innerHTML = col1 + col2 + col3;
-    container.appendChild(el);
+      var col2 = '<div style="display:grid;grid-template-columns:1fr 68px 68px 68px;align-items:center;gap:16px;">'
+        + '<div class="clb-mix-bar" style="height:8px;border-radius:200px;overflow:hidden;display:flex;background:#f0f2f7;cursor:default;"'
+        +   ' data-above="'+pAbove+'" data-inside="'+pInside+'" data-below="'+pBelow+'" data-domain="'+row.domain+'">'
+        +   '<div style="width:'+pAbove+'%;background:#8ac8b1;height:100%;"></div>'
+        +   '<div style="width:'+pInside+'%;background:#b3a2e7;height:100%;"></div>'
+        +   '<div style="width:'+pBelow+'%;background:#e86492;height:100%;"></div>'
+        + '</div>'
+        + '<span style="font-family:\'Open Sans\',sans-serif;font-size:12px;'+(sortCol==='above'?'color:#38476a;font-weight:600':'color:#38476a')+';text-align:left;">'+pAbove+'%</span>'
+        + '<span style="font-family:\'Open Sans\',sans-serif;font-size:12px;'+(sortCol==='inside'?'color:#38476a;font-weight:600':'color:#38476a')+';text-align:left;">'+pInside+'%</span>'
+        + '<span style="font-family:\'Open Sans\',sans-serif;font-size:12px;'+(sortCol==='below'?'color:#38476a;font-weight:600':'color:#38476a')+';text-align:left;">'+pBelow+'%</span>'
+        + '</div>';
+
+      var col3 = '<div style="display:grid;grid-template-columns:1fr 44px;align-items:center;gap:8px;padding-left:20px;">'
+        + '<div style="height:6px;border-radius:200px;background:#f0f2f7;overflow:hidden;">'
+        +   '<div style="width:'+imprPct+'%;height:100%;background:#64abfb;border-radius:200px;"></div>'
+        + '</div>'
+        + '<span style="font-family:\'Open Sans\',sans-serif;font-size:12px;color:#38476a;text-align:right;'+(sortCol==='impr'?'font-weight:600':'')+'">'+fmt(row.impr)+'</span>'
+        + '</div>';
+
+      el.innerHTML = col1 + col2 + col3;
+      container.appendChild(el);
+    });
+
+    // update sort icons in header
+    document.querySelectorAll('.clb-sort-col').forEach(function(el) {
+      var icon = el.querySelector('.clb-sort-icon');
+      if (!icon) return;
+      var isActive = el.dataset.col === sortCol;
+      icon.style.opacity = isActive ? '1' : '0.7';
+      
+      var SVG_BOTH = '<path d="M5 1v10M2 4l3-3 3 3M2 8l3 3 3-3" stroke="#6477a2" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>';      var SVG_DESC = '<path d="M5 1v10M2 8l3 3 3-3" stroke="#6477a2" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>';      var SVG_ASC  = '<path d="M5 1v10M2 4l3-3 3 3" stroke="#6477a2" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>';      icon.innerHTML = isActive ? (sortDir === 'desc' ? SVG_DESC : SVG_ASC) : SVG_BOTH;
+    });
+  }
+
+  // sort header click
+  document.querySelectorAll('.clb-sort-col').forEach(function(el) {
+    el.addEventListener('click', function() {
+      var col = el.dataset.col;
+      if (sortCol === col) {
+        sortDir = sortDir === 'desc' ? 'asc' : 'desc';
+      } else {
+        sortCol = col;
+        sortDir = 'desc';
+      }
+      renderRows();
+    });
   });
+
+  renderRows();
 
   // position mix bar hover tooltip
   var mixTip = document.getElementById('clb-mix-tip');
@@ -2329,20 +2365,6 @@
       }
     });
   }
-
-  // info tooltip — column header ⓘ (impression definition)
-  var infoBtn = document.getElementById('clb-imp-info-btn');
-  var infoTip = document.getElementById('clb-imp-info-tip');
-  if (infoBtn && infoTip) {
-    infoBtn.addEventListener('click', function(e){
-      e.stopPropagation();
-      infoTip.style.display = infoTip.style.display === 'none' ? 'block' : 'none';
-    });
-  }
-
-  document.addEventListener('click', function(){
-    if(infoTip) infoTip.style.display = 'none';
-  });
 })();
 </script>
 
