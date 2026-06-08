@@ -388,7 +388,7 @@
             <span id="scope-dd-label">Content Terms</span>
             <svg width="12" height="12" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 6l4 4 4-4" stroke="#2f78bd" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </button>
-          <div id="scope-dd-panel" style="display:none;position:absolute;top:calc(100% + 4px);right:0;background:#fff;border-radius:8px;box-shadow:0 2px 12px rgba(0,0,0,0.15);padding:4px;min-width:160px;z-index:500;">
+          <div id="scope-dd-panel" style="display:none;position:fixed;background:#fff;border-radius:8px;box-shadow:0 2px 12px rgba(0,0,0,0.15);padding:4px;min-width:160px;z-index:9999;">
             <div class="scope-dd-option scope-dd-option--selected" data-value="content" style="padding:8px 12px;border-radius:6px;font-size:13px;font-family:'Open Sans',sans-serif;cursor:pointer;background:#eaf2fc;color:#2f78bd;font-weight:600;">Content Terms</div>
             <div class="scope-dd-option" data-value="whole" style="padding:8px 12px;border-radius:6px;font-size:13px;font-family:'Open Sans',sans-serif;cursor:pointer;color:rgba(0,0,0,0.87);">Whole Market View</div>
           </div>
@@ -2753,7 +2753,12 @@
 
   btn.addEventListener('click', function(e){
     e.stopPropagation();
-    panel.style.display = panel.style.display === 'none' ? 'block' : 'none';
+    var isOpen = panel.style.display !== 'none';
+    if (isOpen) { panel.style.display = 'none'; return; }
+    var r = btn.getBoundingClientRect();
+    panel.style.top  = (r.bottom + 4) + 'px';
+    panel.style.left = (r.right - 160) + 'px';
+    panel.style.display = 'block';
   });
 
   panel.querySelectorAll('.scope-dd-option').forEach(function(opt){
