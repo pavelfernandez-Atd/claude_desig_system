@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Table Chart Template — Demo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body { background: #e4eef4; font-family: 'Open Sans', sans-serif; min-height: 100vh; display: flex; align-items: flex-start; justify-content: center; padding: 40px 24px; }
+.card { background: #fff; border-radius: 12px; box-shadow: 0 2px 12px rgba(0,0,0,0.08); padding: 24px 28px; width: 100%; max-width: 860px; }
+.card__title { font-size: 15px; font-weight: 700; color: #1a2540; margin-bottom: 20px; }
+
+/* ── table-chart-template.css ── */
+.tct { width:100%; font-family:var(--font-base, 'Open Sans', sans-serif); }
+.tct__header { display:grid; border-bottom:1px solid rgba(0,0,0,0.08); padding-bottom:8px; margin-bottom:2px; align-items:center; }
+.tct__col-label { font-size:11px; font-weight:600; color:#6477a2; text-transform:uppercase; letter-spacing:0.4px; }
+.tct__col-label--above  { color:#4a9e87; }
+.tct__col-label--inside { color:#7b65c9; }
+.tct__col-label--below  { color:#c73d6e; }
+.tct__col-label--sortable { cursor:pointer; user-select:none; display:inline-flex; align-items:center; gap:3px; }
+.tct__col-label--sortable:hover { opacity:0.8; }
+.tct__row { display:grid; align-items:center; padding:10px 0; border-bottom:1px solid rgba(0,0,0,0.05); }
+.tct__row:last-child { border-bottom:none; }
+.tct__competitor { display:flex; align-items:center; gap:8px; }
+.tct__competitor-favicon { width:16px; height:16px; border-radius:3px; flex-shrink:0; }
+.tct__competitor-label { font-size:13px; color:rgba(0,0,0,0.87); }
+.tct__mix { display:grid; align-items:center; gap:16px; }
+.tct__mix-bar { height:8px; border-radius:200px; overflow:hidden; display:flex; background:#f0f2f7; cursor:default; }
+.tct__mix-segment { height:100%; transition: opacity 0.15s; }
+.tct__mix-bar:hover .tct__mix-segment { opacity: 0.6; }
+.tct__mix-bar:hover .tct__mix-segment:hover { opacity: 1; }
+.tct__mix-val { font-size:12px; color:#38476a; }
+.tct__impr { display:grid; align-items:center; gap:8px; padding-left:20px; }
+.tct__impr-bar-wrap { height:6px; border-radius:200px; background:#f0f2f7; overflow:hidden; }
+.tct__impr-bar { height:100%; background:#64abfb; border-radius:200px; }
+.tct__impr-val { font-size:12px; color:#38476a; text-align:right; }
+.tct__sort-icon { flex-shrink:0; opacity:0.7; }
+.tct__sort-icon--active { opacity:1; }
+.tct__mix-val--active,
+.tct__impr-val--active { font-weight:700; color:#1a2540; }
+
+/* Tooltip */
+#tct-tip {
+  display: none;
+  position: fixed;
+  background: #1a2540;
+  color: #fff;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 12px;
+  border-radius: 6px;
+  padding: 8px 12px;
+  pointer-events: none;
+  z-index: 9999;
+  white-space: nowrap;
+  line-height: 1.6;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.18);
+}
+#tct-tip::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 5px solid transparent;
+  border-bottom: none;
+  border-top-color: #1a2540;
+}
+</style>
+</head>
+<body>
+
+<div class="card">
+  <div class="card__title">AIO Position Mix by Competitor</div>
+  <div class="tct" id="tct"></div>
+</div>
+
+<div id="tct-tip"></div>
+
+<script>
+const ROWS = [
+  { domain: 'amazon.com',    above: 31, inside: 22, below: 18, impr: 2840000 },
+  { domain: 'walmart.com',   above: 24, inside: 31, below: 14, impr: 2210000 },
+  { domain: 'target.com',    above: 19, inside: 27, below: 21, impr: 1870000 },
+  { domain: 'bestbuy.com',   above: 14, inside: 18, below: 29, impr: 1540000 },
+  { domain: 'homedepot.com', above: 22, inside: 15, below: 11, impr: 1320000 },
+  { domain: 'chewy.com',     above: 11, inside: 33, below: 9,  impr: 980000  },
+  { domain: 'macys.com',     above: 8,  inside: 20, below: 24, impr: 870000  },
+  { domain: 'lowes.com',     above: 17, inside: 12, below: 16, impr: 760000  },
+  { domain: 'sharkninja.com',above: 6,  inside: 9,  below: 31, impr: 540000  },
+  { domain: 'qvc.com',       above: 4,  inside: 14, below: 22, impr: 380000  },
+];
+
+const COL_GRID = '200px 1fr 180px';
+const MIX_GRID = '1fr 68px 68px 68px';
+const IMPR_GRID = '1fr 44px';
+
+const COLORS = { above: '#8ac8b1', inside: '#b3a2e7', below: '#e86492' };
+
+let sortKey = 'impr';
+let sortDir = -1; // -1 = desc, 1 = asc
+
+function fmt(n) {
+  if (n >= 1e6) return (n / 1e6).toFixed(1).replace(/\.0$/, '') + 'M';
+  if (n >= 1e3) return (n / 1e3).toFixed(0) + 'K';
+  return String(n);
+}
+
+function sortIcon(key) {
+  if (key !== sortKey) return '<svg class="tct__sort-icon" width="10" height="10" viewBox="0 0 10 10"><path d="M5 2l3 3H2zM5 8L2 5h6z" fill="currentColor"/></svg>';
+  return sortDir === -1
+    ? '<svg class="tct__sort-icon tct__sort-icon--active" width="10" height="10" viewBox="0 0 10 10"><path d="M5 8L2 5h6z" fill="currentColor"/></svg>'
+    : '<svg class="tct__sort-icon tct__sort-icon--active" width="10" height="10" viewBox="0 0 10 10"><path d="M5 2l3 3H2z" fill="currentColor"/></svg>';
+}
+
+function render() {
+  const sorted = [...ROWS].sort((a, b) => {
+    const av = sortKey === 'impr' ? a.impr : a[sortKey];
+    const bv = sortKey === 'impr' ? b.impr : b[sortKey];
+    return (bv - av) * (sortDir === -1 ? 1 : -1);
+  });
+
+  const maxImpr = Math.max(...ROWS.map(r => r.impr));
+
+  const tct = document.getElementById('tct');
+  tct.innerHTML = `
+    <div class="tct__header" style="grid-template-columns:${COL_GRID};">
+      <span class="tct__col-label">Competitor</span>
+      <div class="tct__mix" style="grid-template-columns:${MIX_GRID};gap:16px;">
+        <span class="tct__col-label">Position mix</span>
+        <span class="tct__col-label tct__col-label--above tct__col-label--sortable" data-sort="above">Above${sortIcon('above')}</span>
+        <span class="tct__col-label tct__col-label--inside tct__col-label--sortable" data-sort="inside">Inside${sortIcon('inside')}</span>
+        <span class="tct__col-label tct__col-label--below tct__col-label--sortable" data-sort="below">Below${sortIcon('below')}</span>
+      </div>
+      <div class="tct__impr" style="grid-template-columns:${IMPR_GRID};padding-left:20px;gap:8px;align-items:center;">
+        <span class="tct__col-label tct__col-label--sortable" data-sort="impr" style="display:inline-flex;align-items:center;gap:3px;">Est. AIO Impressions${sortIcon('impr')}</span>
+        <span></span>
+      </div>
+    </div>
+    <div id="tct-rows"></div>
+  `;
+
+  const rowsEl = document.getElementById('tct-rows');
+  sorted.forEach(row => {
+    const total = row.above + row.inside + row.below;
+    const pct = k => total > 0 ? ((row[k] / total) * 100).toFixed(1) : '0.0';
+    const w = k => total > 0 ? (row[k] / total * 100) + '%' : '0%';
+    const imprPct = (row.impr / maxImpr * 100).toFixed(1) + '%';
+
+    const isActiveCol = key => sortKey === key ? '--active' : '';
+
+    const div = document.createElement('div');
+    div.className = 'tct__row';
+    div.style.gridTemplateColumns = COL_GRID;
+    div.innerHTML = `
+      <div class="tct__competitor">
+        <img class="tct__competitor-favicon"
+             src="https://www.google.com/s2/favicons?sz=32&domain=${row.domain}"
+             alt="" onerror="this.style.opacity='0'">
+        <span class="tct__competitor-label">${row.domain}</span>
+      </div>
+      <div class="tct__mix" style="grid-template-columns:${MIX_GRID};gap:16px;">
+        <div class="tct__mix-bar"
+             data-above="${row.above}" data-inside="${row.inside}" data-below="${row.below}" data-total="${total}">
+          <div class="tct__mix-segment" style="width:${w('above')};background:${COLORS.above};" data-seg="above"></div>
+          <div class="tct__mix-segment" style="width:${w('inside')};background:${COLORS.inside};" data-seg="inside"></div>
+          <div class="tct__mix-segment" style="width:${w('below')};background:${COLORS.below};" data-seg="below"></div>
+        </div>
+        <span class="tct__mix-val${isActiveCol('above')}">${pct('above')}%</span>
+        <span class="tct__mix-val${isActiveCol('inside')}">${pct('inside')}%</span>
+        <span class="tct__mix-val${isActiveCol('below')}">${pct('below')}%</span>
+      </div>
+      <div class="tct__impr" style="grid-template-columns:${IMPR_GRID};padding-left:20px;gap:8px;align-items:center;">
+        <div class="tct__impr-bar-wrap">
+          <div class="tct__impr-bar" style="width:${imprPct};"></div>
+        </div>
+        <span class="tct__impr-val${isActiveCol('impr')}">${fmt(row.impr)}</span>
+      </div>
+    `;
+    rowsEl.appendChild(div);
+  });
+
+  // Sort click handlers
+  tct.querySelectorAll('[data-sort]').forEach(el => {
+    el.addEventListener('click', () => {
+      const key = el.dataset.sort;
+      if (sortKey === key) {
+        sortDir *= -1;
+      } else {
+        sortKey = key;
+        sortDir = -1;
+      }
+      render();
+    });
+  });
+
+  // Tooltip
+  const tip = document.getElementById('tct-tip');
+  tct.querySelectorAll('.tct__mix-bar').forEach(bar => {
+    bar.addEventListener('mousemove', e => {
+      const seg = e.target.closest('[data-seg]');
+      const above = +bar.dataset.above;
+      const inside = +bar.dataset.inside;
+      const below = +bar.dataset.below;
+      const total = +bar.dataset.total;
+      const pa = total > 0 ? (above/total*100).toFixed(1) : '0.0';
+      const pi = total > 0 ? (inside/total*100).toFixed(1) : '0.0';
+      const pb = total > 0 ? (below/total*100).toFixed(1) : '0.0';
+      const highlight = seg ? seg.dataset.seg : null;
+      tip.innerHTML = [
+        `<span style="color:${highlight==='above'?'#8ac8b1':'rgba(255,255,255,0.7)'}">▲ Above &nbsp; ${pa}%</span>`,
+        `<span style="color:${highlight==='inside'?'#b3a2e7':'rgba(255,255,255,0.7)'}">◆ Inside &nbsp; ${pi}%</span>`,
+        `<span style="color:${highlight==='below'?'#e86492':'rgba(255,255,255,0.7)'}">▼ Below &nbsp; ${pb}%</span>`,
+      ].join('<br>');
+      tip.style.display = 'block';
+      const tw = tip.offsetWidth;
+      const th = tip.offsetHeight;
+      tip.style.left = Math.min(e.clientX - tw/2, window.innerWidth - tw - 8) + 'px';
+      tip.style.top  = (e.clientY - th - 12) + 'px';
+    });
+    bar.addEventListener('mouseleave', () => { tip.style.display = 'none'; });
+  });
+}
+
+render();
+</script>
+</body>
+</html>
