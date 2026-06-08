@@ -1,0 +1,8 @@
+.hbar { width:100%; }
+.hbar__svg { width:100%; display:block; overflow:hidden; }
+.hbar__bar { cursor:pointer; transition:opacity 0.1s; }
+.hbar__bar:hover { opacity:0.82; }
+.hbar__bar--grouped { cursor:default; }
+.hbar__group-hl { transition:fill-opacity 0.1s; }
+.hbar__group-hit { cursor:pointer; }
+.hbar__tooltip { position:fixed; background:rgba(38,50,80,0.95); color:#fff; border-radius:6px; padding:8px 12px; font-family:var(--font-base,'Open Sans',sans-serif); font-size:12px; pointer-events:none; z-index:9999; display:none; min-width:175px; }
