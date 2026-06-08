@@ -366,46 +366,44 @@
       </div>
 
       <!-- Row 2: Tab navigation -->
-      <div class="service-bar__tabs" style="display:flex;align-items:center;justify-content:space-between;width:100%;">
-        <div style="display:flex;align-items:center;">
-          <div class="tab-item">Summary</div>
-          <div class="tab-item">Impact</div>
-          <div class="tab-item">Content</div>
-          <div class="tab-item tab-item--active">Ads</div>
-          <div class="tab-item">
-            <span class="tab-item__icon">
-              <svg width="10" height="14" viewBox="0 0 10 14" fill="none" aria-hidden="true">
-                <path d="M6 1L1 8h4l-1 5 5-7H5l1-5z" fill="#858585" stroke="#858585" stroke-width="0.5" stroke-linejoin="round"/>
-              </svg>
-            </span>
-            Signals
-          </div>
-        </div>
-        <!-- Data scope dropdown -->
-        <div style="position:relative;display:inline-flex;margin-left:auto;" id="scope-dd-wrap">
-          <button id="scope-dd-btn" style="height:28px;padding:0 12px;font-size:12px;border-radius:200px;border:1px solid transparent;background:#dbe9f6;color:#3079bd;font-weight:600;display:inline-flex;align-items:center;gap:5px;cursor:pointer;font-family:'Open Sans',sans-serif;white-space:nowrap;">
-            <svg width="12" height="12" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2 4h12M4 8h8M6 12h4" stroke="#3079bd" stroke-width="1.5" stroke-linecap="round"/></svg>
-            <span id="scope-dd-label">Content Terms</span>
-            <svg width="12" height="12" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 6l4 4 4-4" stroke="#3079bd" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </button>
-          <div id="scope-dd-panel" style="display:none;position:fixed;background:#fff;border-radius:8px;box-shadow:0 2px 12px rgba(0,0,0,0.15);padding:4px;min-width:160px;z-index:9999;">
-            <div class="scope-dd-option scope-dd-option--selected" data-value="content" style="padding:8px 12px;border-radius:6px;font-size:13px;font-family:'Open Sans',sans-serif;cursor:pointer;background:#eaf2fc;color:#2f78bd;font-weight:600;">Content Terms</div>
-            <div class="scope-dd-option" data-value="whole" style="padding:8px 12px;border-radius:6px;font-size:13px;font-family:'Open Sans',sans-serif;cursor:pointer;color:rgba(0,0,0,0.87);">Whole Market View</div>
-          </div>
+      <div class="service-bar__tabs">
+        <div class="tab-item">Summary</div>
+        <div class="tab-item">Impact</div>
+        <div class="tab-item">Content</div>
+        <div class="tab-item tab-item--active">Ads</div>
+        <div class="tab-item">
+          <span class="tab-item__icon">
+            <svg width="10" height="14" viewBox="0 0 10 14" fill="none" aria-hidden="true">
+              <path d="M6 1L1 8h4l-1 5 5-7H5l1-5z" fill="#858585" stroke="#858585" stroke-width="0.5" stroke-linejoin="round"/>
+            </svg>
+          </span>
+          Signals
         </div>
       </div>
 
       <!-- Row 3: Filter bar -->
       <div class="service-bar__filters">
         <div class="service-bar__filter-row">
+          <!-- Data scope dropdown — first element -->
+          <div style="position:relative;display:inline-flex;" id="scope-dd-wrap">
+            <button id="scope-dd-btn" style="height:32px;padding:0 12px;font-size:13px;border-radius:8px;border:1px solid transparent;background:#dbe9f6;color:#3079bd;font-weight:600;display:inline-flex;align-items:center;gap:5px;cursor:pointer;font-family:'Open Sans',sans-serif;white-space:nowrap;">
+              <svg width="12" height="12" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2 4h12M4 8h8M6 12h4" stroke="#3079bd" stroke-width="1.5" stroke-linecap="round"/></svg>
+              <span id="scope-dd-label">Content Terms</span>
+              <svg width="12" height="12" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 6l4 4 4-4" stroke="#3079bd" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+            <div id="scope-dd-panel" style="display:none;position:fixed;background:#fff;border-radius:8px;box-shadow:0 2px 12px rgba(0,0,0,0.15);padding:4px;min-width:160px;z-index:9999;">
+              <div class="scope-dd-option scope-dd-option--selected" data-value="content" style="padding:8px 12px;border-radius:6px;font-size:13px;font-family:'Open Sans',sans-serif;cursor:pointer;background:#eaf2fc;color:#2f78bd;font-weight:600;">Content Terms</div>
+              <div class="scope-dd-option" data-value="whole" style="padding:8px 12px;border-radius:6px;font-size:13px;font-family:'Open Sans',sans-serif;cursor:pointer;color:rgba(0,0,0,0.87);">Whole Market View</div>
+            </div>
+          </div>
           <button class="service-bar__filter-btn">
-            Content Search Terms Groups
+            Search Terms Groups
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
               <path d="M4 6l4 4 4-4" stroke="#2f78bd" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
           </button>
           <button class="service-bar__filter-btn">
-            Content Search Terms
+            Search Terms
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
               <path d="M4 6l4 4 4-4" stroke="#2f78bd" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
