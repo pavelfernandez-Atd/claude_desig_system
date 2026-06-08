@@ -383,7 +383,7 @@
         </div>
         <!-- Data scope dropdown -->
         <div style="position:relative;display:inline-flex;margin-left:auto;" id="scope-dd-wrap">
-          <button id="scope-dd-btn" style="height:28px;padding:0 10px;font-size:12px;border-radius:6px;border:1px solid rgba(0,0,0,0.15);background:#fff;color:#2f78bd;font-weight:600;display:inline-flex;align-items:center;gap:5px;cursor:pointer;font-family:'Open Sans',sans-serif;white-space:nowrap;">
+          <button id="scope-dd-btn" style="height:28px;padding:0 12px;font-size:12px;border-radius:200px;border:1px solid rgba(0,0,0,0.15);background:#fff;color:#2f78bd;font-weight:600;display:inline-flex;align-items:center;gap:5px;cursor:pointer;font-family:'Open Sans',sans-serif;white-space:nowrap;">
             <svg width="12" height="12" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2 4h12M4 8h8M6 12h4" stroke="#2f78bd" stroke-width="1.5" stroke-linecap="round"/></svg>
             <span id="scope-dd-label">Content Terms</span>
             <svg width="12" height="12" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 6l4 4 4-4" stroke="#2f78bd" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -752,6 +752,20 @@
             </div>
           </div>
         </div>
+        <!-- Chart mode selector — next to filter -->
+        <div style="display:inline-flex;align-items:center;gap:4px;">
+          <span style="font-family:'Open Sans',sans-serif;font-size:12px;color:#496f97;white-space:nowrap;">Chart mode</span>
+          <button id="cpt-mode-lines" aria-label="Lines chart" title="Lines" style="width:30px;height:30px;border-radius:6px;border:none;background:#5bb3f9;display:inline-flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;">
+            <svg width="12" height="11" viewBox="0 0 11.2 9.8" fill="none" aria-hidden="true" style="overflow:visible;">
+              <path d="M1.05 0.525V8.225C1.05 8.531 1.269 8.75 1.575 8.75H10.675C10.959 8.75 11.2 8.991 11.2 9.275C11.2 9.581 10.959 9.8 10.675 9.8H1.575C0.7 9.8 0 9.1 0 8.225V0.525C0 0.241 0.219 0 0.525 0C0.809 0 1.05 0.241 1.05 0.525ZM10.347 2.997L7.35 5.972C7.153 6.191 6.825 6.191 6.628 5.972L4.9 4.244L3.172 5.972C2.953 6.191 2.625 6.191 2.428 5.972C2.209 5.775 2.209 5.447 2.428 5.25L4.528 3.15C4.616 3.041 4.747 2.997 4.9 2.997C5.031 2.997 5.163 3.041 5.272 3.15L7 4.878L9.603 2.275C9.8 2.056 10.128 2.056 10.347 2.275C10.544 2.472 10.544 2.8 10.347 2.997Z" fill="white"/>
+            </svg>
+          </button>
+          <button id="cpt-mode-stacked" aria-label="Stacked chart" title="Stacked" style="width:30px;height:30px;border-radius:6px;border:none;background:transparent;display:inline-flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;">
+            <svg width="12" height="11" viewBox="0 0 11.1992 9.95508" fill="none" aria-hidden="true" style="overflow:visible;">
+              <path id="cpt-stacked-icon-path" d="M0.524 0C0.809 0 1.05 0.244 1.05 0.533V8.355C1.05 8.666 1.268 8.889 1.574 8.889H10.675C10.959 8.889 11.199 9.133 11.199 9.422C11.199 9.733 10.959 9.955 10.675 9.955H1.574C0.699 9.955 0 9.244 0 8.355V0.533C0 0.244 0.218 0 0.524 0ZM9.561 1.423C9.784 1.185 10.156 1.185 10.404 1.423C10.627 1.637 10.571 2.064 10.571 2.207V6.844H1.866V4.799L4.432 2.374C4.531 2.255 4.68 2.207 4.854 2.207C5.002 2.207 5.151 2.255 5.274 2.374L7.233 4.252L9.561 1.423Z" fill="#496f97"/>
+            </svg>
+          </button>
+        </div>
         <div style="width:1px;height:20px;background:rgba(0,0,0,0.12);flex-shrink:0;margin:0 4px;"></div>
         <button class="card-header__action-btn" aria-label="Download">
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 2v8M5.5 8l2.5 2.5L10.5 8M3 13h10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -782,20 +796,6 @@
       </div>
     </div>
 
-    <!-- Sub-row: Chart mode — right aligned -->
-    <div style="display:flex;justify-content:flex-end;align-items:center;gap:4px;padding:0 24px 0;">
-      <span style="font-family:'Open Sans',sans-serif;font-size:12px;color:#496f97;white-space:nowrap;">Chart mode</span>
-      <button id="cpt-mode-lines" aria-label="Lines chart" title="Lines" style="width:30px;height:30px;border-radius:6px;border:none;background:#5bb3f9;display:inline-flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;">
-        <svg width="12" height="11" viewBox="0 0 11.2 9.8" fill="none" aria-hidden="true" style="overflow:visible;">
-          <path d="M1.05 0.525V8.225C1.05 8.531 1.269 8.75 1.575 8.75H10.675C10.959 8.75 11.2 8.991 11.2 9.275C11.2 9.581 10.959 9.8 10.675 9.8H1.575C0.7 9.8 0 9.1 0 8.225V0.525C0 0.241 0.219 0 0.525 0C0.809 0 1.05 0.241 1.05 0.525ZM10.347 2.997L7.35 5.972C7.153 6.191 6.825 6.191 6.628 5.972L4.9 4.244L3.172 5.972C2.953 6.191 2.625 6.191 2.428 5.972C2.209 5.775 2.209 5.447 2.428 5.25L4.528 3.15C4.616 3.041 4.747 2.997 4.9 2.997C5.031 2.997 5.163 3.041 5.272 3.15L7 4.878L9.603 2.275C9.8 2.056 10.128 2.056 10.347 2.275C10.544 2.472 10.544 2.8 10.347 2.997Z" fill="white"/>
-        </svg>
-      </button>
-      <button id="cpt-mode-stacked" aria-label="Stacked chart" title="Stacked" style="width:30px;height:30px;border-radius:6px;border:none;background:transparent;display:inline-flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;">
-        <svg width="12" height="11" viewBox="0 0 11.1992 9.95508" fill="none" aria-hidden="true" style="overflow:visible;">
-          <path id="cpt-stacked-icon-path" d="M0.524 0C0.809 0 1.05 0.244 1.05 0.533V8.355C1.05 8.666 1.268 8.889 1.574 8.889H10.675C10.959 8.889 11.199 9.133 11.199 9.422C11.199 9.733 10.959 9.955 10.675 9.955H1.574C0.699 9.955 0 9.244 0 8.355V0.533C0 0.244 0.218 0 0.524 0ZM9.561 1.423C9.784 1.185 10.156 1.185 10.404 1.423C10.627 1.637 10.571 2.064 10.571 2.207V6.844H1.866V4.799L4.432 2.374C4.531 2.255 4.68 2.207 4.854 2.207C5.002 2.207 5.151 2.255 5.274 2.374L7.233 4.252L9.561 1.423Z" fill="#496f97"/>
-        </svg>
-      </button>
-    </div>
 
     <!-- chart + legend -->
     <div style="padding:0 24px 24px;margin-top:-12px;">
