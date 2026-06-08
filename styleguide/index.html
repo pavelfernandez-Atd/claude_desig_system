@@ -1097,6 +1097,13 @@
     .timeline-chart__tooltip { position:fixed; background:rgba(38,50,80,0.95); border-radius:6px; padding:8px 12px; pointer-events:none; z-index:9999; min-width:175px; display:none; }
     .timeline-chart__legend { display:flex; flex-wrap:wrap; justify-content:center; gap:2px 12px; margin-top:12px; padding:0 4px 8px; }
 
+    /* === Horizontal Bars Chart (.hbar) === */
+    .hbar { width:100%; }
+    .hbar__svg { width:100%; display:block; overflow:hidden; }
+    .hbar__bar { cursor:pointer; transition:opacity 0.1s; }
+    .hbar__bar:hover { opacity:0.82; }
+    .hbar__tooltip { position:fixed; background:rgba(38,50,80,0.95); color:#fff; border-radius:6px; padding:8px 12px; font-family:var(--font-base); font-size:12px; pointer-events:none; z-index:9999; display:none; min-width:160px; }
+
     /* === Table Chart Template (.tct) === */
     .tct { width:100%; font-family:var(--font-base); }
     .tct__header { display:grid; border-bottom:1px solid rgba(0,0,0,0.08); padding-bottom:8px; margin-bottom:2px; align-items:center; }
@@ -2723,15 +2730,17 @@
       <div class="comp-sidebar-group" data-group="charts" style="display:none">
         <div class="comp-sidebar-caption">Timelines</div>
         <a class="comp-sidebar-link" data-component="timeline-chart" style="cursor:pointer">Timeline Chart</a>
-        <a class="comp-sidebar-link" data-component="simple-timeline" style="cursor:pointer">Simple Timeline</a>
-        <a class="comp-sidebar-link" data-component="stacked-timeline" style="cursor:pointer">Stacked Timeline</a>
+        <a class="comp-sidebar-link" data-component="simple-timeline" style="cursor:pointer">Dotted Timeline Chart</a>
+        <a class="comp-sidebar-link" data-component="stacked-timeline" style="cursor:pointer">Stacked Lines Chart</a>
         <a class="comp-sidebar-link" data-component="multi-chart-lines" style="cursor:pointer">Multi-Chart Lines</a>
         <div class="comp-sidebar-divider"></div>
         <div class="comp-sidebar-caption">Bars</div>
         <a class="comp-sidebar-link" data-component="vertical-bars-chart" style="cursor:pointer">Vertical Bars Chart</a>
         <a class="comp-sidebar-link" data-component="vertical-stacked-bars-chart" style="cursor:pointer">Vertical Stacked Bars Chart</a>
+        <a class="comp-sidebar-link" data-component="horizontal-bars-chart" style="cursor:pointer">Horizontal Bars Chart</a>
+        <a class="comp-sidebar-link" data-component="multi-series-horizontal-bars-chart" style="cursor:pointer">Multi-Series Horizontal Bars Chart</a>
         <a class="comp-sidebar-link" data-component="gradient-bar-chart" style="cursor:pointer">Gradient Bar Chart</a>
-        <a class="comp-sidebar-link" data-component="inline-bars-chart" style="cursor:pointer">Inline Bars Chart</a>
+        <a class="comp-sidebar-link" data-component="inline-bars-chart" style="cursor:pointer">Segmented Bars Chart</a>
         <div class="comp-sidebar-divider"></div>
         <div class="comp-sidebar-caption">Donuts</div>
         <a class="comp-sidebar-link" data-component="donut-chart" style="cursor:pointer">Donut Chart</a>
@@ -5760,13 +5769,13 @@
                   <div class="dw-settings-option__radio"></div>Bars · Multi-Series
                 </div>
                 <div class="dw-settings-option" data-group="vis" data-value="stacked-timeline">
-                  <div class="dw-settings-option__radio"></div>Stacked Timeline
+                  <div class="dw-settings-option__radio"></div>Stacked Lines Chart
                 </div>
                 <div class="dw-settings-option" data-group="vis" data-value="donut">
                   <div class="dw-settings-option__radio"></div>Donut Chart
                 </div>
                 <div class="dw-settings-option" data-group="vis" data-value="simple-timeline">
-                  <div class="dw-settings-option__radio"></div>Simple Timeline
+                  <div class="dw-settings-option__radio"></div>Dotted Timeline
                 </div>
                 <div class="dw-settings-option" data-group="vis" data-value="single-series-bars">
                   <div class="dw-settings-option__radio"></div>Bars · Single Series
@@ -5889,7 +5898,7 @@
 
           <!-- Variant: Stacked Timeline -->
           <div class="dw-variant-card">
-            <div style="font-size:10px;font-weight:600;color:#858585;letter-spacing:0.4px;text-transform:uppercase;margin-bottom:8px">Stacked Timeline</div>
+            <div style="font-size:10px;font-weight:600;color:#858585;letter-spacing:0.4px;text-transform:uppercase;margin-bottom:8px">Stacked Lines Chart</div>
             <div style="background:#e5eef5;border-radius:12px;padding:24px">
               <div class="dw-card">
 
@@ -5999,7 +6008,7 @@
 
           <!-- Variant: Simple Timeline -->
           <div class="dw-variant-card">
-            <div style="font-size:10px;font-weight:600;color:#858585;letter-spacing:0.4px;text-transform:uppercase;margin-bottom:8px">Simple Timeline</div>
+            <div style="font-size:10px;font-weight:600;color:#858585;letter-spacing:0.4px;text-transform:uppercase;margin-bottom:8px">Dotted Timeline Chart</div>
             <div style="background:#e5eef5;border-radius:12px;padding:24px">
               <div class="dw-card">
 
@@ -6515,7 +6524,7 @@
             <div style="display:flex;align-items:flex-start;gap:8px">
               <span style="font-size:11px;font-weight:700;color:#fff;background:#3079bd;border-radius:50%;width:18px;height:18px;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0">B</span>
               <div>
-                <div style="font-size:12px;font-weight:600;color:#27365b">Stacked Timeline</div>
+                <div style="font-size:12px;font-weight:600;color:#27365b">Stacked Lines Chart</div>
                 <div style="font-size:11px;color:#858585">.stacked-timeline — SVG chart<br>+ legend below</div>
               </div>
             </div>
@@ -7413,7 +7422,7 @@
       <div class="comp-panel" id="comp-panel-inline-bars-chart" style="display:none">
 <section id="inline-bars-chart">
   <div class="section-header">
-    <h2>Inline Bars Chart</h2>
+    <h2>Segmented Bars Chart</h2>
     <div class="divider"></div>
   </div>
   <p style="font-size:13px;color:var(--text-secondary-var);margin-bottom:24px">Stacked proportional bar rows used to compare category distributions across two entities (e.g. You vs. Competitors Avg.). Each row shows a label, a pill-capped bar strip with coloured segments and inline percentages, and a shared legend. Hover reveals a breakdown tooltip with a "View Samples" action.</p>
@@ -8409,7 +8418,7 @@
       <div class="comp-panel" id="comp-panel-simple-timeline" style="display:none">
 <section id="simple-timeline">
   <div class="section-header">
-    <h2>Simple Timeline</h2>
+    <h2>Dotted Timeline Chart</h2>
     <div class="divider"></div>
   </div>
   <p style="font-size:13px;color:var(--text-secondary-var);margin-bottom:24px">A multi-series percentage line chart across a date range. Each series is a polyline with data-point dots. One series — typically your brand — uses a dashed stroke and a translucent area fill to stand out from competitors. Uses the DS chart colour palette.</p>
@@ -8550,25 +8559,38 @@
      would block a tooltip nested inside the hidden panel). */
   var tip = document.createElement('div');
   tip.style.cssText = 'position:fixed;background:#38476a;color:#fff;border-radius:6px;padding:8px 12px;font-family:\'Open Sans\',Helvetica,sans-serif;font-size:12px;pointer-events:none;z-index:9999;white-space:nowrap;display:none;box-shadow:0 2px 8px rgba(0,0,0,0.2)';
-  var series = document.createElement('span');
-  series.style.cssText = 'display:block;font-weight:600;font-size:11px;margin-bottom:2px';
+  // series row: favicon + dot + name
+  var seriesRow = document.createElement('div');
+  seriesRow.style.cssText = 'display:flex;align-items:center;gap:5px;font-weight:600;font-size:11px;margin-bottom:4px;';
+  var favicon = document.createElement('img');
+  favicon.width = 11; favicon.height = 11;
+  favicon.style.cssText = 'border-radius:2px;flex-shrink:0;';
+  var dot = document.createElement('span');
+  dot.style.cssText = 'width:8px;height:8px;border-radius:50%;flex-shrink:0;display:inline-block;';
+  var seriesName = document.createElement('span');
+  seriesRow.appendChild(favicon);
+  seriesRow.appendChild(dot);
+  seriesRow.appendChild(seriesName);
   var val = document.createElement('span');
-  val.style.cssText = 'display:block;font-size:12px;opacity:0.9';
-  tip.appendChild(series);
+  val.style.cssText = 'display:block;font-size:12px;opacity:0.9;padding-left:2px';
+  tip.appendChild(seriesRow);
   tip.appendChild(val);
   document.body.appendChild(tip);
 
   document.querySelectorAll('.simple-timeline__svg circle[data-series]').forEach(function(c){
     c.addEventListener('mouseenter', function(e){
-      series.textContent = c.dataset.series;
-      val.textContent    = c.dataset.value + ' · ' + c.dataset.date;
-      tip.style.display  = 'block';
-      tip.style.left     = (e.clientX + 14) + 'px';
-      tip.style.top      = (e.clientY - 42) + 'px';
+      var domain = c.dataset.series;
+      favicon.src = 'https://www.google.com/s2/favicons?domain=' + domain + '&sz=16';
+      dot.style.background = c.getAttribute('fill') || '#fff';
+      seriesName.textContent = domain;
+      val.textContent = c.dataset.value + ' · ' + c.dataset.date;
+      tip.style.display = 'block';
+      tip.style.left    = (e.clientX + 14) + 'px';
+      tip.style.top     = (e.clientY - 48) + 'px';
     });
     c.addEventListener('mousemove', function(e){
       tip.style.left = (e.clientX + 14) + 'px';
-      tip.style.top  = (e.clientY - 42) + 'px';
+      tip.style.top  = (e.clientY - 48) + 'px';
     });
     c.addEventListener('mouseleave', function(){ tip.style.display = 'none'; });
   });
@@ -8582,7 +8604,7 @@
     <h2>ChartSet Donut+Lines</h2>
     <div class="divider"></div>
   </div>
-  <p style="font-size:13px;color:var(--text-secondary-var);margin-bottom:24px">A combined chart panel: a Donut Chart showing current share distribution, a Chart Legend Item list labelling each series with a favicon, and a Simple Timeline filling the remaining width showing how those shares evolved over time. All three share the same 10 series and colour assignments.</p>
+  <p style="font-size:13px;color:var(--text-secondary-var);margin-bottom:24px">A combined chart panel: a Donut Chart showing current share distribution, a Chart Legend Item list labelling each series with a favicon, and a Dotted Timeline Chart filling the remaining width showing how those shares evolved over time. All three share the same 10 series and colour assignments.</p>
 
   <!-- GitHub + Demo links -->
   <div style="display:flex;gap:8px;margin-bottom:24px;flex-wrap:wrap">
@@ -8877,7 +8899,7 @@
 </style>
 <section id="stacked-timeline">
   <div class="section-header">
-    <h2>Stacked Timeline</h2>
+    <h2>Stacked Lines Chart</h2>
     <div class="divider"></div>
   </div>
   <p style="font-size:13px;color:var(--text-secondary-var);margin-bottom:24px">A 100% stacked area chart showing how multiple series divide a whole over time. Each band represents one series' proportional share; all bands together always fill the full scale. Hover anywhere on the chart to see all series values for that date.</p>
@@ -9224,7 +9246,7 @@
     <div style="width:28px;height:28px;background:#b1d1f6;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0">
       <svg width="18" height="18" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M10.0156 3.5C7.67188 3.5 5.54688 4.75 4.35938 6.75C3.20313 8.78125 3.20313 11.25 4.35938 13.25C5.54688 15.2813 7.67188 16.5 10.0156 16.5C12.3281 16.5 14.4531 15.2813 15.6406 13.25C16.7969 11.25 16.7969 8.78125 15.6406 6.75C14.4531 4.75 12.3281 3.5 10.0156 3.5ZM10.0156 18C7.14063 18 4.51563 16.5 3.07813 14C1.64062 11.5313 1.64062 8.5 3.07813 6C4.51563 3.53125 7.14063 2 10.0156 2C12.8594 2 15.4844 3.53125 16.9219 6C18.3594 8.5 18.3594 11.5313 16.9219 14C15.4844 16.5 12.8594 18 10.0156 18ZM10.0156 6C10.4219 6 10.7656 6.34375 10.7656 6.75V10.25C10.7656 10.6875 10.4219 11 10.0156 11C9.57813 11 9.26563 10.6875 9.26563 10.25V6.75C9.26563 6.34375 9.57813 6 10.0156 6ZM11.0156 13C11.0156 13.5625 10.5469 14 10.0156 14C9.45313 14 9.01563 13.5625 9.01563 13C9.01563 12.4688 9.45313 12 10.0156 12C10.5469 12 11.0156 12.4688 11.0156 13Z" fill="white"/></svg>
     </div>
-    <p style="font-size:13px;color:#6b6b6b;line-height:1.6;margin:0">Use a 100% stacked timeline when each series represents a proportional share of a whole — ad placement types, intent categories, or competitor share splits. The chart always fills the full scale, making it easy to track how the composition shifts over time. For comparing absolute values without a meaningful combined total, prefer the Simple Timeline. <span style="font-weight:600">Coming soon.</span></p>
+    <p style="font-size:13px;color:#6b6b6b;line-height:1.6;margin:0">Use a 100% stacked timeline when each series represents a proportional share of a whole — ad placement types, intent categories, or competitor share splits. The chart always fills the full scale, making it easy to track how the composition shifts over time. For comparing absolute values without a meaningful combined total, prefer the Dotted Timeline Chart. <span style="font-weight:600">Coming soon.</span></p>
   </div>
 
 </section>
@@ -10734,6 +10756,351 @@ const DATES = ['27 Apr, 2026', '28 Apr, 2026', ... '26 May, 2026'];
 })();
 </script>
       </div><!-- /comp-panel-vertical-bars-chart -->
+
+      <!-- ── HORIZONTAL BARS CHART PANEL ──────────────────────────── -->
+      <div class="comp-panel" id="comp-panel-horizontal-bars-chart" style="display:none">
+<section id="horizontal-bars-chart">
+  <div class="section-header">
+    <h2>Horizontal Bars Chart</h2>
+    <div class="divider"></div>
+  </div>
+  <p style="font-size:13px;color:var(--text-secondary-var);margin-bottom:24px">SVG-based horizontal bar chart for comparing values across categories — competitors, domains, topics, or segments. Bars grow left-to-right with rounded right corners. Category labels (with optional favicons) on the Y-axis, value + delta badge at the bar end. Supports single-series and multi-series grouped layouts with hover tooltips.</p>
+
+  <!-- GitHub + Demo links -->
+  <div style="display:flex;gap:8px;margin-bottom:24px;flex-wrap:wrap">
+    <a href="https://github.com/pavelfernandez-Atd/claude_desig_system/tree/main/components/horizontal-bars-chart"
+       target="_blank" rel="noopener noreferrer"
+       onclick="window.open(this.href,'_blank','noopener');return false;"
+       style="display:inline-flex;align-items:center;gap:6px;padding:6px 12px;border-radius:6px;background:#24292f;color:#fff;font-size:12px;font-weight:600;text-decoration:none;font-family:'Open Sans',sans-serif">
+      <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+      View on GitHub
+    </a>
+    <a href="https://htmlpreview.github.io/?https://github.com/pavelfernandez-Atd/claude_desig_system/blob/main/components/horizontal-bars-chart/demo.html"
+       target="_blank" rel="noopener noreferrer"
+       onclick="window.open(this.href,'_blank','noopener');return false;"
+       style="display:inline-flex;align-items:center;gap:6px;padding:6px 12px;border-radius:6px;background:#0969da;color:#fff;font-size:12px;font-weight:600;text-decoration:none;font-family:'Open Sans',sans-serif">
+      <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M8 1a7 7 0 100 14A7 7 0 008 1zM0 8a8 8 0 1116 0A8 8 0 010 8zm6.5-.25A.75.75 0 017.25 7h1a.75.75 0 01.75.75v2.75h.25a.75.75 0 010 1.5h-2a.75.75 0 010-1.5h.25v-2h-.25a.75.75 0 01-.75-.75zM8 6a1 1 0 100-2 1 1 0 000 2z"/></svg>
+      Preview Demo
+    </a>
+  </div>
+
+  <!-- 1. LIVE DEMO — Clean (no end labels) ───────────────────────── -->
+  <div style="margin-bottom:40px">
+    <div class="sub-label">Single series · no value labels · hover tooltip only</div>
+    <div style="background:#e4eef4;padding:24px;border-radius:12px">
+      <div style="background:#fff;border-radius:12px;padding:24px">
+        <div class="hbar" id="hbar-demo-clean">
+          <svg class="hbar__svg" viewBox="0 0 640 162" xmlns="http://www.w3.org/2000/svg">
+            <line x1="122" y1="10" x2="122" y2="130" stroke="#dce3ef" stroke-width="1"/>
+            <line x1="246" y1="10" x2="246" y2="130" stroke="#dce3ef" stroke-width="1"/>
+            <line x1="371" y1="10" x2="371" y2="130" stroke="#dce3ef" stroke-width="1"/>
+            <line x1="496" y1="10" x2="496" y2="130" stroke="#dce3ef" stroke-width="1"/>
+            <line x1="620" y1="10" x2="620" y2="130" stroke="#dce3ef" stroke-width="1"/>
+            <text x="122" y="148" text-anchor="middle" font-family="'Open Sans Condensed','Open Sans',sans-serif" font-stretch="condensed" font-size="12" fill="#38476a">0%</text>
+            <text x="246" y="148" text-anchor="middle" font-family="'Open Sans Condensed','Open Sans',sans-serif" font-stretch="condensed" font-size="12" fill="#38476a">10%</text>
+            <text x="371" y="148" text-anchor="middle" font-family="'Open Sans Condensed','Open Sans',sans-serif" font-stretch="condensed" font-size="12" fill="#38476a">20%</text>
+            <text x="496" y="148" text-anchor="middle" font-family="'Open Sans Condensed','Open Sans',sans-serif" font-stretch="condensed" font-size="12" fill="#38476a">30%</text>
+            <text x="620" y="148" text-anchor="middle" font-family="'Open Sans Condensed','Open Sans',sans-serif" font-stretch="condensed" font-size="12" fill="#38476a">40%</text>
+            <image href="https://www.google.com/s2/favicons?domain=booking.com&sz=16" x="104" y="10" width="8" height="8"/>
+            <text x="102" y="17" text-anchor="end" font-family="'Open Sans Condensed','Open Sans',sans-serif" font-stretch="condensed" font-size="11" fill="#38476a">booking.com</text>
+            <path class="hbar__bar" fill="#b3a2e7" d="M 122,10 H 555 A 3,3 0 0 1 558,13 V 15 A 3,3 0 0 1 555,18 H 122 Z" data-series="booking.com" data-value="35%" data-delta="+4%"/>
+            <image href="https://www.google.com/s2/favicons?domain=comparethemarket.com&sz=16" x="104" y="26" width="8" height="8"/>
+            <text x="102" y="33" text-anchor="end" font-family="'Open Sans Condensed','Open Sans',sans-serif" font-stretch="condensed" font-size="11" fill="#38476a">comparethemarket.com</text>
+            <path class="hbar__bar" fill="#b3a2e7" d="M 122,26 H 468 A 3,3 0 0 1 471,29 V 31 A 3,3 0 0 1 468,34 H 122 Z" data-series="comparethemarket.com" data-value="28%" data-delta="+2%"/>
+            <image href="https://www.google.com/s2/favicons?domain=moneysupermarket.com&sz=16" x="104" y="42" width="8" height="8"/>
+            <text x="102" y="49" text-anchor="end" font-family="'Open Sans Condensed','Open Sans',sans-serif" font-stretch="condensed" font-size="11" fill="#38476a">moneysupermarket.com</text>
+            <path class="hbar__bar" fill="#b3a2e7" d="M 122,42 H 393 A 3,3 0 0 1 396,45 V 47 A 3,3 0 0 1 393,50 H 122 Z" data-series="moneysupermarket.com" data-value="22%" data-delta="-1%"/>
+            <image href="https://www.google.com/s2/favicons?domain=admiral.com&sz=16" x="104" y="58" width="8" height="8"/>
+            <text x="102" y="65" text-anchor="end" font-family="'Open Sans Condensed','Open Sans',sans-serif" font-stretch="condensed" font-size="11" fill="#38476a">admiral.com</text>
+            <path class="hbar__bar" fill="#b3a2e7" d="M 122,58 H 343 A 3,3 0 0 1 346,61 V 63 A 3,3 0 0 1 343,66 H 122 Z" data-series="admiral.com" data-value="18%" data-delta="+3%"/>
+            <image href="https://www.google.com/s2/favicons?domain=hastingsdirect.com&sz=16" x="104" y="74" width="8" height="8"/>
+            <text x="102" y="81" text-anchor="end" font-family="'Open Sans Condensed','Open Sans',sans-serif" font-stretch="condensed" font-size="11" fill="#38476a">hastingsdirect.com</text>
+            <path class="hbar__bar" fill="#b3a2e7" d="M 122,74 H 293 A 3,3 0 0 1 296,77 V 79 A 3,3 0 0 1 293,82 H 122 Z" data-series="hastingsdirect.com" data-value="14%" data-delta="-2%"/>
+            <image href="https://www.google.com/s2/favicons?domain=confused.com&sz=16" x="104" y="90" width="8" height="8"/>
+            <text x="102" y="97" text-anchor="end" font-family="'Open Sans Condensed','Open Sans',sans-serif" font-stretch="condensed" font-size="11" fill="#38476a">confused.com</text>
+            <path class="hbar__bar" fill="#b3a2e7" d="M 122,90 H 256 A 3,3 0 0 1 259,93 V 95 A 3,3 0 0 1 256,98 H 122 Z" data-series="confused.com" data-value="11%" data-delta="+1%"/>
+            <image href="https://www.google.com/s2/favicons?domain=directline.com&sz=16" x="104" y="106" width="8" height="8"/>
+            <text x="102" y="113" text-anchor="end" font-family="'Open Sans Condensed','Open Sans',sans-serif" font-stretch="condensed" font-size="11" fill="#38476a">directline.com</text>
+            <path class="hbar__bar" fill="#b3a2e7" d="M 122,106 H 231 A 3,3 0 0 1 234,109 V 111 A 3,3 0 0 1 231,114 H 122 Z" data-series="directline.com" data-value="9%" data-delta="—"/>
+            <image href="https://www.google.com/s2/favicons?domain=aviva.com&sz=16" x="104" y="122" width="8" height="8"/>
+            <text x="102" y="129" text-anchor="end" font-family="'Open Sans Condensed','Open Sans',sans-serif" font-stretch="condensed" font-size="11" fill="#38476a">aviva.com</text>
+            <path class="hbar__bar" fill="#b3a2e7" d="M 122,122 H 206 A 3,3 0 0 1 209,125 V 127 A 3,3 0 0 1 206,130 H 122 Z" data-series="aviva.com" data-value="7%" data-delta="-1%"/>
+          </svg>
+        </div>
+        <div id="hbar-tip-clean" class="hbar__tooltip"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. LIVE DEMO — Single series with value labels ──────────────── -->
+  <div style="margin-bottom:40px">
+    <div class="sub-label">Single series · value + delta labels at bar end · hover a bar</div>
+    <div style="background:#e4eef4;padding:24px;border-radius:12px">
+      <div style="background:#fff;border-radius:12px;padding:24px">
+        <!-- 8px bars · 8px gap · 8×8 favicons · X0=122 X1=620 · viewBox 0 0 640 162 -->
+        <div class="hbar" id="hbar-demo-single">
+          <svg class="hbar__svg" viewBox="0 0 640 162" xmlns="http://www.w3.org/2000/svg">
+            <!-- Gridlines at 0/10/20/30/40%: x=122/246/371/496/620 -->
+            <line x1="122" y1="10" x2="122" y2="130" stroke="#dce3ef" stroke-width="1"/>
+            <line x1="246" y1="10" x2="246" y2="130" stroke="#dce3ef" stroke-width="1"/>
+            <line x1="371" y1="10" x2="371" y2="130" stroke="#dce3ef" stroke-width="1"/>
+            <line x1="496" y1="10" x2="496" y2="130" stroke="#dce3ef" stroke-width="1"/>
+            <line x1="620" y1="10" x2="620" y2="130" stroke="#dce3ef" stroke-width="1"/>
+            <!-- X-axis labels -->
+            <text x="122" y="148" text-anchor="middle" font-family="'Open Sans Condensed','Open Sans',sans-serif" font-stretch="condensed" font-size="12" fill="#38476a">0%</text>
+            <text x="246" y="148" text-anchor="middle" font-family="'Open Sans Condensed','Open Sans',sans-serif" font-stretch="condensed" font-size="12" fill="#38476a">10%</text>
+            <text x="371" y="148" text-anchor="middle" font-family="'Open Sans Condensed','Open Sans',sans-serif" font-stretch="condensed" font-size="12" fill="#38476a">20%</text>
+            <text x="496" y="148" text-anchor="middle" font-family="'Open Sans Condensed','Open Sans',sans-serif" font-stretch="condensed" font-size="12" fill="#38476a">30%</text>
+            <text x="620" y="148" text-anchor="middle" font-family="'Open Sans Condensed','Open Sans',sans-serif" font-stretch="condensed" font-size="12" fill="#38476a">40%</text>
+            <!-- R0 booking.com 35% -->
+            <image href="https://www.google.com/s2/favicons?domain=booking.com&sz=16" x="104" y="10" width="8" height="8"/>
+            <text x="102" y="17" text-anchor="end" font-family="'Open Sans Condensed','Open Sans',sans-serif" font-stretch="condensed" font-size="11" fill="#38476a">booking.com</text>
+            <path class="hbar__bar" fill="#b3a2e7" d="M 122,10 H 555 A 3,3 0 0 1 558,13 V 15 A 3,3 0 0 1 555,18 H 122 Z" data-series="booking.com" data-value="35%" data-delta="+4%"/>
+            <text x="563" y="17" font-family="Open Sans,sans-serif" font-size="10" font-weight="600" fill="#485982">35% <tspan dx="2" font-size="10" fill="#40af46">+4%</tspan></text>
+            <!-- R1 comparethemarket.com 28% -->
+            <image href="https://www.google.com/s2/favicons?domain=comparethemarket.com&sz=16" x="104" y="26" width="8" height="8"/>
+            <text x="102" y="33" text-anchor="end" font-family="'Open Sans Condensed','Open Sans',sans-serif" font-stretch="condensed" font-size="11" fill="#38476a">comparethemarket.com</text>
+            <path class="hbar__bar" fill="#b3a2e7" d="M 122,26 H 468 A 3,3 0 0 1 471,29 V 31 A 3,3 0 0 1 468,34 H 122 Z" data-series="comparethemarket.com" data-value="28%" data-delta="+2%"/>
+            <text x="476" y="33" font-family="Open Sans,sans-serif" font-size="10" font-weight="600" fill="#485982">28% <tspan dx="2" font-size="10" fill="#40af46">+2%</tspan></text>
+            <!-- R2 moneysupermarket.com 22% -->
+            <image href="https://www.google.com/s2/favicons?domain=moneysupermarket.com&sz=16" x="104" y="42" width="8" height="8"/>
+            <text x="102" y="49" text-anchor="end" font-family="'Open Sans Condensed','Open Sans',sans-serif" font-stretch="condensed" font-size="11" fill="#38476a">moneysupermarket.com</text>
+            <path class="hbar__bar" fill="#b3a2e7" d="M 122,42 H 393 A 3,3 0 0 1 396,45 V 47 A 3,3 0 0 1 393,50 H 122 Z" data-series="moneysupermarket.com" data-value="22%" data-delta="-1%"/>
+            <text x="401" y="49" font-family="Open Sans,sans-serif" font-size="10" font-weight="600" fill="#485982">22% <tspan dx="2" font-size="10" fill="#de5a5a">-1%</tspan></text>
+            <!-- R3 admiral.com 18% -->
+            <image href="https://www.google.com/s2/favicons?domain=admiral.com&sz=16" x="104" y="58" width="8" height="8"/>
+            <text x="102" y="65" text-anchor="end" font-family="'Open Sans Condensed','Open Sans',sans-serif" font-stretch="condensed" font-size="11" fill="#38476a">admiral.com</text>
+            <path class="hbar__bar" fill="#b3a2e7" d="M 122,58 H 343 A 3,3 0 0 1 346,61 V 63 A 3,3 0 0 1 343,66 H 122 Z" data-series="admiral.com" data-value="18%" data-delta="+3%"/>
+            <text x="351" y="65" font-family="Open Sans,sans-serif" font-size="10" font-weight="600" fill="#485982">18% <tspan dx="2" font-size="10" fill="#40af46">+3%</tspan></text>
+            <!-- R4 hastingsdirect.com 14% -->
+            <image href="https://www.google.com/s2/favicons?domain=hastingsdirect.com&sz=16" x="104" y="74" width="8" height="8"/>
+            <text x="102" y="81" text-anchor="end" font-family="'Open Sans Condensed','Open Sans',sans-serif" font-stretch="condensed" font-size="11" fill="#38476a">hastingsdirect.com</text>
+            <path class="hbar__bar" fill="#b3a2e7" d="M 122,74 H 293 A 3,3 0 0 1 296,77 V 79 A 3,3 0 0 1 293,82 H 122 Z" data-series="hastingsdirect.com" data-value="14%" data-delta="-2%"/>
+            <text x="301" y="81" font-family="Open Sans,sans-serif" font-size="10" font-weight="600" fill="#485982">14% <tspan dx="2" font-size="10" fill="#de5a5a">-2%</tspan></text>
+            <!-- R5 confused.com 11% -->
+            <image href="https://www.google.com/s2/favicons?domain=confused.com&sz=16" x="104" y="90" width="8" height="8"/>
+            <text x="102" y="97" text-anchor="end" font-family="'Open Sans Condensed','Open Sans',sans-serif" font-stretch="condensed" font-size="11" fill="#38476a">confused.com</text>
+            <path class="hbar__bar" fill="#b3a2e7" d="M 122,90 H 256 A 3,3 0 0 1 259,93 V 95 A 3,3 0 0 1 256,98 H 122 Z" data-series="confused.com" data-value="11%" data-delta="+1%"/>
+            <text x="264" y="97" font-family="Open Sans,sans-serif" font-size="10" font-weight="600" fill="#485982">11% <tspan dx="2" font-size="10" fill="#40af46">+1%</tspan></text>
+            <!-- R6 directline.com 9% -->
+            <image href="https://www.google.com/s2/favicons?domain=directline.com&sz=16" x="104" y="106" width="8" height="8"/>
+            <text x="102" y="113" text-anchor="end" font-family="'Open Sans Condensed','Open Sans',sans-serif" font-stretch="condensed" font-size="11" fill="#38476a">directline.com</text>
+            <path class="hbar__bar" fill="#b3a2e7" d="M 122,106 H 231 A 3,3 0 0 1 234,109 V 111 A 3,3 0 0 1 231,114 H 122 Z" data-series="directline.com" data-value="9%" data-delta="—"/>
+            <text x="239" y="113" font-family="Open Sans,sans-serif" font-size="10" font-weight="600" fill="#485982">9% <tspan dx="2" font-size="10" fill="#6477a2">—</tspan></text>
+            <!-- R7 aviva.com 7% -->
+            <image href="https://www.google.com/s2/favicons?domain=aviva.com&sz=16" x="104" y="122" width="8" height="8"/>
+            <text x="102" y="129" text-anchor="end" font-family="'Open Sans Condensed','Open Sans',sans-serif" font-stretch="condensed" font-size="11" fill="#38476a">aviva.com</text>
+            <path class="hbar__bar" fill="#b3a2e7" d="M 122,122 H 206 A 3,3 0 0 1 209,125 V 127 A 3,3 0 0 1 206,130 H 122 Z" data-series="aviva.com" data-value="7%" data-delta="-1%"/>
+            <text x="214" y="129" font-family="Open Sans,sans-serif" font-size="10" font-weight="600" fill="#485982">7% <tspan dx="2" font-size="10" fill="#de5a5a">-1%</tspan></text>
+          </svg>
+        </div>
+        <div id="hbar-tip-single" class="hbar__tooltip"></div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- 3. CSS CLASSES ─────────────────────────────────────────────── -->
+  <div style="margin-bottom:40px">
+    <div class="sub-label">CSS Classes</div>
+    <table class="prop-table">
+      <thead><tr><th>Class</th><th>Role</th><th>Notes</th></tr></thead>
+      <tbody>
+        <tr><td><code>.hbar</code></td><td>Root container</td><td>Full width</td></tr>
+        <tr><td><code>.hbar__svg</code></td><td>SVG element</td><td>width:100%, overflow:visible. Plot x: 148→580 (432px), max 40%</td></tr>
+        <tr><td><code>.hbar__bar</code></td><td>Single bar</td><td>Rounded right corners (r=4 single, r=3 grouped). Hover → opacity 0.82</td></tr>
+        <tr><td><code>.hbar__bar--grouped</code></td><td>Bar in a multi-series group</td><td>Smaller radius (r=3), height 12px vs 20px single</td></tr>
+        <tr><td><code>.hbar__group-hl</code></td><td>Group highlight rect</td><td>fill-opacity toggled 0→0.6 by JS on group hover</td></tr>
+        <tr><td><code>.hbar__group-hit</code></td><td>Invisible mouse target</td><td>Covers full group row; triggers tooltip</td></tr>
+        <tr><td><code>.hbar__tooltip</code></td><td>Hover tooltip</td><td>position:fixed, dark bg, follows mouse</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- 4. COORDINATE GUIDE ─────────────────────────────────────────── -->
+  <div style="margin-bottom:40px">
+    <div class="sub-label">Coordinate guide</div>
+    <pre style="background:#f5f7fa;border-radius:8px;padding:16px;font-size:12px;overflow:auto;line-height:1.6">viewBox  0 0 640 H   (H varies with row count)
+Plot x   148 → 580   (432px, max 40%)
+Gridlines at x = 148(0%) · 256(10%) · 364(20%) · 472(30%) · 580(40%)
+
+Single series  bar h=20  row pitch=32   bar right = 148 + value/40 × 432
+Multi-series   bar h=12  group pitch=40  3 bars per group at y-offsets +2/+16/+30
+
+Bar path (rounded right, flat left):
+  M x0,top H (right−r) A r,r 0 0 1 right,(top+r) V (bot−r) A r,r 0 0 1 (right−r),bot H x0 Z
+  where x0=148  r=4(single) or r=3(grouped)</pre>
+  </div>
+
+</section>
+<script>
+// ── Horizontal Bars Chart — clean variant hover ───────────────────────────
+(function(){
+  var tip = document.getElementById('hbar-tip-clean');
+  if (!tip) return;
+  document.querySelectorAll('#hbar-demo-clean .hbar__bar').forEach(function(bar){
+    bar.addEventListener('mouseenter', function(e){
+      var deltaColor = bar.dataset.delta && bar.dataset.delta.charAt(0)==='+' ? '#40af46' : bar.dataset.delta && bar.dataset.delta.charAt(0)==='-' ? '#de5a5a' : '#6477a2';
+      tip.innerHTML = '<div style="font-size:11px;font-weight:600;color:rgba(255,255,255,0.7);margin-bottom:5px;">'+bar.dataset.series+'</div>'
+        +'<div style="display:flex;align-items:center;gap:8px;font-size:13px;">'
+        +'<span style="font-weight:600;color:#fff;">'+bar.dataset.value+'</span>'
+        +(bar.dataset.delta?'<span style="font-size:11px;font-weight:600;color:'+deltaColor+';">'+bar.dataset.delta+'</span>':'')
+        +'</div>';
+      tip.style.display='block';
+      tip.style.left=(e.clientX+14)+'px'; tip.style.top=(e.clientY-54)+'px';
+    });
+    bar.addEventListener('mousemove', function(e){ tip.style.left=(e.clientX+14)+'px'; tip.style.top=(e.clientY-54)+'px'; });
+    bar.addEventListener('mouseleave', function(){ tip.style.display='none'; });
+  });
+})();
+
+// ── Horizontal Bars Chart — single series hover ──────────────────────────
+(function(){
+  var tip = document.getElementById('hbar-tip-single');
+  if (!tip) return;
+  document.querySelectorAll('#hbar-demo-single .hbar__bar').forEach(function(bar){
+    bar.addEventListener('mouseenter', function(e){
+      var deltaColor = bar.dataset.delta && bar.dataset.delta.charAt(0)==='+' ? '#40af46' : bar.dataset.delta && bar.dataset.delta.charAt(0)==='-' ? '#de5a5a' : '#6477a2';
+      tip.innerHTML = '<div style="font-size:11px;font-weight:600;color:rgba(255,255,255,0.7);margin-bottom:5px;">'+bar.dataset.series+'</div>'
+        +'<div style="display:flex;align-items:center;gap:8px;font-size:13px;">'
+        +'<span style="font-weight:600;color:#fff;">'+bar.dataset.value+'</span>'
+        +'<span style="font-size:11px;font-weight:600;color:'+deltaColor+';">'+bar.dataset.delta+'</span>'
+        +'</div>';
+      tip.style.display='block';
+      tip.style.left=(e.clientX+14)+'px'; tip.style.top=(e.clientY-54)+'px';
+    });
+    bar.addEventListener('mousemove', function(e){ tip.style.left=(e.clientX+14)+'px'; tip.style.top=(e.clientY-54)+'px'; });
+    bar.addEventListener('mouseleave', function(){ tip.style.display='none'; });
+  });
+})();
+
+
+</script>
+      </div><!-- /comp-panel-horizontal-bars-chart -->
+
+      <!-- ── MULTI-SERIES HORIZONTAL BARS CHART PANEL ─────────────── -->
+      <div class="comp-panel" id="comp-panel-multi-series-horizontal-bars-chart" style="display:none">
+<section id="multi-series-horizontal-bars-chart">
+  <div class="section-header">
+    <h2>Multi-Series Horizontal Bars Chart</h2>
+    <div class="divider"></div>
+  </div>
+  <p style="font-size:13px;color:var(--text-secondary-var);margin-bottom:24px">A grouped horizontal bar chart for comparing multiple series across categories. Bars within each group use 4px inner gaps; groups are separated by 8px. Hovering a group highlights it and shows a multi-series tooltip. Uses the same <code>.hbar</code> container and chart colour palette as the single-series variant.</p>
+
+  <!-- GitHub + Demo links -->
+  <div style="display:flex;gap:8px;margin-bottom:24px;flex-wrap:wrap">
+    <a href="https://github.com/pavelfernandez-Atd/claude_desig_system/tree/main/components/multi-series-horizontal-bars-chart"
+       target="_blank" rel="noopener noreferrer"
+       onclick="window.open(this.href,'_blank','noopener');return false;"
+       style="display:inline-flex;align-items:center;gap:6px;padding:6px 12px;border-radius:6px;background:#24292f;color:#fff;font-size:12px;font-weight:600;text-decoration:none;font-family:'Open Sans',sans-serif">
+      <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+      View on GitHub
+    </a>
+    <a href="https://htmlpreview.github.io/?https://github.com/pavelfernandez-Atd/claude_desig_system/blob/main/components/multi-series-horizontal-bars-chart/demo.html"
+       target="_blank" rel="noopener noreferrer"
+       onclick="window.open(this.href,'_blank','noopener');return false;"
+       style="display:inline-flex;align-items:center;gap:6px;padding:6px 12px;border-radius:6px;background:#0969da;color:#fff;font-size:12px;font-weight:600;text-decoration:none;font-family:'Open Sans',sans-serif">
+      <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M8 1a7 7 0 100 14A7 7 0 008 1zM0 8a8 8 0 1116 0A8 8 0 010 8zm6.5-.25A.75.75 0 017.25 7h1a.75.75 0 01.75.75v2.75h.25a.75.75 0 010 1.5h-2a.75.75 0 010-1.5h.25v-2h-.25a.75.75 0 01-.75-.75zM8 6a1 1 0 100-2 1 1 0 000 2z"/></svg>
+      Preview Demo
+    </a>
+  </div>
+
+  <!-- LIVE DEMO ─────────────────────────────────────────────────── -->
+  <div style="margin-bottom:40px">
+    <div class="sub-label">3 advertisers · 5 categories · 8px bars · hover a group</div>
+    <div style="background:#e4eef4;padding:24px;border-radius:12px">
+      <div style="background:#fff;border-radius:12px;padding:24px">
+        <!-- 8px bars · 4px inner gap · 8px between groups · X0=68 X1=620 · viewBox 0 0 640 232 -->
+        <div class="hbar" id="hbar-demo-multi">
+          <svg class="hbar__svg" viewBox="0 0 640 232" xmlns="http://www.w3.org/2000/svg">
+            <rect class="hbar__group-hl" data-group="0" x="62" y="8"   width="558" height="36" rx="4" fill="#eaf4ff" fill-opacity="0"/>
+            <rect class="hbar__group-hl" data-group="1" x="62" y="48"  width="558" height="36" rx="4" fill="#eaf4ff" fill-opacity="0"/>
+            <rect class="hbar__group-hl" data-group="2" x="62" y="88"  width="558" height="36" rx="4" fill="#eaf4ff" fill-opacity="0"/>
+            <rect class="hbar__group-hl" data-group="3" x="62" y="128" width="558" height="36" rx="4" fill="#eaf4ff" fill-opacity="0"/>
+            <rect class="hbar__group-hl" data-group="4" x="62" y="168" width="558" height="36" rx="4" fill="#eaf4ff" fill-opacity="0"/>
+            <line x1="68"  y1="10" x2="68"  y2="202" stroke="#dce3ef" stroke-width="1"/>
+            <line x1="206" y1="10" x2="206" y2="202" stroke="#dce3ef" stroke-width="1"/>
+            <line x1="344" y1="10" x2="344" y2="202" stroke="#dce3ef" stroke-width="1"/>
+            <line x1="482" y1="10" x2="482" y2="202" stroke="#dce3ef" stroke-width="1"/>
+            <line x1="620" y1="10" x2="620" y2="202" stroke="#dce3ef" stroke-width="1"/>
+            <text x="68"  y="220" text-anchor="middle" font-family="'Open Sans Condensed','Open Sans',sans-serif" font-stretch="condensed" font-size="12" fill="#38476a">0%</text>
+            <text x="206" y="220" text-anchor="middle" font-family="'Open Sans Condensed','Open Sans',sans-serif" font-stretch="condensed" font-size="12" fill="#38476a">10%</text>
+            <text x="344" y="220" text-anchor="middle" font-family="'Open Sans Condensed','Open Sans',sans-serif" font-stretch="condensed" font-size="12" fill="#38476a">20%</text>
+            <text x="482" y="220" text-anchor="middle" font-family="'Open Sans Condensed','Open Sans',sans-serif" font-stretch="condensed" font-size="12" fill="#38476a">30%</text>
+            <text x="620" y="220" text-anchor="middle" font-family="'Open Sans Condensed','Open Sans',sans-serif" font-stretch="condensed" font-size="12" fill="#38476a">40%</text>
+            <text x="64" y="30"  text-anchor="end" font-family="'Open Sans Condensed','Open Sans',sans-serif" font-stretch="condensed" font-size="11" fill="#38476a">Car Insurance</text>
+            <text x="64" y="70"  text-anchor="end" font-family="'Open Sans Condensed','Open Sans',sans-serif" font-stretch="condensed" font-size="11" fill="#38476a">Home Insurance</text>
+            <text x="64" y="110" text-anchor="end" font-family="'Open Sans Condensed','Open Sans',sans-serif" font-stretch="condensed" font-size="11" fill="#38476a">Travel</text>
+            <text x="64" y="150" text-anchor="end" font-family="'Open Sans Condensed','Open Sans',sans-serif" font-stretch="condensed" font-size="11" fill="#38476a">Broadband</text>
+            <text x="64" y="190" text-anchor="end" font-family="'Open Sans Condensed','Open Sans',sans-serif" font-stretch="condensed" font-size="11" fill="#38476a">Energy</text>
+            <path class="hbar__bar hbar__bar--grouped" fill="#b3a2e7" d="M 68,10 H 548 A 3,3 0 0 1 551,13 V 15 A 3,3 0 0 1 548,18 H 68 Z" data-group="0" data-series="Your Brand" data-value="35%"/>
+            <path class="hbar__bar hbar__bar--grouped" fill="#64abfb" d="M 68,22 H 451 A 3,3 0 0 1 454,25 V 27 A 3,3 0 0 1 451,30 H 68 Z" data-group="0" data-series="booking.com" data-value="28%"/>
+            <path class="hbar__bar hbar__bar--grouped" fill="#d47dd4" d="M 68,34 H 369 A 3,3 0 0 1 372,37 V 39 A 3,3 0 0 1 369,42 H 68 Z" data-group="0" data-series="comparethemarket.com" data-value="22%"/>
+            <path class="hbar__bar hbar__bar--grouped" fill="#b3a2e7" d="M 68,50 H 369 A 3,3 0 0 1 372,53 V 55 A 3,3 0 0 1 369,58 H 68 Z" data-group="1" data-series="Your Brand" data-value="22%"/>
+            <path class="hbar__bar hbar__bar--grouped" fill="#64abfb" d="M 68,62 H 493 A 3,3 0 0 1 496,65 V 67 A 3,3 0 0 1 493,70 H 68 Z" data-group="1" data-series="booking.com" data-value="31%"/>
+            <path class="hbar__bar hbar__bar--grouped" fill="#d47dd4" d="M 68,74 H 313 A 3,3 0 0 1 316,77 V 79 A 3,3 0 0 1 313,82 H 68 Z" data-group="1" data-series="comparethemarket.com" data-value="18%"/>
+            <path class="hbar__bar hbar__bar--grouped" fill="#b3a2e7" d="M 68,90 H 313 A 3,3 0 0 1 316,93 V 95 A 3,3 0 0 1 313,98 H 68 Z" data-group="2" data-series="Your Brand" data-value="18%"/>
+            <path class="hbar__bar hbar__bar--grouped" fill="#64abfb" d="M 68,102 H 410 A 3,3 0 0 1 413,105 V 107 A 3,3 0 0 1 410,110 H 68 Z" data-group="2" data-series="booking.com" data-value="25%"/>
+            <path class="hbar__bar hbar__bar--grouped" fill="#d47dd4" d="M 68,114 H 507 A 3,3 0 0 1 510,117 V 119 A 3,3 0 0 1 507,122 H 68 Z" data-group="2" data-series="comparethemarket.com" data-value="32%"/>
+            <path class="hbar__bar hbar__bar--grouped" fill="#b3a2e7" d="M 68,130 H 451 A 3,3 0 0 1 454,133 V 135 A 3,3 0 0 1 451,138 H 68 Z" data-group="3" data-series="Your Brand" data-value="28%"/>
+            <path class="hbar__bar hbar__bar--grouped" fill="#64abfb" d="M 68,142 H 341 A 3,3 0 0 1 344,145 V 147 A 3,3 0 0 1 341,150 H 68 Z" data-group="3" data-series="booking.com" data-value="20%"/>
+            <path class="hbar__bar hbar__bar--grouped" fill="#d47dd4" d="M 68,154 H 272 A 3,3 0 0 1 275,157 V 159 A 3,3 0 0 1 272,162 H 68 Z" data-group="3" data-series="comparethemarket.com" data-value="15%"/>
+            <path class="hbar__bar hbar__bar--grouped" fill="#b3a2e7" d="M 68,170 H 258 A 3,3 0 0 1 261,173 V 175 A 3,3 0 0 1 258,178 H 68 Z" data-group="4" data-series="Your Brand" data-value="14%"/>
+            <path class="hbar__bar hbar__bar--grouped" fill="#64abfb" d="M 68,182 H 327 A 3,3 0 0 1 330,185 V 187 A 3,3 0 0 1 327,190 H 68 Z" data-group="4" data-series="booking.com" data-value="19%"/>
+            <path class="hbar__bar hbar__bar--grouped" fill="#d47dd4" d="M 68,194 H 396 A 3,3 0 0 1 399,197 V 199 A 3,3 0 0 1 396,202 H 68 Z" data-group="4" data-series="comparethemarket.com" data-value="24%"/>
+            <rect class="hbar__group-hit" data-group="0" x="62" y="8"   width="558" height="36" fill="transparent" style="cursor:pointer"/>
+            <rect class="hbar__group-hit" data-group="1" x="62" y="48"  width="558" height="36" fill="transparent" style="cursor:pointer"/>
+            <rect class="hbar__group-hit" data-group="2" x="62" y="88"  width="558" height="36" fill="transparent" style="cursor:pointer"/>
+            <rect class="hbar__group-hit" data-group="3" x="62" y="128" width="558" height="36" fill="transparent" style="cursor:pointer"/>
+            <rect class="hbar__group-hit" data-group="4" x="62" y="168" width="558" height="36" fill="transparent" style="cursor:pointer"/>
+          </svg>
+        </div>
+        <div style="display:flex;gap:16px;justify-content:center;margin-top:12px;flex-wrap:wrap">
+          <div style="display:inline-flex;align-items:center;gap:5px;font-family:'Open Sans',sans-serif;font-size:13px;font-weight:300;color:#38476a;"><span style="width:28px;height:3px;background:#b3a2e7;border-radius:2px;display:inline-block;"></span>Your Brand</div>
+          <div style="display:inline-flex;align-items:center;gap:5px;font-family:'Open Sans',sans-serif;font-size:13px;font-weight:300;color:#38476a;"><span style="width:28px;height:3px;background:#64abfb;border-radius:2px;display:inline-block;"></span>booking.com</div>
+          <div style="display:inline-flex;align-items:center;gap:5px;font-family:'Open Sans',sans-serif;font-size:13px;font-weight:300;color:#38476a;"><span style="width:28px;height:3px;background:#d47dd4;border-radius:2px;display:inline-block;"></span>comparethemarket.com</div>
+        </div>
+        <div id="hbar-tip-multi" class="hbar__tooltip"></div>
+      </div>
+    </div>
+  </div>
+
+</section>
+<script>
+// ── Multi-Series Horizontal Bars Chart — grouped hover ───────────────────
+(function(){
+  var tip = document.getElementById('hbar-tip-multi');
+  if (!tip) return;
+  var GROUPS = [
+    { label:'Car Insurance',  series:[{n:'Your Brand',c:'#b3a2e7',v:'35%'},{n:'booking.com',c:'#64abfb',v:'28%'},{n:'comparethemarket.com',c:'#d47dd4',v:'22%'}] },
+    { label:'Home Insurance', series:[{n:'Your Brand',c:'#b3a2e7',v:'22%'},{n:'booking.com',c:'#64abfb',v:'31%'},{n:'comparethemarket.com',c:'#d47dd4',v:'18%'}] },
+    { label:'Travel',         series:[{n:'Your Brand',c:'#b3a2e7',v:'18%'},{n:'booking.com',c:'#64abfb',v:'25%'},{n:'comparethemarket.com',c:'#d47dd4',v:'32%'}] },
+    { label:'Broadband',      series:[{n:'Your Brand',c:'#b3a2e7',v:'28%'},{n:'booking.com',c:'#64abfb',v:'20%'},{n:'comparethemarket.com',c:'#d47dd4',v:'15%'}] },
+    { label:'Energy',         series:[{n:'Your Brand',c:'#b3a2e7',v:'14%'},{n:'booking.com',c:'#64abfb',v:'19%'},{n:'comparethemarket.com',c:'#d47dd4',v:'24%'}] }
+  ];
+  document.querySelectorAll('#hbar-demo-multi .hbar__group-hit').forEach(function(hit){
+    var gi=parseInt(hit.dataset.group), g=GROUPS[gi];
+    hit.addEventListener('mouseenter', function(e){
+      document.querySelectorAll('#hbar-demo-multi .hbar__group-hl').forEach(function(r){r.setAttribute('fill-opacity','0');});
+      document.querySelector('#hbar-demo-multi .hbar__group-hl[data-group="'+gi+'"]').setAttribute('fill-opacity','0.6');
+      var h='<div style="font-size:11px;font-weight:600;color:rgba(255,255,255,0.7);margin-bottom:6px;">'+g.label+'</div>';
+      g.series.forEach(function(s){
+        h+='<div style="display:flex;align-items:center;gap:7px;font-size:12px;color:#fff;line-height:1.8;">'
+          +'<span style="width:8px;height:8px;border-radius:50%;background:'+s.c+';flex-shrink:0;display:inline-block;"></span>'
+          +'<span style="flex:1;">'+s.n+'</span><span style="font-weight:600;padding-left:8px;">'+s.v+'</span></div>';
+      });
+      tip.innerHTML=h; tip.style.display='block';
+      tip.style.left=(e.clientX+14)+'px'; tip.style.top=(e.clientY-80)+'px';
+    });
+    hit.addEventListener('mousemove',function(e){tip.style.left=(e.clientX+14)+'px';tip.style.top=(e.clientY-80)+'px';});
+    hit.addEventListener('mouseleave',function(){
+      document.querySelectorAll('#hbar-demo-multi .hbar__group-hl').forEach(function(r){r.setAttribute('fill-opacity','0');});
+      tip.style.display='none';
+    });
+  });
+})();
+</script>
+      </div><!-- /comp-panel-multi-series-horizontal-bars-chart -->
 
       <!-- ── STACKED BARS CHART PANEL ──────────────────────────────── -->
       <div class="comp-panel" id="comp-panel-vertical-stacked-bars-chart" style="display:none">
