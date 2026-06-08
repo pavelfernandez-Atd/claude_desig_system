@@ -451,13 +451,14 @@
             <div class="kpi-card__values">
               <div class="kpi-card__bar" style="background:#8ac8b1;"></div>
               <span class="kpi-card__value" id="kpi-above-val">–</span>
+              <span class="kpi-card__delta" id="kpi-above-delta"></span>
             </div>
             <div class="kpi-card__sparkline" id="kpi-above-sparkline">
               <div class="kpi-card__hover-dot" style="background:#8ac8b1"></div>
               <div class="kpi-card__hover-tooltip"></div>
             </div>
           </div>
-          <span class="kpi-card__subtitle">avg over period</span>
+          <span class="kpi-card__subtitle">avg over period · vs previous</span>
         </div>
       </div>
 
@@ -471,13 +472,14 @@
             <div class="kpi-card__values">
               <div class="kpi-card__bar" style="background:#b3a2e7;"></div>
               <span class="kpi-card__value" id="kpi-inside-val">–</span>
+              <span class="kpi-card__delta" id="kpi-inside-delta"></span>
             </div>
             <div class="kpi-card__sparkline" id="kpi-inside-sparkline">
               <div class="kpi-card__hover-dot" style="background:#b3a2e7"></div>
               <div class="kpi-card__hover-tooltip"></div>
             </div>
           </div>
-          <span class="kpi-card__subtitle">avg over period</span>
+          <span class="kpi-card__subtitle">avg over period · vs previous</span>
         </div>
       </div>
 
@@ -491,13 +493,14 @@
             <div class="kpi-card__values">
               <div class="kpi-card__bar" style="background:#e86492;"></div>
               <span class="kpi-card__value" id="kpi-below-val">–</span>
+              <span class="kpi-card__delta" id="kpi-below-delta"></span>
             </div>
             <div class="kpi-card__sparkline" id="kpi-below-sparkline">
               <div class="kpi-card__hover-dot" style="background:#e86492"></div>
               <div class="kpi-card__hover-tooltip"></div>
             </div>
           </div>
-          <span class="kpi-card__subtitle">avg over period</span>
+          <span class="kpi-card__subtitle">avg over period · vs previous</span>
         </div>
       </div>
 
@@ -511,13 +514,14 @@
             <div class="kpi-card__values">
               <div class="kpi-card__bar" style="background:#8e9cb5;"></div>
               <span class="kpi-card__value" id="kpi-noads-val">–</span>
+              <span class="kpi-card__delta" id="kpi-noads-delta"></span>
             </div>
             <div class="kpi-card__sparkline" id="kpi-noads-sparkline">
               <div class="kpi-card__hover-dot" style="background:#8e9cb5"></div>
               <div class="kpi-card__hover-tooltip"></div>
             </div>
           </div>
-          <span class="kpi-card__subtitle">avg over period</span>
+          <span class="kpi-card__subtitle">avg over period · vs previous</span>
         </div>
       </div>
 
@@ -537,14 +541,16 @@
         </div>
         <div class="card-header__title-section">
           <div class="card-header__title-row">
-            <span class="card-header__title">Ads Position in AIO</span>
+            <span class="card-header__title">Your Ads Position in AIO</span>
           </div>
           <span class="card-header__subtitle">Breakdown of Ads Frequency by position</span>
         </div>
         <div class="card-header__actions" style="align-items:center;">
-          <div style="background:#fafafa;border-radius:40px;padding:6px;display:inline-flex;gap:4px;">
-            <div class="subtab subtab--active">Content Terms</div>
-            <div class="subtab">Whole Market</div>
+          <!-- Data source toggle: Whole Market ↔ Content Terms -->
+          <div style="display:inline-flex;align-items:center;gap:0;" id="aio-ds-toggle-wrap">
+            <span id="aio-ds-label-whole" style="font-family:'Open Sans',sans-serif;font-size:13px;color:#2b2b2b;font-weight:400;white-space:nowrap;margin-right:6px;">Whole Market</span>
+            <input type="checkbox" class="ds-toggle-input" id="aio-ds-toggle" checked style="flex-shrink:0;">
+            <span id="aio-ds-label-content" style="font-family:'Open Sans',sans-serif;font-size:13px;color:#2b2b2b;font-weight:600;white-space:nowrap;margin-left:6px;">Content Terms</span>
           </div>
           <div class="ads-type-wrap" style="position:relative;display:inline-flex;">
             <button class="service-bar__filter-btn ads-type-btn" id="ads-type-btn" style="height:32px;padding:0 10px;font-size:13px;border-radius:6px;border:none;background:transparent;color:#2f78bd;font-weight:600;display:inline-flex;align-items:center;gap:4px;cursor:pointer;">
@@ -563,6 +569,7 @@
             </div>
           </div>
           <div style="width:1px;height:20px;background:rgba(0,0,0,0.12);flex-shrink:0;"></div>
+          <div style="display:inline-flex;align-items:center;gap:0;">
           <label class="ds-toggle-label" id="comp-toggle-label" style="font-size:13px;">
             <input type="checkbox" class="ds-toggle-input" id="comp-toggle">
             <span>Show Comp.</span>
@@ -590,6 +597,7 @@
               </div>
             </div>
           </div>
+          </div><!-- end Show Comp. + eye wrapper -->
           <div style="width:1px;height:20px;background:rgba(0,0,0,0.12);flex-shrink:0;"></div>
           <button class="card-header__action-btn" aria-label="Download">
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
@@ -706,12 +714,12 @@
           <button class="subtab" data-pos="below" id="cpt-tab-below">Below</button>
         </div>
         <!-- Data source toggle: Whole Market ↔ Content Terms -->
-        <div style="display:inline-flex;align-items:center;gap:0;margin-left:8px;">
+        <div style="display:inline-flex;align-items:center;gap:0;">
           <span id="cpt-ds-label-whole" style="font-family:'Open Sans',sans-serif;font-size:13px;color:#2b2b2b;font-weight:400;white-space:nowrap;margin-right:6px;">Whole Market</span>
-          <input type="checkbox" class="ds-toggle-input" id="cpt-ds-toggle" style="flex-shrink:0;">
-          <span id="cpt-ds-label-content" style="font-family:'Open Sans',sans-serif;font-size:13px;color:#2b2b2b;font-weight:400;white-space:nowrap;margin-left:6px;">Content Terms</span>
+          <input type="checkbox" class="ds-toggle-input" id="cpt-ds-toggle" checked style="flex-shrink:0;">
+          <span id="cpt-ds-label-content" style="font-family:'Open Sans',sans-serif;font-size:13px;color:#2b2b2b;font-weight:600;white-space:nowrap;margin-left:6px;">Content Terms</span>
         </div>
-        <!-- Filter dropdown -->
+        <!-- Filter button + panel -->
         <div style="position:relative;display:inline-flex;" id="cpt-filter-wrap">
           <button id="cpt-filter-btn" style="height:32px;padding:0 10px;font-size:13px;border-radius:6px;border:none;background:transparent;color:#2f78bd;font-weight:600;display:inline-flex;align-items:center;gap:4px;cursor:pointer;font-family:'Open Sans',sans-serif;">
             <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2 4h12M4 8h8M6 12h4" stroke="#2f78bd" stroke-width="1.5" stroke-linecap="round"/></svg>
@@ -772,8 +780,23 @@
       </div>
     </div>
 
+    <!-- Sub-row: Chart mode — right aligned -->
+    <div style="display:flex;justify-content:flex-end;align-items:center;gap:4px;padding:0 24px 0;">
+      <span style="font-family:'Open Sans',sans-serif;font-size:12px;color:#496f97;white-space:nowrap;">Chart mode</span>
+      <button id="cpt-mode-lines" aria-label="Lines chart" title="Lines" style="width:30px;height:30px;border-radius:6px;border:none;background:#5bb3f9;display:inline-flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;">
+        <svg width="12" height="11" viewBox="0 0 11.2 9.8" fill="none" aria-hidden="true" style="overflow:visible;">
+          <path d="M1.05 0.525V8.225C1.05 8.531 1.269 8.75 1.575 8.75H10.675C10.959 8.75 11.2 8.991 11.2 9.275C11.2 9.581 10.959 9.8 10.675 9.8H1.575C0.7 9.8 0 9.1 0 8.225V0.525C0 0.241 0.219 0 0.525 0C0.809 0 1.05 0.241 1.05 0.525ZM10.347 2.997L7.35 5.972C7.153 6.191 6.825 6.191 6.628 5.972L4.9 4.244L3.172 5.972C2.953 6.191 2.625 6.191 2.428 5.972C2.209 5.775 2.209 5.447 2.428 5.25L4.528 3.15C4.616 3.041 4.747 2.997 4.9 2.997C5.031 2.997 5.163 3.041 5.272 3.15L7 4.878L9.603 2.275C9.8 2.056 10.128 2.056 10.347 2.275C10.544 2.472 10.544 2.8 10.347 2.997Z" fill="white"/>
+        </svg>
+      </button>
+      <button id="cpt-mode-stacked" aria-label="Stacked chart" title="Stacked" style="width:30px;height:30px;border-radius:6px;border:none;background:transparent;display:inline-flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;">
+        <svg width="12" height="11" viewBox="0 0 11.1992 9.95508" fill="none" aria-hidden="true" style="overflow:visible;">
+          <path id="cpt-stacked-icon-path" d="M0.524 0C0.809 0 1.05 0.244 1.05 0.533V8.355C1.05 8.666 1.268 8.889 1.574 8.889H10.675C10.959 8.889 11.199 9.133 11.199 9.422C11.199 9.733 10.959 9.955 10.675 9.955H1.574C0.699 9.955 0 9.244 0 8.355V0.533C0 0.244 0.218 0 0.524 0ZM9.561 1.423C9.784 1.185 10.156 1.185 10.404 1.423C10.627 1.637 10.571 2.064 10.571 2.207V6.844H1.866V4.799L4.432 2.374C4.531 2.255 4.68 2.207 4.854 2.207C5.002 2.207 5.151 2.255 5.274 2.374L7.233 4.252L9.561 1.423Z" fill="#496f97"/>
+        </svg>
+      </button>
+    </div>
+
     <!-- chart + legend -->
-    <div style="padding:0 24px 24px;">
+    <div style="padding:0 24px 24px;margin-top:-12px;">
       <div style="position:relative;">
         <svg id="cpt-svg" viewBox="0 0 740 230" style="width:100%;display:block;" xmlns="http://www.w3.org/2000/svg">
           <!-- grid lines -->
@@ -795,10 +818,32 @@
           <line id="cpt-indicator" x1="0" y1="18" x2="0" y2="200" stroke="rgba(0,0,0,0.35)" stroke-width="1" stroke-dasharray="3,2" style="display:none"/>
           <rect id="cpt-hit" x="36" y="18" width="692" height="182" fill="transparent" style="cursor:crosshair"/>
         </svg>
+        <!-- Stacked chart (hidden by default) -->
+        <svg id="cpt-stacked-svg" viewBox="0 0 740 230" style="width:100%;display:none;" xmlns="http://www.w3.org/2000/svg">
+          <line x1="36" y1="18"  x2="728" y2="18"  stroke="#dce3ef" stroke-width="1"/>
+          <line x1="36" y1="64"  x2="728" y2="64"  stroke="#dce3ef" stroke-width="1"/>
+          <line x1="36" y1="109" x2="728" y2="109" stroke="#dce3ef" stroke-width="1"/>
+          <line x1="36" y1="155" x2="728" y2="155" stroke="#dce3ef" stroke-width="1"/>
+          <line x1="36" y1="200" x2="728" y2="200" stroke="#dce3ef" stroke-width="1"/>
+          <text class="aio-axis-label" x="32" y="22"  text-anchor="end" font-family="'Open Sans Condensed','Open Sans',sans-serif" font-stretch="condensed" font-size="13" fill="rgba(0,0,0,0.6)">100%</text>
+          <text class="aio-axis-label" x="32" y="113" text-anchor="end" font-family="'Open Sans Condensed','Open Sans',sans-serif" font-stretch="condensed" font-size="13" fill="rgba(0,0,0,0.6)">50%</text>
+          <text class="aio-axis-label" x="32" y="204" text-anchor="end" font-family="'Open Sans Condensed','Open Sans',sans-serif" font-stretch="condensed" font-size="13" fill="rgba(0,0,0,0.6)">0%</text>
+          <text class="aio-axis-label" x="36"  y="222" text-anchor="start" font-family="'Open Sans Condensed','Open Sans',sans-serif" font-stretch="condensed" font-size="13" fill="rgba(0,0,0,0.6)">27 Apr, 2026</text>
+          <text class="aio-axis-label" x="728" y="222" text-anchor="end"   font-family="'Open Sans Condensed','Open Sans',sans-serif" font-stretch="condensed" font-size="13" fill="rgba(0,0,0,0.6)">26 May, 2026</text>
+          <g id="cpt-stacked-bands"></g>
+          <line id="cpt-stacked-indicator" x1="0" y1="18" x2="0" y2="200" stroke="rgba(0,0,0,0.35)" stroke-width="1" stroke-dasharray="3,2" style="display:none"/>
+          <rect id="cpt-stacked-hit" x="36" y="18" width="692" height="182" fill="transparent" style="cursor:crosshair"/>
+        </svg>
         <div id="cpt-tooltip" style="display:none;position:fixed;background:rgba(38,50,80,0.95);border-radius:6px;padding:8px 12px;pointer-events:none;z-index:9999;min-width:175px;"></div>
       </div>
       <!-- legend -->
       <div id="cpt-legend" style="display:flex;flex-wrap:wrap;justify-content:center;gap:2px 12px;margin-top:12px;padding:0 4px 8px;"></div>
+      <!-- stacked legend (hidden by default) -->
+      <div id="cpt-stacked-legend" style="display:none;flex-wrap:wrap;justify-content:center;gap:2px 12px;margin-top:12px;padding:0 4px 8px;">
+        <div class="stacked-timeline__legend-item"><svg width="8" height="8" viewBox="0 0 8 8"><circle cx="4" cy="4" r="4" fill="#8ac8b1"/></svg>Ads Above AIO</div>
+        <div class="stacked-timeline__legend-item"><svg width="8" height="8" viewBox="0 0 8 8"><circle cx="4" cy="4" r="4" fill="#b3a2e7"/></svg>Ads Inside AIO</div>
+        <div class="stacked-timeline__legend-item"><svg width="8" height="8" viewBox="0 0 8 8"><circle cx="4" cy="4" r="4" fill="#e86492"/></svg>Ads Below AIO</div>
+      </div>
     </div>
     </div><!-- end white card wrapper -->
     <!-- end Competitor Position Timeline card -->
@@ -819,6 +864,13 @@
           <span class="card-header__subtitle">AIO position mix and estimated impression volume per competitor</span>
         </div>
         <div class="card-header__actions" style="align-items:center;">
+          <!-- Data source toggle: Whole Market ↔ Content Terms -->
+          <div style="display:inline-flex;align-items:center;gap:0;margin-right:4px;">
+            <span id="clb-ds-label-whole" style="font-family:'Open Sans',sans-serif;font-size:13px;color:#2b2b2b;font-weight:400;white-space:nowrap;margin-right:6px;">Whole Market</span>
+            <input type="checkbox" class="ds-toggle-input" id="clb-ds-toggle" checked style="flex-shrink:0;">
+            <span id="clb-ds-label-content" style="font-family:'Open Sans',sans-serif;font-size:13px;color:#2b2b2b;font-weight:600;white-space:nowrap;margin-left:6px;">Content Terms</span>
+          </div>
+          <div style="width:1px;height:20px;background:rgba(0,0,0,0.12);flex-shrink:0;margin-right:4px;"></div>
           <button class="card-header__action-btn" aria-label="Download">
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 2v8M5.5 8l2.5 2.5L10.5 8M3 13h10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </button>
@@ -1666,7 +1718,7 @@
         for (var i = 0; i < len; i++) sum += rawRows[i][key];
         return sum / len;
       }
-      function fmt(v) { return (v * 100).toFixed(1) + '%'; }
+      function fmt(v) { return Math.round(v * 100) + '%'; }
 
       // Build smooth SVG sparkline path for a set of values
       function buildSparkSVG(vals, color, gradId) {
@@ -1792,6 +1844,33 @@
       var vNoAds  = vals('no_position');
 
       var BAR_COLORS = { above:'#8ac8b1', inside:'#b3a2e7', below:'#e86492', no_position:'#8e9cb5' };
+
+      function delta(key) {
+        // compare second half avg vs first half avg
+        if (!len) return 0;
+        var half = Math.floor(len / 2);
+        var first = 0, second = 0;
+        for (var i = 0; i < half; i++) first += rawRows[i][key];
+        for (var i = half; i < len; i++) second += rawRows[i][key];
+        return second / (len - half) - first / half;
+      }
+
+      function setDelta(deltaId, d) {
+        var node = el(deltaId);
+        if (!node) return;
+        var pp = Math.round(d * 100); // percentage points, rounded
+        if (pp === 0) {
+          node.textContent = '—';
+          node.className = 'kpi-card__delta kpi-card__delta--flat';
+        } else if (pp > 0) {
+          node.textContent = '+' + pp + '%';
+          node.className = 'kpi-card__delta kpi-card__delta--up';
+        } else {
+          node.textContent = pp + '%';
+          node.className = 'kpi-card__delta kpi-card__delta--down';
+        }
+      }
+
       function setKpi(id, v, barKey) {
         var node = el(id);
         if (!node) return;
@@ -1802,6 +1881,11 @@
       setKpi('kpi-inside-val',   avg('inside'),      'inside');
       setKpi('kpi-below-val',    avg('below'),       'below');
       setKpi('kpi-noads-val', avg('no_position'), 'no_position');
+
+      setDelta('kpi-above-delta',  delta('above'));
+      setDelta('kpi-inside-delta', delta('inside'));
+      setDelta('kpi-below-delta',  delta('below'));
+      setDelta('kpi-noads-delta',  delta('no_position'));
 
       updateSparkline('kpi-above-sparkline',  vAbove,  trendColor(vAbove),  trendGrad(vAbove));
       updateSparkline('kpi-inside-sparkline', vInside, trendColor(vInside), trendGrad(vInside));
@@ -1978,17 +2062,22 @@
   // ── Subtab wiring — scoped to the AIO position card only ─────────────────
   var aioSubtabWrap = document.querySelector('.card-header .subtab')
     && document.querySelector('.card-header .subtab').closest('.card-header__actions');
-  // find only the Content Terms / Whole Market subtabs (inside the AIO chart card header)
-  var aioSubtabs = document.querySelectorAll('#aio-position-card .subtab, .card-header__actions .subtab:not([data-pos])');
-  aioSubtabs.forEach(function(btn){
-    btn.addEventListener('click', function(){
-      aioSubtabs.forEach(function(b){ b.classList.remove('subtab--active'); });
-      btn.classList.add('subtab--active');
-      var label = btn.textContent.trim();
-      var scope = label === 'Content Terms' ? 'content' : 'whole';
-      renderAIOChart(scope, currentAdType);
-    });
-  });
+  // ── AIO data source toggle (Whole Market ↔ Content Terms) ────────────────
+  var aioDsToggle     = document.getElementById('aio-ds-toggle');
+  var aioDsLabelWhole   = document.getElementById('aio-ds-label-whole');
+  var aioDsLabelContent = document.getElementById('aio-ds-label-content');
+  if (aioDsToggle) {
+    function applyAioDsStyle() {
+      var isContent = aioDsToggle.checked;
+      aioDsLabelWhole.style.fontWeight   = isContent ? '400' : '600';
+      aioDsLabelContent.style.fontWeight = isContent ? '600' : '400';
+      renderAIOChart(isContent ? 'content' : 'whole', currentAdType);
+    }
+    aioDsToggle.addEventListener('change', applyAioDsStyle);
+    // init styling (checked = content by default)
+    aioDsLabelWhole.style.fontWeight   = '400';
+    aioDsLabelContent.style.fontWeight = '600';
+  }
 
   // ── Dropdown wiring ───────────────────────────────────────────────────────
   var ddEl = document.getElementById('ads-type-dropdown');
@@ -2014,8 +2103,10 @@
   var compToggle = document.getElementById('comp-toggle');
   if (compToggle) {
     var compLegendGroup = document.getElementById('comp-legend-group');
+    var compLabel = document.querySelector('#comp-toggle-label span');
     function applyCompVisibility() {
       var show = compToggle.checked;
+      if (compLabel) compLabel.style.fontWeight = show ? '600' : '400';
       dynGroup.querySelectorAll('.aio-comp-line').forEach(function(el){
         el.style.display = show ? '' : 'none';
       });
@@ -2175,7 +2266,7 @@
           hiddenSeries[idx] = true;
         }
         item.classList.toggle('csd-series--off');
-        render(currentPos); // redraw without the toggled series
+        if (currentMode === 'lines') render(currentPos); else buildStackedChart();
       });
       legend.appendChild(item);
     });
@@ -2293,10 +2384,156 @@
   // tab clicks
   document.getElementById('cpt-tabs').addEventListener('click', function(e){
     var btn = e.target.closest('[data-pos]');
-    if (btn) render(btn.dataset.pos);
+    if (!btn) return;
+    currentPos = btn.dataset.pos;
+    if (currentMode === 'lines') render(currentPos);
+    else buildStackedChart();
   });
 
-  render('above');
+  // ── Chart mode toggle ──────────────────────────────────────────────────
+  var modeLines   = document.getElementById('cpt-mode-lines');
+  var modeStacked = document.getElementById('cpt-mode-stacked');
+  var lineSvg     = document.getElementById('cpt-svg');
+  var stackedSvg  = document.getElementById('cpt-stacked-svg');
+  var lineLegend  = document.getElementById('cpt-legend');
+  var stackLegend = document.getElementById('cpt-stacked-legend');
+  var tabs        = document.getElementById('cpt-tabs');
+  var stackBands  = document.getElementById('cpt-stacked-bands');
+  var stackInd    = document.getElementById('cpt-stacked-indicator');
+  var stackHit    = document.getElementById('cpt-stacked-hit');
+
+  var currentMode = 'lines';
+
+  function buildStackedChart() {
+    // Average across all 10 competitors for each position per date
+    stackBands.innerHTML = '';
+    var n = N, X0s=36, X1s=728, Y0s=18, Y1s=200, H=182;
+    function pxS(i){ return X0s + i/(n-1)*(X1s-X0s); }
+    function pyS(frac){ return Y1s - frac*H; }
+
+    // Stack the same 10 competitors, normalised to 100% so chart fills fully
+    var series = DATA[currentPos];
+    var visibleCIs = [];
+    for (var ci=0; ci<series.length; ci++) { if (!hiddenSeries[ci]) visibleCIs.push(ci); }
+
+    // Compute normalised values (each value / date total * 100)
+    var normSeries = {};
+    visibleCIs.forEach(function(ci) {
+      normSeries[ci] = new Array(n);
+    });
+    for (var d=0; d<n; d++) {
+      var tot=0;
+      visibleCIs.forEach(function(ci){ tot += series[ci][d]; });
+      if (!tot) tot=1;
+      visibleCIs.forEach(function(ci){ normSeries[ci][d] = series[ci][d]/tot*100; });
+    }
+
+    // pyS2: 0→Y1s(200), 100→Y0s(18)
+    function pyS2(v){ return Y1s - (v/100)*H; }
+    function pts(tops, bottoms) {
+      var p='';
+      for (var i=0;i<n;i++) p+=pxS(i).toFixed(1)+','+pyS2(tops[i]).toFixed(1)+' ';
+      for (var i=n-1;i>=0;i--) p+=pxS(i).toFixed(1)+','+pyS2(bottoms[i]).toFixed(1)+' ';
+      return p.trim();
+    }
+
+    var ns='http://www.w3.org/2000/svg';
+    var cumulative = new Array(n).fill(0);
+    // draw from last ci to first so top series is on top
+    for (var vi=visibleCIs.length-1; vi>=0; vi--) {
+      var ci = visibleCIs[vi];
+      var bottom = cumulative.slice();
+      var top = bottom.map(function(b,d){ return b + normSeries[ci][d]; });
+      var poly=document.createElementNS(ns,'polygon');
+      poly.setAttribute('points', pts(top, bottom));
+      poly.setAttribute('fill', COLORS[ci]);
+      poly.setAttribute('fill-opacity','0.85');
+      stackBands.appendChild(poly);
+      // separator line
+      var polyline=document.createElementNS(ns,'polyline');
+      var pStr=''; top.forEach(function(t,i){ pStr+=pxS(i).toFixed(1)+','+pyS2(t).toFixed(1)+' '; });
+      polyline.setAttribute('points', pStr.trim());
+      polyline.setAttribute('fill','none');
+      polyline.setAttribute('stroke','rgba(255,255,255,0.5)');
+      polyline.setAttribute('stroke-width','1');
+      stackBands.appendChild(polyline);
+      for (var d=0;d<n;d++) cumulative[d] += normSeries[ci][d];
+    }
+    // store raw series for tooltip
+    stackBands._series = series;
+    stackBands._normSeries = normSeries;
+    stackBands._visibleCIs = visibleCIs;
+    // Update y-axis labels (always 0–100% normalised)
+    var yLabels = stackedSvg.querySelectorAll('.aio-axis-label');
+    if (yLabels[0]) yLabels[0].textContent = '100%';
+    if (yLabels[1]) yLabels[1].textContent = '50%';
+    if (yLabels[2]) yLabels[2].textContent = '0%';
+
+    // Update axis font size
+    var scale = stackedSvg.getBoundingClientRect().width / 740;
+    if (scale) { var sp=(13/scale).toFixed(2); yLabels.forEach(function(t){t.setAttribute('font-size',sp);}); }
+  }
+
+  // Stacked hover
+  stackHit.addEventListener('mousemove', function(e) {
+    var r = stackedSvg.getBoundingClientRect();
+    var sx = (e.clientX - r.left) * (740/r.width);
+    var idx = Math.max(0, Math.min(N-1, Math.round((sx-36)/(728-36)*(N-1))));
+    stackInd.setAttribute('x1', 36+idx/(N-1)*692);
+    stackInd.setAttribute('x2', 36+idx/(N-1)*692);
+    stackInd.style.display = 'block';
+    if (stackBands._series) {
+      var series = stackBands._series;
+      var norm = stackBands._normSeries;
+      var html = '<div style="font-size:11px;font-weight:600;color:rgba(255,255,255,0.7);margin-bottom:6px;letter-spacing:0.3px;">'+DATES[idx]+'</div>';
+      var rows = (stackBands._visibleCIs||[]).map(function(ci){return{ci:ci,v:series[ci][idx],pct:norm&&norm[ci]?norm[ci][idx]:0};});
+      rows.sort(function(a,b){return b.v-a.v;});
+      rows.forEach(function(row){
+        html+='<div style="display:flex;align-items:center;gap:6px;font-size:12px;color:#fff;line-height:1.8;">'
+          +'<span style="width:8px;height:8px;border-radius:50%;background:'+COLORS[row.ci]+';flex-shrink:0;display:inline-block;"></span>'
+          +'<img src="https://www.google.com/s2/favicons?domain='+COMPETITORS[row.ci]+'&sz=16" width="11" height="11" style="border-radius:2px;flex-shrink:0;">'
+          +'<span style="flex:1;white-space:nowrap;">'+COMPETITORS[row.ci]+'</span>'
+          +'<span style="font-weight:600;padding-left:8px;">'+row.v+'%</span>'
+          +'<span style="opacity:0.5;font-size:10px;padding-left:4px;">('+row.pct.toFixed(0)+'%)</span>'
+          +'</div>';
+      });
+      tip.innerHTML = html;
+      tip.style.display = 'block';
+      tip.style.left = (e.clientX+16)+'px';
+      tip.style.top  = (e.clientY-80)+'px';
+    }
+  });
+  stackHit.addEventListener('mouseleave', function() {
+    stackInd.style.display = 'none';
+    tip.style.display = 'none';
+  });
+
+  function setMode(mode) {
+    currentMode = mode;
+    var isLines = mode === 'lines';
+    // toggle button styles
+    modeLines.style.background   = isLines ? '#5bb3f9' : 'transparent';
+    modeStacked.style.background = isLines ? 'transparent' : '#5bb3f9';
+    // swap icon colours
+    modeStacked.querySelectorAll('path').forEach(function(p){
+      p.setAttribute('fill', isLines ? '#496f97' : 'white');
+    });
+    modeLines.querySelectorAll('path').forEach(function(p){
+      p.setAttribute('fill', isLines ? 'white' : '#496f97');
+    });
+    // show/hide chart + controls
+    lineSvg.style.display   = isLines ? '' : 'none';
+    stackedSvg.style.display= isLines ? 'none' : '';
+    lineLegend.style.display = 'flex'; // legend always visible (same competitors)
+    stackLegend.style.display= 'none'; // not used
+    tabs.style.display        = ''; // tabs always visible
+    if (isLines) render(currentPos); else buildStackedChart();
+  }
+
+  modeLines.addEventListener('click',   function(){ setMode('lines'); });
+  modeStacked.addEventListener('click', function(){ setMode('stacked'); });
+
+  setMode('lines'); // initialise in lines mode
 })();
 </script>
 
@@ -2451,6 +2688,23 @@
       }
     });
   }
+
+
+  // ── Leaderboard data source toggle ───────────────────────────────────────
+  (function(){
+    var tog   = document.getElementById('clb-ds-toggle');
+    var lwhole = document.getElementById('clb-ds-label-whole');
+    var lcont  = document.getElementById('clb-ds-label-content');
+    if (!tog) return;
+    function applyStyle() {
+      lwhole.style.fontWeight = tog.checked ? '400' : '600';
+      lcont.style.fontWeight  = tog.checked ? '600' : '400';
+      // Data scope change would re-fetch / re-render in production
+    }
+    tog.addEventListener('change', applyStyle);
+    applyStyle(); // init
+  })();
+
 })();
 </script>
 
