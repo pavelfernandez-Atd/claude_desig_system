@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Multi-Series Horizontal Bars Chart – Demo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Open Sans', sans-serif;
+      background: #e4eef4;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 32px 16px;
+    }
+    .card {
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 2px 12px rgba(38,50,80,0.10);
+      padding: 28px 28px 24px;
+      width: 100%;
+      max-width: 700px;
+    }
+    .card__title {
+      font-size: 15px;
+      font-weight: 600;
+      color: #263250;
+      margin-bottom: 4px;
+    }
+    .card__subtitle {
+      font-size: 12px;
+      color: #6b7a99;
+      margin-bottom: 20px;
+    }
+
+    /* ---- component CSS ---- */
+    .hbar { width: 100%; }
+    .hbar__svg { width: 100%; display: block; overflow: hidden; }
+    .hbar__bar { cursor: pointer; transition: opacity 0.1s; }
+    .hbar__bar:hover { opacity: 0.82; }
+    .hbar__bar--grouped { cursor: default; }
+    .hbar__group-hl { transition: fill-opacity 0.1s; }
+    .hbar__group-hit { cursor: pointer; }
+    .hbar__tooltip {
+      position: fixed;
+      background: rgba(38,50,80,0.95);
+      color: #fff;
+      border-radius: 6px;
+      padding: 8px 12px;
+      font-family: var(--font-base, 'Open Sans', sans-serif);
+      font-size: 12px;
+      pointer-events: none;
+      z-index: 9999;
+      display: none;
+      min-width: 175px;
+    }
+    /* ---- legend ---- */
+    .hbar__legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px 20px;
+      margin-top: 14px;
+      padding-left: 68px;
+    }
+    .hbar__legend-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      color: #4a5568;
+    }
+    .hbar__legend-swatch {
+      width: 12px;
+      height: 12px;
+      border-radius: 2px;
+      flex-shrink: 0;
+    }
+  </style>
+</head>
+<body>
+<div class="card">
+  <div class="card__title">Paid Search – Share of Clicks by Category</div>
+  <div class="card__subtitle">3 advertisers · 5 categories · last 30 days</div>
+
+  <div class="hbar">
+    <!--
+      viewBox: 0 0 640 232
+      Plot X0=68, X1=620  (552px = 40%)
+      Gridlines at 0%=68, 10%=206, 20%=344, 30%=482, 40%=620
+      Bar h=8, inner gap=4, group gap=8
+      Group height=32 (3×8+2×4), pitch=40 (32+8)
+      5 groups → total content height = 5×40−8 = 192 → SVG height = 192+24+16 = 232
+      Group tops (y): 0→24, 1→64, 2→104, 3→144, 4→184
+      Gridline top=16, bottom=215
+      X-axis label y=228
+    -->
+    <svg class="hbar__svg" viewBox="0 0 640 232" aria-label="Multi-series horizontal bar chart">
+
+      <!-- Group highlight rects (fill-opacity animated via JS) -->
+      <rect class="hbar__group-hl" data-group="0" x="62" y="16" width="562" height="40" rx="3" fill="#e8f0fe" fill-opacity="0"/>
+      <rect class="hbar__group-hl" data-group="1" x="62" y="56" width="562" height="40" rx="3" fill="#e8f0fe" fill-opacity="0"/>
+      <rect class="hbar__group-hl" data-group="2" x="62" y="96" width="562" height="40" rx="3" fill="#e8f0fe" fill-opacity="0"/>
+      <rect class="hbar__group-hl" data-group="3" x="62" y="136" width="562" height="40" rx="3" fill="#e8f0fe" fill-opacity="0"/>
+      <rect class="hbar__group-hl" data-group="4" x="62" y="176" width="562" height="40" rx="3" fill="#e8f0fe" fill-opacity="0"/>
+
+      <!-- Gridlines -->
+      <line x1="68"  y1="14" x2="68"  y2="218" stroke="#dde3ed" stroke-width="1"/>
+      <line x1="206" y1="14" x2="206" y2="218" stroke="#dde3ed" stroke-width="1" stroke-dasharray="3 3"/>
+      <line x1="344" y1="14" x2="344" y2="218" stroke="#dde3ed" stroke-width="1" stroke-dasharray="3 3"/>
+      <line x1="482" y1="14" x2="482" y2="218" stroke="#dde3ed" stroke-width="1" stroke-dasharray="3 3"/>
+      <line x1="620" y1="14" x2="620" y2="218" stroke="#dde3ed" stroke-width="1" stroke-dasharray="3 3"/>
+
+      <!-- X-axis labels -->
+      <text x="68"  y="230" text-anchor="middle" font-family="Open Sans,sans-serif" font-size="10" fill="#6b7a99">0%</text>
+      <text x="206" y="230" text-anchor="middle" font-family="Open Sans,sans-serif" font-size="10" fill="#6b7a99">10%</text>
+      <text x="344" y="230" text-anchor="middle" font-family="Open Sans,sans-serif" font-size="10" fill="#6b7a99">20%</text>
+      <text x="482" y="230" text-anchor="middle" font-family="Open Sans,sans-serif" font-size="10" fill="#6b7a99">30%</text>
+      <text x="620" y="230" text-anchor="middle" font-family="Open Sans,sans-serif" font-size="10" fill="#6b7a99">40%</text>
+
+      <!-- Category labels (text-anchor=end, x=64, vertically centred in each group) -->
+      <!-- group centre = top + 20 -->
+      <text x="64" y="40"  text-anchor="end" font-family="Open Sans,sans-serif" font-size="11" fill="#263250" dominant-baseline="middle">Car Insurance</text>
+      <text x="64" y="80"  text-anchor="end" font-family="Open Sans,sans-serif" font-size="11" fill="#263250" dominant-baseline="middle">Home Insurance</text>
+      <text x="64" y="120" text-anchor="end" font-family="Open Sans,sans-serif" font-size="11" fill="#263250" dominant-baseline="middle">Travel</text>
+      <text x="64" y="160" text-anchor="end" font-family="Open Sans,sans-serif" font-size="11" fill="#263250" dominant-baseline="middle">Broadband</text>
+      <text x="64" y="200" text-anchor="end" font-family="Open Sans,sans-serif" font-size="11" fill="#263250" dominant-baseline="middle">Energy</text>
+
+      <!--
+        Data (share of clicks, max axis=40%):
+        px per % = 552/40 = 13.8
+
+        Category          Your Brand  booking.com  comparethemarket
+        Car Insurance     35%         22%          18%
+        Home Insurance    28%         15%          30%
+        Travel            12%         38%          8%
+        Broadband         20%         10%          25%
+        Energy            16%         28%          12%
+
+        Bar y positions per group (group top = G):
+          series 0 (Your Brand):        y = G+8
+          series 1 (booking.com):       y = G+20  (8+4+8)
+          series 2 (comparethemarket):  y = G+32  (8+4+8+4+8... wait, 8+4+8=20 then +4+8=32)
+
+        Group tops: G0=16, G1=56, G2=96, G3=136, G4=176
+      -->
+
+      <!-- GROUP 0 – Car Insurance -->
+      <rect class="hbar__bar hbar__bar--grouped" fill="#b3a2e7" x="68" y="24"  width="483" height="8" rx="2" data-group="0" data-series="Your Brand"          data-value="35%"/>
+      <rect class="hbar__bar hbar__bar--grouped" fill="#64abfb" x="68" y="36"  width="304" height="8" rx="2" data-group="0" data-series="booking.com"           data-value="22%"/>
+      <rect class="hbar__bar hbar__bar--grouped" fill="#d47dd4" x="68" y="48"  width="249" height="8" rx="2" data-group="0" data-series="comparethemarket.com"  data-value="18%"/>
+
+      <!-- GROUP 1 – Home Insurance -->
+      <rect class="hbar__bar hbar__bar--grouped" fill="#b3a2e7" x="68" y="64"  width="387" height="8" rx="2" data-group="1" data-series="Your Brand"          data-value="28%"/>
+      <rect class="hbar__bar hbar__bar--grouped" fill="#64abfb" x="68" y="76"  width="207" height="8" rx="2" data-group="1" data-series="booking.com"           data-value="15%"/>
+      <rect class="hbar__bar hbar__bar--grouped" fill="#d47dd4" x="68" y="88"  width="414" height="8" rx="2" data-group="1" data-series="comparethemarket.com"  data-value="30%"/>
+
+      <!-- GROUP 2 – Travel -->
+      <rect class="hbar__bar hbar__bar--grouped" fill="#b3a2e7" x="68" y="104" width="166" height="8" rx="2" data-group="2" data-series="Your Brand"          data-value="12%"/>
+      <rect class="hbar__bar hbar__bar--grouped" fill="#64abfb" x="68" y="116" width="524" height="8" rx="2" data-group="2" data-series="booking.com"           data-value="38%"/>
+      <rect class="hbar__bar hbar__bar--grouped" fill="#d47dd4" x="68" y="128" width="110" height="8" rx="2" data-group="2" data-series="comparethemarket.com"  data-value="8%"/>
+
+      <!-- GROUP 3 – Broadband -->
+      <rect class="hbar__bar hbar__bar--grouped" fill="#b3a2e7" x="68" y="144" width="276" height="8" rx="2" data-group="3" data-series="Your Brand"          data-value="20%"/>
+      <rect class="hbar__bar hbar__bar--grouped" fill="#64abfb" x="68" y="156" width="138" height="8" rx="2" data-group="3" data-series="booking.com"           data-value="10%"/>
+      <rect class="hbar__bar hbar__bar--grouped" fill="#d47dd4" x="68" y="168" width="345" height="8" rx="2" data-group="3" data-series="comparethemarket.com"  data-value="25%"/>
+
+      <!-- GROUP 4 – Energy -->
+      <rect class="hbar__bar hbar__bar--grouped" fill="#b3a2e7" x="68" y="184" width="221" height="8" rx="2" data-group="4" data-series="Your Brand"          data-value="16%"/>
+      <rect class="hbar__bar hbar__bar--grouped" fill="#64abfb" x="68" y="196" width="387" height="8" rx="2" data-group="4" data-series="booking.com"           data-value="28%"/>
+      <rect class="hbar__bar hbar__bar--grouped" fill="#d47dd4" x="68" y="208" width="166" height="8" rx="2" data-group="4" data-series="comparethemarket.com"  data-value="12%"/>
+
+      <!-- Hit rects (one per group, full-height, invisible) -->
+      <rect class="hbar__group-hit" data-group="0" x="62" y="16" width="562" height="40" fill="transparent"/>
+      <rect class="hbar__group-hit" data-group="1" x="62" y="56" width="562" height="40" fill="transparent"/>
+      <rect class="hbar__group-hit" data-group="2" x="62" y="96" width="562" height="40" fill="transparent"/>
+      <rect class="hbar__group-hit" data-group="3" x="62" y="136" width="562" height="40" fill="transparent"/>
+      <rect class="hbar__group-hit" data-group="4" x="62" y="176" width="562" height="40" fill="transparent"/>
+    </svg>
+
+    <!-- Legend -->
+    <div class="hbar__legend">
+      <span class="hbar__legend-item">
+        <span class="hbar__legend-swatch" style="background:#b3a2e7"></span>Your Brand
+      </span>
+      <span class="hbar__legend-item">
+        <span class="hbar__legend-swatch" style="background:#64abfb"></span>booking.com
+      </span>
+      <span class="hbar__legend-item">
+        <span class="hbar__legend-swatch" style="background:#d47dd4"></span>comparethemarket.com
+      </span>
+    </div>
+
+    <!-- Tooltip -->
+    <div class="hbar__tooltip" id="hbar-tip"></div>
+  </div>
+</div>
+
+<script>
+(function () {
+  const CATEGORIES = ['Car Insurance','Home Insurance','Travel','Broadband','Energy'];
+  const SERIES = ['Your Brand','booking.com','comparethemarket.com'];
+  const COLOURS = { 'Your Brand':'#b3a2e7', 'booking.com':'#64abfb', 'comparethemarket.com':'#d47dd4' };
+
+  const tip   = document.getElementById('hbar-tip');
+  const hls   = document.querySelectorAll('.hbar__group-hl');
+  const hits  = document.querySelectorAll('.hbar__group-hit');
+
+  // Build data map from the SVG attributes
+  const dataMap = {};
+  document.querySelectorAll('.hbar__bar--grouped').forEach(el => {
+    const g = el.dataset.group;
+    const s = el.dataset.series;
+    const v = el.dataset.value;
+    if (!dataMap[g]) dataMap[g] = {};
+    dataMap[g][s] = v;
+  });
+
+  function showTip(e, groupIdx) {
+    const cat = CATEGORIES[groupIdx];
+    let html = '<div style="font-weight:600;margin-bottom:6px;font-size:12px;">' + cat + '</div>';
+    SERIES.forEach(s => {
+      const val = (dataMap[groupIdx] && dataMap[groupIdx][s]) || '—';
+      html += '<div style="display:flex;align-items:center;gap:6px;margin-top:3px;">'
+            + '<span style="width:10px;height:10px;border-radius:2px;background:' + COLOURS[s] + ';flex-shrink:0;display:inline-block;"></span>'
+            + '<span style="flex:1;color:#c8d0e0;">' + s + '</span>'
+            + '<span style="font-weight:600;margin-left:8px;">' + val + '</span>'
+            + '</div>';
+    });
+    tip.innerHTML = html;
+    tip.style.display = 'block';
+    moveTip(e);
+  }
+
+  function moveTip(e) {
+    const x = e.clientX + 14;
+    const y = e.clientY - 10;
+    tip.style.left = Math.min(x, window.innerWidth - tip.offsetWidth - 8) + 'px';
+    tip.style.top  = Math.min(y, window.innerHeight - tip.offsetHeight - 8) + 'px';
+  }
+
+  function hideTip() {
+    tip.style.display = 'none';
+  }
+
+  hits.forEach(hit => {
+    const g = parseInt(hit.dataset.group, 10);
+    const hl = hls[g];
+
+    hit.addEventListener('mouseenter', e => {
+      if (hl) hl.setAttribute('fill-opacity', '1');
+      showTip(e, g);
+    });
+    hit.addEventListener('mousemove', moveTip);
+    hit.addEventListener('mouseleave', () => {
+      if (hl) hl.setAttribute('fill-opacity', '0');
+      hideTip();
+    });
+  });
+})();
+</script>
+</body>
+</html>
