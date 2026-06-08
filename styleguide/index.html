@@ -228,8 +228,9 @@
     .palette-family-name { font-size: 11px; font-weight: 600; color: var(--text-secondary-var); text-transform: capitalize; letter-spacing: 0.4px; }
     .palette-strip { display: flex; gap: 2px; }
     .palette-chip-wrap { display: flex; flex-direction: column; align-items: center; gap: 3px; }
-    .palette-chip { width: 36px; height: 28px; border-radius: 3px; border: 1px solid rgba(0,0,0,0.06); flex-shrink: 0; }
+    .palette-chip { width: 48px; height: 28px; border-radius: 3px; border: 1px solid rgba(0,0,0,0.06); flex-shrink: 0; }
     .palette-step { font-size: 8px; color: var(--text-secondary-var); }
+    .palette-hex  { font-size: 7.5px; color: var(--text-secondary-var); letter-spacing: -0.2px; opacity: 0.75; }
 
     /* CHART DOTS */
     .chart-row { display: flex; flex-wrap: wrap; gap: 8px; }
@@ -1863,6 +1864,7 @@
       <div class="swatch chart-swatch"><div class="swatch-chip" style="background:#435a97"></div><span class="swatch-name">09 navy</span><span class="swatch-value">#435a97</span></div>
       <div class="swatch chart-swatch"><div class="swatch-chip" style="background:#814e2c"></div><span class="swatch-name">10 brown</span><span class="swatch-value">#814e2c</span></div>
       <div class="swatch chart-swatch"><div class="swatch-chip" style="background:#c8d09c"></div><span class="swatch-name">11 olive</span><span class="swatch-value">#c8d09c</span></div>
+      <div class="swatch chart-swatch"><div class="swatch-chip" style="background:#95b536"></div><span class="swatch-name">12 lime</span><span class="swatch-value">#95b536</span></div>
       <div class="swatch chart-swatch"><div class="swatch-chip" style="background:#d3dbe6"></div><span class="swatch-name">neutral</span><span class="swatch-value">#d3dbe6</span></div>
     </div>
   </div>
@@ -2046,16 +2048,33 @@
       <div class="palette-row">
         <span class="palette-family-name">Green</span>
         <div class="palette-strip">
-          <div class="palette-chip-wrap"><div class="palette-chip" style="background:#102d12"></div><span class="palette-step">900</span></div>
-          <div class="palette-chip-wrap"><div class="palette-chip" style="background:#1a471c"></div><span class="palette-step">800</span></div>
-          <div class="palette-chip-wrap"><div class="palette-chip" style="background:#246127"></div><span class="palette-step">700</span></div>
-          <div class="palette-chip-wrap"><div class="palette-chip" style="background:#2e7d32"></div><span class="palette-step">600</span></div>
-          <div class="palette-chip-wrap"><div class="palette-chip" style="background:#37953c"></div><span class="palette-step">500</span></div>
-          <div class="palette-chip-wrap"><div class="palette-chip" style="background:#40af46"></div><span class="palette-step">400</span></div>
-          <div class="palette-chip-wrap"><div class="palette-chip" style="background:#5fc464"></div><span class="palette-step">300</span></div>
-          <div class="palette-chip-wrap"><div class="palette-chip" style="background:#8bd48f"></div><span class="palette-step">200</span></div>
-          <div class="palette-chip-wrap"><div class="palette-chip" style="background:#b8e5ba"></div><span class="palette-step">100</span></div>
-          <div class="palette-chip-wrap"><div class="palette-chip" style="background:#daf1db"></div><span class="palette-step">50</span></div>
+          <div class="palette-chip-wrap"><div class="palette-chip" style="background:#0b2114"></div><span class="palette-step">900</span></div>
+          <div class="palette-chip-wrap"><div class="palette-chip" style="background:#133821"></div><span class="palette-step">800</span></div>
+          <div class="palette-chip-wrap"><div class="palette-chip" style="background:#1b4d30"></div><span class="palette-step">700</span></div>
+          <div class="palette-chip-wrap"><div class="palette-chip" style="background:#25643f"></div><span class="palette-step">600</span></div>
+          <div class="palette-chip-wrap"><div class="palette-chip" style="background:#2f7a4e"></div><span class="palette-step">500</span></div>
+          <div class="palette-chip-wrap"><div class="palette-chip" style="background:#3d9761"></div><span class="palette-step">400</span></div>
+          <div class="palette-chip-wrap"><div class="palette-chip" style="background:#5caf79"></div><span class="palette-step">300</span></div>
+          <div class="palette-chip-wrap"><div class="palette-chip" style="background:#8acca6"></div><span class="palette-step">200</span></div>
+          <div class="palette-chip-wrap"><div class="palette-chip" style="background:#c4ead5"></div><span class="palette-step">100</span></div>
+          <div class="palette-chip-wrap"><div class="palette-chip" style="background:#eaf7ee"></div><span class="palette-step">50</span></div>
+        </div>
+      </div>
+
+      <!-- Olive -->
+      <div class="palette-row">
+        <span class="palette-family-name">Olive</span>
+        <div class="palette-strip">
+          <div class="palette-chip-wrap"><div class="palette-chip" style="background:#292e0f"></div><span class="palette-step">900</span></div>
+          <div class="palette-chip-wrap"><div class="palette-chip" style="background:#444b1b"></div><span class="palette-step">800</span></div>
+          <div class="palette-chip-wrap"><div class="palette-chip" style="background:#5e6827"></div><span class="palette-step">700</span></div>
+          <div class="palette-chip-wrap"><div class="palette-chip" style="background:#788434"></div><span class="palette-step">600</span></div>
+          <div class="palette-chip-wrap"><div class="palette-chip" style="background:#919f41"></div><span class="palette-step">500</span></div>
+          <div class="palette-chip-wrap"><div class="palette-chip" style="background:#a7b654"></div><span class="palette-step">400</span></div>
+          <div class="palette-chip-wrap"><div class="palette-chip" style="background:#b6c176"></div><span class="palette-step">300</span></div>
+          <div class="palette-chip-wrap"><div class="palette-chip" style="background:#c8d09c"></div><span class="palette-step">200</span></div>
+          <div class="palette-chip-wrap"><div class="palette-chip" style="background:#dbdfc3"></div><span class="palette-step">100</span></div>
+          <div class="palette-chip-wrap"><div class="palette-chip" style="background:#ecede3"></div><span class="palette-step">50</span></div>
         </div>
       </div>
 
@@ -14620,6 +14639,20 @@ Prioritise authority reinforcement in declining citation segments</textarea>
     });
   });
 })();
+</script>
+<script>
+// Monochromatic palettes — inject hex values under each step label
+document.querySelectorAll('.palette-chip-wrap').forEach(function(wrap) {
+  var chip = wrap.querySelector('.palette-chip');
+  var step = wrap.querySelector('.palette-step');
+  if (!chip || !step) return;
+  var m = (chip.getAttribute('style') || '').match(/#[0-9a-fA-F]{3,8}/i);
+  if (!m) return;
+  var span = document.createElement('span');
+  span.className = 'palette-hex';
+  span.textContent = m[0].toLowerCase();
+  step.insertAdjacentElement('afterend', span);
+});
 </script>
 </body>
 </html>
