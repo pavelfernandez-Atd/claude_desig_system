@@ -1547,8 +1547,10 @@
     .acc { background:#f7f9fc; border:1px solid #d3d3d3; border-radius:12px; padding:16px; display:flex; align-items:center; gap:10px; font-family:'Open Sans',Helvetica,sans-serif; cursor:pointer; transition:background 0.15s,border-color 0.15s; user-select:none; }
     .acc:hover { background:#eef3f8; border-color:#c0cfe0; }
     .acc-wrap.is-expanded .acc { border-radius:12px 12px 0 0; border-color:#b1d1f6; border-bottom-color:transparent; }
-    .acc__drag { width:32px; height:32px; display:flex; align-items:center; justify-content:center; flex-shrink:0; cursor:grab; color:#9aafc5; }
-    .acc__drag:hover { color:#6477a2; }
+    .acc__drag { width:32px; height:32px; display:flex; align-items:center; justify-content:center; flex-shrink:0; cursor:grab; color:#6477a2; position:relative; }
+    .acc__drag::after { content:attr(data-tooltip); position:absolute; bottom:calc(100% + 6px); left:50%; transform:translateX(-50%); background:rgba(33,33,33,0.88); color:#fff; font-size:11px; font-weight:400; font-family:'Open Sans',Helvetica,sans-serif; white-space:nowrap; padding:4px 8px; border-radius:4px; pointer-events:none; opacity:0; transition:opacity 0.15s; z-index:10; }
+    .acc__drag::before { content:''; position:absolute; bottom:calc(100% + 2px); left:50%; transform:translateX(-50%); border:4px solid transparent; border-top-color:rgba(33,33,33,0.88); pointer-events:none; opacity:0; transition:opacity 0.15s; z-index:10; }
+    .acc__drag:hover::after, .acc__drag:hover::before { opacity:1; }
     .acc__body { flex:1; min-width:0; display:flex; flex-direction:column; gap:4px; }
     .acc__title { font-size:16px; font-weight:600; color:rgba(0,0,0,0.87); line-height:19px; }
     .acc__desc { font-size:13px; color:#6b6b6b; line-height:15px; }
@@ -7073,8 +7075,8 @@
       <!-- Row 1 — Google Ads -->
       <div class="acc-wrap" id="aclp-0">
         <div class="acc" onclick="accToggle('aclp-0')">
-          <div class="acc__drag" onclick="event.stopPropagation()" title="Drag to reorder">
-            <svg width="22" height="22" viewBox="0 0 14 10" style="transform:rotate(90deg);display:block;flex-shrink:0" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.917031 0H13.083C13.5701 0 14 0.390625 14 0.833333C14 1.30208 13.5701 1.66667 13.083 1.66667H0.917031C0.401201 1.66667 0 1.30208 0 0.833333C0 0.390625 0.401201 0 0.917031 0ZM0.917031 4.16667H13.083C13.5701 4.16667 14 4.55729 14 5C14 5.46875 13.5701 5.83333 13.083 5.83333H0.917031C0.401201 5.83333 0 5.46875 0 5C0 4.55729 0.401201 4.16667 0.917031 4.16667ZM0.917031 8.33333H13.083C13.5701 8.33333 14 8.72396 14 9.16667C14 9.63542 13.5701 10 13.083 10H0.917031C0.401201 10 0 9.63542 0 9.16667C0 8.72396 0.401201 8.33333 0.917031 8.33333Z" fill="#3079BD"/></svg>
+          <div class="acc__drag" onclick="event.stopPropagation()" data-tooltip="drag me">
+            <svg width="22" height="22" viewBox="0 0 14 10" style="transform:rotate(90deg);display:block;flex-shrink:0" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.917031 0H13.083C13.5701 0 14 0.390625 14 0.833333C14 1.30208 13.5701 1.66667 13.083 1.66667H0.917031C0.401201 1.66667 0 1.30208 0 0.833333C0 0.390625 0.401201 0 0.917031 0ZM0.917031 4.16667H13.083C13.5701 4.16667 14 4.55729 14 5C14 5.46875 13.5701 5.83333 13.083 5.83333H0.917031C0.401201 5.83333 0 5.46875 0 5C0 4.55729 0.401201 4.16667 0.917031 4.16667ZM0.917031 8.33333H13.083C13.5701 8.33333 14 8.72396 14 9.16667C14 9.63542 13.5701 10 13.083 10H0.917031C0.401201 10 0 9.63542 0 9.16667C0 8.72396 0.401201 8.33333 0.917031 8.33333Z" fill="currentColor"/></svg>
           </div>
           <label class="toggle-switch" onclick="event.stopPropagation()">
             <input type="checkbox" class="toggle-switch__input" checked onchange="accSetDisabled('aclp-0',!this.checked)">
@@ -7102,8 +7104,8 @@
       <!-- Row 2 — Microsoft -->
       <div class="acc-wrap" id="aclp-1">
         <div class="acc" onclick="accToggle('aclp-1')">
-          <div class="acc__drag" onclick="event.stopPropagation()" title="Drag to reorder">
-            <svg width="22" height="22" viewBox="0 0 14 10" style="transform:rotate(90deg);display:block;flex-shrink:0" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.917031 0H13.083C13.5701 0 14 0.390625 14 0.833333C14 1.30208 13.5701 1.66667 13.083 1.66667H0.917031C0.401201 1.66667 0 1.30208 0 0.833333C0 0.390625 0.401201 0 0.917031 0ZM0.917031 4.16667H13.083C13.5701 4.16667 14 4.55729 14 5C14 5.46875 13.5701 5.83333 13.083 5.83333H0.917031C0.401201 5.83333 0 5.46875 0 5C0 4.55729 0.401201 4.16667 0.917031 4.16667ZM0.917031 8.33333H13.083C13.5701 8.33333 14 8.72396 14 9.16667C14 9.63542 13.5701 10 13.083 10H0.917031C0.401201 10 0 9.63542 0 9.16667C0 8.72396 0.401201 8.33333 0.917031 8.33333Z" fill="#3079BD"/></svg>
+          <div class="acc__drag" onclick="event.stopPropagation()" data-tooltip="drag me">
+            <svg width="22" height="22" viewBox="0 0 14 10" style="transform:rotate(90deg);display:block;flex-shrink:0" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.917031 0H13.083C13.5701 0 14 0.390625 14 0.833333C14 1.30208 13.5701 1.66667 13.083 1.66667H0.917031C0.401201 1.66667 0 1.30208 0 0.833333C0 0.390625 0.401201 0 0.917031 0ZM0.917031 4.16667H13.083C13.5701 4.16667 14 4.55729 14 5C14 5.46875 13.5701 5.83333 13.083 5.83333H0.917031C0.401201 5.83333 0 5.46875 0 5C0 4.55729 0.401201 4.16667 0.917031 4.16667ZM0.917031 8.33333H13.083C13.5701 8.33333 14 8.72396 14 9.16667C14 9.63542 13.5701 10 13.083 10H0.917031C0.401201 10 0 9.63542 0 9.16667C0 8.72396 0.401201 8.33333 0.917031 8.33333Z" fill="currentColor"/></svg>
           </div>
           <label class="toggle-switch" onclick="event.stopPropagation()">
             <input type="checkbox" class="toggle-switch__input" checked onchange="accSetDisabled('aclp-1',!this.checked)">
@@ -7130,8 +7132,8 @@
       <!-- Row 3 — Meta (starts disabled) -->
       <div class="acc-wrap is-disabled" id="aclp-2">
         <div class="acc">
-          <div class="acc__drag" title="Drag to reorder">
-            <svg width="22" height="22" viewBox="0 0 14 10" style="transform:rotate(90deg);display:block;flex-shrink:0" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.917031 0H13.083C13.5701 0 14 0.390625 14 0.833333C14 1.30208 13.5701 1.66667 13.083 1.66667H0.917031C0.401201 1.66667 0 1.30208 0 0.833333C0 0.390625 0.401201 0 0.917031 0ZM0.917031 4.16667H13.083C13.5701 4.16667 14 4.55729 14 5C14 5.46875 13.5701 5.83333 13.083 5.83333H0.917031C0.401201 5.83333 0 5.46875 0 5C0 4.55729 0.401201 4.16667 0.917031 4.16667ZM0.917031 8.33333H13.083C13.5701 8.33333 14 8.72396 14 9.16667C14 9.63542 13.5701 10 13.083 10H0.917031C0.401201 10 0 9.63542 0 9.16667C0 8.72396 0.401201 8.33333 0.917031 8.33333Z" fill="#3079BD"/></svg>
+          <div class="acc__drag" data-tooltip="drag me">
+            <svg width="22" height="22" viewBox="0 0 14 10" style="transform:rotate(90deg);display:block;flex-shrink:0" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.917031 0H13.083C13.5701 0 14 0.390625 14 0.833333C14 1.30208 13.5701 1.66667 13.083 1.66667H0.917031C0.401201 1.66667 0 1.30208 0 0.833333C0 0.390625 0.401201 0 0.917031 0ZM0.917031 4.16667H13.083C13.5701 4.16667 14 4.55729 14 5C14 5.46875 13.5701 5.83333 13.083 5.83333H0.917031C0.401201 5.83333 0 5.46875 0 5C0 4.55729 0.401201 4.16667 0.917031 4.16667ZM0.917031 8.33333H13.083C13.5701 8.33333 14 8.72396 14 9.16667C14 9.63542 13.5701 10 13.083 10H0.917031C0.401201 10 0 9.63542 0 9.16667C0 8.72396 0.401201 8.33333 0.917031 8.33333Z" fill="currentColor"/></svg>
           </div>
           <label class="toggle-switch" onclick="event.stopPropagation()">
             <input type="checkbox" class="toggle-switch__input" onchange="accSetDisabled('aclp-2',!this.checked)">
@@ -7157,8 +7159,8 @@
       <!-- Row 4 — LinkedIn -->
       <div class="acc-wrap" id="aclp-3">
         <div class="acc" onclick="accToggle('aclp-3')">
-          <div class="acc__drag" onclick="event.stopPropagation()" title="Drag to reorder">
-            <svg width="22" height="22" viewBox="0 0 14 10" style="transform:rotate(90deg);display:block;flex-shrink:0" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.917031 0H13.083C13.5701 0 14 0.390625 14 0.833333C14 1.30208 13.5701 1.66667 13.083 1.66667H0.917031C0.401201 1.66667 0 1.30208 0 0.833333C0 0.390625 0.401201 0 0.917031 0ZM0.917031 4.16667H13.083C13.5701 4.16667 14 4.55729 14 5C14 5.46875 13.5701 5.83333 13.083 5.83333H0.917031C0.401201 5.83333 0 5.46875 0 5C0 4.55729 0.401201 4.16667 0.917031 4.16667ZM0.917031 8.33333H13.083C13.5701 8.33333 14 8.72396 14 9.16667C14 9.63542 13.5701 10 13.083 10H0.917031C0.401201 10 0 9.63542 0 9.16667C0 8.72396 0.401201 8.33333 0.917031 8.33333Z" fill="#3079BD"/></svg>
+          <div class="acc__drag" onclick="event.stopPropagation()" data-tooltip="drag me">
+            <svg width="22" height="22" viewBox="0 0 14 10" style="transform:rotate(90deg);display:block;flex-shrink:0" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.917031 0H13.083C13.5701 0 14 0.390625 14 0.833333C14 1.30208 13.5701 1.66667 13.083 1.66667H0.917031C0.401201 1.66667 0 1.30208 0 0.833333C0 0.390625 0.401201 0 0.917031 0ZM0.917031 4.16667H13.083C13.5701 4.16667 14 4.55729 14 5C14 5.46875 13.5701 5.83333 13.083 5.83333H0.917031C0.401201 5.83333 0 5.46875 0 5C0 4.55729 0.401201 4.16667 0.917031 4.16667ZM0.917031 8.33333H13.083C13.5701 8.33333 14 8.72396 14 9.16667C14 9.63542 13.5701 10 13.083 10H0.917031C0.401201 10 0 9.63542 0 9.16667C0 8.72396 0.401201 8.33333 0.917031 8.33333Z" fill="currentColor"/></svg>
           </div>
           <label class="toggle-switch" onclick="event.stopPropagation()">
             <input type="checkbox" class="toggle-switch__input" checked onchange="accSetDisabled('aclp-3',!this.checked)">
@@ -7192,7 +7194,7 @@
       <div style="font-size:11px;font-weight:600;color:#6477a2;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:8px">Default — Collapsed</div>
       <div class="acc-wrap">
         <div class="acc">
-          <div class="acc__drag"><svg width="22" height="22" viewBox="0 0 14 10" style="transform:rotate(90deg);display:block;flex-shrink:0" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.917031 0H13.083C13.5701 0 14 0.390625 14 0.833333C14 1.30208 13.5701 1.66667 13.083 1.66667H0.917031C0.401201 1.66667 0 1.30208 0 0.833333C0 0.390625 0.401201 0 0.917031 0ZM0.917031 4.16667H13.083C13.5701 4.16667 14 4.55729 14 5C14 5.46875 13.5701 5.83333 13.083 5.83333H0.917031C0.401201 5.83333 0 5.46875 0 5C0 4.55729 0.401201 4.16667 0.917031 4.16667ZM0.917031 8.33333H13.083C13.5701 8.33333 14 8.72396 14 9.16667C14 9.63542 13.5701 10 13.083 10H0.917031C0.401201 10 0 9.63542 0 9.16667C0 8.72396 0.401201 8.33333 0.917031 8.33333Z" fill="#3079BD"/></svg></div>
+          <div class="acc__drag" data-tooltip="drag me"><svg width="22" height="22" viewBox="0 0 14 10" style="transform:rotate(90deg);display:block;flex-shrink:0" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.917031 0H13.083C13.5701 0 14 0.390625 14 0.833333C14 1.30208 13.5701 1.66667 13.083 1.66667H0.917031C0.401201 1.66667 0 1.30208 0 0.833333C0 0.390625 0.401201 0 0.917031 0ZM0.917031 4.16667H13.083C13.5701 4.16667 14 4.55729 14 5C14 5.46875 13.5701 5.83333 13.083 5.83333H0.917031C0.401201 5.83333 0 5.46875 0 5C0 4.55729 0.401201 4.16667 0.917031 4.16667ZM0.917031 8.33333H13.083C13.5701 8.33333 14 8.72396 14 9.16667C14 9.63542 13.5701 10 13.083 10H0.917031C0.401201 10 0 9.63542 0 9.16667C0 8.72396 0.401201 8.33333 0.917031 8.33333Z" fill="currentColor"/></svg></div>
           <label class="toggle-switch"><input type="checkbox" class="toggle-switch__input" checked><span class="toggle-switch__track"><span class="toggle-switch__thumb"></span></span></label>
           <div class="acc__body"><div class="acc__title">Google Ads</div><div class="acc__desc">Search, Shopping &amp; Display campaigns</div></div>
           <span class="acc__count">4/4</span>
@@ -7205,7 +7207,7 @@
       <div style="font-size:11px;font-weight:600;color:#6477a2;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:8px">Expanded</div>
       <div class="acc-wrap is-expanded">
         <div class="acc">
-          <div class="acc__drag"><svg width="22" height="22" viewBox="0 0 14 10" style="transform:rotate(90deg);display:block;flex-shrink:0" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.917031 0H13.083C13.5701 0 14 0.390625 14 0.833333C14 1.30208 13.5701 1.66667 13.083 1.66667H0.917031C0.401201 1.66667 0 1.30208 0 0.833333C0 0.390625 0.401201 0 0.917031 0ZM0.917031 4.16667H13.083C13.5701 4.16667 14 4.55729 14 5C14 5.46875 13.5701 5.83333 13.083 5.83333H0.917031C0.401201 5.83333 0 5.46875 0 5C0 4.55729 0.401201 4.16667 0.917031 4.16667ZM0.917031 8.33333H13.083C13.5701 8.33333 14 8.72396 14 9.16667C14 9.63542 13.5701 10 13.083 10H0.917031C0.401201 10 0 9.63542 0 9.16667C0 8.72396 0.401201 8.33333 0.917031 8.33333Z" fill="#3079BD"/></svg></div>
+          <div class="acc__drag" data-tooltip="drag me"><svg width="22" height="22" viewBox="0 0 14 10" style="transform:rotate(90deg);display:block;flex-shrink:0" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.917031 0H13.083C13.5701 0 14 0.390625 14 0.833333C14 1.30208 13.5701 1.66667 13.083 1.66667H0.917031C0.401201 1.66667 0 1.30208 0 0.833333C0 0.390625 0.401201 0 0.917031 0ZM0.917031 4.16667H13.083C13.5701 4.16667 14 4.55729 14 5C14 5.46875 13.5701 5.83333 13.083 5.83333H0.917031C0.401201 5.83333 0 5.46875 0 5C0 4.55729 0.401201 4.16667 0.917031 4.16667ZM0.917031 8.33333H13.083C13.5701 8.33333 14 8.72396 14 9.16667C14 9.63542 13.5701 10 13.083 10H0.917031C0.401201 10 0 9.63542 0 9.16667C0 8.72396 0.401201 8.33333 0.917031 8.33333Z" fill="currentColor"/></svg></div>
           <label class="toggle-switch"><input type="checkbox" class="toggle-switch__input" checked><span class="toggle-switch__track"><span class="toggle-switch__thumb"></span></span></label>
           <div class="acc__body"><div class="acc__title">Google Ads</div><div class="acc__desc">Search, Shopping &amp; Display campaigns</div></div>
           <span class="acc__count">4/4</span>
@@ -7225,7 +7227,7 @@
       <div style="font-size:11px;font-weight:600;color:#6477a2;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:8px">Toggle Off — Disabled</div>
       <div class="acc-wrap is-disabled">
         <div class="acc">
-          <div class="acc__drag"><svg width="22" height="22" viewBox="0 0 14 10" style="transform:rotate(90deg);display:block;flex-shrink:0" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.917031 0H13.083C13.5701 0 14 0.390625 14 0.833333C14 1.30208 13.5701 1.66667 13.083 1.66667H0.917031C0.401201 1.66667 0 1.30208 0 0.833333C0 0.390625 0.401201 0 0.917031 0ZM0.917031 4.16667H13.083C13.5701 4.16667 14 4.55729 14 5C14 5.46875 13.5701 5.83333 13.083 5.83333H0.917031C0.401201 5.83333 0 5.46875 0 5C0 4.55729 0.401201 4.16667 0.917031 4.16667ZM0.917031 8.33333H13.083C13.5701 8.33333 14 8.72396 14 9.16667C14 9.63542 13.5701 10 13.083 10H0.917031C0.401201 10 0 9.63542 0 9.16667C0 8.72396 0.401201 8.33333 0.917031 8.33333Z" fill="#3079BD"/></svg></div>
+          <div class="acc__drag" data-tooltip="drag me"><svg width="22" height="22" viewBox="0 0 14 10" style="transform:rotate(90deg);display:block;flex-shrink:0" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.917031 0H13.083C13.5701 0 14 0.390625 14 0.833333C14 1.30208 13.5701 1.66667 13.083 1.66667H0.917031C0.401201 1.66667 0 1.30208 0 0.833333C0 0.390625 0.401201 0 0.917031 0ZM0.917031 4.16667H13.083C13.5701 4.16667 14 4.55729 14 5C14 5.46875 13.5701 5.83333 13.083 5.83333H0.917031C0.401201 5.83333 0 5.46875 0 5C0 4.55729 0.401201 4.16667 0.917031 4.16667ZM0.917031 8.33333H13.083C13.5701 8.33333 14 8.72396 14 9.16667C14 9.63542 13.5701 10 13.083 10H0.917031C0.401201 10 0 9.63542 0 9.16667C0 8.72396 0.401201 8.33333 0.917031 8.33333Z" fill="currentColor"/></svg></div>
           <label class="toggle-switch"><input type="checkbox" class="toggle-switch__input"><span class="toggle-switch__track"><span class="toggle-switch__thumb"></span></span></label>
           <div class="acc__body"><div class="acc__title">Meta Ads</div><div class="acc__desc">Facebook &amp; Instagram campaigns</div></div>
           <span class="acc__count">0/2</span>
