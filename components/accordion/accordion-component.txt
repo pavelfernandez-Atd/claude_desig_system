@@ -1,0 +1,267 @@
+ACCORDION COMPONENT
+Adthena Design System — Component Specification
+Figma source: node 214:1413 (Claude-DS file)
+================================================
+
+
+OVERVIEW
+--------
+The Accordion is a collapsible row component used in settings panels and ordered
+configuration lists. Each row combines five interactive elements: a drag handle for
+reordering, a toggle switch for enabling/disabling the item, a title + description
+block, an optional count badge, and a circular expand button that reveals a content
+panel below the row.
+
+Typical use cases:
+  • Ad platform configuration lists (Google Ads, Microsoft Advertising, Meta Ads…)
+  • Filter or dimension ordering panels
+  • Feature toggle lists within a settings sidebar
+
+
+VISUAL SPECIFICATIONS
+---------------------
+
+Row container (.acc)
+  Background:     #f7f9fc
+  Border:         1px solid #d3d3d3
+  Border radius:  12px
+  Padding:        16px (all sides)
+  Gap (between children): 10px
+  Font family:    'Open Sans', Helvetica, sans-serif
+
+Row — Hover state
+  Background:     #eef3f8
+  Border color:   #c0cfe0
+
+Row — Expanded state  (.acc-wrap.is-expanded > .acc)
+  Border radius:  12px 12px 0 0   (bottom corners flatten to join content panel)
+  Border color:   #b1d1f6
+  Bottom border:  transparent     (seamless join with content panel)
+
+① Drag handle  (.acc__drag)
+  Size:    32 × 32 px
+  Icon:    6-dot Material drag indicator (two columns of three dots)
+  Color:   #9aafc5  (hover: #6477a2)
+  Cursor:  grab  /  grabbing on active
+
+② Toggle switch  (.acc__toggle)
+  Size:    35 × 20 px (w × h)
+  Track OFF:  background #c4c4c4
+  Track ON:   background #1565c0
+  Thumb:      white circle, 16 × 16 px, top/left offset 2 px
+              box-shadow: 0 1px 3px rgba(0,0,0,0.22)
+  Transition: background 0.2s, transform 0.2s
+  Thumb shift when ON: translateX(15px)
+
+③ Title / Description  (.acc__body)
+  Flex: 1 (fills available space)
+  Gap between title and description: 4px
+
+  Title  (.acc__title)
+    Font size:    16 px
+    Font weight:  600 (SemiBold)
+    Color:        rgba(0,0,0,0.87)
+    Line height:  19 px
+
+  Description  (.acc__desc)
+    Font size:    13 px
+    Font weight:  400
+    Color:        #6b6b6b
+    Line height:  15 px
+
+④ Count badge  (.acc__count)
+  Font size:    14 px
+  Font weight:  400
+  Color:        #6477a2 (neutral/400)
+  Format:       "active/total"  e.g. "4/4", "2/3", "0/2"
+  Optional — omit the element if no count is needed.
+
+⑤ Expand button  (.acc__btn)
+  Overall size:  32 × 32 px
+  Outer ring:    border-radius 200px, background #d1e4fa, padding 2px
+  Inner circle:  flex:1, border-radius 200px, background #eaeff5
+                 (hover: #cdd8eb)
+  Chevron icon:  16 × 16 px SVG, stroke #435a97, stroke-width 2.5
+  Transition:    chevron rotates 180° when .acc-wrap has .is-expanded
+
+⑥ Content panel  (.acc__content)
+  Background:     #f7f9fc
+  Border:         1px solid #b1d1f6
+  Border-top:     none (hidden behind the row's bottom edge)
+  Border-radius:  0 0 12px 12px
+  Padding (closed):  0 16px
+  Padding (open):    16px
+  Max-height (closed): 0
+  Max-height (open):   500px
+  Transition:     max-height 0.35s ease, padding 0.35s ease
+
+
+STATES
+------
+
+Default (collapsed)
+  Row shows normally. Content panel is hidden (max-height: 0).
+  Toggle is checked (ON). Count reflects active total.
+
+Expanded
+  .is-expanded on .acc-wrap.
+  Row border-radius flattens at bottom. Border color becomes #b1d1f6.
+  Content panel gains .is-open (max-height: 500px, padding: 16px).
+  Chevron rotates 180°.
+
+Disabled (toggle off)
+  .is-disabled on .acc-wrap.
+  .acc__body, .acc__count, .acc__drag: opacity 0.42.
+  .acc__drag and .acc__btn: pointer-events none.
+  Row: cursor default, no hover background change.
+  Toggle itself remains fully interactive (not dimmed) so the user can re-enable.
+
+Hover
+  Row background transitions to #eef3f8.
+  Border color transitions to #c0cfe0.
+  Inner expand button circle transitions to #cdd8eb.
+
+
+BEHAVIOR
+--------
+
+Expand / Collapse
+  Clicking the row OR the expand button toggles the open state.
+  Use event.stopPropagation() on child elements (drag handle, toggle label,
+  expand button) to prevent double-firing.
+
+  JavaScript helper:
+    function accToggle(id) {
+      var wrap    = document.getElementById(id);
+      var content = document.getElementById(id + '-c');
+      var open    = wrap.classList.toggle('is-expanded');
+      if (content) content.classList.toggle('is-open', open);
+    }
+
+Enable / Disable
+  Toggle's onchange handler calls accSetDisabled.
+  When disabled: expand and drag interactions are blocked; toggle still works.
+
+  JavaScript helper:
+    function accSetDisabled(id, disabled) {
+      document.getElementById(id).classList.toggle('is-disabled', disabled);
+    }
+
+Drag to Reorder
+  The drag handle icon signals reorderability. Wire up a drag-and-drop library
+  (e.g. SortableJS) or the native HTML5 draggable API on .acc-wrap elements.
+  Use stopPropagation() on .acc__drag mousedown/touchstart to avoid triggering
+  the row expand click.
+
+
+HTML STRUCTURE
+--------------
+
+<div class="acc-wrap" id="acc-0">           <!-- state container -->
+
+  <div class="acc" onclick="accToggle('acc-0')">
+
+    <!-- ① Drag handle -->
+    <div class="acc__drag" onclick="event.stopPropagation()">
+      <!-- 6-dot SVG -->
+    </div>
+
+    <!-- ② Toggle switch -->
+    <label class="acc__toggle" onclick="event.stopPropagation()">
+      <input type="checkbox" checked
+             onchange="accSetDisabled('acc-0', !this.checked)">
+      <span class="acc__track"></span>
+      <span class="acc__thumb"></span>
+    </label>
+
+    <!-- ③ Title / Description -->
+    <div class="acc__body">
+      <div class="acc__title">Google Ads</div>
+      <div class="acc__desc">Search, Shopping &amp; Display campaigns</div>
+    </div>
+
+    <!-- ④ Count (optional) -->
+    <span class="acc__count">4/4</span>
+
+    <!-- ⑤ Expand button -->
+    <button class="acc__btn"
+            onclick="event.stopPropagation(); accToggle('acc-0')">
+      <div class="acc__btn-inner">
+        <!-- chevron SVG (rotates when expanded) -->
+      </div>
+    </button>
+
+  </div>
+
+  <!-- ⑥ Content panel -->
+  <div class="acc__content" id="acc-0-c">
+    <!-- any content (rows, forms, lists…) -->
+  </div>
+
+</div>
+
+Notes:
+  • The ID suffix used for the content panel must be the row ID + "-c"
+    so the toggle helpers can locate it automatically.
+  • Wrap multiple accordion rows in a flex column with gap: 8px.
+  • Do NOT give .acc-wrap.is-disabled .acc an onclick — remove it when disabled
+    or skip adding it for rows that start in the disabled state.
+
+
+CSS CLASS REFERENCE
+-------------------
+
+Class                        Purpose
+----------------------------  --------------------------------------------------
+.acc-wrap                    Outer flex-column wrapper (holds row + content)
+.acc-wrap.is-expanded        Expanded state: flattens bottom border-radius, etc.
+.acc-wrap.is-disabled        Disabled state: dims row, blocks non-toggle clicks
+.acc                         The visible row bar
+.acc__drag                   Drag handle icon container
+.acc__toggle                 Custom toggle switch wrapper (label element)
+.acc__track                  Toggle track (background pill)
+.acc__thumb                  Toggle thumb (white circle)
+.acc__body                   Title + description flex column
+.acc__title                  Primary label (16px semibold)
+.acc__desc                   Supporting description (13px grey)
+.acc__count                  Active/total count (14px, #6477a2)
+.acc__btn                    Expand button outer ring
+.acc__btn-inner              Expand button inner circle (holds chevron)
+.acc__content                Collapsible content panel
+.acc__content.is-open        Reveals content panel (max-height + padding)
+
+
+DESIGN TOKENS USED
+------------------
+
+Token                   Value         Usage
+----------------------  ------------  -------------------------------------------
+bg.paper                #ffffff       —
+Card Tinted             #f7f9fc       Row + content panel background
+Border (disabled)       #d3d3d3       Default row border
+blue/50                 #d1e4fa       Expand button outer ring
+neutral/neutral-25      #eaeff5       Expand button inner circle
+primary.main            #1565c0       Toggle ON color
+neutral/400             #6477a2       Count badge text
+navy/600                #435a97       Chevron icon stroke
+Text Body               #27365b       Content row text
+Text Secondary          #6b6b6b       Description text
+Text Primary            rgba(0,0,0,0.87)  Title text
+
+
+ACCESSIBILITY
+-------------
+• The toggle input is a native <input type="checkbox"> — screen readers announce
+  it correctly without extra ARIA.
+• The expand <button> should have aria-expanded="true/false" wired in JS for full
+  screen reader support.
+• The .acc__drag element should have role="button" tabindex="0" and keyboard
+  drag-and-drop support if reordering must be keyboard-accessible.
+• Minimum touch target size: 32 × 32 px (satisfied by .acc__btn and .acc__drag).
+
+
+CHANGELOG
+---------
+2026-06-11  Initial component created from Figma node 214:1413.
+            Variants: Default, Expanded, Toggle Off.
+            Added to styleguide under Components / Cards.
