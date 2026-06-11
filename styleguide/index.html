@@ -1542,6 +1542,37 @@
     .mentions-sample__search-btn { width:40px; height:40px; background:#ffffff; border:1px solid #e0e0e0; border-radius:8px; display:flex; align-items:center; justify-content:center; cursor:pointer; flex-shrink:0; padding:0; }
     .mentions-sample__icon-row { display:flex; align-items:center; gap:2px; flex-shrink:0; }
     .mentions-sample__icon-btn { width:30px; height:30px; display:flex; align-items:center; justify-content:center; border-radius:6px; background:transparent; border:none; cursor:pointer; padding:0; flex-shrink:0; }
+    /* === Accordion (.acc) — Figma node 214:1413 === */
+    .acc-wrap { display:flex; flex-direction:column; }
+    .acc { background:#f7f9fc; border:1px solid #d3d3d3; border-radius:12px; padding:16px; display:flex; align-items:center; gap:10px; font-family:'Open Sans',Helvetica,sans-serif; cursor:pointer; transition:background 0.15s,border-color 0.15s; user-select:none; }
+    .acc:hover { background:#eef3f8; border-color:#c0cfe0; }
+    .acc-wrap.is-expanded .acc { border-radius:12px 12px 0 0; border-bottom-color:transparent; border-color:#b1d1f6; }
+    .acc__drag { width:32px; height:32px; display:flex; align-items:center; justify-content:center; flex-shrink:0; cursor:grab; color:#9aafc5; }
+    .acc__drag:hover { color:#6477a2; }
+    .acc__toggle { flex-shrink:0; position:relative; width:35px; height:20px; display:inline-block; cursor:pointer; }
+    .acc__toggle input { opacity:0; width:0; height:0; position:absolute; }
+    .acc__track { position:absolute; inset:0; background:#c4c4c4; border-radius:20px; transition:background 0.2s; cursor:pointer; }
+    .acc__toggle input:checked + .acc__track { background:#1565c0; }
+    .acc__thumb { position:absolute; top:2px; left:2px; width:16px; height:16px; background:#fff; border-radius:50%; transition:transform 0.2s; box-shadow:0 1px 3px rgba(0,0,0,0.22); pointer-events:none; }
+    .acc__toggle input:checked ~ .acc__thumb { transform:translateX(15px); }
+    .acc__body { flex:1; min-width:0; display:flex; flex-direction:column; gap:4px; }
+    .acc__title { font-size:16px; font-weight:600; color:rgba(0,0,0,0.87); line-height:19px; }
+    .acc__desc { font-size:13px; color:#6b6b6b; line-height:15px; }
+    .acc__count { font-size:14px; color:#6477a2; white-space:nowrap; flex-shrink:0; }
+    .acc__btn { width:32px; height:32px; border-radius:200px; background:#d1e4fa; padding:2px; display:flex; flex-shrink:0; box-sizing:border-box; cursor:pointer; border:none; transition:background 0.15s; }
+    .acc__btn-inner { flex:1; border-radius:200px; background:#eaeff5; display:flex; align-items:center; justify-content:center; transition:background 0.15s; }
+    .acc:hover .acc__btn-inner { background:#cdd8eb; }
+    .acc__btn svg { transition:transform 0.25s ease; }
+    .acc-wrap.is-expanded .acc .acc__btn svg { transform:rotate(180deg); }
+    .acc__content { overflow:hidden; max-height:0; transition:max-height 0.35s ease,padding 0.35s ease; padding:0 16px; background:#f7f9fc; border:1px solid #b1d1f6; border-top:none; border-radius:0 0 12px 12px; }
+    .acc__content.is-open { max-height:500px; padding:16px; }
+    /* Disabled state — dims row elements but keeps toggle interactive */
+    .acc-wrap.is-disabled .acc { cursor:default; background:#f7f9fc !important; border-color:#d3d3d3 !important; }
+    .acc-wrap.is-disabled .acc__body,
+    .acc-wrap.is-disabled .acc__count,
+    .acc-wrap.is-disabled .acc__drag { opacity:0.42; }
+    .acc-wrap.is-disabled .acc__drag,
+    .acc-wrap.is-disabled .acc__btn { pointer-events:none; }
 
     /* ── Tooltip Info ──────────────────────────────────────────── */
     .tooltip-info {
@@ -2745,6 +2776,7 @@
         <a class="comp-sidebar-link" data-component="widget-header" style="cursor:pointer">Widget Header</a>
         <a class="comp-sidebar-link" data-component="dashboard-widget" style="cursor:pointer">Dashboard Widget</a>
         <a class="comp-sidebar-link" data-component="dashboard-banner" style="cursor:pointer">Dashboard Banner</a>
+        <a class="comp-sidebar-link" data-component="accordion" style="cursor:pointer">Accordion</a>
       </div>
       <div class="comp-sidebar-group" data-group="charts" style="display:none">
         <div class="comp-sidebar-caption">Timelines</div>
@@ -7016,6 +7048,294 @@
             });
           })();
         </script>
+      </div>
+
+      <div class="comp-panel" id="comp-panel-accordion" style="display:none">
+<section id="accordion-section">
+  <div class="section-header">
+    <h2>Accordion</h2>
+    <div class="divider"></div>
+  </div>
+  <p style="font-size:13px;color:var(--text-secondary-var);margin-bottom:16px">Collapsible row with drag-to-reorder handle, toggle switch, title/description, item count, and expand button. Designed for configuration panels and ordered settings lists where items can be enabled or disabled and rearranged.</p>
+
+  <!-- GitHub + Demo links -->
+  <div style="display:flex;gap:8px;margin-bottom:24px;flex-wrap:wrap">
+    <a href="https://github.com/pavelfernandez-Atd/claude_desig_system/tree/main/components/accordion" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:6px;padding:6px 12px;border-radius:6px;background:#24292f;color:#fff;font-size:12px;font-weight:600;text-decoration:none;font-family:'Open Sans',sans-serif">
+      <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+      View on GitHub
+    </a>
+    <a href="https://htmlpreview.github.io/?https://github.com/pavelfernandez-Atd/claude_desig_system/blob/main/components/accordion/demo.html" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:6px;padding:6px 12px;border-radius:6px;background:#0969da;color:#fff;font-size:12px;font-weight:600;text-decoration:none;font-family:'Open Sans',sans-serif">
+      <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M8 1a7 7 0 100 14A7 7 0 008 1zM0 8a8 8 0 1116 0A8 8 0 010 8zm6.5-.25A.75.75 0 017.25 7h1a.75.75 0 01.75.75v2.75h.25a.75.75 0 010 1.5h-2a.75.75 0 010-1.5h.25v-2h-.25a.75.75 0 01-.75-.75zM8 6a1 1 0 100-2 1 1 0 000 2z"/></svg>
+      Preview Demo
+    </a>
+  </div>
+
+  <!-- ── LIVE PREVIEW ─────────────────────────────────────────── -->
+  <div class="comp-section-label">Live Preview</div>
+  <p style="font-size:12px;color:#6b6b6b;margin-bottom:12px">Click a row or its expand button to open/close. Toggle the switch to enable or disable an item.</p>
+  <div style="background:#e5eef5;border-radius:12px;padding:24px;margin-bottom:32px">
+    <div style="display:flex;flex-direction:column;gap:8px">
+
+      <!-- Row 1 — Google Ads -->
+      <div class="acc-wrap" id="aclp-0">
+        <div class="acc" onclick="accToggle('aclp-0')">
+          <div class="acc__drag" onclick="event.stopPropagation()" title="Drag to reorder">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M11 18c0 1.1-.9 2-2 2s-2-.9-2-2 .9-2 2-2 2 .9 2 2zm-2-8c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0-6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm6 4c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/></svg>
+          </div>
+          <label class="acc__toggle" onclick="event.stopPropagation()">
+            <input type="checkbox" checked onchange="accSetDisabled('aclp-0',!this.checked)">
+            <span class="acc__track"></span><span class="acc__thumb"></span>
+          </label>
+          <div class="acc__body">
+            <div class="acc__title">Google Ads</div>
+            <div class="acc__desc">Search, Shopping &amp; Display campaigns</div>
+          </div>
+          <span class="acc__count">4/4</span>
+          <button class="acc__btn" onclick="event.stopPropagation();accToggle('aclp-0')">
+            <div class="acc__btn-inner"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#435a97" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></div>
+          </button>
+        </div>
+        <div class="acc__content" id="aclp-0-c">
+          <div style="display:flex;flex-direction:column">
+            <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid #e4eaf2"><span style="font-size:13px;color:#27365b;font-weight:600">Search Campaigns</span><span style="font-size:12px;color:#6477a2">12 keywords</span></div>
+            <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid #e4eaf2"><span style="font-size:13px;color:#27365b;font-weight:600">Shopping Campaigns</span><span style="font-size:12px;color:#6477a2">3 campaigns</span></div>
+            <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid #e4eaf2"><span style="font-size:13px;color:#27365b;font-weight:600">Display Campaigns</span><span style="font-size:12px;color:#6477a2">2 campaigns</span></div>
+            <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 0"><span style="font-size:13px;color:#27365b;font-weight:600">Performance Max</span><span style="font-size:12px;color:#6477a2">1 campaign</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Row 2 — Microsoft -->
+      <div class="acc-wrap" id="aclp-1">
+        <div class="acc" onclick="accToggle('aclp-1')">
+          <div class="acc__drag" onclick="event.stopPropagation()" title="Drag to reorder">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M11 18c0 1.1-.9 2-2 2s-2-.9-2-2 .9-2 2-2 2 .9 2 2zm-2-8c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0-6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm6 4c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/></svg>
+          </div>
+          <label class="acc__toggle" onclick="event.stopPropagation()">
+            <input type="checkbox" checked onchange="accSetDisabled('aclp-1',!this.checked)">
+            <span class="acc__track"></span><span class="acc__thumb"></span>
+          </label>
+          <div class="acc__body">
+            <div class="acc__title">Microsoft Advertising</div>
+            <div class="acc__desc">Bing &amp; Audience Network campaigns</div>
+          </div>
+          <span class="acc__count">3/3</span>
+          <button class="acc__btn" onclick="event.stopPropagation();accToggle('aclp-1')">
+            <div class="acc__btn-inner"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#435a97" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></div>
+          </button>
+        </div>
+        <div class="acc__content" id="aclp-1-c">
+          <div style="display:flex;flex-direction:column">
+            <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid #e4eaf2"><span style="font-size:13px;color:#27365b;font-weight:600">Search Campaigns</span><span style="font-size:12px;color:#6477a2">8 keywords</span></div>
+            <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid #e4eaf2"><span style="font-size:13px;color:#27365b;font-weight:600">Audience Campaigns</span><span style="font-size:12px;color:#6477a2">2 campaigns</span></div>
+            <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 0"><span style="font-size:13px;color:#27365b;font-weight:600">Shopping Campaigns</span><span style="font-size:12px;color:#6477a2">1 campaign</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Row 3 — Meta (starts disabled) -->
+      <div class="acc-wrap is-disabled" id="aclp-2">
+        <div class="acc">
+          <div class="acc__drag" title="Drag to reorder">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M11 18c0 1.1-.9 2-2 2s-2-.9-2-2 .9-2 2-2 2 .9 2 2zm-2-8c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0-6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm6 4c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/></svg>
+          </div>
+          <label class="acc__toggle">
+            <input type="checkbox" onchange="accSetDisabled('aclp-2',!this.checked)">
+            <span class="acc__track"></span><span class="acc__thumb"></span>
+          </label>
+          <div class="acc__body">
+            <div class="acc__title">Meta Ads</div>
+            <div class="acc__desc">Facebook &amp; Instagram campaigns</div>
+          </div>
+          <span class="acc__count">0/2</span>
+          <button class="acc__btn">
+            <div class="acc__btn-inner"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#435a97" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></div>
+          </button>
+        </div>
+        <div class="acc__content" id="aclp-2-c">
+          <div style="display:flex;flex-direction:column">
+            <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid #e4eaf2"><span style="font-size:13px;color:#27365b;font-weight:600">Facebook Campaigns</span><span style="font-size:12px;color:#6477a2">4 campaigns</span></div>
+            <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 0"><span style="font-size:13px;color:#27365b;font-weight:600">Instagram Campaigns</span><span style="font-size:12px;color:#6477a2">2 campaigns</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Row 4 — LinkedIn -->
+      <div class="acc-wrap" id="aclp-3">
+        <div class="acc" onclick="accToggle('aclp-3')">
+          <div class="acc__drag" onclick="event.stopPropagation()" title="Drag to reorder">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M11 18c0 1.1-.9 2-2 2s-2-.9-2-2 .9-2 2-2 2 .9 2 2zm-2-8c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0-6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm6 4c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/></svg>
+          </div>
+          <label class="acc__toggle" onclick="event.stopPropagation()">
+            <input type="checkbox" checked onchange="accSetDisabled('aclp-3',!this.checked)">
+            <span class="acc__track"></span><span class="acc__thumb"></span>
+          </label>
+          <div class="acc__body">
+            <div class="acc__title">LinkedIn Ads</div>
+            <div class="acc__desc">B2B sponsored content &amp; InMail</div>
+          </div>
+          <span class="acc__count">2/2</span>
+          <button class="acc__btn" onclick="event.stopPropagation();accToggle('aclp-3')">
+            <div class="acc__btn-inner"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#435a97" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></div>
+          </button>
+        </div>
+        <div class="acc__content" id="aclp-3-c">
+          <div style="display:flex;flex-direction:column">
+            <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid #e4eaf2"><span style="font-size:13px;color:#27365b;font-weight:600">Sponsored Content</span><span style="font-size:12px;color:#6477a2">5 campaigns</span></div>
+            <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 0"><span style="font-size:13px;color:#27365b;font-weight:600">InMail Campaigns</span><span style="font-size:12px;color:#6477a2">2 campaigns</span></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ── VARIANTS ──────────────────────────────────────────────── -->
+  <div class="comp-section-label" style="margin-bottom:16px">Variants</div>
+  <div style="display:flex;flex-direction:column;gap:24px;margin-bottom:32px">
+
+    <div>
+      <div style="font-size:11px;font-weight:600;color:#6477a2;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:8px">Default — Collapsed</div>
+      <div class="acc-wrap">
+        <div class="acc">
+          <div class="acc__drag"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M11 18c0 1.1-.9 2-2 2s-2-.9-2-2 .9-2 2-2 2 .9 2 2zm-2-8c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0-6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm6 4c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/></svg></div>
+          <label class="acc__toggle"><input type="checkbox" checked><span class="acc__track"></span><span class="acc__thumb"></span></label>
+          <div class="acc__body"><div class="acc__title">Google Ads</div><div class="acc__desc">Search, Shopping &amp; Display campaigns</div></div>
+          <span class="acc__count">4/4</span>
+          <button class="acc__btn"><div class="acc__btn-inner"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#435a97" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></div></button>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div style="font-size:11px;font-weight:600;color:#6477a2;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:8px">Expanded</div>
+      <div class="acc-wrap is-expanded">
+        <div class="acc">
+          <div class="acc__drag"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M11 18c0 1.1-.9 2-2 2s-2-.9-2-2 .9-2 2-2 2 .9 2 2zm-2-8c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0-6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm6 4c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/></svg></div>
+          <label class="acc__toggle"><input type="checkbox" checked><span class="acc__track"></span><span class="acc__thumb"></span></label>
+          <div class="acc__body"><div class="acc__title">Google Ads</div><div class="acc__desc">Search, Shopping &amp; Display campaigns</div></div>
+          <span class="acc__count">4/4</span>
+          <button class="acc__btn"><div class="acc__btn-inner"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#435a97" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></div></button>
+        </div>
+        <div class="acc__content is-open">
+          <div style="display:flex;flex-direction:column">
+            <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid #e4eaf2"><span style="font-size:13px;color:#27365b;font-weight:600">Search Campaigns</span><span style="font-size:12px;color:#6477a2">12 keywords</span></div>
+            <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid #e4eaf2"><span style="font-size:13px;color:#27365b;font-weight:600">Shopping Campaigns</span><span style="font-size:12px;color:#6477a2">3 campaigns</span></div>
+            <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 0"><span style="font-size:13px;color:#27365b;font-weight:600">Display Campaigns</span><span style="font-size:12px;color:#6477a2">2 campaigns</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div style="font-size:11px;font-weight:600;color:#6477a2;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:8px">Toggle Off — Disabled</div>
+      <div class="acc-wrap is-disabled">
+        <div class="acc">
+          <div class="acc__drag"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M11 18c0 1.1-.9 2-2 2s-2-.9-2-2 .9-2 2-2 2 .9 2 2zm-2-8c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0-6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm6 4c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/></svg></div>
+          <label class="acc__toggle"><input type="checkbox"><span class="acc__track"></span><span class="acc__thumb"></span></label>
+          <div class="acc__body"><div class="acc__title">Meta Ads</div><div class="acc__desc">Facebook &amp; Instagram campaigns</div></div>
+          <span class="acc__count">0/2</span>
+          <button class="acc__btn"><div class="acc__btn-inner"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#435a97" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></div></button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ── ANATOMY ───────────────────────────────────────────────── -->
+  <div class="comp-section-label" style="margin-bottom:16px">Anatomy</div>
+  <div style="background:#f9fbff;border-radius:12px;padding:20px;margin-bottom:32px;font-size:13px;color:#27365b;line-height:1.6">
+    <div style="display:grid;grid-template-columns:auto 1fr;gap:8px 16px;align-items:start">
+      <span style="font-weight:600;color:#6477a2;white-space:nowrap">① Drag handle</span>
+      <span>Dot-grip SVG (20×20 px). Allows drag-to-reorder. Use <code style="background:#e8edf5;padding:1px 5px;border-radius:3px;font-size:11px">onclick="event.stopPropagation()"</code> to prevent the row toggle from firing during drag.</span>
+      <span style="font-weight:600;color:#6477a2;white-space:nowrap">② Toggle switch</span>
+      <span>35×20 px CSS toggle. Enables/disables the item. When unchecked, call <code style="background:#e8edf5;padding:1px 5px;border-radius:3px;font-size:11px">accSetDisabled(id, true)</code> to add <code style="background:#e8edf5;padding:1px 5px;border-radius:3px;font-size:11px">.is-disabled</code> on the <code style="background:#e8edf5;padding:1px 5px;border-radius:3px;font-size:11px">.acc-wrap</code>. The toggle itself remains interactive.</span>
+      <span style="font-weight:600;color:#6477a2;white-space:nowrap">③ Title / Description</span>
+      <span>Primary label: 16 px, weight 600, <code style="background:#e8edf5;padding:1px 5px;border-radius:3px;font-size:11px">rgba(0,0,0,0.87)</code>. Secondary text: 13 px, <code style="background:#e8edf5;padding:1px 5px;border-radius:3px;font-size:11px">#6b6b6b</code>.</span>
+      <span style="font-weight:600;color:#6477a2;white-space:nowrap">④ Count badge</span>
+      <span>Shows active/total ratio (e.g. <em>4/4</em>, <em>2/3</em>). Optional. 14 px, <code style="background:#e8edf5;padding:1px 5px;border-radius:3px;font-size:11px">#6477a2</code>.</span>
+      <span style="font-weight:600;color:#6477a2;white-space:nowrap">⑤ Expand button</span>
+      <span>32×32 ring button. Outer ring: <code style="background:#e8edf5;padding:1px 5px;border-radius:3px;font-size:11px">#d1e4fa</code>. Inner circle: <code style="background:#e8edf5;padding:1px 5px;border-radius:3px;font-size:11px">#eaeff5</code>. Chevron rotates 180° when <code style="background:#e8edf5;padding:1px 5px;border-radius:3px;font-size:11px">.acc-wrap.is-expanded</code>.</span>
+      <span style="font-weight:600;color:#6477a2;white-space:nowrap">⑥ Content panel</span>
+      <span>Hidden by default (max-height: 0). Add <code style="background:#e8edf5;padding:1px 5px;border-radius:3px;font-size:11px">.is-open</code> on <code style="background:#e8edf5;padding:1px 5px;border-radius:3px;font-size:11px">.acc__content</code> and <code style="background:#e8edf5;padding:1px 5px;border-radius:3px;font-size:11px">.is-expanded</code> on <code style="background:#e8edf5;padding:1px 5px;border-radius:3px;font-size:11px">.acc-wrap</code> to reveal. Shares the same background and border as the header.</span>
+    </div>
+  </div>
+
+  <!-- ── HTML USAGE ────────────────────────────────────────────── -->
+  <div class="comp-section-label" style="margin-bottom:16px">HTML Usage</div>
+  <pre style="background:#1e1e2e;color:#cdd6f4;border-radius:12px;padding:20px;font-size:12px;line-height:1.75;overflow-x:auto;margin-bottom:32px;font-family:'Fira Code','Courier New',monospace"><code>&lt;!-- Wrap row + content panel together --&gt;
+&lt;div class="acc-wrap" id="acc-0"&gt;
+
+  &lt;div class="acc" onclick="accToggle('acc-0')"&gt;
+
+    &lt;!-- ① Drag handle --&gt;
+    &lt;div class="acc__drag" onclick="event.stopPropagation()"&gt;
+      &lt;!-- inline 6-dot drag SVG --&gt;
+    &lt;/div&gt;
+
+    &lt;!-- ② Toggle switch --&gt;
+    &lt;label class="acc__toggle" onclick="event.stopPropagation()"&gt;
+      &lt;input type="checkbox" checked
+             onchange="accSetDisabled('acc-0', !this.checked)"&gt;
+      &lt;span class="acc__track"&gt;&lt;/span&gt;
+      &lt;span class="acc__thumb"&gt;&lt;/span&gt;
+    &lt;/label&gt;
+
+    &lt;!-- ③ Title / Description --&gt;
+    &lt;div class="acc__body"&gt;
+      &lt;div class="acc__title"&gt;Google Ads&lt;/div&gt;
+      &lt;div class="acc__desc"&gt;Search, Shopping &amp;amp; Display campaigns&lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;!-- ④ Count badge --&gt;
+    &lt;span class="acc__count"&gt;4/4&lt;/span&gt;
+
+    &lt;!-- ⑤ Expand button --&gt;
+    &lt;button class="acc__btn"
+            onclick="event.stopPropagation(); accToggle('acc-0')"&gt;
+      &lt;div class="acc__btn-inner"&gt;
+        &lt;!-- inline chevron SVG --&gt;
+      &lt;/div&gt;
+    &lt;/button&gt;
+
+  &lt;/div&gt;
+
+  &lt;!-- ⑥ Content panel --&gt;
+  &lt;div class="acc__content" id="acc-0-c"&gt;
+    &lt;!-- any content here --&gt;
+  &lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;script&gt;
+function accToggle(id) {
+  var wrap    = document.getElementById(id);
+  var content = document.getElementById(id + '-c');
+  var open    = wrap.classList.toggle('is-expanded');
+  if (content) content.classList.toggle('is-open', open);
+}
+function accSetDisabled(id, disabled) {
+  document.getElementById(id).classList.toggle('is-disabled', disabled);
+}
+&lt;/script&gt;</code></pre>
+
+  <script>
+    (function(){
+      window.accToggle = function(id) {
+        var wrap    = document.getElementById(id);
+        var content = document.getElementById(id + '-c');
+        if (!wrap) return;
+        var open = wrap.classList.toggle('is-expanded');
+        if (content) content.classList.toggle('is-open', open);
+      };
+      window.accSetDisabled = function(id, disabled) {
+        var wrap = document.getElementById(id);
+        if (!wrap) return;
+        wrap.classList.toggle('is-disabled', disabled);
+      };
+    })();
+  </script>
+</section>
       </div>
 
       <div class="comp-panel" id="comp-panel-multi-chart-lines" style="display:none">
