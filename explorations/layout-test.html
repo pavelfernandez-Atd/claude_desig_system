@@ -74,7 +74,7 @@
     .mnv2__acpanel-col-head { display: flex; align-items: center; gap: 4px; height: 20px; }
     .mnv2__acpanel-col-head span { font-family: 'Open Sans', sans-serif; font-size: 12px; font-weight: 600; color: #181818; }
     .mnv2__acpanel-search { display: flex; align-items: center; background: white; border-radius: 8px; padding: 0 12px; height: 40px; gap: 8px; }
-    .mnv2__acpanel-search input { border: none; outline: none; font-family: 'Open Sans', sans-serif; font-size: 14px; color: #858585; flex: 1; background: transparent; }
+    .mnv2__acpanel-search input { border: none; outline: none; font-family: 'Open Sans', sans-serif; font-size: 13px; color: #858585; flex: 1; background: transparent; }
     .mnv2__acpanel-list { background: white; border-radius: 12px; padding: 16px; display: flex; flex-direction: column; gap: 2px; border: none; outline: none; box-sizing: border-box; }
     .mnv2__account:focus { outline: none; }
     .mnv2__acpanel-list--scroll { overflow-y: auto; }
@@ -84,10 +84,8 @@
     .mnv2__acpanel-item--active:hover { background: #748EA3; }
     .mnv2__acpanel-sep { display: none; }
     .mnv2__acpanel-footer { display: flex; justify-content: flex-end; align-items: center; gap: 10px; }
-    .mnv2__acpanel-cancel { height: 40px; padding: 0 12px; border-radius: 6px; border: none; background: transparent; font-family: 'Open Sans', sans-serif; font-size: 14px; font-weight: 600; color: #485982; cursor: pointer; }
-    .mnv2__acpanel-cancel:hover { background: rgba(0,0,0,0.04); }
-    .mnv2__acpanel-apply { height: 40px; padding: 0 12px; border-radius: 6px; border: none; background: #64ABFB; font-family: 'Open Sans', sans-serif; font-size: 14px; font-weight: 600; color: white; cursor: pointer; }
-    .mnv2__acpanel-apply:hover { background: #0a7dd0; }
+    .mnv2__acpanel-cancel { height: 28px; padding: 0 8px; font-size: 12px; }
+    .mnv2__acpanel-apply { border-radius: 6px; }
     .mnv2__item-group { background: transparent; border-radius: 8px; display: flex; flex-direction: column; transition: background 0.25s cubic-bezier(0.4,0,0.2,1); }
     .mnv2__item-group--open { background: #eaf1f7; }
     .mnv2__item-group .mnv2__item { width: 100%; }
@@ -302,7 +300,7 @@
           </div>
           <div class="mnv2__acpanel-footer">
             <button class="btn btn--plain-dark mnv2__acpanel-cancel">Cancel</button>
-            <button class="btn btn--primary mnv2__acpanel-apply">Apply</button>
+            <button class="btn btn--primary btn--sm mnv2__acpanel-apply">Apply</button>
           </div>
         </div>
       </div>
