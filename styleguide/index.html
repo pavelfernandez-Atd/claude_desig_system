@@ -805,8 +805,8 @@
     /* ── Tab Item ──────────────────────────────────────────────── */
     .tab-item {
       display: inline-flex; align-items: center; justify-content: center;
-      height: 30px; padding: 0 14px; border-radius: 200px;
-      font-family: var(--font-base); font-size: 13px; font-weight: 600;
+      height: 28px; padding: 0 12px; border-radius: 200px;
+      font-family: var(--font-base); font-size: 12px; font-weight: 600;
       line-height: 15px; text-transform: capitalize;
       color: #516B85; background: #ffffff;
       cursor: pointer; gap: 4px; white-space: nowrap;
@@ -833,6 +833,10 @@
     .tab-item .tab-item__icon svg [stroke]:not([stroke="none"]) { stroke: #516B85; }
     .tab-item:hover .tab-item__icon svg [fill]:not([fill="none"]) { fill: #ffffff; }
     .tab-item:hover .tab-item__icon svg [stroke]:not([stroke="none"]) { stroke: #ffffff; }
+    .tab-item--active .tab-item__icon svg [fill]:not([fill="none"]) { fill: #ffffff; }
+    .tab-item--active .tab-item__icon svg [stroke]:not([stroke="none"]) { stroke: #ffffff; }
+    .tab-item--disabled .tab-item__icon svg [fill]:not([fill="none"]) { fill: #b2bfcc; }
+    .tab-item--disabled .tab-item__icon svg [stroke]:not([stroke="none"]) { stroke: #b2bfcc; }
     .tab-item--active .tab-item__counter { background: #ffffff; font-size: 10px; line-height: 9px; }
     /* Subtab states showcase */
     .subtab-states { display: flex; flex-direction: column; gap: 24px; }
@@ -919,7 +923,6 @@
     .service-bar__filter-row {
       display: flex; align-items: center; gap: 8px; width: 100%;
     }
-    .service-bar__filter-row .btn { font-size: 13px; }
     .service-bar__filter-btn {
       display: inline-flex; align-items: center; justify-content: center;
       gap: 4px; height: 30px; padding: 0 12px; border-radius: var(--radius-md);
@@ -933,13 +936,13 @@
     /* ── Button ─────────────────────────────────────────────────── */
     .btn {
       display: inline-flex; align-items: center; justify-content: center;
-      gap: 4px; padding: 0 12px; height: 40px; border-radius: var(--radius-md);
-      font-family: var(--font-base); font-size: 14px; font-weight: 600; line-height: 20px;
+      gap: 4px; padding: 0 8px; height: 40px; border-radius: var(--radius-md);
+      font-family: var(--font-base); font-size: 13px; font-weight: 600; line-height: 20px;
       cursor: pointer; border: 1px solid transparent; white-space: nowrap;
       user-select: none; transition: background 0.15s, color 0.15s, border-color 0.15s;
       text-decoration: none; box-sizing: border-box;
     }
-    .btn--sm { height: 30px; }
+    .btn--sm { height: 28px; font-size: 12px; }
     .btn--accent { height: 36px; }
 
     .btn--primary { background: #0c8dea; color: #ffffff; }
@@ -1798,7 +1801,7 @@
     .mnv2__acpanel-col-head { display: flex; align-items: center; gap: 4px; height: 20px; }
     .mnv2__acpanel-col-head span { font-family: 'Open Sans', sans-serif; font-size: 12px; font-weight: 600; color: #181818; }
     .mnv2__acpanel-search { display: flex; align-items: center; background: white; border-radius: 8px; padding: 0 12px; height: 40px; gap: 8px; }
-    .mnv2__acpanel-search input { border: none; outline: none; font-family: 'Open Sans', sans-serif; font-size: 14px; color: #858585; flex: 1; background: transparent; }
+    .mnv2__acpanel-search input { border: none; outline: none; font-family: 'Open Sans', sans-serif; font-size: 13px; color: #858585; flex: 1; background: transparent; }
     .mnv2__acpanel-list { background: white; border-radius: 12px; padding: 16px; display: flex; flex-direction: column; gap: 2px; border: none; outline: none; box-sizing: border-box; }
     .mnv2__account:focus { outline: none; }
     .mnv2__acpanel-list--scroll { overflow-y: auto; }
@@ -1808,10 +1811,9 @@
     .mnv2__acpanel-item--active:hover { background: #748EA3; }
     .mnv2__acpanel-sep { display: none; }
     .mnv2__acpanel-footer { display: flex; justify-content: flex-end; align-items: center; gap: 10px; }
-    .mnv2__acpanel-cancel { height: 40px; padding: 0 12px; border-radius: 6px; border: none; background: transparent; font-family: 'Open Sans', sans-serif; font-size: 14px; font-weight: 600; color: #485982; cursor: pointer; }
+    .mnv2__acpanel-cancel { height: 28px; padding: 0 8px; border-radius: 6px; border: none; background: transparent; font-family: 'Open Sans', sans-serif; font-size: 12px; font-weight: 600; color: #485982; cursor: pointer; }
     .mnv2__acpanel-cancel:hover { background: rgba(0,0,0,0.04); }
-    .mnv2__acpanel-apply { height: 40px; padding: 0 12px; border-radius: 6px; border: none; background: #64ABFB; font-family: 'Open Sans', sans-serif; font-size: 14px; font-weight: 600; color: white; cursor: pointer; }
-    .mnv2__acpanel-apply:hover { background: #0a7dd0; }
+    .mnv2__acpanel-apply { border-radius: 6px; }
     .mnv2__item-group { background: transparent; border-radius: 8px; display: flex; flex-direction: column; transition: background 0.25s cubic-bezier(0.4,0,0.2,1); }
     .mnv2__item-group--open { background: #eaf1f7; }
     .mnv2__item-group .mnv2__item { width: 100%; }
@@ -4265,7 +4267,7 @@
           </div>
           <div class="service-bar__info-wrap kpi-info-wrap">
             <button class="service-bar__info-btn">
-              <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+              <svg width="16" height="16" viewBox="0 0 20 20" fill="none">
                 <circle cx="10" cy="10" r="8" stroke="#334557" stroke-width="1.2"/>
                 <path d="M10 9v5" stroke="#334557" stroke-width="1.2" stroke-linecap="round"/>
                 <circle cx="10" cy="6.5" r="0.8" fill="#334557"/>
@@ -4334,7 +4336,7 @@
                 <svg width="14" height="15" viewBox="0 0 14 15" fill="none" style="flex-shrink:0"><rect x="0.5" y="1.5" width="13" height="13" rx="2" stroke="#2f78bd"/><path d="M0.5 5.5h13" stroke="#2f78bd"/><path d="M4 0.5v2M10 0.5v2" stroke="#2f78bd" stroke-linecap="round"/></svg>
                 <span class="service-bar__date-label">Last 30 Days</span>
               </div>
-              <button class="service-bar__info-btn"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="8" stroke="#3079bd" stroke-width="1.2"/><path d="M10 9v5" stroke="#3079bd" stroke-width="1.2" stroke-linecap="round"/><circle cx="10" cy="6.5" r="0.8" fill="#3079bd"/></svg></button>
+              <button class="service-bar__info-btn"><svg width="16" height="16" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="8" stroke="#334557" stroke-width="1.2"/><path d="M10 9v5" stroke="#334557" stroke-width="1.2" stroke-linecap="round"/><circle cx="10" cy="6.5" r="0.8" fill="#334557"/></svg></button>
             </div>
           </div>
         </div>
@@ -4372,22 +4374,22 @@
     <div class="sub-label">Row 3 · Filter bar</div>
     <div class="service-bar__filters">
       <div class="service-bar__filter-row">
-        <button class="service-bar__filter-btn">
+        <button class="btn btn--plain btn--sm">
           Industry
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="#2f78bd" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="#334557" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </button>
-        <button class="service-bar__filter-btn">
+        <button class="btn btn--plain btn--sm">
           Country
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="#2f78bd" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="#334557" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </button>
-        <button class="service-bar__filter-btn">
+        <button class="btn btn--plain btn--sm">
           Date Range
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="#2f78bd" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="#334557" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </button>
         <div class="service-bar__filter-spacer"></div>
-        <button class="service-bar__filter-btn">
+        <button class="btn btn--plain btn--sm">
           Saved Filters
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="#2f78bd" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="#334557" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </button>
       </div>
     </div>
@@ -14080,9 +14082,9 @@ Prioritise authority reinforcement in declining citation segments</textarea>
   </div>
 
   <!-- LIVE DEMO -->
-  <div style="margin-bottom:48px">
+  <div style="margin-bottom:248px">
     <div class="sub-label">Live Demo</div>
-    <div style="background:#eff1f5;padding:24px;border-radius:12px;display:flex;align-items:stretch;height:600px;width:fit-content">
+    <div style="background:#eff1f5;padding:16px;border-radius:12px;display:flex;align-items:stretch;height:600px;width:fit-content">
       <nav class="mnv2" id="mnv2-demo" style="height:100%">
         <div class="mnv2__top">
         <div class="mnv2__head">
@@ -14171,7 +14173,7 @@ Prioritise authority reinforcement in declining citation segments</textarea>
               </div>
               <div class="mnv2__acpanel-search">
                 <input type="text" placeholder="Search">
-                <img src="data:image/svg+xml;base64,PHN2ZyBwcmVzZXJ2ZUFzcGVjdFJhdGlvPSJub25lIiB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBvdmVyZmxvdz0idmlzaWJsZSIgc3R5bGU9ImRpc3BsYXk6IGJsb2NrOyIgdmlld0JveD0iMCAwIDIwIDIwIiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8ZyBpZD0iSWNvbi9TZWFyY2giPgo8cGF0aCBpZD0iJiMyMzk7JiMxMjg7JiMxMzA7IiBkPSJNMTUuMDA2NCA4LjQ5MDQ5QzE1LjAwNjQgOS45MjU4OSAxNC41Mzc0IDExLjI2NzcgMTMuNzU1NyAxMi4zMjg2TDE3LjY5NTIgMTYuMjkxNkMxOC4xMDE2IDE2LjY2NiAxOC4xMDE2IDE3LjMyMTMgMTcuNjk1MiAxNy42OTU4QzE3LjMyIDE4LjEwMTQgMTYuNjYzNCAxOC4xMDE0IDE2LjI4ODIgMTcuNjk1OEwxMi4zMTc1IDEzLjczMjhDMTEuMjU0NSAxNC41NDQxIDkuOTEwMTEgMTQuOTgxIDguNTAzMTggMTQuOTgxQzQuOTA3NjcgMTQuOTgxIDIgMTIuMDc5IDIgOC40OTA0OUMyIDQuOTMzMiA0LjkwNzY3IDIgOC41MDMxOCAyQzEyLjA2NzQgMiAxNS4wMDY0IDQuOTMzMiAxNS4wMDY0IDguNDkwNDlaTTguNTAzMTggMTIuOTgzOUMxMC4wOTc3IDEyLjk4MzkgMTEuNTY3MiAxMi4xNDE0IDEyLjM4MDEgMTAuNzM3MkMxMy4xOTMgOS4zNjQyMSAxMy4xOTMgNy42NDc5OCAxMi4zODAxIDYuMjQzNzhDMTEuNTY3MiA0Ljg3MDc5IDEwLjA5NzcgMy45OTcwNyA4LjUwMzE4IDMuOTk3MDdDNi44NzczOCAzLjk5NzA3IDUuNDA3OTEgNC44NzA3OSA0LjU5NTAyIDYuMjQzNzhDMy43ODIxMiA3LjY0Nzk4IDMuNzgyMTIgOS4zNjQyMSA0LjU5NTAyIDEwLjczNzJDNS40MDc5MSAxMi4xNDE0IDYuODc3MzggMTIuOTgzOSA4LjUwMzE4IDEyLjk4MzlaIiBmaWxsPSJ2YXIoLS1maWxsLTAsICM3NDhFQTMpIi8+CjwvZz4KPC9zdmc+Cg==" width="20" height="20" alt="">
+                <img src="data:image/svg+xml;base64,PHN2ZyBwcmVzZXJ2ZUFzcGVjdFJhdGlvPSJub25lIiB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBvdmVyZmxvdz0idmlzaWJsZSIgc3R5bGU9ImRpc3BsYXk6IGJsb2NrOyIgdmlld0JveD0iMCAwIDIwIDIwIiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8ZyBpZD0iSWNvbi9TZWFyY2giPgo8cGF0aCBpZD0iJiMyMzk7JiMxMjg7JiMxMzA7IiBkPSJNMTUuMDA2NCA4LjQ5MDQ5QzE1LjAwNjQgOS45MjU4OSAxNC41Mzc0IDExLjI2NzcgMTMuNzU1NyAxMi4zMjg2TDE3LjY5NTIgMTYuMjkxNkMxOC4xMDE2IDE2LjY2NiAxOC4xMDE2IDE3LjMyMTMgMTcuNjk1MiAxNy42OTU4QzE3LjMyIDE4LjEwMTQgMTYuNjYzNCAxOC4xMDE0IDE2LjI4ODIgMTcuNjk1OEwxMi4zMTc1IDEzLjczMjhDMTEuMjU0NSAxNC41NDQxIDkuOTEwMTEgMTQuOTgxIDguNTAzMTggMTQuOTgxQzQuOTA3NjcgMTQuOTgxIDIgMTIuMDc5IDIgOC40OTA0OUMyIDQuOTMzMiA0LjkwNzY3IDIgOC41MDMxOCAyQzEyLjA2NzQgMiAxNS4wMDY0IDQuOTMzMiAxNS4wMDY0IDguNDkwNDlaTTguNTAzMTggMTIuOTgzOUMxMC4wOTc3IDEyLjk4MzkgMTEuNTY3MiAxMi4xNDE0IDEyLjM4MDEgMTAuNzM3MkMxMy4xOTMgOS4zNjQyMSAxMy4xOTMgNy42NDc5OCAxMi4zODAxIDYuMjQzNzhDMTEuNTY3MiA0Ljg3MDc5IDEwLjA5NzcgMy45OTcwNyA4LjUwMzE4IDMuOTk3MDdDNi44NzczOCAzLjk5NzA3IDUuNDA3OTEgNC44NzA3OSA0LjU5NTAyIDYuMjQzNzhDMy43ODIxMiA3LjY0Nzk4IDMuNzgyMTIgOS4zNjQyMSA0LjU5NTAyIDEwLjczNzJDNS40MDc5MSAxMi4xNDE0IDYuODc3MzggMTIuOTgzOSA4LjUwMzE4IDEyLjk4MzlaIiBmaWxsPSJ2YXIoLS1maWxsLTAsICM3NDhFQTMpIi8+CjwvZz4KPC9zdmc+Cg==" width="16" height="16" alt="">
               </div>
               <div class="mnv2__acpanel-list" id="mnv2-domain-list">
                 <button class="mnv2__acpanel-item" data-domain="au">AU / Adthena.com</button>
@@ -14186,7 +14188,7 @@ Prioritise authority reinforcement in declining citation segments</textarea>
               </div>
               <div class="mnv2__acpanel-search">
                 <input type="text" placeholder="Search">
-                <img src="data:image/svg+xml;base64,PHN2ZyBwcmVzZXJ2ZUFzcGVjdFJhdGlvPSJub25lIiB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBvdmVyZmxvdz0idmlzaWJsZSIgc3R5bGU9ImRpc3BsYXk6IGJsb2NrOyIgdmlld0JveD0iMCAwIDIwIDIwIiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8ZyBpZD0iSWNvbi9TZWFyY2giPgo8cGF0aCBpZD0iJiMyMzk7JiMxMjg7JiMxMzA7IiBkPSJNMTUuMDA2NCA4LjQ5MDQ5QzE1LjAwNjQgOS45MjU4OSAxNC41Mzc0IDExLjI2NzcgMTMuNzU1NyAxMi4zMjg2TDE3LjY5NTIgMTYuMjkxNkMxOC4xMDE2IDE2LjY2NiAxOC4xMDE2IDE3LjMyMTMgMTcuNjk1MiAxNy42OTU4QzE3LjMyIDE4LjEwMTQgMTYuNjYzNCAxOC4xMDE0IDE2LjI4ODIgMTcuNjk1OEwxMi4zMTc1IDEzLjczMjhDMTEuMjU0NSAxNC41NDQxIDkuOTEwMTEgMTQuOTgxIDguNTAzMTggMTQuOTgxQzQuOTA3NjcgMTQuOTgxIDIgMTIuMDc5IDIgOC40OTA0OUMyIDQuOTMzMiA0LjkwNzY3IDIgOC41MDMxOCAyQzEyLjA2NzQgMiAxNS4wMDY0IDQuOTMzMiAxNS4wMDY0IDguNDkwNDlaTTguNTAzMTggMTIuOTgzOUMxMC4wOTc3IDEyLjk4MzkgMTEuNTY3MiAxMi4xNDE0IDEyLjM4MDEgMTAuNzM3MkMxMy4xOTMgOS4zNjQyMSAxMy4xOTMgNy42NDc5OCAxMi4zODAxIDYuMjQzNzhDMTEuNTY3MiA0Ljg3MDc5IDEwLjA5NzcgMy45OTcwNyA4LjUwMzE4IDMuOTk3MDdDNi44NzczOCAzLjk5NzA3IDUuNDA3OTEgNC44NzA3OSA0LjU5NTAyIDYuMjQzNzhDMy43ODIxMiA3LjY0Nzk4IDMuNzgyMTIgOS4zNjQyMSA0LjU5NTAyIDEwLjczNzJDNS40MDc5MSAxMi4xNDE0IDYuODc3MzggMTIuOTgzOSA4LjUwMzE4IDEyLjk4MzlaIiBmaWxsPSJ2YXIoLS1maWxsLTAsICM3NDhFQTMpIi8+CjwvZz4KPC9zdmc+Cg==" width="20" height="20" alt="">
+                <img src="data:image/svg+xml;base64,PHN2ZyBwcmVzZXJ2ZUFzcGVjdFJhdGlvPSJub25lIiB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBvdmVyZmxvdz0idmlzaWJsZSIgc3R5bGU9ImRpc3BsYXk6IGJsb2NrOyIgdmlld0JveD0iMCAwIDIwIDIwIiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8ZyBpZD0iSWNvbi9TZWFyY2giPgo8cGF0aCBpZD0iJiMyMzk7JiMxMjg7JiMxMzA7IiBkPSJNMTUuMDA2NCA4LjQ5MDQ5QzE1LjAwNjQgOS45MjU4OSAxNC41Mzc0IDExLjI2NzcgMTMuNzU1NyAxMi4zMjg2TDE3LjY5NTIgMTYuMjkxNkMxOC4xMDE2IDE2LjY2NiAxOC4xMDE2IDE3LjMyMTMgMTcuNjk1MiAxNy42OTU4QzE3LjMyIDE4LjEwMTQgMTYuNjYzNCAxOC4xMDE0IDE2LjI4ODIgMTcuNjk1OEwxMi4zMTc1IDEzLjczMjhDMTEuMjU0NSAxNC41NDQxIDkuOTEwMTEgMTQuOTgxIDguNTAzMTggMTQuOTgxQzQuOTA3NjcgMTQuOTgxIDIgMTIuMDc5IDIgOC40OTA0OUMyIDQuOTMzMiA0LjkwNzY3IDIgOC41MDMxOCAyQzEyLjA2NzQgMiAxNS4wMDY0IDQuOTMzMiAxNS4wMDY0IDguNDkwNDlaTTguNTAzMTggMTIuOTgzOUMxMC4wOTc3IDEyLjk4MzkgMTEuNTY3MiAxMi4xNDE0IDEyLjM4MDEgMTAuNzM3MkMxMy4xOTMgOS4zNjQyMSAxMy4xOTMgNy42NDc5OCAxMi4zODAxIDYuMjQzNzhDMTEuNTY3MiA0Ljg3MDc5IDEwLjA5NzcgMy45OTcwNyA4LjUwMzE4IDMuOTk3MDdDNi44NzczOCAzLjk5NzA3IDUuNDA3OTEgNC44NzA3OSA0LjU5NTAyIDYuMjQzNzhDMy43ODIxMiA3LjY0Nzk4IDMuNzgyMTIgOS4zNjQyMSA0LjU5NTAyIDEwLjczNzJDNS40MDc5MSAxMi4xNDE0IDYuODc3MzggMTIuOTgzOSA4LjUwMzE4IDEyLjk4MzlaIiBmaWxsPSJ2YXIoLS1maWxsLTAsICM3NDhFQTMpIi8+CjwvZz4KPC9zdmc+Cg==" width="16" height="16" alt="">
               </div>
               <div class="mnv2__acpanel-list mnv2__acpanel-list--scroll" id="mnv2-loc-list">
                 <button class="mnv2__acpanel-item mnv2__acpanel-item--active">United Kingdom</button>
@@ -14201,7 +14203,7 @@ Prioritise authority reinforcement in declining citation segments</textarea>
           </div>
           <div class="mnv2__acpanel-footer">
             <button class="btn btn--plain-dark mnv2__acpanel-cancel">Cancel</button>
-            <button class="btn btn--primary mnv2__acpanel-apply">Apply</button>
+            <button class="btn btn--primary btn--sm mnv2__acpanel-apply">Apply</button>
           </div>
         </div>
       </div>
