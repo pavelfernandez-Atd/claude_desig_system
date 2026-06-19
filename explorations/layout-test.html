@@ -19,11 +19,12 @@
     .adthena-wordmark { font-family: var(--font-base); font-size: 18px; font-weight: 700; letter-spacing: -0.3px; }
     .mnv2__bell-btn { background: none; border: none; cursor: pointer; padding: 0; display: flex; align-items: center; }
     .mnv2__bell-btn:hover { opacity: 0.7; }
-    .mnv2__account { background: rgba(234,241,247,0.8); border-radius: 0 0 8px 8px; padding: 8px; display: flex; align-items: center; gap: 6px; cursor: pointer; border: none; text-align: left; width: 100%; }
+    .mnv2__account { background: rgba(234,241,247,0.8); border-radius: 0 0 8px 8px; padding: 8px 8px 8px 13px; display: flex; align-items: center; gap: 8px; cursor: pointer; border: none; text-align: left; width: 100%; }
     .mnv2__account:hover { background: rgba(234,241,247,1); }
     .mnv2__account-text { display: flex; flex-direction: column; flex: 1; }
     .mnv2__account-primary { font-size: 12px; font-weight: 600; color: #27365b; line-height: 1; }
     .mnv2__account-secondary { font-size: 12px; font-weight: 400; color: #27365b; line-height: 1; }
+    .mnv2__account-flag { flex-shrink: 0; line-height: 0; display: block; }
     .mnv2__account-arrow { }
     .mnv2__scroll { overflow-y: auto; flex: 1; }
     .mnv2__section-label { font-size: 8px; font-weight: 600; letter-spacing: 0.6px; text-transform: uppercase; color: #485982; padding: 6px 8px 2px; }
@@ -190,9 +191,9 @@
             <button class="mnv2__bell-btn"><img src="data:image/svg+xml;base64,PHN2ZyBwcmVzZXJ2ZUFzcGVjdFJhdGlvPSJub25lIiB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBvdmVyZmxvdz0idmlzaWJsZSIgc3R5bGU9ImRpc3BsYXk6IGJsb2NrOyIgdmlld0JveD0iMCAwIDE0IDE0IiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8ZyBpZD0iSWNvbi9CZWxsIj4KPHBhdGggaWQ9IiYjMjM5OyYjMTMxOyYjMTc5OyIgZD0iTTcuMDExNzEgMC43QzcuNDA5ODMgMC43IDcuNzYxMTEgMS4wNjkxNCA3Ljc2MTExIDEuNDg3NVYxLjk3OTY5QzkuNDcwNjkgMi4zMjQyMiAxMC43NTg3IDMuOTIzODMgMTAuNzU4NyA1LjgxODc1VjYuMjg2MzNDMTAuNzU4NyA3LjQ0Mjk3IDExLjE1NjggOC41NzUgMTEuODgyOCA5LjQzNjMzTDEyLjA0NjggOS42MzMyQzEyLjI1NzUgOS44NzkzIDEyLjMwNDQgMTAuMTk5MiAxMi4xODczIDEwLjQ5NDVDMTIuMDcwMiAxMC43NjUyIDExLjc4OTIgMTAuOTM3NSAxMS41MDgxIDEwLjkzNzVIMi41MTUyOUMyLjIxMDg1IDEwLjkzNzUgMS45Mjk4MiAxMC43NjUyIDEuODEyNzMgMTAuNDk0NUMxLjY5NTYzIDEwLjE5OTIgMS43NDI0NyA5Ljg3OTMgMS45NTMyNCA5LjYzMzJMMi4xMTcxNyA5LjQzNjMzQzIuODQzMTYgOC41NzUgMy4yNjQ3IDcuNDQyOTcgMy4yNjQ3IDYuMjg2MzNWNS44MTg3NUMzLjI2NDcgMy45MjM4MyA0LjU1MjczIDIuMzI0MjIgNi4yNjIzMSAxLjk3OTY5VjEuNDg3NUM2LjI2MjMxIDEuMDY5MTQgNi41OTAxNyAwLjcgNy4wMTE3MSAwLjdaTTguMDY1NTYgMTIuODU3QzcuNzg0NTMgMTMuMTUyMyA3LjQwOTgzIDEzLjMgNy4wMTE3MSAxMy4zQzYuNjEzNTkgMTMuMyA2LjIxNTQ3IDEzLjE1MjMgNS45MzQ0NCAxMi44NTdDNS42NTM0MiAxMi41NjE3IDUuNTEyOSAxMi4xNDM0IDUuNTEyOSAxMS43MjVINy4wMTE3MUg4LjUxMDUxQzguNTEwNTEgMTIuMTQzNCA4LjM0NjU4IDEyLjU2MTcgOC4wNjU1NiAxMi44NTdaIiBmaWxsPSJ2YXIoLS1maWxsLTAsICMzMzQ1NTcpIi8+CjwvZz4KPC9zdmc+Cg==" width="14" height="14" alt="" style="display:block"></button>
           </div>
           <button class="mnv2__account" id="mnv2-account-btn">
-            <img src="data:image/svg+xml;base64,PHN2ZyBwcmVzZXJ2ZUFzcGVjdFJhdGlvPSJub25lIiB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBvdmVyZmxvdz0idmlzaWJsZSIgc3R5bGU9ImRpc3BsYXk6IGJsb2NrOyIgdmlld0JveD0iMCAwIDIwIDIwIiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8ZyBpZD0iSWNvbi9Mb2NhdGlvbiI+CjxwYXRoIGlkPSImIzIzOTsmIzE0MzsmIzEzMzsiIGQ9Ik0xMC44MDg2IDE4LjgyODFDMTAuMzg2NyAxOS4zNTU1IDkuNTc4MTIgMTkuMzU1NSA5LjE1NjI1IDE4LjgyODFDNy4zNjMyOCAxNi41NDMgMy4yNSAxMS4wOTM4IDMuMjUgOEMzLjI1IDQuMjczNDQgNi4yNzM0NCAxLjI1IDEwIDEuMjVDMTMuNzI2NiAxLjI1IDE2Ljc1IDQuMjczNDQgMTYuNzUgOEMxNi43NSAxMS4wOTM4IDEyLjYzNjcgMTYuNTQzIDEwLjgwODYgMTguODI4MVpNMTAgNS43NUM5LjE5MTQxIDUuNzUgOC40NTMxMiA2LjIwNzAzIDguMDMxMjUgNi44NzVDNy42NDQ1MyA3LjU3ODEyIDcuNjQ0NTMgOC40NTcwMyA4LjAzMTI1IDkuMTI1QzguNDUzMTIgOS44MjgxMiA5LjE5MTQxIDEwLjI1IDEwIDEwLjI1QzEwLjc3MzQgMTAuMjUgMTEuNTExNyA5LjgyODEyIDExLjkzMzYgOS4xMjVDMTIuMzIwMyA4LjQ1NzAzIDEyLjMyMDMgNy41NzgxMiAxMS45MzM2IDYuODc1QzExLjUxMTcgNi4yMDcwMyAxMC43NzM0IDUuNzUgMTAgNS43NVoiIGZpbGw9InZhcigtLWZpbGwtMCwgIzY0NzdBMikiLz4KPC9nPgo8L3N2Zz4K" width="20" height="20" alt="" style="display:block">
+            <span id="mnv2-account-flag" class="mnv2__account-flag"><svg width="16" height="11" viewBox="0 0 20 14" xmlns="http://www.w3.org/2000/svg" style="display:block"><defs><clipPath id="fc-uk"><rect width="20" height="14" rx="2"/></clipPath></defs><g clip-path="url(#fc-uk)"><rect width="20" height="14" fill="#012169"/><path stroke="white" stroke-width="5" d="M0 0L20 14M20 0L0 14"/><path stroke="#C8102E" stroke-width="2.5" d="M0 0L20 14M20 0L0 14"/><rect x="8.5" y="0" width="3" height="14" fill="white"/><rect x="0" y="5.5" width="20" height="3" fill="white"/><rect x="9.25" y="0" width="1.5" height="14" fill="#C8102E"/><rect x="0" y="6.25" width="20" height="1.5" fill="#C8102E"/></g></svg></span>
             <div class="mnv2__account-text">
-              <span class="mnv2__account-primary">UK / Adthena</span>
+              <span class="mnv2__account-primary">Adthena</span>
               <span class="mnv2__account-secondary">United Kingdom</span>
             </div>
             <img class="mnv2__account-arrow" src="data:image/svg+xml;base64,PHN2ZyBwcmVzZXJ2ZUFzcGVjdFJhdGlvPSJub25lIiB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBvdmVyZmxvdz0idmlzaWJsZSIgc3R5bGU9ImRpc3BsYXk6IGJsb2NrOyIgdmlld0JveD0iMCAwIDIwIDIwIiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8ZyBpZD0iSWNvbi9BbmdsZURvd24tT3V0bGluZSI+CjxwYXRoIGlkPSImIzIzOTsmIzEzMjsmIzEzNTsiIGQ9Ik0xMC40NzU1IDEyLjc4MzlDMTAuMjAzOCAxMy4wNzIgOS43OTYyIDEzLjA3MiA5LjU1MTYzIDEyLjc4MzlMNS4yMDM4IDguMTc0MDdDNC45MzIwNyA3LjkxNDc3IDQuOTMyMDcgNy40ODI1OSA1LjIwMzggNy4yMjMyOUM1LjQ0ODM3IDYuOTM1MTcgNS44NTU5OCA2LjkzNTE3IDYuMTAwNTQgNy4yMjMyOUw5Ljk4NjQxIDExLjM0MzNMMTMuODk5NSA3LjE5NDQ4QzE0LjE0NCA2LjkzNTE3IDE0LjU1MTYgNi45MzUxNyAxNC43OTYyIDcuMTk0NDhDMTUuMDY3OSA3LjQ4MjU5IDE1LjA2NzkgNy45MTQ3NyAxNC43OTYyIDguMTc0MDdMMTAuNDc1NSAxMi43ODM5WiIgZmlsbD0idmFyKC0tZmlsbC0wLCAjNjQ3N0EyKSIvPgo8L2c+Cjwvc3ZnPgo=" width="20" height="20" alt="">
@@ -485,7 +486,11 @@
     acPanel.querySelector('.mnv2__acpanel-apply')?.addEventListener('click', function() {
       var activeDomain = domainList?.querySelector('.mnv2__acpanel-item--active');
       var activeLocation = document.getElementById('mnv2-loc-list')?.querySelector('.mnv2__acpanel-item--active');
-      if (activeDomain) acBtn.querySelector('.mnv2__account-primary').textContent = activeDomain.textContent.trim();
+      if (activeDomain) {
+        var domainText = activeDomain.textContent.trim();
+        // Strip "XX / " country prefix — flag shows the country
+        acBtn.querySelector('.mnv2__account-primary').textContent = domainText.replace(/^[A-Z]{2}\s*\/\s*/, '');
+      }
       if (activeLocation) acBtn.querySelector('.mnv2__account-secondary').textContent = activeLocation.textContent.trim();
       acPanel.classList.remove('mnv2__acpanel--open');
       acBtn.classList.remove('open');
