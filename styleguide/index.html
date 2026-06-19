@@ -805,8 +805,8 @@
     /* ── Tab Item ──────────────────────────────────────────────── */
     .tab-item {
       display: inline-flex; align-items: center; justify-content: center;
-      height: 30px; padding: 0 16px; border-radius: 200px;
-      font-family: var(--font-base); font-size: 14px; font-weight: 600;
+      height: 30px; padding: 0 14px; border-radius: 200px;
+      font-family: var(--font-base); font-size: 13px; font-weight: 600;
       line-height: 15px; text-transform: capitalize;
       color: #516B85; background: #ffffff;
       cursor: pointer; gap: 4px; white-space: nowrap;
@@ -902,19 +902,24 @@
       cursor: pointer; flex-shrink: 0; transition: background 0.15s;
     }
     .service-bar__info-btn:hover { background: #eaeff5; }
+    .service-bar__info-wrap { position: relative; display: inline-flex; flex-shrink: 0; }
+    .service-bar__info-wrap .kpi-info-tooltip { left: auto; right: 0; transform: none; }
+    .service-bar__info-wrap .kpi-info-tooltip .tooltip-info__arrow { margin-left: auto; margin-right: 8px; }
+    .service-bar__info-wrap .kpi-info-tooltip::after { content: ''; position: absolute; bottom: -8px; left: 0; right: 0; height: 8px; }
     .service-bar__tabs {
       display: flex; align-items: center; height: 42px; background: #fafafa;
       border-radius: 40px; padding: 6px 12px 6px 6px; gap: 4px;
       width: 100%; box-sizing: border-box; overflow-x: auto;
     }
     .service-bar__filters {
-      display: flex; flex-direction: column; gap: 8px; padding: 8px;
+      display: flex; flex-direction: column; gap: 8px; padding: 4px;
       background: #fafafa; border-radius: var(--radius-xl);
       width: 100%; box-sizing: border-box;
     }
     .service-bar__filter-row {
       display: flex; align-items: center; gap: 8px; width: 100%;
     }
+    .service-bar__filter-row .btn { font-size: 13px; }
     .service-bar__filter-btn {
       display: inline-flex; align-items: center; justify-content: center;
       gap: 4px; height: 30px; padding: 0 12px; border-radius: var(--radius-md);
@@ -4258,13 +4263,19 @@
             </svg>
             <span class="service-bar__date-label">19 Aug <span class="year">2025</span> – 28 Aug <span class="year">2025</span></span>
           </div>
-          <button class="service-bar__info-btn" title="Info">
-            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-              <circle cx="10" cy="10" r="8" stroke="#334557" stroke-width="1.2"/>
-              <path d="M10 9v5" stroke="#334557" stroke-width="1.2" stroke-linecap="round"/>
-              <circle cx="10" cy="6.5" r="0.8" fill="#334557"/>
-            </svg>
-          </button>
+          <div class="service-bar__info-wrap kpi-info-wrap">
+            <button class="service-bar__info-btn">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                <circle cx="10" cy="10" r="8" stroke="#334557" stroke-width="1.2"/>
+                <path d="M10 9v5" stroke="#334557" stroke-width="1.2" stroke-linecap="round"/>
+                <circle cx="10" cy="6.5" r="0.8" fill="#334557"/>
+              </svg>
+            </button>
+            <div class="tooltip-info kpi-info-tooltip">
+              <div class="tooltip-info__body">Shows how AI Overviews affect search visibility and query complexity. Use this to prioritize content updates and PPC strategy across your tracked terms.</div>
+              <svg class="tooltip-info__arrow" width="78" height="10" viewBox="0 0 78 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M24 0H54C54 0 52.203 0 49 2.4096C45.7745 4.83616 42.0352 7.68387 40.1758 9.10226C39.4766 9.63566 38.5145 9.65177 37.8035 9.13418C36.0242 7.83892 32.5121 5.25297 29 2.5C25.8106 0 24 0 24 0Z" fill="white"/></svg>
+            </div>
+          </div>
         </div>
       </div>
 
