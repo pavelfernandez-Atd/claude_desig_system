@@ -4243,11 +4243,11 @@
       <!-- Row 1: Identity -->
       <div class="service-bar__header">
         <div class="service-bar__avatar">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2l2.09 6.26L20 10l-5.91 1.74L12 18l-2.09-6.26L4 10l5.91-1.74L12 2z" fill="#334557"/></svg>
+          <svg width="20" height="20" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12.4051 6.97976C12.4408 7.1627 12.7084 7.16271 12.7441 6.97976C13.0547 5.38333 13.5202 4.92762 15.153 4.62396C15.3403 4.58912 15.3403 4.32799 15.153 4.29315C13.5203 3.9895 13.0547 3.53365 12.7441 1.93736C12.7085 1.75419 12.4407 1.75419 12.4051 1.93736C12.0945 3.53373 11.6284 3.9895 9.99556 4.29315C9.8087 4.32824 9.80865 4.58891 9.99556 4.62396C11.6285 4.92762 12.0945 5.38324 12.4051 6.97976ZM7.38029 14.3432C7.43195 14.6242 7.84335 14.6242 7.895 14.3432C8.452 11.3136 9.26111 10.523 12.36 9.97847C12.6471 9.92785 12.6471 9.52589 12.36 9.47523C9.26102 8.93065 8.452 8.13968 7.895 5.10983C7.84325 4.82898 7.43203 4.82896 7.38029 5.10983C6.82329 8.13966 6.01428 8.93065 2.91533 9.47523C2.62833 9.52598 2.6283 9.92776 2.91533 9.97847C6.01418 10.523 6.82329 11.3136 7.38029 14.3432ZM13.1125 16.0962C13.1397 16.2346 13.3417 16.2346 13.3689 16.0962C13.6041 14.8869 13.9572 14.5418 15.194 14.3118C15.3355 14.2852 15.3354 14.0878 15.194 14.0612C13.9572 13.8312 13.6041 13.486 13.3689 12.2768C13.3419 12.1381 13.1395 12.1381 13.1125 12.2768C12.8773 13.486 12.5242 13.8312 11.2875 14.0612C11.1456 14.0876 11.1456 14.2854 11.2875 14.3118C12.5242 14.5418 12.8773 14.887 13.1125 16.0962Z" fill="#334557"/></svg>
         </div>
         <div class="service-bar__text">
-          <span class="service-bar__title">Search Terms Details</span>
-          <span class="service-bar__subtitle">Section description to provide context awareness and any other relevant information</span>
+          <span class="service-bar__title">AI Overview</span>
+          <span class="service-bar__subtitle">How AI Overviews impact search visibility and query complexity across key terms to prioritize content and PPC strategy.</span>
         </div>
         <div class="service-bar__actions">
           <div class="service-bar__date">
@@ -4270,30 +4270,25 @@
 
       <!-- Row 2: Tab navigation -->
       <div class="service-bar__tabs" id="sb-tab-rail">
-        <div class="tab-item tab-item--active" onclick="sbSetTab(this)">Page 1</div>
-        <div class="tab-item" onclick="sbSetTab(this)">Page 2</div>
-        <div class="tab-item" onclick="sbSetTab(this)">Page 3</div>
-        <div class="tab-item" onclick="sbSetTab(this)">Page 4</div>
+        <div class="tab-item tab-item--active" onclick="sbSetTab(this)">Summary</div>
+        <div class="tab-item" onclick="sbSetTab(this)">Impact</div>
+        <div class="tab-item" onclick="sbSetTab(this)">Content</div>
+        <div class="tab-item" onclick="sbSetTab(this)">Signals</div>
       </div>
 
       <!-- Row 3: Filter bar -->
       <div class="service-bar__filters">
         <div class="service-bar__filter-row">
           <button class="btn btn--plain btn--sm">
+            All Devices
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="#334557" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <button class="btn btn--plain btn--sm">
             Search Term Groups
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="#334557" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </button>
           <button class="btn btn--plain btn--sm">
             Search Terms
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="#334557" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </button>
-          <button class="btn btn--plain btn--sm">
-            Devices
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="#334557" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </button>
-          <div class="service-bar__filter-spacer"></div>
-          <button class="btn btn--plain btn--sm">
-            Saved Filters
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="#334557" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </button>
         </div>
@@ -4317,7 +4312,7 @@
         <div class="service-bar" style="max-width:600px">
           <div class="service-bar__header">
             <div class="service-bar__avatar" style="background:#EAF1F7">
-              <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="7" stroke="#334557" stroke-width="1.5"/><path d="M7 10h6M10 7v6" stroke="#334557" stroke-width="1.5" stroke-linecap="round"/></svg>
+              <svg width="20" height="20" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12.4051 6.97976C12.4408 7.1627 12.7084 7.16271 12.7441 6.97976C13.0547 5.38333 13.5202 4.92762 15.153 4.62396C15.3403 4.58912 15.3403 4.32799 15.153 4.29315C13.5203 3.9895 13.0547 3.53365 12.7441 1.93736C12.7085 1.75419 12.4407 1.75419 12.4051 1.93736C12.0945 3.53373 11.6284 3.9895 9.99556 4.29315C9.8087 4.32824 9.80865 4.58891 9.99556 4.62396C11.6285 4.92762 12.0945 5.38324 12.4051 6.97976ZM7.38029 14.3432C7.43195 14.6242 7.84335 14.6242 7.895 14.3432C8.452 11.3136 9.26111 10.523 12.36 9.97847C12.6471 9.92785 12.6471 9.52589 12.36 9.47523C9.26102 8.93065 8.452 8.13968 7.895 5.10983C7.84325 4.82898 7.43203 4.82896 7.38029 5.10983C6.82329 8.13966 6.01428 8.93065 2.91533 9.47523C2.62833 9.52598 2.6283 9.92776 2.91533 9.97847C6.01418 10.523 6.82329 11.3136 7.38029 14.3432ZM13.1125 16.0962C13.1397 16.2346 13.3417 16.2346 13.3689 16.0962C13.6041 14.8869 13.9572 14.5418 15.194 14.3118C15.3355 14.2852 15.3354 14.0878 15.194 14.0612C13.9572 13.8312 13.6041 13.486 13.3689 12.2768C13.3419 12.1381 13.1395 12.1381 13.1125 12.2768C12.8773 13.486 12.5242 13.8312 11.2875 14.0612C11.1456 14.0876 11.1456 14.2854 11.2875 14.3118C12.5242 14.5418 12.8773 14.887 13.1125 16.0962Z" fill="#334557"/></svg>
             </div>
             <div class="service-bar__text">
               <span class="service-bar__title">AI Overview</span>
