@@ -1790,7 +1790,7 @@
     .mnv2__acpanel-inner {
       background: #eaf1f7;
       border-radius: 8px;
-      padding: 8px;
+      padding: 16px;
       display: flex;
       flex-direction: column;
       gap: 8px;
@@ -1800,7 +1800,8 @@
     .mnv2__acpanel-col { display: flex; flex-direction: column; gap: 8px; width: 230px; flex-shrink: 0; overflow: hidden; }
     .mnv2__acpanel-col-head { display: flex; align-items: center; gap: 4px; height: 20px; }
     .mnv2__acpanel-col-head span { font-family: 'Open Sans', sans-serif; font-size: 12px; font-weight: 600; color: #181818; }
-    .mnv2__acpanel-search { display: flex; align-items: center; background: white; border-radius: 8px; padding: 0 12px; height: 40px; gap: 8px; }
+    .mnv2__acpanel-search { display: none; align-items: center; background: white; border-radius: 8px; padding: 0 12px; height: 40px; gap: 8px; }
+    .mnv2__acpanel-search--visible { display: flex; }
     .mnv2__acpanel-search input { border: none; outline: none; font-family: 'Open Sans', sans-serif; font-size: 13px; color: #858585; flex: 1; background: transparent; }
     .mnv2__acpanel-list { background: white; border-radius: 12px; padding: 16px; display: flex; flex-direction: column; gap: 2px; border: none; outline: none; box-sizing: border-box; }
     .mnv2__account:focus { outline: none; }
@@ -14449,6 +14450,14 @@ Prioritise authority reinforcement in declining citation segments</textarea>
     };
 
 
+    function toggleSearch(listEl) {
+      var searchEl = listEl.previousElementSibling;
+      if (searchEl && searchEl.classList.contains('mnv2__acpanel-search')) {
+        var count = listEl.querySelectorAll('.mnv2__acpanel-item').length;
+        searchEl.classList.toggle('mnv2__acpanel-search--visible', count > 20);
+      }
+    }
+
     function renderLocations(domain) {
       var list = document.getElementById('mnv2-loc-list');
       if (!list) return;
@@ -14466,6 +14475,7 @@ Prioritise authority reinforcement in declining citation segments</textarea>
           list.appendChild(sep);
         }
       });
+      toggleSearch(list);
       bindLocationClicks();
     }
 
@@ -14492,9 +14502,11 @@ Prioritise authority reinforcement in declining citation segments</textarea>
           renderLocations(btn.dataset.domain);
         });
       });
+      toggleSearch(domainList);
     }
 
     bindLocationClicks();
+    toggleSearch(document.getElementById('mnv2-loc-list'));
     acBtn.addEventListener('click', function(e) {
       e.stopPropagation();
       var isOpen = acPanel.classList.contains('mnv2__acpanel--open');
