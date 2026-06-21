@@ -269,6 +269,21 @@ body {
 .kpi-card__delta--down { color: #de5a5a; }
 .kpi-card__delta--flat { color: #6477a2; }
 .kpi-card__sparkline { flex: 1; min-width: 0; height: 44px; position: relative; }
+.kpi-card__hover-dot {
+  position: absolute; width: 10px; height: 10px; border-radius: 50%;
+  border: 2px solid #fff; box-shadow: 0 1px 4px rgba(0,0,0,0.18);
+  transform: translate(-50%, -50%); pointer-events: none;
+  opacity: 0; transition: opacity 0.1s; z-index: 2;
+}
+.kpi-card__hover-tooltip {
+  position: absolute; background: rgba(0,0,0,0.8); color: #fff;
+  font-family: var(--font-base); font-size: 12px; font-weight: 600;
+  line-height: normal; padding: 3px 7px; border-radius: 4px;
+  transform: translate(-50%, -100%); pointer-events: none;
+  opacity: 0; transition: opacity 0.1s; white-space: nowrap; z-index: 3;
+}
+.kpi-card__hover-dot--static   { opacity: 1; }
+.kpi-card__hover-tooltip--static { opacity: 1; }
 .kpi-card__subtitle {
   font-family: var(--font-base);
   font-size: 12px;
