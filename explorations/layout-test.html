@@ -176,6 +176,8 @@
       color: var(--text-secondary);
     }
 
+    .kpi-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+
   </style>
 </head>
 <body>
@@ -383,12 +385,206 @@
         }
       </script>
 
+      <!-- SVG gradient defs for KPI sparklines -->
+      <svg width="0" height="0" style="position:absolute">
+        <defs>
+          <linearGradient id="kpi-grad-up" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#40af46" stop-opacity="0.25"/>
+            <stop offset="100%" stop-color="#40af46" stop-opacity="0.02"/>
+          </linearGradient>
+          <linearGradient id="kpi-grad-down" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#de5a5a" stop-opacity="0.25"/>
+            <stop offset="100%" stop-color="#de5a5a" stop-opacity="0.02"/>
+          </linearGradient>
+          <linearGradient id="kpi-grad-flat" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#6477a2" stop-opacity="0.18"/>
+            <stop offset="100%" stop-color="#6477a2" stop-opacity="0.02"/>
+          </linearGradient>
+        </defs>
+      </svg>
+
+      <!-- KPI row -->
+      <div class="kpi-row">
+
+        <!-- AIO Coverage — up -->
+        <div class="kpi-card">
+          <div class="kpi-card__header">
+            <span class="kpi-card__label">AIO Coverage</span>
+            <div class="kpi-info-wrap">
+              <div class="kpi-card__info-icon" role="button" tabindex="0" aria-label="More information">i</div>
+              <div class="tooltip-info kpi-info-tooltip">
+                <div class="tooltip-info__body">% of your tracked search terms that triggered an AI Overview in the selected period.</div>
+                <svg class="tooltip-info__arrow" width="78" height="10" viewBox="0 0 78 10" fill="none"><path d="M24 0H54C54 0 52.203 0 49 2.4096C45.7745 4.83616 42.0352 7.68387 40.1758 9.10226C39.4766 9.63566 38.5145 9.65177 37.8035 9.13418C36.0242 7.83892 32.5121 5.25297 29 2.5C25.8106 0 24 0 24 0Z" fill="white"/></svg>
+              </div>
+            </div>
+          </div>
+          <div class="kpi-card__body">
+            <div class="kpi-card__row">
+              <div class="kpi-card__values">
+                <div class="kpi-card__bar"></div>
+                <span class="kpi-card__value">68</span>
+                <span class="kpi-card__delta kpi-card__delta--up">+12</span>
+              </div>
+              <div class="kpi-card__sparkline" data-color="#40af46" data-start="56" data-end="68">
+                <svg width="100%" height="44" viewBox="0 0 214 44" preserveAspectRatio="none">
+                  <path d="M0,38 C40,34 80,28 120,20 C160,12 188,7 214,4" fill="none" stroke="#40af46" stroke-width="1.5"/>
+                  <path d="M0,38 C40,34 80,28 120,20 C160,12 188,7 214,4 L214,44 L0,44Z" fill="url(#kpi-grad-up)"/>
+                </svg>
+                <div class="kpi-card__hover-dot" style="background:#40af46"></div>
+                <div class="kpi-card__hover-tooltip"></div>
+              </div>
+            </div>
+            <span class="kpi-card__subtitle">% of tracked terms — vs. previous period</span>
+          </div>
+        </div>
+
+        <!-- Impression Share — down -->
+        <div class="kpi-card">
+          <div class="kpi-card__header">
+            <span class="kpi-card__label">Impression Share</span>
+            <div class="kpi-info-wrap">
+              <div class="kpi-card__info-icon" role="button" tabindex="0" aria-label="More information">i</div>
+              <div class="tooltip-info kpi-info-tooltip">
+                <div class="tooltip-info__body">Share of total impressions where your brand appeared in an AI Overview result.</div>
+                <svg class="tooltip-info__arrow" width="78" height="10" viewBox="0 0 78 10" fill="none"><path d="M24 0H54C54 0 52.203 0 49 2.4096C45.7745 4.83616 42.0352 7.68387 40.1758 9.10226C39.4766 9.63566 38.5145 9.65177 37.8035 9.13418C36.0242 7.83892 32.5121 5.25297 29 2.5C25.8106 0 24 0 24 0Z" fill="white"/></svg>
+              </div>
+            </div>
+          </div>
+          <div class="kpi-card__body">
+            <div class="kpi-card__row">
+              <div class="kpi-card__values">
+                <div class="kpi-card__bar"></div>
+                <span class="kpi-card__value">41</span>
+                <span class="kpi-card__delta kpi-card__delta--down">-7</span>
+              </div>
+              <div class="kpi-card__sparkline" data-color="#de5a5a" data-start="48" data-end="41">
+                <svg width="100%" height="44" viewBox="0 0 214 44" preserveAspectRatio="none">
+                  <path d="M0,6 C40,10 80,18 120,26 C160,34 188,39 214,40" fill="none" stroke="#de5a5a" stroke-width="1.5"/>
+                  <path d="M0,6 C40,10 80,18 120,26 C160,34 188,39 214,40 L214,44 L0,44Z" fill="url(#kpi-grad-down)"/>
+                </svg>
+                <div class="kpi-card__hover-dot" style="background:#de5a5a"></div>
+                <div class="kpi-card__hover-tooltip"></div>
+              </div>
+            </div>
+            <span class="kpi-card__subtitle">% share of total impressions — vs. previous period</span>
+          </div>
+        </div>
+
+        <!-- Brand Mentions — up -->
+        <div class="kpi-card">
+          <div class="kpi-card__header">
+            <span class="kpi-card__label">Brand Mentions</span>
+            <div class="kpi-info-wrap">
+              <div class="kpi-card__info-icon" role="button" tabindex="0" aria-label="More information">i</div>
+              <div class="tooltip-info kpi-info-tooltip">
+                <div class="tooltip-info__body">Number of times your brand was cited or linked within AI Overview answers for tracked queries.</div>
+                <svg class="tooltip-info__arrow" width="78" height="10" viewBox="0 0 78 10" fill="none"><path d="M24 0H54C54 0 52.203 0 49 2.4096C45.7745 4.83616 42.0352 7.68387 40.1758 9.10226C39.4766 9.63566 38.5145 9.65177 37.8035 9.13418C36.0242 7.83892 32.5121 5.25297 29 2.5C25.8106 0 24 0 24 0Z" fill="white"/></svg>
+              </div>
+            </div>
+          </div>
+          <div class="kpi-card__body">
+            <div class="kpi-card__row">
+              <div class="kpi-card__values">
+                <div class="kpi-card__bar"></div>
+                <span class="kpi-card__value">24</span>
+                <span class="kpi-card__delta kpi-card__delta--up">+5</span>
+              </div>
+              <div class="kpi-card__sparkline" data-color="#40af46" data-start="19" data-end="24">
+                <svg width="100%" height="44" viewBox="0 0 214 44" preserveAspectRatio="none">
+                  <path d="M0,36 C50,30 100,22 150,14 C180,9 200,6 214,4" fill="none" stroke="#40af46" stroke-width="1.5"/>
+                  <path d="M0,36 C50,30 100,22 150,14 C180,9 200,6 214,4 L214,44 L0,44Z" fill="url(#kpi-grad-up)"/>
+                </svg>
+                <div class="kpi-card__hover-dot" style="background:#40af46"></div>
+                <div class="kpi-card__hover-tooltip"></div>
+              </div>
+            </div>
+            <span class="kpi-card__subtitle">Unique mentions in AIO answers — vs. previous period</span>
+          </div>
+        </div>
+
+        <!-- Terms Tracked — flat -->
+        <div class="kpi-card">
+          <div class="kpi-card__header">
+            <span class="kpi-card__label">Terms Tracked</span>
+            <div class="kpi-info-wrap">
+              <div class="kpi-card__info-icon" role="button" tabindex="0" aria-label="More information">i</div>
+              <div class="tooltip-info kpi-info-tooltip">
+                <div class="tooltip-info__body">Total number of search terms actively monitored for AI Overview activity in this account.</div>
+                <svg class="tooltip-info__arrow" width="78" height="10" viewBox="0 0 78 10" fill="none"><path d="M24 0H54C54 0 52.203 0 49 2.4096C45.7745 4.83616 42.0352 7.68387 40.1758 9.10226C39.4766 9.63566 38.5145 9.65177 37.8035 9.13418C36.0242 7.83892 32.5121 5.25297 29 2.5C25.8106 0 24 0 24 0Z" fill="white"/></svg>
+              </div>
+            </div>
+          </div>
+          <div class="kpi-card__body">
+            <div class="kpi-card__row">
+              <div class="kpi-card__values kpi-card__values--full">
+                <div class="kpi-card__bar"></div>
+                <span class="kpi-card__value">31</span>
+                <span class="kpi-card__delta kpi-card__delta--flat">—</span>
+                <div class="kpi-card__sparkline" style="margin-left:8px" data-color="#6477a2" data-start="31" data-end="31">
+                  <svg width="100%" height="44" viewBox="0 0 214 44" preserveAspectRatio="none">
+                    <path d="M0,22 C60,21 120,23 170,22 C190,22 205,22 214,22" fill="none" stroke="#6477a2" stroke-width="1.5"/>
+                    <path d="M0,22 C60,21 120,23 170,22 C190,22 205,22 214,22 L214,44 L0,44Z" fill="url(#kpi-grad-flat)"/>
+                  </svg>
+                  <div class="kpi-card__hover-dot" style="background:#6477a2"></div>
+                  <div class="kpi-card__hover-tooltip"></div>
+                </div>
+              </div>
+            </div>
+            <span class="kpi-card__subtitle">Active keywords in tracking — no change</span>
+          </div>
+        </div>
+
+      </div>
+
       <div class="placeholder-card">
         <span class="placeholder-card__label">Content cards will go here</span>
       </div>
 
     </div>
   </div>
+
+  <script>
+  // Sparkline hover interaction
+  (function() {
+    function initSparklineHover(sparkline) {
+      var svg      = sparkline.querySelector('svg');
+      var linePath = sparkline.querySelector('path');
+      var dot      = sparkline.querySelector('.kpi-card__hover-dot');
+      var tooltip  = sparkline.querySelector('.kpi-card__hover-tooltip');
+      if (!svg || !linePath || !dot || !tooltip) return;
+      if (dot.classList.contains('kpi-card__hover-dot--static')) return;
+      var color    = sparkline.dataset.color  || '#40af46';
+      var startVal = parseInt(sparkline.dataset.start || '28', 10);
+      var endVal   = parseInt(sparkline.dataset.end   || '33', 10);
+      var totalLen = linePath.getTotalLength();
+      var vb       = svg.viewBox.baseVal;
+      dot.style.background = color;
+      function positionAt(xFrac) {
+        var lo = 0, hi = totalLen;
+        for (var i = 0; i < 24; i++) {
+          var mid = (lo + hi) / 2;
+          if (linePath.getPointAtLength(mid).x / vb.width < xFrac) { lo = mid; } else { hi = mid; }
+        }
+        var pt   = linePath.getPointAtLength((lo + hi) / 2);
+        var rect = sparkline.getBoundingClientRect();
+        var domX = (pt.x / vb.width)  * rect.width;
+        var domY = (pt.y / vb.height) * rect.height;
+        dot.style.left     = domX + 'px';
+        dot.style.top      = domY + 'px';
+        tooltip.style.left = domX + 'px';
+        tooltip.style.top  = (domY - 8) + 'px';
+        tooltip.textContent = Math.round(startVal + (endVal - startVal) * xFrac);
+      }
+      sparkline.addEventListener('mouseenter', function() { dot.style.opacity = '1'; tooltip.style.opacity = '1'; });
+      sparkline.addEventListener('mouseleave', function() { dot.style.opacity = '0'; tooltip.style.opacity = '0'; });
+      sparkline.addEventListener('mousemove', function(e) {
+        var rect = sparkline.getBoundingClientRect();
+        positionAt(Math.max(0.01, Math.min(0.99, (e.clientX - rect.left) / rect.width)));
+      });
+    }
+    document.querySelectorAll('.kpi-card__sparkline[data-color]').forEach(initSparklineHover);
+  })();
+  </script>
 
   <script>
 (function() {
