@@ -1092,7 +1092,8 @@
 
     /* === Filter Advanced Dropdown (.ds-adv-dd) === */
     .ds-adv-dd { position:relative; display:inline-block; }
-    .ds-adv-dd__panel { width:320px; background:#ffffff; border-radius:12px; box-shadow:0 4px 20px rgba(27,48,96,0.10),0 1px 4px rgba(27,48,96,0.06); overflow:hidden; }
+    .ds-adv-dd__panel { width:320px; background:#ffffff; border-radius:12px; box-shadow:0 4px 20px rgba(27,48,96,0.10),0 1px 4px rgba(27,48,96,0.06); overflow:hidden; opacity:0; transform:translateY(-4px); transition:opacity 0.15s, transform 0.15s; }
+    .ds-adv-dd__panel--open { opacity:1; transform:translateY(0); }
     .ds-adv-dd__search { display:flex; align-items:center; gap:8px; margin:12px; padding:8px 12px; border:1.5px solid #c4cdd5; border-radius:8px; transition:border-color 0.15s; }
     .ds-adv-dd__search:focus-within { border-color:#1565c0; }
     .ds-adv-dd__search-icon { color:#a0aab6; flex-shrink:0; }
@@ -4485,7 +4486,10 @@
                   <button class="subtab subtab--active" onclick="advDdToggleMode(this)">Include</button>
                   <button class="subtab" onclick="advDdToggleMode(this)">Exclude</button>
                 </div>
-                <button class="btn btn--plain btn--sm" onclick="advDdSelectAll('sb-stg',this)">Select All</button>
+                <div style="display:flex;align-items:center;gap:4px">
+                <button class="btn btn--plain btn--sm ds-adv-dd__reset-btn" style="display:none" onclick="advDdReset('sb-stg')">Reset</button>
+                <button class="btn btn--plain btn--sm" onclick="advDdSelectAll('sb-stg')">Select All</button>
+              </div>
               </div>
               <div class="ds-adv-dd__list" id="sb-stg-list">
                 <label class="ds-adv-dd__item ds-checkbox-label"><input type="checkbox" class="ds-checkbox-input"><span class="ds-adv-dd__item-label">Brand</span></label>
@@ -4516,7 +4520,10 @@
                   <button class="subtab subtab--active" onclick="advDdToggleMode(this)">Include</button>
                   <button class="subtab" onclick="advDdToggleMode(this)">Exclude</button>
                 </div>
-                <button class="btn btn--plain btn--sm" onclick="advDdSelectAll('sb-st',this)">Select All</button>
+                <div style="display:flex;align-items:center;gap:4px">
+                <button class="btn btn--plain btn--sm ds-adv-dd__reset-btn" style="display:none" onclick="advDdReset('sb-st')">Reset</button>
+                <button class="btn btn--plain btn--sm" onclick="advDdSelectAll('sb-st')">Select All</button>
+              </div>
               </div>
               <div class="ds-adv-dd__list" id="sb-st-list">
                 <label class="ds-adv-dd__item ds-checkbox-label"><input type="checkbox" class="ds-checkbox-input"><span class="ds-adv-dd__item-label">car insurance quote</span><span class="ds-adv-dd__badge">1H</span></label>
@@ -4631,7 +4638,10 @@
                 <button class="subtab subtab--active" onclick="advDdToggleMode(this)">Include</button>
                 <button class="subtab" onclick="advDdToggleMode(this)">Exclude</button>
               </div>
-              <button class="btn btn--plain btn--sm" onclick="advDdSelectAll('anat-stg',this)">Select All</button>
+              <div style="display:flex;align-items:center;gap:4px">
+                <button class="btn btn--plain btn--sm ds-adv-dd__reset-btn" style="display:none" onclick="advDdReset('anat-stg')">Reset</button>
+                <button class="btn btn--plain btn--sm" onclick="advDdSelectAll('anat-stg')">Select All</button>
+              </div>
             </div>
             <div class="ds-adv-dd__list" id="anat-stg-list">
               <label class="ds-adv-dd__item ds-checkbox-label"><input type="checkbox" class="ds-checkbox-input"><span class="ds-adv-dd__item-label">Brand</span></label>
@@ -4662,7 +4672,10 @@
                 <button class="subtab subtab--active" onclick="advDdToggleMode(this)">Include</button>
                 <button class="subtab" onclick="advDdToggleMode(this)">Exclude</button>
               </div>
-              <button class="btn btn--plain btn--sm" onclick="advDdSelectAll('anat-st',this)">Select All</button>
+              <div style="display:flex;align-items:center;gap:4px">
+                <button class="btn btn--plain btn--sm ds-adv-dd__reset-btn" style="display:none" onclick="advDdReset('anat-st')">Reset</button>
+                <button class="btn btn--plain btn--sm" onclick="advDdSelectAll('anat-st')">Select All</button>
+              </div>
             </div>
             <div class="ds-adv-dd__list" id="anat-st-list">
               <label class="ds-adv-dd__item ds-checkbox-label"><input type="checkbox" class="ds-checkbox-input"><span class="ds-adv-dd__item-label">car insurance quote</span><span class="ds-adv-dd__badge">1H</span></label>
@@ -15218,12 +15231,12 @@ Prioritise authority reinforcement in declining citation segments</textarea>
     }
     // close on outside click
     document.addEventListener('click', function(e) {
-      if (!e.target.closest('.ds-dropdown')) {
+      if (!e.target.closest('.ds-dropdown') && !e.target.closest('.ds-adv-dd')) {
         document.querySelectorAll('.ds-dropdown__menu--open').forEach(function(m) {
           m.classList.remove('ds-dropdown__menu--open');
         });
         document.querySelectorAll('.ds-dropdown__trigger--open').forEach(function(b) {
-          b.classList.remove('ds-dropdown__trigger--open');
+          if (!b.closest('.ds-adv-dd')) b.classList.remove('ds-dropdown__trigger--open');
         });
       }
     });
@@ -15438,7 +15451,10 @@ Prioritise authority reinforcement in declining citation segments</textarea>
                 <button class="subtab subtab--active" onclick="advDdToggleMode(this)">Include</button>
                 <button class="subtab" onclick="advDdToggleMode(this)">Exclude</button>
               </div>
-              <button class="btn btn--plain btn--sm" onclick="advDdSelectAll('adv-dd-demo',this)">Select All</button>
+              <div style="display:flex;align-items:center;gap:4px">
+                <button class="btn btn--plain btn--sm ds-adv-dd__reset-btn" style="display:none" onclick="advDdReset('adv-dd-demo')">Reset</button>
+                <button class="btn btn--plain btn--sm" onclick="advDdSelectAll('adv-dd-demo')">Select All</button>
+              </div>
             </div>
             <div class="ds-adv-dd__list" id="adv-dd-demo-list">
               <label class="ds-adv-dd__item ds-checkbox-label"><input type="checkbox" class="ds-checkbox-input"><span class="ds-adv-dd__item-label">Brand — UK</span></label>
@@ -15466,7 +15482,7 @@ Prioritise authority reinforcement in declining citation segments</textarea>
     <div style="background:#ffffff;padding:24px;border-radius:12px;display:flex;gap:48px;flex-wrap:wrap;align-items:flex-start">
 
       <div style="display:flex;flex-direction:column;gap:0;align-items:flex-start">
-        <div class="ds-adv-dd__panel" style="position:static;pointer-events:none">
+        <div class="ds-adv-dd__panel" style="position:static;pointer-events:none;opacity:1;transform:none">
           <div class="ds-adv-dd__search" style="border-color:#1565c0">
             <svg class="ds-adv-dd__search-icon" width="15" height="15" viewBox="0 0 15 15" fill="none"><circle cx="6.5" cy="6.5" r="5" stroke="currentColor" stroke-width="1.4"/><path d="M10.5 10.5l3 3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
             <input class="ds-adv-dd__search-input" placeholder="Search..." style="pointer-events:none">
@@ -15519,17 +15535,28 @@ Prioritise authority reinforcement in declining citation segments</textarea>
       var panel = document.getElementById(id + '-panel');
       if (!list || !panel) return;
       var cbs = list.querySelectorAll('.ds-checkbox-input');
-      var allChecked = cbs.length > 0 && Array.from(cbs).every(function(cb) { return cb.checked; });
-      var selectAllBtn = panel.querySelector('.btn--plain.btn--sm');
-      if (selectAllBtn) selectAllBtn.textContent = allChecked ? 'Reset' : 'Select All';
+      var anyChecked = Array.from(cbs).some(function(cb) { return cb.checked; });
+      var resetBtn = panel.querySelector('.ds-adv-dd__reset-btn');
+      if (resetBtn) resetBtn.style.display = anyChecked ? '' : 'none';
+    }
+    function advDdClose(id) {
+      var panel = document.getElementById(id + '-panel');
+      var btn   = document.getElementById(id + '-btn');
+      if (!panel || !panel.classList.contains('ds-adv-dd__panel--open')) return;
+      panel.classList.remove('ds-adv-dd__panel--open');
+      setTimeout(function() { if (!panel.classList.contains('ds-adv-dd__panel--open')) panel.style.display = 'none'; }, 150);
+      if (btn) btn.classList.remove('ds-dropdown__trigger--open');
     }
     function advDdToggle(id) {
       var panel = document.getElementById(id + '-panel');
       var btn   = document.getElementById(id + '-btn');
-      var open  = panel.style.display === 'block';
-      panel.style.display = open ? 'none' : 'block';
-      if (btn) btn.classList.toggle('ds-dropdown__trigger--open', !open);
-      if (!open) {
+      var isOpen = panel.classList.contains('ds-adv-dd__panel--open');
+      if (isOpen) {
+        advDdClose(id);
+      } else {
+        panel.style.display = 'block';
+        requestAnimationFrame(function() { requestAnimationFrame(function() { panel.classList.add('ds-adv-dd__panel--open'); }); });
+        if (btn) btn.classList.add('ds-dropdown__trigger--open');
         var list = document.getElementById(id + '-list');
         if (list && !list.dataset.advInit) {
           list.dataset.advInit = '1';
@@ -15543,10 +15570,13 @@ Prioritise authority reinforcement in declining citation segments</textarea>
       group.querySelectorAll('.subtab').forEach(function(b) { b.classList.remove('subtab--active'); });
       btn.classList.add('subtab--active');
     }
-    function advDdSelectAll(id, btn) {
-      var isReset = btn.textContent.trim() === 'Reset';
-      document.querySelectorAll('#' + id + '-list .ds-checkbox-input').forEach(function(cb) { cb.checked = !isReset; });
-      btn.textContent = isReset ? 'Select All' : 'Reset';
+    function advDdSelectAll(id) {
+      document.querySelectorAll('#' + id + '-list .ds-checkbox-input').forEach(function(cb) { cb.checked = true; });
+      advDdSyncSelectBtn(id);
+    }
+    function advDdReset(id) {
+      document.querySelectorAll('#' + id + '-list .ds-checkbox-input').forEach(function(cb) { cb.checked = false; });
+      advDdSyncSelectBtn(id);
     }
     function advDdFilter(id) {
       var q = document.getElementById(id + '-search').value.toLowerCase();
@@ -15565,8 +15595,7 @@ Prioritise authority reinforcement in declining citation segments</textarea>
       }
       var base = btn.dataset.baseLabel;
       btn.childNodes[0].textContent = checked.length ? base + ' (' + checked.length + ') ' : base + ' ';
-      document.getElementById(id + '-panel').style.display = 'none';
-      btn.classList.remove('ds-dropdown__trigger--open');
+      advDdClose(id);
     }
     // close on outside click
     document.addEventListener('click', function(e) {
@@ -15574,8 +15603,11 @@ Prioritise authority reinforcement in declining citation segments</textarea>
         if (!dd.contains(e.target)) {
           var panel = dd.querySelector('.ds-adv-dd__panel[id]');
           var btn   = dd.querySelector('[id$="-btn"]');
-          if (panel) panel.style.display = 'none';
-          if (btn)   btn.classList.remove('ds-dropdown__trigger--open');
+          if (panel && panel.classList.contains('ds-adv-dd__panel--open')) {
+            panel.classList.remove('ds-adv-dd__panel--open');
+            setTimeout(function() { if (!panel.classList.contains('ds-adv-dd__panel--open')) panel.style.display = 'none'; }, 150);
+          }
+          if (btn) btn.classList.remove('ds-dropdown__trigger--open');
         }
       });
     });
