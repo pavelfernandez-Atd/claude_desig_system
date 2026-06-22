@@ -15483,22 +15483,30 @@ Prioritise authority reinforcement in declining citation segments</textarea>
 
       <div style="display:flex;flex-direction:column;gap:0;align-items:flex-start">
         <div class="ds-adv-dd__panel" style="position:static;pointer-events:none;opacity:1;transform:none">
-          <div class="ds-adv-dd__search" style="border-color:#1565c0">
+          <div class="ds-adv-dd__search">
             <svg class="ds-adv-dd__search-icon" width="15" height="15" viewBox="0 0 15 15" fill="none"><circle cx="6.5" cy="6.5" r="5" stroke="currentColor" stroke-width="1.4"/><path d="M10.5 10.5l3 3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
             <input class="ds-adv-dd__search-input" placeholder="Search..." style="pointer-events:none">
           </div>
           <div class="ds-adv-dd__toolbar">
             <div style="display:flex;align-items:center;background:#fafafa;border-radius:40px;padding:5px;gap:2px">
               <button class="subtab subtab--active">Include <span class="subtab__badge">3</span></button>
-              <button class="subtab">Exclude <span class="subtab__badge" style="display:none"></span></button>
+              <button class="subtab">Exclude <span class="subtab__badge">1</span></button>
             </div>
-            <button class="btn btn--plain btn--sm">Select All</button>
+            <div style="display:flex;align-items:center;gap:4px">
+              <button class="btn btn--plain btn--sm ds-adv-dd__reset-btn">Reset</button>
+              <button class="btn btn--plain btn--sm">Select All</button>
+            </div>
           </div>
           <div class="ds-adv-dd__list" style="overflow:visible">
-            <label class="ds-adv-dd__item ds-checkbox-label"><input type="checkbox" class="ds-checkbox-input"><span class="ds-adv-dd__item-label">Brand — UK</span></label>
+            <label class="ds-adv-dd__item ds-checkbox-label"><input type="checkbox" class="ds-checkbox-input" checked><span class="ds-adv-dd__item-label">Brand — UK</span></label>
             <label class="ds-adv-dd__item ds-checkbox-label"><input type="checkbox" class="ds-checkbox-input" checked><span class="ds-adv-dd__item-label">Brand — US</span><span class="ds-adv-dd__badge">1H</span></label>
+            <label class="ds-adv-dd__item ds-checkbox-label"><input type="checkbox" class="ds-checkbox-input" checked><span class="ds-adv-dd__item-label">Retargeting</span></label>
+            <div class="ds-adv-dd__divider" style="height:1px;background:rgba(0,0,0,0.08);margin:4px 8px;flex-shrink:0"></div>
             <label class="ds-adv-dd__item ds-checkbox-label"><input type="checkbox" class="ds-checkbox-input"><span class="ds-adv-dd__item-label">Competitor Conquesting</span><span class="ds-adv-dd__badge">1H</span></label>
             <label class="ds-adv-dd__item ds-checkbox-label"><input type="checkbox" class="ds-checkbox-input"><span class="ds-adv-dd__item-label">Generic — Broad</span></label>
+            <label class="ds-adv-dd__item ds-checkbox-label"><input type="checkbox" class="ds-checkbox-input"><span class="ds-adv-dd__item-label">Generic — Exact</span><span class="ds-adv-dd__badge">1H</span></label>
+            <label class="ds-adv-dd__item ds-checkbox-label"><input type="checkbox" class="ds-checkbox-input"><span class="ds-adv-dd__item-label">Shopping — Core</span><span class="ds-adv-dd__badge">1H</span></label>
+            <label class="ds-adv-dd__item ds-checkbox-label"><input type="checkbox" class="ds-checkbox-input"><span class="ds-adv-dd__item-label">Performance Max</span></label>
           </div>
           <div class="ds-adv-dd__footer">
             <button class="btn btn--primary btn--sm">Apply</button>
