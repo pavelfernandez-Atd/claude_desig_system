@@ -15586,7 +15586,23 @@ Prioritise authority reinforcement in declining citation segments</textarea>
           list.addEventListener('change', function() { advDdSyncSelectBtn(id); });
         }
         advDdSyncSelectBtn(id);
+        advDdSortList(id);
       }
+    }
+    function advDdSortList(id) {
+      var list = document.getElementById(id + '-list');
+      if (!list) return;
+      list.querySelectorAll('.ds-adv-dd__divider').forEach(function(d) { d.remove(); });
+      var items = Array.from(list.querySelectorAll('.ds-adv-dd__item'));
+      var checked = items.filter(function(i) { return i.querySelector('.ds-checkbox-input').checked; });
+      var unchecked = items.filter(function(i) { return !i.querySelector('.ds-checkbox-input').checked; });
+      if (!checked.length) return;
+      checked.forEach(function(i) { list.appendChild(i); });
+      var divider = document.createElement('div');
+      divider.className = 'ds-adv-dd__divider';
+      divider.style.cssText = 'height:1px;background:rgba(0,0,0,0.08);margin:4px 8px;flex-shrink:0';
+      list.appendChild(divider);
+      unchecked.forEach(function(i) { list.appendChild(i); });
     }
     function advDdToggleMode(btn) {
       var group = btn.closest('div');
@@ -15616,6 +15632,7 @@ Prioritise authority reinforcement in declining citation segments</textarea>
           list.querySelectorAll('.ds-checkbox-input').forEach(function(cb, i) { cb.checked = saved ? (saved[i] || false) : false; });
         }
         advDdSyncSelectBtn(id);
+        advDdSortList(id);
       }
     }
     function advDdSelectAll(id) {
