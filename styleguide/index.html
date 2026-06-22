@@ -1193,6 +1193,11 @@
     .gauge__value { font-family:var(--font-base); font-size:50px; font-weight:300; color:#27365b; line-height:1; letter-spacing:-2px; }
     .gauge__unit { font-family:var(--font-base); font-size:22px; font-weight:300; color:#27365b; line-height:1; padding-bottom:6px; padding-left:3px; }
     .gauge__subtitle { position:absolute; left:50%; top:calc(50% + 22px); transform:translateX(-50%); font-family:var(--font-base); font-size:12px; font-weight:400; color:#6477a2; white-space:nowrap; line-height:14px; }
+    .gauge--md { width:200px; height:200px; }
+    .gauge--md .gauge__icon { width:28px; height:28px; bottom:calc(50% + 13px); }
+    .gauge--md .gauge__value { font-size:40px; letter-spacing:-1.5px; }
+    .gauge--md .gauge__unit { font-size:18px; padding-bottom:5px; }
+    .gauge--md .gauge__subtitle { font-size:11px; top:calc(50% + 19px); }
     .gauge--sm .gauge__icon { width:22px; height:22px; bottom:calc(50% + 11px); }
     .gauge--sm .gauge__value { font-size:32px; letter-spacing:-1px; }
     .gauge--sm .gauge__unit { font-size:14px; padding-bottom:4px; }
@@ -9309,7 +9314,7 @@ function accSetDisabled(id, disabled) {
 
           <!-- Left: gauge -->
           <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;padding-right:24px;flex-shrink:0">
-            <div class="gauge" id="gauge-template" data-value="41">
+            <div class="gauge gauge--md" id="gauge-template" data-value="41">
               <svg class="gauge__svg" viewBox="0 0 248 248" xmlns="http://www.w3.org/2000/svg">
                 <!-- Outer decorative ring -->
                 <circle cx="124" cy="124" r="115" fill="none" stroke="#fafafa" stroke-width="16"/>
@@ -9435,6 +9440,64 @@ function accSetDisabled(id, disabled) {
 
   <!-- 2. VARIANTS ─────────────────────────────────────────────── -->
   <div style="margin-bottom:40px">
+    <div class="sub-label">Size Variants</div>
+    <div style="display:flex;gap:40px;align-items:flex-end;flex-wrap:wrap;margin-bottom:40px">
+
+      <!-- Big Gauge -->
+      <div style="display:flex;flex-direction:column;align-items:center;gap:10px">
+        <div class="gauge" data-value="41">
+          <svg class="gauge__svg" viewBox="0 0 248 248" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="124" cy="124" r="115" fill="none" stroke="#fafafa" stroke-width="16"/>
+            <circle cx="124" cy="124" r="94" fill="none" stroke="#dbd8ef" stroke-width="18" stroke-dasharray="442.9 147.7" transform="rotate(135,124,124)" stroke-linecap="round"/>
+            <circle class="gauge__progress" cx="124" cy="124" r="94" fill="none" stroke="#b3a2e7" stroke-width="18" stroke-dasharray="0 590.6" transform="rotate(135,124,124)" stroke-linecap="round"/>
+            <circle cx="124" cy="124" r="81" fill="#ffffff"/>
+          </svg>
+          <div class="gauge__label">
+            <svg class="gauge__icon" viewBox="0 0 36 36" fill="none"><path d="M22 5 L23.5 10.5 L29 12 L23.5 13.5 L22 19 L20.5 13.5 L15 12 L20.5 10.5 Z" fill="#b3a2e7"/><path d="M11 15 L12 19 L16 20 L12 21 L11 25 L10 21 L6 20 L10 19 Z" fill="#b3a2e7"/><path d="M26 23 L26.7 25.3 L29 26 L26.7 26.7 L26 29 L25.3 26.7 L23 26 L25.3 25.3 Z" fill="#b3a2e7"/></svg>
+            <div class="gauge__value-row"><span class="gauge__value">0</span><span class="gauge__unit">%</span></div>
+            <span class="gauge__subtitle">AIO Avg. Frequency</span>
+          </div>
+        </div>
+        <span style="font-size:12px;font-weight:600;color:#485982;font-family:'Open Sans',sans-serif">Big Gauge · 248px</span>
+      </div>
+
+      <!-- Medium Gauge -->
+      <div style="display:flex;flex-direction:column;align-items:center;gap:10px">
+        <div class="gauge gauge--md" data-value="41">
+          <svg class="gauge__svg" viewBox="0 0 248 248" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="124" cy="124" r="115" fill="none" stroke="#fafafa" stroke-width="16"/>
+            <circle cx="124" cy="124" r="94" fill="none" stroke="#dbd8ef" stroke-width="18" stroke-dasharray="442.9 147.7" transform="rotate(135,124,124)" stroke-linecap="round"/>
+            <circle class="gauge__progress" cx="124" cy="124" r="94" fill="none" stroke="#b3a2e7" stroke-width="18" stroke-dasharray="0 590.6" transform="rotate(135,124,124)" stroke-linecap="round"/>
+            <circle cx="124" cy="124" r="81" fill="#ffffff"/>
+          </svg>
+          <div class="gauge__label">
+            <svg class="gauge__icon" viewBox="0 0 36 36" fill="none"><path d="M22 5 L23.5 10.5 L29 12 L23.5 13.5 L22 19 L20.5 13.5 L15 12 L20.5 10.5 Z" fill="#b3a2e7"/><path d="M11 15 L12 19 L16 20 L12 21 L11 25 L10 21 L6 20 L10 19 Z" fill="#b3a2e7"/><path d="M26 23 L26.7 25.3 L29 26 L26.7 26.7 L26 29 L25.3 26.7 L23 26 L25.3 25.3 Z" fill="#b3a2e7"/></svg>
+            <div class="gauge__value-row"><span class="gauge__value">0</span><span class="gauge__unit">%</span></div>
+            <span class="gauge__subtitle">AIO Avg. Frequency</span>
+          </div>
+        </div>
+        <span style="font-size:12px;font-weight:600;color:#485982;font-family:'Open Sans',sans-serif">Medium Gauge · 200px</span>
+      </div>
+
+      <!-- Small Gauge -->
+      <div style="display:flex;flex-direction:column;align-items:center;gap:10px">
+        <div class="gauge gauge--sm" data-value="41">
+          <svg class="gauge__svg" viewBox="0 0 248 248" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="124" cy="124" r="115" fill="none" stroke="#fafafa" stroke-width="16"/>
+            <circle cx="124" cy="124" r="94" fill="none" stroke="#dbd8ef" stroke-width="18" stroke-dasharray="442.9 147.7" transform="rotate(135,124,124)" stroke-linecap="round"/>
+            <circle class="gauge__progress" cx="124" cy="124" r="94" fill="none" stroke="#b3a2e7" stroke-width="18" stroke-dasharray="0 590.6" transform="rotate(135,124,124)" stroke-linecap="round"/>
+            <circle cx="124" cy="124" r="81" fill="#ffffff"/>
+          </svg>
+          <div class="gauge__label">
+            <svg class="gauge__icon" viewBox="0 0 36 36" fill="none"><path d="M22 5 L23.5 10.5 L29 12 L23.5 13.5 L22 19 L20.5 13.5 L15 12 L20.5 10.5 Z" fill="#b3a2e7"/><path d="M11 15 L12 19 L16 20 L12 21 L11 25 L10 21 L6 20 L10 19 Z" fill="#b3a2e7"/><path d="M26 23 L26.7 25.3 L29 26 L26.7 26.7 L26 29 L25.3 26.7 L23 26 L25.3 25.3 Z" fill="#b3a2e7"/></svg>
+            <div class="gauge__value-row"><span class="gauge__value">0</span><span class="gauge__unit">%</span></div>
+          </div>
+        </div>
+        <span style="font-size:12px;font-weight:600;color:#485982;font-family:'Open Sans',sans-serif">Small Gauge · 160px</span>
+      </div>
+
+    </div>
+
     <div class="sub-label">Value Variants</div>
     <div style="display:flex;gap:24px;flex-wrap:wrap;align-items:flex-start">
       <div style="display:flex;flex-direction:column;align-items:center;gap:8px">
