@@ -177,7 +177,6 @@
     }
 
     .kpi-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
-    .kpi-card__info-icon { width: 36px; height: 36px; }
 
     /* Date picker */
     .dp-wrap { position: relative; display: inline-block; }
@@ -608,6 +607,36 @@
 
       </div>
 
+      <!-- Gauge + Timeline card -->
+      <div class="bg-white" style="background:#fff;border-radius:12px;padding:24px">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:16px">
+          <div style="width:32px;height:32px;border-radius:50%;background:#93a1b6;display:flex;align-items:center;justify-content:center;flex-shrink:0">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="8" stroke="white" stroke-width="1.5"/><path d="M12 8v4l2.5 2.5" stroke="white" stroke-width="1.5" stroke-linecap="round"/></svg>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:2px;flex:1">
+            <span style="font-family:var(--font-base);font-size:16px;font-weight:600;color:rgba(0,0,0,0.87);line-height:1.2">AIO Coverage Over Time</span>
+            <span style="font-family:var(--font-base);font-size:13px;font-weight:400;color:#6b6b6b;line-height:1.2">Impression share vs. brand mentions — last 6 months</span>
+          </div>
+        </div>
+        <div class="chartset-donut-lines" id="lt-chartset">
+          <div>
+            <div class="donut-chart" id="lt-chartset-donut">
+              <svg class="donut-chart__svg" viewBox="0 0 248 248"></svg>
+              <div class="donut-chart__label">
+                <div class="donut-chart__value-row">
+                  <span class="donut-chart__value">68</span>
+                  <span class="donut-chart__unit">%</span>
+                </div>
+                <span class="donut-chart__subtitle">AIO<br>Coverage</span>
+              </div>
+            </div>
+          </div>
+          <div class="chartset-timeline">
+            <svg class="chartset-timeline__svg" id="lt-chartset-svg"></svg>
+          </div>
+        </div>
+      </div>
+
       <div class="placeholder-card">
         <span class="placeholder-card__label">Content cards will go here</span>
       </div>
@@ -754,6 +783,128 @@
     }
     var renderSbDp = makePicker({ prefix: 'sbDp', wrapId: 'sb-dp-wrap', panelId: 'sb-dp-panel', monthsId: 'sb-dp-months', presetsId: 'sb-dp-presets', startValId: 'sb-dp-start-val', endValId: 'sb-dp-end-val', labelId: 'sb-dp-trigger-label' });
     if (document.readyState !== 'loading') { renderSbDp(); } else { document.addEventListener('DOMContentLoaded', renderSbDp); }
+  })();
+  </script>
+
+  <script>
+  // Gauge + Timeline (chartset-donut-lines)
+  (function() {
+    function drawDonut(containerId, segments, total) {
+      var el = document.getElementById(containerId);
+      if (!el) return;
+      var svg = el.querySelector('svg');
+      if (!svg) return;
+      var cx = 124, cy = 124, r = 90, stroke = 28;
+      var circumference = 2 * Math.PI * r;
+      var offset = 0;
+      svg.innerHTML = '';
+      var bg = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+      bg.setAttribute('cx', cx); bg.setAttribute('cy', cy); bg.setAttribute('r', r);
+      bg.setAttribute('fill', 'none'); bg.setAttribute('stroke', '#e8edf5');
+      bg.setAttribute('stroke-width', stroke);
+      svg.appendChild(bg);
+      segments.forEach(function(seg) {
+        var pct = seg.value / total;
+        var len = pct * circumference;
+        var circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+        circle.setAttribute('cx', cx); circle.setAttribute('cy', cy); circle.setAttribute('r', r);
+        circle.setAttribute('fill', 'none');
+        circle.setAttribute('stroke', seg.color);
+        circle.setAttribute('stroke-width', stroke);
+        circle.setAttribute('stroke-dasharray', len + ' ' + (circumference - len));
+        circle.setAttribute('stroke-dashoffset', -offset * circumference / total + circumference * 0.25);
+        circle.setAttribute('stroke-linecap', 'round');
+        svg.appendChild(circle);
+        offset += seg.value;
+      });
+    }
+
+    function drawChartsetTimeline() {
+      var svg = document.getElementById('lt-chartset-svg');
+      if (!svg) return;
+      var container = svg.parentElement;
+      var W = container.clientWidth || 400;
+      var H = container.clientHeight || 236;
+      var PAD_L = 44, PAD_R = 12, PAD_T = 16, PAD_B = 28;
+      var chartW = W - PAD_L - PAD_R;
+      var chartH = H - PAD_T - PAD_B;
+      var data = [
+        { label: '1 Jan', values: [42, 28] },
+        { label: '1 Feb', values: [50, 30] },
+        { label: '1 Mar', values: [55, 32] },
+        { label: '1 Apr', values: [60, 35] },
+        { label: '1 May', values: [63, 38] },
+        { label: '1 Jun', values: [68, 41] }
+      ];
+      var colors = ['#4a9ef8', '#d47dd4'];
+      var allVals = data.reduce(function(a, d) { return a.concat(d.values); }, []);
+      var minV = Math.min.apply(null, allVals) - 5;
+      var maxV = Math.max.apply(null, allVals) + 5;
+      function px(i) { return PAD_L + (i / (data.length - 1)) * chartW; }
+      function py(v) { return PAD_T + (1 - (v - minV) / (maxV - minV)) * chartH; }
+      var ns = 'http://www.w3.org/2000/svg';
+      svg.setAttribute('width', W); svg.setAttribute('height', H);
+      svg.innerHTML = '';
+      [0.25, 0.5, 0.75, 1].forEach(function(f) {
+        var y = PAD_T + f * chartH;
+        var line = document.createElementNS(ns, 'line');
+        line.setAttribute('x1', PAD_L); line.setAttribute('x2', W - PAD_R);
+        line.setAttribute('y1', y); line.setAttribute('y2', y);
+        line.setAttribute('stroke', '#dce3ef'); line.setAttribute('stroke-width', '1');
+        svg.appendChild(line);
+      });
+      // Y-axis labels
+      [0.25, 0.5, 0.75, 1].forEach(function(f) {
+        var v = Math.round(maxV - f * (maxV - minV));
+        var y = PAD_T + f * chartH;
+        var t = document.createElementNS(ns, 'text');
+        t.setAttribute('x', PAD_L - 6); t.setAttribute('y', y + 4);
+        t.setAttribute('text-anchor', 'end');
+        t.setAttribute('font-family', 'Open Sans, sans-serif');
+        t.setAttribute('font-size', '11'); t.setAttribute('fill', '#858585');
+        t.textContent = v;
+        svg.appendChild(t);
+      });
+      colors.forEach(function(color, ci) {
+        var pts = data.map(function(d, i) { return px(i) + ',' + py(d.values[ci]); }).join(' ');
+        var poly = document.createElementNS(ns, 'polyline');
+        poly.setAttribute('points', pts); poly.setAttribute('fill', 'none');
+        poly.setAttribute('stroke', color); poly.setAttribute('stroke-width', '2.5');
+        svg.appendChild(poly);
+        data.forEach(function(d, i) {
+          var c = document.createElementNS(ns, 'circle');
+          c.setAttribute('cx', px(i)); c.setAttribute('cy', py(d.values[ci]));
+          c.setAttribute('r', '5'); c.setAttribute('fill', color);
+          c.setAttribute('stroke', 'white'); c.setAttribute('stroke-width', '2');
+          svg.appendChild(c);
+        });
+      });
+      [[0, 'start'], [data.length - 1, 'end']].forEach(function(pair) {
+        var t = document.createElementNS(ns, 'text');
+        t.setAttribute('x', px(pair[0]));
+        t.setAttribute('y', H - 4);
+        t.setAttribute('text-anchor', pair[1]);
+        t.setAttribute('font-family', 'Open Sans, sans-serif');
+        t.setAttribute('font-size', '11'); t.setAttribute('fill', '#858585');
+        t.textContent = data[pair[0]].label;
+        svg.appendChild(t);
+      });
+    }
+
+    function init() {
+      drawDonut('lt-chartset-donut', [
+        { value: 68, color: '#4a9ef8' },
+        { value: 20, color: '#b3a2e7' },
+        { value: 12, color: '#e0e5ef' }
+      ], 100);
+      drawChartsetTimeline();
+      var ro = new ResizeObserver(drawChartsetTimeline);
+      var svg = document.getElementById('lt-chartset-svg');
+      if (svg) ro.observe(svg.parentElement);
+    }
+
+    if (document.readyState !== 'loading') { init(); }
+    else { document.addEventListener('DOMContentLoaded', init); }
   })();
   </script>
 
