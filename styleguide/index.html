@@ -408,7 +408,7 @@
       min-width: 0;
     }
     .kpi-card__info-icon {
-      width: 16px; height: 16px;
+      width: 36px; height: 36px;
       border: 1.5px solid #6477a2;
       border-radius: 50%;
       display: flex; align-items: center; justify-content: center;
@@ -745,8 +745,8 @@
       font-family: var(--font-base); font-size: 14px; font-weight: 600;
       cursor: pointer; padding: 0 12px; height: 36px; border-radius: var(--radius-md);
     }
-    .notif-action-ghost:hover    { background: #f0f7ff; }
-    .notif-action-outlined:hover { background: #f0f7ff; }
+    .notif-action-ghost:hover    { background: #EAF1F7; }
+    .notif-action-outlined:hover { background: #EAF1F7; }
     .notif-panel__footer {
       background: #fafafa; border-radius: var(--radius-lg);
       margin: 0 16px; padding: 10px 16px;
@@ -894,7 +894,7 @@
       padding: 0 8px; box-sizing: border-box; cursor: pointer; white-space: nowrap;
       transition: background 0.15s;
     }
-    .service-bar__date:hover { background: #f0f0f0; }
+    .service-bar__date:hover { background: #EAF1F7; }
     .service-bar__date-label {
       flex: none; font-family: var(--font-base); font-size: 13px;
       font-weight: 400; color: #181818; line-height: 24px;
@@ -903,13 +903,16 @@
     .service-bar__info-btn {
       width: 36px; height: 36px; display: flex; align-items: center; justify-content: center;
       border-radius: var(--radius-md); border: none; background: transparent;
-      cursor: pointer; flex-shrink: 0; transition: background 0.15s;
+      cursor: pointer; flex-shrink: 0; transition: background 0.15s; position: relative;
     }
-    .service-bar__info-btn:hover { background: #eaeff5; }
+    .service-bar__info-btn:hover { background: #EAF1F7; }
+    .service-bar__info-btn::after { content: ''; position: absolute; top: 100%; left: 0; right: 0; height: 20px; }
     .service-bar__info-wrap { position: relative; display: inline-flex; flex-shrink: 0; }
-    .service-bar__info-wrap .kpi-info-tooltip { left: auto; right: 0; transform: none; }
-    .service-bar__info-wrap .kpi-info-tooltip .tooltip-info__arrow { margin-left: auto; margin-right: 8px; }
-    .service-bar__info-wrap .kpi-info-tooltip::after { content: ''; position: absolute; bottom: -8px; left: 0; right: 0; height: 8px; }
+    .service-bar__info-wrap .kpi-info-tooltip { bottom: auto; top: calc(100% + 6px); left: auto; right: 0; transform: none; }
+    .service-bar__info-wrap .kpi-info-tooltip .tooltip-info__arrow { margin-left: auto; margin-right: 0px; }
+    .service-bar__info-wrap:hover .kpi-info-tooltip { opacity: 0; pointer-events: none; }
+    .service-bar__info-btn:hover ~ .kpi-info-tooltip { opacity: 1; pointer-events: auto; }
+    .service-bar__info-wrap .kpi-info-tooltip:hover { opacity: 1; pointer-events: auto; }
     .service-bar__tabs {
       display: flex; align-items: center; height: 42px; background: #fafafa;
       border-radius: 40px; padding: 6px 12px 6px 6px; gap: 4px;
@@ -930,7 +933,7 @@
       font-family: var(--font-base); font-size: 14px; font-weight: 600;
       color: #2f78bd; white-space: nowrap; transition: background 0.15s;
     }
-    .service-bar__filter-btn:hover { background: #F2F8FC; }
+    .service-bar__filter-btn:hover { background: #EAF1F7; }
     .service-bar__filter-spacer { flex: 1; }
 
     /* ── Button ─────────────────────────────────────────────────── */
@@ -961,7 +964,7 @@
     .btn--secondary:disabled, .btn--secondary.btn--disabled { background: #b2bfcc !important; color: #ffffff !important; }
 
     .btn--plain { background: transparent; color: #334557; }
-    .btn--plain:hover { background: #e8f2fc; border-color: #dbe9f6; }
+    .btn--plain:hover { background: #EAF1F7; }
     .btn--plain:active { background: #5BB3F9; color: #ffffff; }
 
     .btn--outlined { background: #ffffff; border-color: #dbe9f6; color: #3079bd; }
@@ -976,7 +979,7 @@
     .btn--plain-white { background: transparent; color: #ffffff; }
     .btn--plain-white:hover { background: rgba(255,255,255,0.12); }
     .btn--plain-dark { background: transparent; color: #485982; }
-    .btn--plain-dark:hover { background: #eaeff5; }
+    .btn--plain-dark:hover { background: #EAF1F7; }
 
     .btn--icon-only  { padding: 0; width: 40px; }
     .btn--icon-only.btn--sm { width: 30px; }
@@ -989,7 +992,7 @@
     .btn--icon-secondary:hover { background: #40556a; }
     .btn--icon-outlined { background: #ffffff; border-color: #dbe9f6; color: #3079bd; padding: 0; width: 40px; }
     .btn--icon-outlined.btn--sm { width: 30px; }
-    .btn--icon-outlined:hover { background: #e8f2fc; }
+    .btn--icon-outlined:hover { background: #EAF1F7; }
 
     .btn:disabled, .btn--disabled { cursor: not-allowed; pointer-events: none; }
     .btn__icon {
@@ -1007,12 +1010,12 @@
     .card-header__subtitle { font-family:var(--font-base); font-size:13px; font-weight:400; color:#6b6b6b; line-height:16px; overflow:hidden; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; }
     .card-header__actions { display:flex; align-items:flex-start; gap:8px; flex-shrink:0; padding-left:12px; }
     .card-header__action-btn { width:30px; height:30px; border-radius:6px; display:flex; align-items:center; justify-content:center; background:transparent; border:none; cursor:pointer; color:#485982; transition:background 0.15s; flex-shrink:0; }
-    .card-header__action-btn:hover { background:#eaeff5; }
+    .card-header__action-btn:hover { background:#EAF1F7; }
     .subtab-rail { display:flex; align-items:center; gap:4px; background:#fafafa; border-radius:40px; padding:6px; flex-shrink:0; }
     .chart-mode { display:flex; align-items:center; gap:4px; height:30px; flex-shrink:0; }
     .chart-mode__label { font-family:var(--font-base); font-size:12px; font-weight:400; color:#496f97; white-space:nowrap; }
     .chart-mode__btn { width:30px; height:30px; border-radius:6px; display:flex; align-items:center; justify-content:center; background:transparent; border:none; cursor:pointer; color:#485982; transition:background 0.15s; flex-shrink:0; }
-    .chart-mode__btn:hover { background:#eaeff5; }
+    .chart-mode__btn:hover { background:#EAF1F7; }
     .chart-mode__btn--active { background:#A1CDFF; color:#ffffff; }
     .chart-mode__btn--active:hover { background:#A1CDFF; }
     .chart-mode__btn--active img { filter:brightness(0) invert(1); }
@@ -1179,6 +1182,21 @@
     .donut-chart__value { font-family:var(--font-base); font-size:40px; font-weight:300; color:#27365b; line-height:1; }
     .donut-chart__unit { font-family:var(--font-base); font-size:20px; font-weight:300; color:#27365b; line-height:1; padding-bottom:5px; padding-left:3px; }
     .donut-chart__subtitle { font-family:var(--font-base); font-size:12px; font-weight:400; color:#485982; text-align:center; line-height:15px; }
+
+    /* === Gauge (.gauge) === */
+    .gauge { position:relative; width:248px; height:248px; flex-shrink:0; }
+    .gauge--sm { width:160px; height:160px; }
+    .gauge__svg { width:100%; height:100%; }
+    .gauge__label { position:absolute; inset:0; pointer-events:none; }
+    .gauge__icon { position:absolute; left:50%; bottom:calc(50% + 16px); transform:translateX(-50%); width:36px; height:36px; flex-shrink:0; }
+    .gauge__value-row { position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); display:flex; align-items:flex-end; line-height:1; }
+    .gauge__value { font-family:var(--font-base); font-size:50px; font-weight:300; color:#27365b; line-height:1; letter-spacing:-2px; }
+    .gauge__unit { font-family:var(--font-base); font-size:22px; font-weight:300; color:#27365b; line-height:1; padding-bottom:6px; padding-left:3px; }
+    .gauge__subtitle { position:absolute; left:50%; top:calc(50% + 22px); transform:translateX(-50%); font-family:var(--font-base); font-size:12px; font-weight:400; color:#6477a2; white-space:nowrap; line-height:14px; }
+    .gauge--sm .gauge__icon { width:22px; height:22px; bottom:calc(50% + 11px); }
+    .gauge--sm .gauge__value { font-size:32px; letter-spacing:-1px; }
+    .gauge--sm .gauge__unit { font-size:14px; padding-bottom:4px; }
+    .gauge--sm .gauge__subtitle { font-size:10px; top:calc(50% + 16px); }
 
     /* === Vertical Bars Chart (.vbar) === */
     .vbar { position:relative; width:100%; }
@@ -1360,7 +1378,7 @@
     .wh__subtitle { font-family:var(--font-base); font-size:13px; font-weight:400; color:#6b6b6b; line-height:20px; }
     .wh__actions { display:flex; align-items:center; gap:8px; padding-left:12px; flex-shrink:0; }
     .wh__btn { width:30px; height:30px; border-radius:6px; border:none; background:transparent; cursor:pointer; display:flex; align-items:center; justify-content:center; color:#6b6b6b; transition:background 0.15s, color 0.15s; }
-    .wh__btn:hover { background:rgba(0,0,0,0.06); color:#27365b; }
+    .wh__btn:hover { background:#EAF1F7; color:#27365b; }
 
     /* === Dashboard Widget — drag/elevation state === */
     .dw-card {
@@ -1832,6 +1850,66 @@
     .mnv2__subitem--active .mnv2__subitem-label { font-weight: 600; color: #063059; }
     .mnv2__subitems-sep { height: 16px; display: flex; align-items: center; margin: 0 8px; }
     .mnv2__subitems-sep::after { content: ''; display: block; width: 100%; height: 1px; background: #c0cde0; }
+    /* ── DATE PICKER PANEL ─────────────────────────────────────── */
+    .dp-wrap { position: relative; display: inline-block; }
+    .dp-panel {
+      display: none; position: absolute; z-index: 200; top: calc(100% + 6px); left: 0;
+      background: #ffffff; border-radius: 20px;
+      box-shadow: 0 0 16px rgba(23,42,68,0.2);
+      padding: 16px; flex-direction: row; gap: 0;
+      font-family: var(--font-base);
+    }
+    .dp-panel--open { display: flex; }
+    .dp-panel--right { left: auto; right: 0; }
+    .dp-body { display: flex; gap: 0; }
+    .dp-calendars { display: flex; flex-direction: column; gap: 16px; }
+    .dp-months { display: flex; gap: 16px; }
+    .dp-month { background: #fafafa; border-radius: 12px; overflow: hidden; display: flex; flex-direction: column; gap: 6px; padding-bottom: 8px; }
+    .dp-month__header { display: flex; align-items: center; justify-content: space-between; padding: 4px 16px; }
+    .dp-month__nav { width: 40px; height: 40px; border: none; background: transparent; cursor: pointer; border-radius: 6px; display: flex; align-items: center; justify-content: center; transition: background 0.15s; flex-shrink: 0; }
+    .dp-month__nav:hover { background: #EAF1F7; }
+    .dp-month__title { font-size: 16px; font-weight: 400; color: rgba(0,0,0,0.87); white-space: nowrap; }
+    .dp-dow-row { display: flex; justify-content: space-between; padding: 0 13px; }
+    .dp-dow { width: 24px; font-size: 12px; font-weight: 600; color: #496f97; text-align: center; line-height: 13px; }
+    .dp-dates { display: flex; flex-direction: column; gap: 2px; padding: 0 8px 0 8px; }
+    .dp-date-row { display: flex; }
+    .dp-date-row--end-align { justify-content: flex-end; }
+    .dp-day {
+      width: 32px; height: 32px; display: flex; align-items: center; justify-content: center;
+      font-size: 14px; font-weight: 400; color: rgba(0,0,0,0.87); cursor: pointer;
+      border-radius: 0; transition: background 0.1s; box-sizing: border-box; user-select: none;
+      flex-shrink: 0;
+    }
+    .dp-day--empty { width: 32px; height: 32px; flex-shrink: 0; }
+    .dp-day:hover:not(.dp-day--start):not(.dp-day--end) { background: #EAF1F7; border-radius: 6px; z-index: 1; }
+    .dp-day--in-range { background: #dbe9f6; }
+    .dp-day--start { background: #0c8dea; color: #ffffff; border-radius: 6px 0 0 6px; }
+    .dp-day--end { background: #0c8dea; color: #ffffff; border-radius: 0 6px 6px 0; }
+    .dp-day--start.dp-day--end { border-radius: 6px; }
+    .dp-day--start + .dp-day--in-range { border-radius: 0; }
+    .dp-divider { width: 1px; background: #e0e0e0; margin: 0 16px; flex-shrink: 0; align-self: stretch; }
+    .dp-presets { display: flex; flex-direction: column; width: 136px; flex-shrink: 0; }
+    .dp-preset-btn {
+      height: 40px; border: 1px solid transparent; background: transparent; cursor: pointer;
+      font-family: var(--font-base); font-size: 13px; font-weight: 600; color: #334557;
+      text-align: left; padding: 0 12px; border-radius: var(--radius-md); white-space: nowrap;
+      transition: background 0.15s, color 0.15s; user-select: none; width: 100%;
+    }
+    .dp-preset-btn:hover { background: #EAF1F7; }
+    .dp-preset-btn--active { background: #EAF1F7; }
+    .dp-preset-btn--active:hover { background: #dce8f2; }
+    .dp-footer { display: flex; align-items: center; gap: 45px; }
+    .dp-inputs { display: flex; gap: 9px; flex: 1; }
+    .dp-input-field {
+      width: 140px; border: 1px solid #e0e0e0; border-radius: 8px; padding: 7px 12px;
+      background: white; position: relative; box-sizing: border-box;
+    }
+    .dp-input-label {
+      position: absolute; top: -6px; left: 8px; background: white; padding: 0 4px;
+      font-size: 12px; color: #858585; line-height: 12px;
+    }
+    .dp-input-value { font-size: 14px; color: #181818; line-height: 24px; display: block; white-space: nowrap; }
+    .dp-actions { display: flex; gap: 8px; align-items: center; flex-shrink: 0; }
   </style>
 </head>
 <body>
@@ -2895,6 +2973,7 @@
         <a class="comp-sidebar-link" data-component="simple-timeline" style="cursor:pointer">Dotted Timeline Chart</a>
         <a class="comp-sidebar-link" data-component="stacked-timeline" style="cursor:pointer">Stacked Lines Chart</a>
         <a class="comp-sidebar-link" data-component="multi-chart-lines" style="cursor:pointer">Multi-Chart Lines</a>
+        <a class="comp-sidebar-link" data-component="single-timeline" style="cursor:pointer">Single Timeline</a>
         <div class="comp-sidebar-divider"></div>
         <div class="comp-sidebar-caption">Bars</div>
         <a class="comp-sidebar-link" data-component="vertical-bars-chart" style="cursor:pointer">Vertical Bars Chart</a>
@@ -2907,16 +2986,21 @@
         <div class="comp-sidebar-caption">Donuts</div>
         <a class="comp-sidebar-link" data-component="donut-chart" style="cursor:pointer">Donut Chart</a>
         <div class="comp-sidebar-divider"></div>
+        <div class="comp-sidebar-caption">Gauges</div>
+        <a class="comp-sidebar-link" data-component="gauge" style="cursor:pointer">Gauge</a>
+        <div class="comp-sidebar-divider"></div>
         <div class="comp-sidebar-caption">Sets &amp; Templates</div>
         <a class="comp-sidebar-link" data-component="chartset-donut-lines" style="cursor:pointer">ChartSet Donut+Lines</a>
         <a class="comp-sidebar-link" data-component="avg-position" style="cursor:pointer">Avg. Position</a>
         <a class="comp-sidebar-link" data-component="table-chart-template" style="cursor:pointer">Table Chart Template</a>
         <a class="comp-sidebar-link" data-component="chart-legend-item" style="cursor:pointer">Chart Legend Item</a>
+        <a class="comp-sidebar-link" data-component="gauge-timeline" style="cursor:pointer">Gauge + Timeline</a>
       </div>
       <div class="comp-sidebar-group" data-group="navigation" style="display:none">
         <a class="comp-sidebar-link" data-component="app-bar" style="cursor:pointer">App Bar</a>
         <a class="comp-sidebar-link" data-component="main-nav" style="cursor:pointer">Main Nav</a>
         <a class="comp-sidebar-link" data-component="service-bar" style="cursor:pointer">Service Bar</a>
+        <a class="comp-sidebar-link" data-component="date-picker" style="cursor:pointer">Date Picker</a>
         <a class="comp-sidebar-link" data-component="sub-tab" style="cursor:pointer">Sub Tab</a>
         <a class="comp-sidebar-link" data-component="tab-item" style="cursor:pointer">Tab Item</a>
         <a class="comp-sidebar-link" data-component="button" style="cursor:pointer">Button</a>
@@ -4259,13 +4343,40 @@
           <span class="service-bar__subtitle">How AI Overviews impact search visibility and query complexity across key terms to prioritize content and PPC strategy.</span>
         </div>
         <div class="service-bar__actions">
-          <div class="service-bar__date">
-            <svg width="14" height="15" viewBox="0 0 14 15" fill="none" style="flex-shrink:0">
-              <rect x="0.5" y="1.5" width="13" height="13" rx="2" stroke="#2f78bd"/>
-              <path d="M0.5 5.5h13" stroke="#2f78bd"/>
-              <path d="M4 0.5v2M10 0.5v2" stroke="#2f78bd" stroke-linecap="round"/>
-            </svg>
-            <span class="service-bar__date-label">Last 30 Days</span>
+          <div class="dp-wrap" id="sb-dp-wrap">
+            <div class="service-bar__date" id="sb-dp-trigger" onclick="sbDpToggle(event)">
+              <span class="service-bar__date-label" id="sb-dp-trigger-label">Last 30 Days</span>
+              <svg width="14" height="15" viewBox="0 0 14 15" fill="none" style="flex-shrink:0">
+                <rect x="0.5" y="1.5" width="13" height="13" rx="2" stroke="#2f78bd"/>
+                <path d="M0.5 5.5h13" stroke="#2f78bd"/>
+                <path d="M4 0.5v2M10 0.5v2" stroke="#2f78bd" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <div class="dp-panel dp-panel--right" id="sb-dp-panel">
+              <div class="dp-body">
+                <div class="dp-calendars">
+                  <div class="dp-months" id="sb-dp-months"></div>
+                  <div class="dp-footer">
+                    <div class="dp-inputs">
+                      <div class="dp-input-field">
+                        <span class="dp-input-label">Start Day</span>
+                        <span class="dp-input-value" id="sb-dp-start-val">—</span>
+                      </div>
+                      <div class="dp-input-field">
+                        <span class="dp-input-label">End Day</span>
+                        <span class="dp-input-value" id="sb-dp-end-val">—</span>
+                      </div>
+                    </div>
+                    <div class="dp-actions">
+                      <button class="btn btn--plain" onclick="sbDpCancel()">Cancel</button>
+                      <button class="btn btn--primary" onclick="sbDpApply()">Apply</button>
+                    </div>
+                  </div>
+                </div>
+                <div class="dp-divider"></div>
+                <div class="dp-presets" id="sb-dp-presets"></div>
+              </div>
+            </div>
           </div>
           <div class="service-bar__info-wrap kpi-info-wrap">
             <button class="service-bar__info-btn">
@@ -4275,7 +4386,7 @@
                 <circle cx="10" cy="6.5" r="0.8" fill="#334557"/>
               </svg>
             </button>
-            <div class="tooltip-info kpi-info-tooltip">
+            <div class="tooltip-info tooltip-info--arrow-top kpi-info-tooltip">
               <div class="tooltip-info__body">Shows how AI Overviews affect search visibility and query complexity. Use this to prioritize content updates and PPC strategy across your tracked terms.</div>
               <svg class="tooltip-info__arrow" width="78" height="10" viewBox="0 0 78 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M24 0H54C54 0 52.203 0 49 2.4096C45.7745 4.83616 42.0352 7.68387 40.1758 9.10226C39.4766 9.63566 38.5145 9.65177 37.8035 9.13418C36.0242 7.83892 32.5121 5.25297 29 2.5C25.8106 0 24 0 24 0Z" fill="white"/></svg>
             </div>
@@ -4323,7 +4434,6 @@
     <div class="sub-label">Row 1 · Identity — avatar colour variants</div>
     <div class="subtab-states">
       <div class="subtab-row">
-        <span class="subtab-row-label" style="width:120px">Bright blue</span>
         <div class="service-bar" style="max-width:600px">
           <div class="service-bar__header">
             <div class="service-bar__avatar" style="background:#EAF1F7">
@@ -4335,8 +4445,8 @@
             </div>
             <div class="service-bar__actions">
               <div class="service-bar__date">
-                <svg width="14" height="15" viewBox="0 0 14 15" fill="none" style="flex-shrink:0"><rect x="0.5" y="1.5" width="13" height="13" rx="2" stroke="#2f78bd"/><path d="M0.5 5.5h13" stroke="#2f78bd"/><path d="M4 0.5v2M10 0.5v2" stroke="#2f78bd" stroke-linecap="round"/></svg>
                 <span class="service-bar__date-label">Last 30 Days</span>
+                <svg width="14" height="15" viewBox="0 0 14 15" fill="none" style="flex-shrink:0"><rect x="0.5" y="1.5" width="13" height="13" rx="2" stroke="#2f78bd"/><path d="M0.5 5.5h13" stroke="#2f78bd"/><path d="M4 0.5v2M10 0.5v2" stroke="#2f78bd" stroke-linecap="round"/></svg>
               </div>
               <button class="service-bar__info-btn"><svg width="16" height="16" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="8" stroke="#334557" stroke-width="1.2"/><path d="M10 9v5" stroke="#334557" stroke-width="1.2" stroke-linecap="round"/><circle cx="10" cy="6.5" r="0.8" fill="#334557"/></svg></button>
             </div>
@@ -4473,6 +4583,165 @@
         </tbody>
       </table>
     </div>
+  </div>
+
+</section>
+      </div>
+
+      <!-- ── DATE PICKER PANEL ─────────────────────────────────── -->
+      <div class="comp-panel" id="comp-panel-date-picker" style="display:none">
+<section id="date-picker">
+  <div class="section-header">
+    <h2>Date Picker</h2>
+    <div class="divider"></div>
+  </div>
+  <p style="font-size:13px;color:var(--text-secondary-var);margin-bottom:24px">Compact date range selector used in the Service Bar identity row. Shows the currently selected period as a text label with a calendar icon on the right. Sizes to its content — no fixed width.</p>
+
+  <!-- LIVE DEMO · Interactive ──────────────────────────────────── -->
+  <div style="margin-bottom:40px">
+    <div class="sub-label">Live Demo · Interactive Picker</div>
+    <div style="padding:24px;background:#f4f6f9;border-radius:12px;min-height:420px">
+      <div class="dp-wrap" id="dp-wrap">
+        <div class="service-bar__date" id="dp-trigger" onclick="dpToggle()">
+          <span class="service-bar__date-label" id="dp-trigger-label">Last 30 Days</span>
+          <svg width="14" height="15" viewBox="0 0 14 15" fill="none" style="flex-shrink:0">
+            <rect x="0.5" y="1.5" width="13" height="13" rx="2" stroke="#2f78bd"/>
+            <path d="M0.5 5.5h13" stroke="#2f78bd"/>
+            <path d="M4 0.5v2M10 0.5v2" stroke="#2f78bd" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div class="dp-panel dp-panel--open" id="dp-panel">
+          <div class="dp-body">
+            <div class="dp-calendars">
+              <div class="dp-months" id="dp-months"></div>
+              <div class="dp-footer">
+                <div class="dp-inputs">
+                  <div class="dp-input-field">
+                    <span class="dp-input-label">Start Day</span>
+                    <span class="dp-input-value" id="dp-start-val">—</span>
+                  </div>
+                  <div class="dp-input-field">
+                    <span class="dp-input-label">End Day</span>
+                    <span class="dp-input-value" id="dp-end-val">—</span>
+                  </div>
+                </div>
+                <div class="dp-actions">
+                  <button class="btn btn--plain" onclick="dpCancel()">Cancel</button>
+                  <button class="btn btn--primary" onclick="dpApply()">Apply</button>
+                </div>
+              </div>
+            </div>
+            <div class="dp-divider"></div>
+            <div class="dp-presets" id="dp-presets"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- LIVE DEMO · States ────────────────────────────────────────── -->
+  <div style="margin-bottom:40px">
+    <div class="sub-label">Trigger States</div>
+    <div style="display:flex;flex-wrap:wrap;gap:24px;align-items:center;padding:24px;background:#f4f6f9;border-radius:12px">
+
+      <!-- Default -->
+      <div style="display:flex;flex-direction:column;align-items:center;gap:8px">
+        <div class="service-bar__date">
+          <span class="service-bar__date-label">Last 30 Days</span>
+          <svg width="14" height="15" viewBox="0 0 14 15" fill="none" style="flex-shrink:0">
+            <rect x="0.5" y="1.5" width="13" height="13" rx="2" stroke="#2f78bd"/>
+            <path d="M0.5 5.5h13" stroke="#2f78bd"/>
+            <path d="M4 0.5v2M10 0.5v2" stroke="#2f78bd" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <span style="font-size:11px;font-weight:600;color:#9aa5be;text-transform:uppercase;letter-spacing:0.5px">Default</span>
+      </div>
+
+      <!-- Hover (simulated) -->
+      <div style="display:flex;flex-direction:column;align-items:center;gap:8px">
+        <div class="service-bar__date" style="background:#EAF1F7">
+          <span class="service-bar__date-label">Last 30 Days</span>
+          <svg width="14" height="15" viewBox="0 0 14 15" fill="none" style="flex-shrink:0">
+            <rect x="0.5" y="1.5" width="13" height="13" rx="2" stroke="#2f78bd"/>
+            <path d="M0.5 5.5h13" stroke="#2f78bd"/>
+            <path d="M4 0.5v2M10 0.5v2" stroke="#2f78bd" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <span style="font-size:11px;font-weight:600;color:#9aa5be;text-transform:uppercase;letter-spacing:0.5px">Hover</span>
+      </div>
+
+      <!-- Date range label variant -->
+      <div style="display:flex;flex-direction:column;align-items:center;gap:8px">
+        <div class="service-bar__date">
+          <span class="service-bar__date-label">19 Aug – 18 Sep <span class="year">2025</span></span>
+          <svg width="14" height="15" viewBox="0 0 14 15" fill="none" style="flex-shrink:0">
+            <rect x="0.5" y="1.5" width="13" height="13" rx="2" stroke="#2f78bd"/>
+            <path d="M0.5 5.5h13" stroke="#2f78bd"/>
+            <path d="M4 0.5v2M10 0.5v2" stroke="#2f78bd" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <span style="font-size:11px;font-weight:600;color:#9aa5be;text-transform:uppercase;letter-spacing:0.5px">Date Range</span>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- DESIGN TOKENS ─────────────────────────────────────────────── -->
+  <div style="margin-bottom:40px">
+    <div class="sub-label">Design Tokens</div>
+    <div class="spec-table-wrap">
+      <table class="spec-table">
+        <thead><tr><th>Token</th><th>Value</th><th>Usage</th></tr></thead>
+        <tbody>
+          <tr><td>core/secondary/card-grey</td><td>#fafafa</td><td>Default background</td></tr>
+          <tr><td>primary.light</td><td>#EAF1F7</td><td>Hover background</td></tr>
+          <tr><td>borderRadius.lg</td><td>8px</td><td>Corner radius</td></tr>
+          <tr><td>—</td><td>40px</td><td>Height</td></tr>
+          <tr><td>—</td><td>0 8px</td><td>Horizontal padding</td></tr>
+          <tr><td>—</td><td>8px</td><td>Gap between label and icon</td></tr>
+          <tr><td>text.primaryVar</td><td>#181818</td><td>Label text colour</td></tr>
+          <tr><td>—</td><td>13px / 400</td><td>Label font size / weight</td></tr>
+          <tr><td>core/primary/medium</td><td>#2f78bd</td><td>Calendar icon stroke</td></tr>
+          <tr><td>—</td><td>14×15px</td><td>Calendar icon size</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- CSS CLASSES ───────────────────────────────────────────────── -->
+  <div style="margin-bottom:40px">
+    <div class="sub-label">CSS Classes</div>
+    <div class="spec-table-wrap">
+      <table class="spec-table">
+        <thead><tr><th>Class</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr><td>.service-bar__date</td><td>Container — flex row, 40px height, #fafafa bg, 8px radius, sizes to content</td></tr>
+          <tr><td>.service-bar__date-label</td><td>Text label — 13px regular #181818, flex:none</td></tr>
+          <tr><td>.service-bar__date-label span.year</td><td>Year portion of a date range — 10px, visually de-emphasised</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- HTML USAGE ────────────────────────────────────────────────── -->
+  <div style="margin-bottom:40px">
+    <div class="sub-label">HTML Usage</div>
+    <pre class="code-block" style="background:#f6f8fa;border:1px solid #e1e4e8;border-radius:8px;padding:16px;font-size:12px;overflow-x:auto;line-height:1.6">&lt;div class="service-bar__date"&gt;
+  &lt;span class="service-bar__date-label"&gt;Last 30 Days&lt;/span&gt;
+  &lt;svg width="14" height="15" viewBox="0 0 14 15" fill="none" style="flex-shrink:0"&gt;
+    &lt;rect x="0.5" y="1.5" width="13" height="13" rx="2" stroke="#2f78bd"/&gt;
+    &lt;path d="M0.5 5.5h13" stroke="#2f78bd"/&gt;
+    &lt;path d="M4 0.5v2M10 0.5v2" stroke="#2f78bd" stroke-linecap="round"/&gt;
+  &lt;/svg&gt;
+&lt;/div&gt;
+
+&lt;!-- Date range variant --&gt;
+&lt;div class="service-bar__date"&gt;
+  &lt;span class="service-bar__date-label"&gt;
+    19 Aug – 18 Sep &lt;span class="year"&gt;2025&lt;/span&gt;
+  &lt;/span&gt;
+  &lt;svg ...&gt;...&lt;/svg&gt;
+&lt;/div&gt;</pre>
   </div>
 
 </section>
@@ -4837,7 +5106,7 @@
   <!-- 1. LIVE DEMO ──────────────────────────────────────────────── -->
   <div style="margin-bottom:40px">
     <div class="sub-label">Live Demo · Full layout</div>
-    <div style="background:#e4eef4;padding:24px;border-radius:12px;overflow-x:auto">
+    <div style="background:#ffffff;padding:24px;border-radius:12px;overflow-x:auto">
       <div class="card-header" style="min-width:820px">
         <div class="card-header__roundel">
           <img src="https://c.animaapp.com/mnf1temheWr30Q/img/navicon-ai-search.svg" width="20" height="20" alt="AI Search" style="display:block;flex-shrink:0;filter:brightness(0) invert(1)">
@@ -5200,7 +5469,7 @@
   <!-- ① LIVE PREVIEW ───────────────────────────────────────────── -->
   <div style="margin-bottom:40px">
     <div class="sub-label">Live Preview</div>
-    <div style="background:#e4eef4;padding:20px;border-radius:12px">
+    <div style="background:#ffffff;padding:20px;border-radius:12px">
       <div class="wh">
         <div class="wh__thumb">
           <svg viewBox="0 0 20 20" fill="none"><use href="#wh-icon-pin"/></svg>
@@ -5224,7 +5493,7 @@
   <!-- ② ALL VARIANTS ──────────────────────────────────────────── -->
   <div style="margin-bottom:40px">
     <div class="sub-label">Variants</div>
-    <div style="background:#e4eef4;padding:20px;border-radius:12px;display:flex;flex-direction:column;gap:12px">
+    <div style="background:#ffffff;padding:20px;border-radius:12px;display:flex;flex-direction:column;gap:12px">
 
       <!-- With subtitle + settings + info -->
       <div>
@@ -5290,7 +5559,7 @@
   <!-- ③ INTERACTIVE DEMO ──────────────────────────────────────── -->
   <div style="margin-bottom:40px">
     <div class="sub-label">Interactive Demo</div>
-    <div style="background:#e4eef4;padding:20px;border-radius:12px">
+    <div style="background:#ffffff;padding:20px;border-radius:12px">
 
       <!-- Controls -->
       <div style="display:flex;gap:16px;flex-wrap:wrap;margin-bottom:16px;padding:16px;background:#fff;border-radius:8px;align-items:flex-end">
@@ -7478,7 +7747,7 @@ function accSetDisabled(id, disabled) {
   <!-- 1. LIVE DEMO ─────────────────────────────────────────────── -->
   <div style="margin-bottom:40px">
     <div class="sub-label">Live Demo · 3 metrics</div>
-    <div style="background:#e4eef4;padding:24px;border-radius:12px">
+    <div style="background:#ffffff;padding:24px;border-radius:12px">
       <div class="mclc" id="mclc-demo">
         <div class="mclc__body">
 
@@ -7625,7 +7894,7 @@ function accSetDisabled(id, disabled) {
   <!-- 3. SINGLE ROW ANATOMY ────────────────────────────────────── -->
   <div style="margin-bottom:40px">
     <div class="sub-label">Single Row · Anatomy</div>
-    <div style="background:#e4eef4;padding:16px;border-radius:12px">
+    <div style="background:#ffffff;padding:16px;border-radius:12px">
       <div class="mclc" style="padding-bottom:0">
         <div class="mclc__body" style="padding-top:0">
           <div class="mclc__row">
@@ -7858,12 +8127,144 @@ function accSetDisabled(id, disabled) {
       mclcDrawAll();
     }
     document.addEventListener('click', function(e) {
-      if (e.target && e.target.dataset && e.target.dataset.component === 'multi-chart-lines') {
+      if (e.target && e.target.dataset && (e.target.dataset.component === 'multi-chart-lines' || e.target.dataset.component === 'single-timeline' || e.target.dataset.component === 'gauge-timeline')) {
         setTimeout(function() { mclcDrawAll(true); }, 30);
       }
     });
   })();
   </script>
+
+</section>
+      </div>
+
+      <div class="comp-panel" id="comp-panel-single-timeline" style="display:none">
+<section id="single-timeline">
+  <div class="section-header">
+    <h2>Single Timeline</h2>
+    <div class="divider"></div>
+  </div>
+  <p style="font-size:13px;color:var(--text-secondary-var);margin-bottom:24px">A full-width sparkline chart with Y-axis labels and a date axis. Use when a card needs to show one time-series trend without a KPI summary tile.</p>
+
+  <!-- 1. LIVE DEMO ─────────────────────────────────────────────── -->
+  <div style="margin-bottom:40px">
+    <div class="sub-label">Live Demo</div>
+    <div style="background:#ffffff;padding:24px;border-radius:12px">
+      <div class="mclc" id="stl-demo">
+        <div class="mclc__body">
+          <div class="mclc__row">
+            <div class="mclc__chart">
+              <div class="mclc__y-labels"><span>800</span><span>0</span></div>
+              <div class="mclc__canvas-wrap">
+                <div class="mclc__bands">
+                  <div class="mclc__band"></div><div class="mclc__band"></div>
+                  <div class="mclc__band"></div><div class="mclc__band"></div>
+                </div>
+                <svg class="mclc__svg" viewBox="0 0 100 100" preserveAspectRatio="none"
+                     data-color="#6848c6" data-ymin="0" data-ymax="800" data-start="2026-04-21"
+                     data-vals="0.12,0.15,0.18,0.22,0.27,0.32,0.37,0.41,0.44,0.47,0.50,0.53,0.57,0.61,0.65,0.68,0.70,0.72,0.74,0.76,0.77,0.78,0.79,0.80,0.82,0.84,0.86,0.88,0.90,0.93"></svg>
+              </div>
+            </div>
+          </div>
+          <div class="mclc__x-axis">
+            <div class="mclc__x-chart">
+              <span class="mclc__x-y-spacer">800</span>
+              <div class="mclc__x-labels">
+                <span class="mclc__x-label">21 Apr, 2026</span>
+                <span class="mclc__x-label">28 Apr, 2026</span>
+                <span class="mclc__x-label">5 May, 2026</span>
+                <span class="mclc__x-label">12 May, 2026</span>
+                <span class="mclc__x-label">19 May, 2026</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. ANATOMY ──────────────────────────────────────────────── -->
+  <div style="margin-bottom:40px">
+    <div class="sub-label">Anatomy</div>
+    <div style="background:#ffffff;padding:16px;border-radius:12px">
+      <div class="mclc" style="padding-bottom:0">
+        <div class="mclc__body" style="padding-top:0">
+          <div class="mclc__row">
+            <div class="mclc__chart" style="outline:2px dashed rgba(55,133,221,0.3);outline-offset:2px">
+              <div class="mclc__y-labels" style="outline:1px dashed #ccc;outline-offset:1px"><span>800</span><span>0</span></div>
+              <div class="mclc__canvas-wrap" style="outline:1px dashed #ccc;outline-offset:1px">
+                <div class="mclc__bands"><div class="mclc__band"></div><div class="mclc__band"></div><div class="mclc__band"></div><div class="mclc__band"></div></div>
+                <svg class="mclc__svg" viewBox="0 0 100 100" preserveAspectRatio="none"
+                     data-color="#6848c6" data-ymin="0" data-ymax="800"
+                     data-vals="0.12,0.15,0.18,0.22,0.27,0.32,0.37,0.41,0.44,0.47,0.50,0.53,0.57,0.61,0.65,0.68,0.70,0.72,0.74,0.76,0.77,0.78,0.79,0.80,0.82,0.84,0.86,0.88,0.90,0.93"></svg>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div style="display:flex;gap:24px;margin-top:12px;font-size:11px;color:#858585;flex-wrap:wrap">
+        <span><span style="display:inline-block;width:10px;height:10px;border:2px dashed rgba(55,133,221,0.5);margin-right:4px"></span>.mclc__chart — flex-1, 93px, Y labels + canvas</span>
+        <span><span style="display:inline-block;width:10px;height:10px;border:1px dashed #ccc;margin-right:4px"></span>.mclc__x-axis — date tick row below the chart</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3. CSS CLASSES ───────────────────────────────────────────── -->
+  <div style="margin-bottom:40px">
+    <div class="sub-label">CSS Classes</div>
+    <table class="spec-table">
+      <thead><tr><th>Class</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td>.mclc</td><td>Root wrapper — white bg, rounded-xl, pb-24px. Shared with Multi-Chart Lines.</td></tr>
+        <tr><td>.mclc__body</td><td>Inner column — flex col, gap 16px, px-24px, pt-16px</td></tr>
+        <tr><td>.mclc__row</td><td>Chart row — flex row, 93px height</td></tr>
+        <tr><td>.mclc__chart</td><td>Full-width chart area — flex-1, 93px height, gap 8px</td></tr>
+        <tr><td>.mclc__y-labels</td><td>Y-axis column — Condensed 13px #858585, justify-between</td></tr>
+        <tr><td>.mclc__canvas-wrap</td><td>Relative container — holds ghost bands + SVG line</td></tr>
+        <tr><td>.mclc__x-axis</td><td>Date label row below the chart</td></tr>
+        <tr><td>.mclc__x-chart</td><td>Date tick container — full width, aligns to chart area</td></tr>
+        <tr><td>.mclc__x-label</td><td>Date tick label — 10px #858585</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- 4. HTML USAGE ────────────────────────────────────────────── -->
+  <div style="margin-bottom:40px">
+    <div class="sub-label">HTML Usage</div>
+    <pre class="code-block">&lt;div class="mclc"&gt;
+  &lt;div class="mclc__body"&gt;
+
+    &lt;div class="mclc__row"&gt;
+      &lt;div class="mclc__chart"&gt;
+        &lt;div class="mclc__y-labels"&gt;&lt;span&gt;800&lt;/span&gt;&lt;span&gt;0&lt;/span&gt;&lt;/div&gt;
+        &lt;div class="mclc__canvas-wrap"&gt;
+          &lt;div class="mclc__bands"&gt;
+            &lt;div class="mclc__band"&gt;&lt;/div&gt;&lt;div class="mclc__band"&gt;&lt;/div&gt;
+            &lt;div class="mclc__band"&gt;&lt;/div&gt;&lt;div class="mclc__band"&gt;&lt;/div&gt;
+          &lt;/div&gt;
+          &lt;svg class="mclc__svg" viewBox="0 0 100 100" preserveAspectRatio="none"
+               data-color="#6848c6" data-ymin="0" data-ymax="800"
+               data-start="2026-04-21"
+               data-vals="0.12,0.27,0.44,0.57,0.68,0.76,0.82,0.88,0.90,0.93"&gt;&lt;/svg&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;div class="mclc__x-axis"&gt;
+      &lt;div class="mclc__x-chart"&gt;
+        &lt;span class="mclc__x-y-spacer"&gt;800&lt;/span&gt;
+        &lt;div class="mclc__x-labels"&gt;
+          &lt;span class="mclc__x-label"&gt;21 Apr, 2026&lt;/span&gt;
+          &lt;span class="mclc__x-label"&gt;28 Apr, 2026&lt;/span&gt;
+          &lt;span class="mclc__x-label"&gt;5 May, 2026&lt;/span&gt;
+          &lt;span class="mclc__x-label"&gt;12 May, 2026&lt;/span&gt;
+          &lt;span class="mclc__x-label"&gt;19 May, 2026&lt;/span&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+
+  &lt;/div&gt;
+&lt;/div&gt;</pre>
+  </div>
 
 </section>
       </div>
@@ -7897,7 +8298,7 @@ function accSetDisabled(id, disabled) {
   <!-- 1. LIVE DEMO ─────────────────────────────────────────────── -->
   <div style="margin-bottom:40px">
     <div class="sub-label">Live Demo · hover a row</div>
-    <div style="background:#e4eef4;padding:24px;border-radius:12px">
+    <div style="background:#ffffff;padding:24px;border-radius:12px">
       <div style="background:#fff;border-radius:12px;padding:24px">
         <div class="ibc" id="ibc-demo">
 
@@ -7973,7 +8374,7 @@ function accSetDisabled(id, disabled) {
   <!-- 2. HOVER STATE ────────────────────────────────────────────── -->
   <div style="margin-bottom:40px">
     <div class="sub-label">Hover State · tooltip visible</div>
-    <div style="background:#e4eef4;padding:24px;border-radius:12px">
+    <div style="background:#ffffff;padding:24px;border-radius:12px">
       <div style="background:#fff;border-radius:12px;padding:24px">
         <div class="ibc">
           <div class="ibc__row" style="background:#f5f8ff">
@@ -8258,7 +8659,7 @@ function accSetDisabled(id, disabled) {
   <!-- 1. LIVE DEMO ─────────────────────────────────────────────── -->
   <div style="margin-bottom:40px">
     <div class="sub-label">Live Demo · hover a row</div>
-    <div style="background:#e4eef4;padding:24px;border-radius:12px">
+    <div style="background:#ffffff;padding:24px;border-radius:12px">
       <div style="background:#fff;border-radius:12px;padding:24px">
         <div class="gbc">
 
@@ -8299,7 +8700,7 @@ function accSetDisabled(id, disabled) {
   <!-- 2. EXTENDED DEMO ────────────────────────────────────────── -->
   <div style="margin-bottom:40px">
     <div class="sub-label">Extended · 6 rows</div>
-    <div style="background:#e4eef4;padding:24px;border-radius:12px">
+    <div style="background:#ffffff;padding:24px;border-radius:12px">
       <div style="background:#fff;border-radius:12px;padding:24px">
         <div class="gbc">
           <div class="gbc__row">
@@ -8545,7 +8946,7 @@ function accSetDisabled(id, disabled) {
   <!-- 1. LIVE DEMO ──────────────────────────────────────────────── -->
   <div style="margin-bottom:40px">
     <div class="sub-label">Live Demo · 88% coverage, 10 segments</div>
-    <div style="background:#e4eef4;padding:32px;border-radius:12px;display:flex;gap:32px;align-items:center;flex-wrap:wrap">
+    <div style="background:#ffffff;padding:32px;border-radius:12px;display:flex;gap:32px;align-items:center;flex-wrap:wrap">
       <div class="donut-chart">
         <svg class="donut-chart__svg" viewBox="0 0 248 248" xmlns="http://www.w3.org/2000/svg">
           <!-- White inner fill (covers hole) -->
@@ -8611,7 +9012,7 @@ function accSetDisabled(id, disabled) {
     <div style="display:flex;gap:24px;flex-wrap:wrap;align-items:center">
 
       <!-- 65% / 6 segments -->
-      <div style="background:#e4eef4;padding:24px;border-radius:12px">
+      <div style="background:#ffffff;padding:24px;border-radius:12px">
         <div class="donut-chart">
           <svg class="donut-chart__svg" viewBox="0 0 248 248" xmlns="http://www.w3.org/2000/svg">
             <circle cx="124" cy="124" r="85" fill="#ffffff"/>
@@ -8636,7 +9037,7 @@ function accSetDisabled(id, disabled) {
       </div>
 
       <!-- Single segment 42% -->
-      <div style="background:#e4eef4;padding:24px;border-radius:12px">
+      <div style="background:#ffffff;padding:24px;border-radius:12px">
         <div class="donut-chart">
           <svg class="donut-chart__svg" viewBox="0 0 248 248" xmlns="http://www.w3.org/2000/svg">
             <circle cx="124" cy="124" r="85" fill="#ffffff"/>
@@ -8744,7 +9145,7 @@ function accSetDisabled(id, disabled) {
     <div style="display:flex;gap:32px;flex-wrap:wrap">
 
       <!-- Standard (dot only) -->
-      <div style="background:#e4eef4;padding:20px 24px;border-radius:12px">
+      <div style="background:#ffffff;padding:20px 24px;border-radius:12px">
         <div style="font-size:11px;font-weight:600;color:#496f97;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:4px">Standard</div>
         <div class="chart-legend-item">
           <span class="chart-legend-item__dot" style="background:#b3a2e7"></span>
@@ -8753,7 +9154,7 @@ function accSetDisabled(id, disabled) {
       </div>
 
       <!-- With favicon -->
-      <div style="background:#e4eef4;padding:20px 24px;border-radius:12px">
+      <div style="background:#ffffff;padding:20px 24px;border-radius:12px">
         <div style="font-size:11px;font-weight:600;color:#496f97;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:4px">With favicon</div>
         <div class="chart-legend-item">
           <img class="chart-legend-item__favicon" src="https://www.google.com/s2/favicons?domain=tripadvisor.co.uk&sz=32" alt="">
@@ -8768,7 +9169,7 @@ function accSetDisabled(id, disabled) {
   <!-- 2. LIVE DEMO — 10-item legend ────────────────────────────── -->
   <div style="margin-bottom:40px">
     <div class="sub-label">10-item legend · standard</div>
-    <div style="background:#e4eef4;padding:24px;border-radius:12px;display:inline-block">
+    <div style="background:#ffffff;padding:24px;border-radius:12px;display:inline-block">
       <div style="background:#fff;border-radius:10px;padding:16px 20px;display:grid;grid-template-columns:1fr 1fr;gap:0 24px">
         <div class="chart-legend-item"><span class="chart-legend-item__dot" style="background:#b3a2e7"></span><span class="chart-legend-item__label">booking.com / 14%</span></div>
         <div class="chart-legend-item"><span class="chart-legend-item__dot" style="background:#64abfb"></span><span class="chart-legend-item__label">expedia.co.uk / 12%</span></div>
@@ -8788,7 +9189,7 @@ function accSetDisabled(id, disabled) {
   <!-- 3. LIVE DEMO — with favicons ────────────────────────────── -->
   <div style="margin-bottom:40px">
     <div class="sub-label">5-item legend · with favicons</div>
-    <div style="background:#e4eef4;padding:24px;border-radius:12px;display:inline-block">
+    <div style="background:#ffffff;padding:24px;border-radius:12px;display:inline-block">
       <div style="background:#fff;border-radius:10px;padding:16px 20px;display:flex;flex-direction:column">
         <div class="chart-legend-item"><img class="chart-legend-item__favicon" src="https://www.google.com/s2/favicons?domain=booking.com&sz=32" alt=""><span class="chart-legend-item__dot" style="background:#b3a2e7"></span><span class="chart-legend-item__label">booking.com / 14%</span></div>
         <div class="chart-legend-item"><img class="chart-legend-item__favicon" src="https://www.google.com/s2/favicons?domain=expedia.co.uk&sz=32" alt=""><span class="chart-legend-item__dot" style="background:#64abfb"></span><span class="chart-legend-item__label">expedia.co.uk / 12%</span></div>
@@ -8802,7 +9203,7 @@ function accSetDisabled(id, disabled) {
   <!-- 4. IN-CONTEXT: donut + legend ───────────────────────────── -->
   <div style="margin-bottom:40px">
     <div class="sub-label">In context · donut chart + legend</div>
-    <div style="background:#e4eef4;padding:24px;border-radius:12px">
+    <div style="background:#ffffff;padding:24px;border-radius:12px">
       <div style="background:#fff;border-radius:12px;padding:24px;display:inline-flex;gap:32px;align-items:center;flex-wrap:wrap">
         <div class="donut-chart">
           <svg class="donut-chart__svg" viewBox="0 0 248 248" xmlns="http://www.w3.org/2000/svg">
@@ -8863,6 +9264,384 @@ function accSetDisabled(id, disabled) {
 </section>
       </div>
 
+      <!-- ── DONUT + TIMELINE PANEL ───────────────────────────────────── -->
+      <div class="comp-panel" id="comp-panel-gauge-timeline" style="display:none">
+<section id="gauge-timeline">
+  <div class="section-header">
+    <h2>Gauge + Timeline</h2>
+    <div class="divider"></div>
+  </div>
+  <p style="font-size:13px;color:var(--text-secondary-var);margin-bottom:24px">A two-column card template combining a Gauge on the left with a trend line (Single Timeline) on the right. Use to show a KPI score alongside its trend over time.</p>
+
+  <!-- LIVE DEMO ───────────────────────────────────────────────── -->
+  <div style="margin-bottom:40px">
+    <div class="sub-label">Live Demo</div>
+
+      <!-- Card template -->
+      <div style="background:#fff;border-radius:12px;display:flex;flex-direction:column">
+
+        <!-- Card Header -->
+        <div class="card-header">
+          <div class="card-header__title-section">
+            <div class="card-header__title-row">
+              <span class="card-header__title">AI Overview Frequency</span>
+            </div>
+            <span class="card-header__subtitle">Presence of AI Overview on search results relative to the total number of searches</span>
+          </div>
+          <div class="card-header__actions">
+            <button class="card-header__action-btn" aria-label="Download CSV">
+              <svg width="16" height="16"><use href="#icon-download"/></svg>
+            </button>
+            <button class="card-header__action-btn" aria-label="More information">
+              <svg width="16" height="16"><use href="#icon-info"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- Divider -->
+        <div style="height:1px;background:#f0f4f8;flex-shrink:0"></div>
+
+        <!-- Content -->
+        <div style="padding:0;display:flex;flex-direction:column">
+
+        <!-- Two-column content -->
+        <div style="display:flex;gap:0;align-items:stretch;padding:24px">
+
+          <!-- Left: gauge -->
+          <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;padding-right:24px;flex-shrink:0">
+            <div class="gauge" id="gauge-template" data-value="41">
+              <svg class="gauge__svg" viewBox="0 0 248 248" xmlns="http://www.w3.org/2000/svg">
+                <!-- Outer decorative ring -->
+                <circle cx="124" cy="124" r="115" fill="none" stroke="#fafafa" stroke-width="16"/>
+                <!-- Track arc 270° -->
+                <circle cx="124" cy="124" r="94" fill="none" stroke="#dbd8ef" stroke-width="18"
+                        stroke-dasharray="442.9 147.7" transform="rotate(135,124,124)" stroke-linecap="round"/>
+                <!-- Progress arc (animated) -->
+                <circle class="gauge__progress" cx="124" cy="124" r="94" fill="none" stroke="#b3a2e7" stroke-width="18"
+                        stroke-dasharray="0 590.6" transform="rotate(135,124,124)" stroke-linecap="round"/>
+                <!-- Inner white fill -->
+                <circle cx="124" cy="124" r="81" fill="#ffffff"/>
+              </svg>
+              <div class="gauge__label">
+                <svg class="gauge__icon" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M22 5 L23.5 10.5 L29 12 L23.5 13.5 L22 19 L20.5 13.5 L15 12 L20.5 10.5 Z" fill="#b3a2e7"/>
+                  <path d="M11 15 L12 19 L16 20 L12 21 L11 25 L10 21 L6 20 L10 19 Z" fill="#b3a2e7"/>
+                  <path d="M26 23 L26.7 25.3 L29 26 L26.7 26.7 L26 29 L25.3 26.7 L23 26 L25.3 25.3 Z" fill="#b3a2e7"/>
+                </svg>
+                <div class="gauge__value-row">
+                  <span class="gauge__value">0</span>
+                  <span class="gauge__unit">%</span>
+                </div>
+                <span class="gauge__subtitle">AIO Avg. Frequency</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Vertical divider -->
+          <div style="width:1px;background:#e8edf3;align-self:stretch;flex-shrink:0"></div>
+
+          <!-- Right: single timeline -->
+          <div style="flex:1;min-width:0;padding-left:24px;display:flex;flex-direction:column">
+            <div class="mclc" style="background:transparent;border-radius:0;padding-bottom:0;flex:1;display:flex;flex-direction:column">
+              <div class="mclc__body" style="padding:0;flex:1;display:flex;flex-direction:column">
+                <div class="mclc__row" style="flex:1;height:auto;align-items:stretch">
+                  <div class="mclc__chart" style="height:100%;align-self:stretch">
+                    <div class="mclc__y-labels"><span>800</span><span>0</span></div>
+                    <div class="mclc__canvas-wrap">
+                      <div class="mclc__bands">
+                        <div class="mclc__band"></div><div class="mclc__band"></div>
+                        <div class="mclc__band"></div><div class="mclc__band"></div>
+                      </div>
+                      <svg class="mclc__svg" viewBox="0 0 100 100" preserveAspectRatio="none"
+                           data-color="#b3a2e7" data-ymin="0" data-ymax="800" data-start="2026-04-21"
+                           data-vals="0.42,0.38,0.45,0.51,0.48,0.52,0.55,0.61,0.58,0.63,0.60,0.65,0.68,0.72,0.69,0.74,0.71,0.76,0.80,0.77,0.82,0.79,0.85,0.83,0.87,0.84,0.88,0.91,0.89,0.93"></svg>
+                    </div>
+                  </div>
+                </div>
+                <div class="mclc__x-axis">
+                  <div class="mclc__x-chart">
+                    <span class="mclc__x-y-spacer">800</span>
+                    <div class="mclc__x-labels">
+                      <span class="mclc__x-label">21 Apr</span>
+                      <span class="mclc__x-label">28 Apr</span>
+                      <span class="mclc__x-label">5 May</span>
+                      <span class="mclc__x-label">12 May</span>
+                      <span class="mclc__x-label">19 May</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        </div><!-- /content -->
+      </div><!-- /card -->
+  </div>
+
+</section>
+      </div>
+
+      <!-- ── GAUGE PANEL ──────────────────────────────────────────────── -->
+      <div class="comp-panel" id="comp-panel-gauge" style="display:none">
+<section id="gauge">
+  <div class="section-header">
+    <h2>Gauge</h2>
+    <div class="divider"></div>
+  </div>
+  <p style="font-size:13px;color:var(--text-secondary-var);margin-bottom:24px">A 270° arc-based radial gauge with a purple progress arc, light lavender track, and a centre overlay showing a sparkle icon, large value, and optional subtitle. Animates from 0 to the target value on load.</p>
+
+  <!-- 1. LIVE DEMO ─────────────────────────────────────────────── -->
+  <div style="margin-bottom:40px">
+    <div class="sub-label">Live Demo</div>
+    <div style="background:#ffffff;padding:32px;border-radius:12px;display:flex;flex-direction:column;align-items:center;gap:24px">
+      <div class="gauge" id="gauge-live" data-value="41">
+        <svg class="gauge__svg" viewBox="0 0 248 248" xmlns="http://www.w3.org/2000/svg">
+          <!-- Outer decorative ring -->
+          <circle cx="124" cy="124" r="115" fill="none" stroke="#fafafa" stroke-width="16"/>
+          <!-- Track arc 270° -->
+          <circle cx="124" cy="124" r="94" fill="none" stroke="#dbd8ef" stroke-width="18"
+                  stroke-dasharray="442.9 147.7" transform="rotate(135,124,124)" stroke-linecap="round"/>
+          <!-- Progress arc (animated) -->
+          <circle class="gauge__progress" cx="124" cy="124" r="94" fill="none" stroke="#b3a2e7" stroke-width="18"
+                  stroke-dasharray="0 590.6" transform="rotate(135,124,124)" stroke-linecap="round"/>
+          <!-- Inner white fill -->
+          <circle cx="124" cy="124" r="81" fill="#ffffff"/>
+        </svg>
+        <div class="gauge__label">
+          <svg class="gauge__icon" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M22 5 L23.5 10.5 L29 12 L23.5 13.5 L22 19 L20.5 13.5 L15 12 L20.5 10.5 Z" fill="#b3a2e7"/>
+            <path d="M11 15 L12 19 L16 20 L12 21 L11 25 L10 21 L6 20 L10 19 Z" fill="#b3a2e7"/>
+            <path d="M26 23 L26.7 25.3 L29 26 L26.7 26.7 L26 29 L25.3 26.7 L23 26 L25.3 25.3 Z" fill="#b3a2e7"/>
+          </svg>
+          <div class="gauge__value-row">
+            <span class="gauge__value" id="gauge-live-val">0</span>
+            <span class="gauge__unit">%</span>
+          </div>
+          <span class="gauge__subtitle">AIO Avg. Frequency</span>
+        </div>
+      </div>
+      <!-- Preset buttons -->
+      <div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:center">
+        <button onclick="gaugeSetLive(25)"  style="padding:6px 14px;border-radius:200px;border:1px solid #c4c8e0;background:transparent;font-size:12px;font-weight:600;color:#6477a2;cursor:pointer;font-family:'Open Sans',sans-serif">25%</button>
+        <button onclick="gaugeSetLive(41)"  style="padding:6px 14px;border-radius:200px;border:1px solid #b3a2e7;background:#b3a2e7;font-size:12px;font-weight:600;color:#fff;cursor:pointer;font-family:'Open Sans',sans-serif">41%</button>
+        <button onclick="gaugeSetLive(68)"  style="padding:6px 14px;border-radius:200px;border:1px solid #c4c8e0;background:transparent;font-size:12px;font-weight:600;color:#6477a2;cursor:pointer;font-family:'Open Sans',sans-serif">68%</button>
+        <button onclick="gaugeSetLive(92)"  style="padding:6px 14px;border-radius:200px;border:1px solid #c4c8e0;background:transparent;font-size:12px;font-weight:600;color:#6477a2;cursor:pointer;font-family:'Open Sans',sans-serif">92%</button>
+        <button onclick="gaugeSetLive(100)" style="padding:6px 14px;border-radius:200px;border:1px solid #c4c8e0;background:transparent;font-size:12px;font-weight:600;color:#6477a2;cursor:pointer;font-family:'Open Sans',sans-serif">100%</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. VARIANTS ─────────────────────────────────────────────── -->
+  <div style="margin-bottom:40px">
+    <div class="sub-label">Value Variants</div>
+    <div style="display:flex;gap:24px;flex-wrap:wrap;align-items:flex-start">
+      <div style="display:flex;flex-direction:column;align-items:center;gap:8px">
+        <div class="gauge gauge--sm" data-value="25">
+          <svg class="gauge__svg" viewBox="0 0 248 248" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="124" cy="124" r="115" fill="none" stroke="#fafafa" stroke-width="16"/>
+            <circle cx="124" cy="124" r="94" fill="none" stroke="#dbd8ef" stroke-width="18" stroke-dasharray="442.9 147.7" transform="rotate(135,124,124)" stroke-linecap="round"/>
+            <circle class="gauge__progress" cx="124" cy="124" r="94" fill="none" stroke="#b3a2e7" stroke-width="18" stroke-dasharray="0 590.6" transform="rotate(135,124,124)" stroke-linecap="round"/>
+            <circle cx="124" cy="124" r="81" fill="#ffffff"/>
+          </svg>
+          <div class="gauge__label">
+            <svg class="gauge__icon" viewBox="0 0 36 36" fill="none"><path d="M22 5 L23.5 10.5 L29 12 L23.5 13.5 L22 19 L20.5 13.5 L15 12 L20.5 10.5 Z" fill="#b3a2e7"/><path d="M11 15 L12 19 L16 20 L12 21 L11 25 L10 21 L6 20 L10 19 Z" fill="#b3a2e7"/><path d="M26 23 L26.7 25.3 L29 26 L26.7 26.7 L26 29 L25.3 26.7 L23 26 L25.3 25.3 Z" fill="#b3a2e7"/></svg>
+            <div class="gauge__value-row"><span class="gauge__value">0</span><span class="gauge__unit">%</span></div>
+          </div>
+        </div>
+        <span style="font-size:11px;color:#858585">25%</span>
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:8px">
+        <div class="gauge gauge--sm" data-value="50">
+          <svg class="gauge__svg" viewBox="0 0 248 248" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="124" cy="124" r="115" fill="none" stroke="#fafafa" stroke-width="16"/>
+            <circle cx="124" cy="124" r="94" fill="none" stroke="#dbd8ef" stroke-width="18" stroke-dasharray="442.9 147.7" transform="rotate(135,124,124)" stroke-linecap="round"/>
+            <circle class="gauge__progress" cx="124" cy="124" r="94" fill="none" stroke="#b3a2e7" stroke-width="18" stroke-dasharray="0 590.6" transform="rotate(135,124,124)" stroke-linecap="round"/>
+            <circle cx="124" cy="124" r="81" fill="#ffffff"/>
+          </svg>
+          <div class="gauge__label">
+            <svg class="gauge__icon" viewBox="0 0 36 36" fill="none"><path d="M22 5 L23.5 10.5 L29 26 L23.5 13.5 L22 19 L20.5 13.5 L15 12 L20.5 10.5 Z" fill="#b3a2e7"/><path d="M11 15 L12 19 L16 20 L12 21 L11 25 L10 21 L6 20 L10 19 Z" fill="#b3a2e7"/><path d="M26 23 L26.7 25.3 L29 26 L26.7 26.7 L26 29 L25.3 26.7 L23 26 L25.3 25.3 Z" fill="#b3a2e7"/></svg>
+            <div class="gauge__value-row"><span class="gauge__value">0</span><span class="gauge__unit">%</span></div>
+          </div>
+        </div>
+        <span style="font-size:11px;color:#858585">50%</span>
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:8px">
+        <div class="gauge gauge--sm" data-value="75">
+          <svg class="gauge__svg" viewBox="0 0 248 248" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="124" cy="124" r="115" fill="none" stroke="#fafafa" stroke-width="16"/>
+            <circle cx="124" cy="124" r="94" fill="none" stroke="#dbd8ef" stroke-width="18" stroke-dasharray="442.9 147.7" transform="rotate(135,124,124)" stroke-linecap="round"/>
+            <circle class="gauge__progress" cx="124" cy="124" r="94" fill="none" stroke="#b3a2e7" stroke-width="18" stroke-dasharray="0 590.6" transform="rotate(135,124,124)" stroke-linecap="round"/>
+            <circle cx="124" cy="124" r="81" fill="#ffffff"/>
+          </svg>
+          <div class="gauge__label">
+            <svg class="gauge__icon" viewBox="0 0 36 36" fill="none"><path d="M22 5 L23.5 10.5 L29 26 L23.5 13.5 L22 19 L20.5 13.5 L15 12 L20.5 10.5 Z" fill="#b3a2e7"/><path d="M11 15 L12 19 L16 20 L12 21 L11 25 L10 21 L6 20 L10 19 Z" fill="#b3a2e7"/><path d="M26 23 L26.7 25.3 L29 26 L26.7 26.7 L26 29 L25.3 26.7 L23 26 L25.3 25.3 Z" fill="#b3a2e7"/></svg>
+            <div class="gauge__value-row"><span class="gauge__value">0</span><span class="gauge__unit">%</span></div>
+          </div>
+        </div>
+        <span style="font-size:11px;color:#858585">75%</span>
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:8px">
+        <div class="gauge gauge--sm" data-value="92">
+          <svg class="gauge__svg" viewBox="0 0 248 248" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="124" cy="124" r="115" fill="none" stroke="#fafafa" stroke-width="16"/>
+            <circle cx="124" cy="124" r="94" fill="none" stroke="#dbd8ef" stroke-width="18" stroke-dasharray="442.9 147.7" transform="rotate(135,124,124)" stroke-linecap="round"/>
+            <circle class="gauge__progress" cx="124" cy="124" r="94" fill="none" stroke="#b3a2e7" stroke-width="18" stroke-dasharray="0 590.6" transform="rotate(135,124,124)" stroke-linecap="round"/>
+            <circle cx="124" cy="124" r="81" fill="#ffffff"/>
+          </svg>
+          <div class="gauge__label">
+            <svg class="gauge__icon" viewBox="0 0 36 36" fill="none"><path d="M22 5 L23.5 10.5 L29 26 L23.5 13.5 L22 19 L20.5 13.5 L15 12 L20.5 10.5 Z" fill="#b3a2e7"/><path d="M11 15 L12 19 L16 20 L12 21 L11 25 L10 21 L6 20 L10 19 Z" fill="#b3a2e7"/><path d="M26 23 L26.7 25.3 L29 26 L26.7 26.7 L26 29 L25.3 26.7 L23 26 L25.3 25.3 Z" fill="#b3a2e7"/></svg>
+            <div class="gauge__value-row"><span class="gauge__value">0</span><span class="gauge__unit">%</span></div>
+          </div>
+        </div>
+        <span style="font-size:11px;color:#858585">92%</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3. CSS CLASSES ───────────────────────────────────────────── -->
+  <div style="margin-bottom:40px">
+    <div class="sub-label">CSS Classes</div>
+    <table class="spec-table">
+      <thead><tr><th>Class</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td>.gauge</td><td>Root — 248×248px, position:relative. Add <code>data-value="0–100"</code> for JS to read.</td></tr>
+        <tr><td>.gauge--sm</td><td>Small variant — 160×160px, scales typography proportionally.</td></tr>
+        <tr><td>.gauge__svg</td><td>Full-size SVG canvas (100%×100%)</td></tr>
+        <tr><td>.gauge__progress</td><td>Animated progress arc — JS sets stroke-dasharray from <code>data-value</code>.</td></tr>
+        <tr><td>.gauge__label</td><td>Absolute centre overlay — flex col, items-center, gap 6px</td></tr>
+        <tr><td>.gauge__icon</td><td>Sparkle SVG icon — 36×36px (22×22px on --sm)</td></tr>
+        <tr><td>.gauge__value-row</td><td>Flex row aligning number + unit at baseline</td></tr>
+        <tr><td>.gauge__value</td><td>Large number — 50px light (300), letter-spacing -2px, #27365b</td></tr>
+        <tr><td>.gauge__unit</td><td>Unit suffix (%) — 22px light, baseline-padded</td></tr>
+        <tr><td>.gauge__subtitle</td><td>Optional descriptor — 12px #6477a2</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- 4. DESIGN TOKENS ────────────────────────────────────────── -->
+  <div style="margin-bottom:40px">
+    <div class="sub-label">Design Tokens</div>
+    <table class="spec-table">
+      <thead><tr><th>Token</th><th>Value</th><th>Usage</th></tr></thead>
+      <tbody>
+        <tr><td>—</td><td>248 × 248px</td><td>Default gauge size</td></tr>
+        <tr><td>—</td><td>160 × 160px</td><td>Small gauge size (--sm)</td></tr>
+        <tr><td>—</td><td>270°</td><td>Arc sweep (gap at bottom)</td></tr>
+        <tr><td>—</td><td>r = 94px</td><td>Track &amp; progress arc radius</td></tr>
+        <tr><td>—</td><td>18px</td><td>Track &amp; progress stroke-width</td></tr>
+        <tr><td>—</td><td>r = 110px</td><td>Outer decorative ring radius</td></tr>
+        <tr><td>—</td><td>20px</td><td>Outer ring stroke-width</td></tr>
+        <tr><td>purple/200</td><td>#b3a2e7</td><td>Progress arc + sparkle icon fill</td></tr>
+        <tr><td>—</td><td>#dbd8ef</td><td>Track arc (background)</td></tr>
+        <tr><td>—</td><td>#ededf8</td><td>Outer decorative ring</td></tr>
+        <tr><td>—</td><td>50px / 300</td><td>Centre value — font-size / weight</td></tr>
+        <tr><td>—</td><td>-2px</td><td>Centre value letter-spacing</td></tr>
+        <tr><td>neutral/800</td><td>#27365b</td><td>Centre value + unit colour</td></tr>
+        <tr><td>neutral/400</td><td>#6477a2</td><td>Subtitle colour</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- 5. HTML USAGE ────────────────────────────────────────────── -->
+  <div style="margin-bottom:40px">
+    <div class="sub-label">HTML Usage</div>
+    <pre class="code-block">&lt;div class="gauge" data-value="68"&gt;
+  &lt;svg class="gauge__svg" viewBox="0 0 248 248" xmlns="http://www.w3.org/2000/svg"&gt;
+    &lt;!-- Outer decorative ring --&gt;
+    &lt;circle cx="124" cy="124" r="110" fill="none" stroke="#fafafa" stroke-width="20"/&gt;
+    &lt;!-- Track arc (270°) --&gt;
+    &lt;circle cx="124" cy="124" r="94" fill="none" stroke="#dbd8ef" stroke-width="18"
+            stroke-dasharray="442.9 147.7" transform="rotate(135,124,124)" stroke-linecap="round"/&gt;
+    &lt;!-- Progress arc — JS animates stroke-dasharray --&gt;
+    &lt;circle class="gauge__progress" cx="124" cy="124" r="94" fill="none" stroke="#b3a2e7"
+            stroke-width="18" stroke-dasharray="0 590.6"
+            transform="rotate(135,124,124)" stroke-linecap="round"/&gt;
+    &lt;!-- Inner white fill --&gt;
+    &lt;circle cx="124" cy="124" r="79" fill="#ffffff"/&gt;
+  &lt;/svg&gt;
+  &lt;div class="gauge__label"&gt;
+    &lt;!-- Sparkle icon --&gt;
+    &lt;svg class="gauge__icon" viewBox="0 0 36 36" fill="none"&gt;
+      &lt;path d="M22 5 L23.5 10.5 L29 12 L23.5 13.5 L22 19 L20.5 13.5 L15 12 L20.5 10.5 Z" fill="#b3a2e7"/&gt;
+      &lt;path d="M11 15 L12 19 L16 20 L12 21 L11 25 L10 21 L6 20 L10 19 Z" fill="#b3a2e7"/&gt;
+      &lt;path d="M26 23 L26.7 25.3 L29 26 L26.7 26.7 L26 29 L25.3 26.7 L23 26 L25.3 25.3 Z" fill="#b3a2e7"/&gt;
+    &lt;/svg&gt;
+    &lt;div class="gauge__value-row"&gt;
+      &lt;span class="gauge__value"&gt;0&lt;/span&gt;
+      &lt;span class="gauge__unit"&gt;%&lt;/span&gt;
+    &lt;/div&gt;
+    &lt;span class="gauge__subtitle"&gt;AI coverage score&lt;/span&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</pre>
+  </div>
+
+  <script>
+  (function() {
+    var GAUGE_R   = 94;
+    var GAUGE_C   = 2 * Math.PI * GAUGE_R;   // 590.6
+    var GAUGE_ARC = GAUGE_C * 270 / 360;     // 442.9
+
+    function animateGauge(el, targetVal, onUpdate) {
+      var progress  = el.querySelector('.gauge__progress');
+      var valueEl   = el.querySelector('.gauge__value');
+      if (!progress) return;
+      var startTime = null, duration = 1000;
+      function step(ts) {
+        if (!startTime) startTime = ts;
+        var t  = Math.min((ts - startTime) / duration, 1);
+        var e  = 1 - Math.pow(1 - t, 3);          // ease-out cubic
+        var len = GAUGE_ARC * (targetVal / 100) * e;
+        progress.setAttribute('stroke-dasharray', len.toFixed(1) + ' ' + GAUGE_C.toFixed(1));
+        if (valueEl) valueEl.textContent = Math.round(targetVal * e);
+        if (onUpdate) onUpdate(Math.round(targetVal * e));
+        if (t < 1) requestAnimationFrame(step);
+      }
+      requestAnimationFrame(step);
+    }
+
+    function gaugeDrawAll() {
+      document.querySelectorAll('.gauge[data-value]').forEach(function(el) {
+        animateGauge(el, parseFloat(el.dataset.value) || 0);
+      });
+    }
+
+    window.gaugeSetLive = function(val) {
+      var el = document.getElementById('gauge-live');
+      if (!el) return;
+      el.dataset.value = val;
+      /* update active preset button style */
+      el.closest('div').querySelectorAll('button').forEach(function(btn) {
+        var isActive = btn.textContent.trim() === val + '%';
+        btn.style.background    = isActive ? '#b3a2e7' : 'transparent';
+        btn.style.borderColor   = isActive ? '#b3a2e7' : '#c4c8e0';
+        btn.style.color         = isActive ? '#fff'    : '#6477a2';
+      });
+      animateGauge(el, val);
+    };
+
+    window.gaugeDrawAll = gaugeDrawAll;
+
+    /* trigger on nav click */
+    document.addEventListener('click', function(e) {
+      if (e.target && e.target.dataset && (e.target.dataset.component === 'gauge' || e.target.dataset.component === 'gauge-timeline')) {
+        setTimeout(gaugeDrawAll, 30);
+      }
+    });
+
+    /* initial draw */
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', gaugeDrawAll);
+    } else {
+      gaugeDrawAll();
+    }
+  })();
+  </script>
+
+</section>
+      </div>
+
       <!-- ── SIMPLE TIMELINE PANEL ─────────────────────────────────── -->
       <div class="comp-panel" id="comp-panel-simple-timeline" style="display:none">
 <section id="simple-timeline">
@@ -8893,7 +9672,7 @@ function accSetDisabled(id, disabled) {
   <!-- 1. LIVE DEMO ──────────────────────────────────────────────── -->
   <div style="margin-bottom:40px">
     <div class="sub-label">Live Demo · 6 series · 1 Dec – 31 Dec, 2025</div>
-    <div style="background:#e4eef4;padding:20px;border-radius:12px">
+    <div style="background:#ffffff;padding:20px;border-radius:12px">
       <div class="simple-timeline">
         <svg class="simple-timeline__svg" viewBox="0 0 740 215" xmlns="http://www.w3.org/2000/svg">
           <rect x="48" y="18" width="662" height="170" fill="none"/>
@@ -9374,7 +10153,7 @@ function accSetDisabled(id, disabled) {
   <!-- ① LIVE DEMO ─────────────────────────────────────────────────── -->
   <div style="margin-bottom:40px">
     <div class="sub-label">Live Demo · 4 series · Jan–Jun 2026 · values sum to 100%</div>
-    <div style="background:#e4eef4;padding:20px;border-radius:12px">
+    <div style="background:#ffffff;padding:20px;border-radius:12px">
       <div style="background:#ffffff;border-radius:8px;padding:16px">
       <div class="stacked-timeline">
         <!-- viewBox: 740 × 215. Plot area: x 48→710, y 18(top=100%)→188(bottom=0%), h=170 -->
@@ -9509,7 +10288,7 @@ function accSetDisabled(id, disabled) {
   <!-- ① VARIANT — With Comparison Lines ─────────────────────────── -->
   <div style="margin-bottom:40px">
     <div class="sub-label">Variant · With comparison lines · vs. Industry Average (dotted)</div>
-    <div style="background:#e4eef4;padding:20px;border-radius:12px">
+    <div style="background:#ffffff;padding:20px;border-radius:12px">
       <div style="background:#ffffff;border-radius:8px;padding:16px">
       <div class="stacked-timeline">
         <!--
@@ -9731,7 +10510,7 @@ function accSetDisabled(id, disabled) {
   <!-- ① LIVE DEMO ─────────────────────────────────────────────────── -->
   <div style="margin-bottom:40px">
     <div class="sub-label">Live Demo · 5 series · 30 data points · legend toggle · hover tooltip</div>
-    <div style="background:#e4eef4;padding:24px;border-radius:12px">
+    <div style="background:#ffffff;padding:24px;border-radius:12px">
       <div style="background:#fff;border-radius:12px;padding:24px">
       <div class="timeline-chart" id="tc-demo">
         <div style="position:relative;">
@@ -10521,7 +11300,7 @@ const DATES = ['27 Apr, 2026', '28 Apr, 2026', ... '26 May, 2026'];
   <!-- ① LIVE DEMO ─────────────────────────────────────────────────── -->
   <div style="margin-bottom:40px">
     <div class="sub-label">Live Demo · 10 rows · sortable columns · hover tooltip · position mix + impressions</div>
-    <div style="background:#e4eef4;padding:24px;border-radius:12px">
+    <div style="background:#ffffff;padding:24px;border-radius:12px">
       <div style="background:#fff;border-radius:12px;padding:24px">
         <!-- Column headers -->
         <div class="tct__header" id="tct-header" style="grid-template-columns:200px 1fr 180px;">
@@ -10730,7 +11509,7 @@ const DATES = ['27 Apr, 2026', '28 Apr, 2026', ... '26 May, 2026'];
   <!-- 1. LIVE DEMO ─────────────────────────────────────────────── -->
   <div style="margin-bottom:40px">
     <div class="sub-label">Live Demo</div>
-    <div style="background:#e4eef4;padding:24px;border-radius:12px;max-width:420px">
+    <div style="background:#ffffff;padding:24px;border-radius:12px;max-width:420px">
       <div class="citations-pos">
         <div class="citations-pos__body">
           <div class="citations-pos__row">
@@ -10802,7 +11581,7 @@ const DATES = ['27 Apr, 2026', '28 Apr, 2026', ... '26 May, 2026'];
   <div style="margin-bottom:40px">
     <div class="sub-label">Row States</div>
     <div style="display:flex;gap:16px;flex-wrap:wrap">
-      <div style="background:#e4eef4;padding:16px;border-radius:12px;flex:1;min-width:260px">
+      <div style="background:#ffffff;padding:16px;border-radius:12px;flex:1;min-width:260px">
         <div style="font-size:11px;color:#496f97;font-weight:600;margin-bottom:8px;text-transform:uppercase;letter-spacing:0.5px">Default row</div>
         <div class="citations-pos__row" style="background:#fff;padding:8px 12px;border-radius:8px">
           <div class="citations-pos__pos-chip citations-pos__pos-chip--default">
@@ -10817,7 +11596,7 @@ const DATES = ['27 Apr, 2026', '28 Apr, 2026', ... '26 May, 2026'];
           <span class="citations-pos__delta citations-pos__delta--pos">+3</span>
         </div>
       </div>
-      <div style="background:#e4eef4;padding:16px;border-radius:12px;flex:1;min-width:260px">
+      <div style="background:#ffffff;padding:16px;border-radius:12px;flex:1;min-width:260px">
         <div style="font-size:11px;color:#496f97;font-weight:600;margin-bottom:8px;text-transform:uppercase;letter-spacing:0.5px">Active row (your brand)</div>
         <div class="citations-pos__row" style="background:#fff;padding:8px 12px;border-radius:8px">
           <div class="citations-pos__pos-chip citations-pos__pos-chip--active">
@@ -10891,7 +11670,7 @@ const DATES = ['27 Apr, 2026', '28 Apr, 2026', ... '26 May, 2026'];
   <!-- 1. LIVE DEMO — Single series ──────────────────────────────── -->
   <div style="margin-bottom:40px">
     <div class="sub-label">Single series · Your Brand share of voice · Jan–Jun 2026 · hover a bar</div>
-    <div style="background:#e4eef4;padding:24px;border-radius:12px">
+    <div style="background:#ffffff;padding:24px;border-radius:12px">
       <div style="background:#fff;border-radius:12px;padding:24px">
         <div class="vbar">
           <!--
@@ -10951,7 +11730,7 @@ const DATES = ['27 Apr, 2026', '28 Apr, 2026', ... '26 May, 2026'];
   <!-- 2. LIVE DEMO — Multi-series grouped ───────────────────────── -->
   <div style="margin-bottom:40px">
     <div class="sub-label">Multi-series grouped · 3 advertisers · Jan–Jun 2026 · hover a bar</div>
-    <div style="background:#e4eef4;padding:24px;border-radius:12px">
+    <div style="background:#ffffff;padding:24px;border-radius:12px">
       <div style="background:#fff;border-radius:12px;padding:24px">
         <div class="vbar">
           <!--
@@ -11236,7 +12015,7 @@ const DATES = ['27 Apr, 2026', '28 Apr, 2026', ... '26 May, 2026'];
   <!-- 1. LIVE DEMO — Clean (no end labels) ───────────────────────── -->
   <div style="margin-bottom:40px">
     <div class="sub-label">Single series · no value labels · hover tooltip only</div>
-    <div style="background:#e4eef4;padding:24px;border-radius:12px">
+    <div style="background:#ffffff;padding:24px;border-radius:12px">
       <div style="background:#fff;border-radius:12px;padding:24px">
         <div class="hbar" id="hbar-demo-clean">
           <svg class="hbar__svg" viewBox="0 0 640 162" xmlns="http://www.w3.org/2000/svg">
@@ -11284,7 +12063,7 @@ const DATES = ['27 Apr, 2026', '28 Apr, 2026', ... '26 May, 2026'];
   <!-- 2. LIVE DEMO — Single series with value labels ──────────────── -->
   <div style="margin-bottom:40px">
     <div class="sub-label">Single series · value + delta labels at bar end · hover a bar</div>
-    <div style="background:#e4eef4;padding:24px;border-radius:12px">
+    <div style="background:#ffffff;padding:24px;border-radius:12px">
       <div style="background:#fff;border-radius:12px;padding:24px">
         <!-- 8px bars · 8px gap · 8×8 favicons · X0=122 X1=620 · viewBox 0 0 640 162 -->
         <div class="hbar" id="hbar-demo-single">
@@ -11457,7 +12236,7 @@ Bar path (rounded right, flat left):
   <!-- LIVE DEMO ─────────────────────────────────────────────────── -->
   <div style="margin-bottom:40px">
     <div class="sub-label">3 advertisers · 5 categories · 8px bars · hover a group</div>
-    <div style="background:#e4eef4;padding:24px;border-radius:12px">
+    <div style="background:#ffffff;padding:24px;border-radius:12px">
       <div style="background:#fff;border-radius:12px;padding:24px">
         <!-- 8px bars · 4px inner gap · 8px between groups · X0=68 X1=620 · viewBox 0 0 640 232 -->
         <div class="hbar" id="hbar-demo-multi">
@@ -11581,7 +12360,7 @@ Bar path (rounded right, flat left):
   <!-- 1. LIVE DEMO ─────────────────────────────────────────────── -->
   <div style="margin-bottom:40px">
     <div class="sub-label">100 % stacked · Share composition · Jan–Jun 2026 · hover a column</div>
-    <div style="background:#e4eef4;padding:24px;border-radius:12px">
+    <div style="background:#ffffff;padding:24px;border-radius:12px">
       <div style="background:#fff;border-radius:12px;padding:24px">
         <div class="vbar">
           <!--
@@ -15226,6 +16005,215 @@ document.querySelectorAll('.palette-chip-wrap').forEach(function(wrap) {
   span.textContent = m[0].toLowerCase();
   step.insertAdjacentElement('afterend', span);
 });
+</script>
+<script>
+// ── DATE PICKER ─────────────────────────────────────────────────────
+(function() {
+  var MONTHS_SHORT = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  var PRESETS = [
+    { label: 'Last 7 Days',    days: 7 },
+    { label: 'Last 14 Days',   days: 14 },
+    { label: 'Last 30 Days',   days: 30 },
+    { label: 'This Month',     type: 'thisMonth' },
+    { label: 'Last 6 Weeks',   days: 42 },
+    { label: 'Last 6 Months',  type: 'last6Months' },
+    { label: 'Last 12 Months', type: 'last12Months' },
+    { label: 'This Year',      type: 'thisYear' },
+  ];
+
+  function sameDay(a, b) { return a && b && a.getFullYear()===b.getFullYear() && a.getMonth()===b.getMonth() && a.getDate()===b.getDate(); }
+  function isBetween(d, a, b) {
+    if (!a || !b) return false;
+    var mn = a < b ? a : b, mx = a < b ? b : a;
+    return d > mn && d < mx;
+  }
+  function fmtInput(d) {
+    if (!d) return '—';
+    return MONTHS_SHORT[d.getMonth()] + ' ' + d.getDate() + ', ' + d.getFullYear();
+  }
+  function fmtLabel(s, e, preset) {
+    if (preset) return preset;
+    if (!s) return 'Select range';
+    if (!e || sameDay(s,e)) return MONTHS_SHORT[s.getMonth()] + ' ' + s.getDate() + ', ' + s.getFullYear();
+    var a = s < e ? s : e, b = s < e ? e : s;
+    if (a.getFullYear() === b.getFullYear())
+      return a.getDate() + ' ' + MONTHS_SHORT[a.getMonth()] + ' – ' + b.getDate() + ' ' + MONTHS_SHORT[b.getMonth()] + ' ' + b.getFullYear();
+    return a.getDate() + ' ' + MONTHS_SHORT[a.getMonth()] + ' ' + a.getFullYear() + ' – ' + b.getDate() + ' ' + MONTHS_SHORT[b.getMonth()] + ' ' + b.getFullYear();
+  }
+
+  function buildMonth(year, month, side, prefix, st) {
+    var first = new Date(year, month, 1);
+    var startDow = first.getDay();
+    var daysInMonth = new Date(year, month + 1, 0).getDate();
+
+    var effectiveStart = st.startDate;
+    var effectiveEnd   = st.endDate;
+    if (st.startDate && !st.endDate && st.hoverDate) {
+      effectiveEnd = st.hoverDate;
+      if (effectiveEnd < effectiveStart) { var tmp = effectiveStart; effectiveStart = effectiveEnd; effectiveEnd = tmp; }
+    }
+
+    var html = '<div class="dp-month">';
+    html += '<div class="dp-month__header">';
+    html += '<button class="dp-month__nav" onclick="' + prefix + 'Nav(-1)">';
+    html += '<svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M10 4L6 8l4 4" stroke="#334557" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+    html += '</button>';
+    html += '<span class="dp-month__title">' + MONTHS_SHORT[month] + ' ' + year + '</span>';
+    if (side === 'right') {
+      html += '<button class="dp-month__nav" onclick="' + prefix + 'Nav(1)">';
+      html += '<svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M6 4l4 4-4 4" stroke="#334557" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+      html += '</button>';
+    } else {
+      html += '<div style="width:40px"></div>';
+    }
+    html += '</div>';
+
+    html += '<div class="dp-dow-row">';
+    ['Su','Mo','Tu','We','Th','Fr','Sa'].forEach(function(d) { html += '<span class="dp-dow">' + d + '</span>'; });
+    html += '</div>';
+
+    html += '<div class="dp-dates">';
+    var cells = [];
+    for (var i = 0; i < startDow; i++) cells.push(null);
+    for (var d = 1; d <= daysInMonth; d++) cells.push(new Date(year, month, d));
+    for (var i = 0; i < cells.length; i += 7) {
+      var row = cells.slice(i, i + 7);
+      html += '<div class="dp-date-row">';
+      row.forEach(function(cell) {
+        if (!cell) { html += '<div class="dp-day--empty"></div>'; return; }
+        var cls = 'dp-day';
+        var isStart = effectiveStart && sameDay(cell, effectiveStart);
+        var isEnd   = effectiveEnd   && sameDay(cell, effectiveEnd);
+        var inRange = isBetween(cell, effectiveStart, effectiveEnd);
+        if (isStart) cls += ' dp-day--start';
+        if (isEnd)   cls += ' dp-day--end';
+        if (inRange && !isStart && !isEnd) cls += ' dp-day--in-range';
+        var key = cell.getFullYear() + ',' + cell.getMonth() + ',' + cell.getDate();
+        html += '<div class="' + cls + '" onclick="' + prefix + 'ClickDay(' + key + ')" onmouseenter="' + prefix + 'Hover(' + key + ')" onmouseleave="' + prefix + 'HoverOut()">' + cell.getDate() + '</div>';
+      });
+      html += '</div>';
+    }
+    html += '</div>';
+    html += '</div>';
+    return html;
+  }
+
+  function makePicker(cfg) {
+    var today = new Date(); today.setHours(0,0,0,0);
+    var st = {
+      leftYear: today.getFullYear(), leftMonth: today.getMonth() - 1 < 0 ? 11 : today.getMonth() - 1,
+      startDate: null, endDate: null, hoverDate: null,
+      activePreset: 'Last 30 Days', isOpen: cfg.startOpen || false,
+      openedAt: cfg.startOpen ? Date.now() + 9999 : 0,
+      pendingStart: null, pendingEnd: null,
+    };
+    (function() {
+      var end = new Date(today);
+      var start = new Date(end); start.setDate(start.getDate() - 29);
+      st.startDate = start; st.endDate = end;
+      st.pendingStart = start; st.pendingEnd = end;
+      var lm = new Date(end); lm.setMonth(lm.getMonth() - 1);
+      st.leftYear = lm.getFullYear(); st.leftMonth = lm.getMonth();
+    })();
+
+    function rightMY() { var d = new Date(st.leftYear, st.leftMonth + 1, 1); return { year: d.getFullYear(), month: d.getMonth() }; }
+
+    function render() {
+      var panel = document.getElementById(cfg.panelId);
+      if (!panel) return;
+      panel.classList.toggle('dp-panel--open', st.isOpen);
+      var rm = rightMY();
+      var monthsEl = document.getElementById(cfg.monthsId);
+      if (monthsEl) monthsEl.innerHTML = buildMonth(st.leftYear, st.leftMonth, 'left', cfg.prefix, st) + buildMonth(rm.year, rm.month, 'right', cfg.prefix, st);
+      var presetsEl = document.getElementById(cfg.presetsId);
+      if (presetsEl) {
+        presetsEl.innerHTML = PRESETS.map(function(p) {
+          var active = p.label === st.activePreset ? ' dp-preset-btn--active' : '';
+          return '<button class="dp-preset-btn' + active + '" onclick="' + cfg.prefix + 'Preset(\'' + p.label + '\')">' + p.label + '</button>';
+        }).join('');
+      }
+      var sv = document.getElementById(cfg.startValId);
+      var ev = document.getElementById(cfg.endValId);
+      if (sv) sv.textContent = fmtInput(st.startDate);
+      if (ev) ev.textContent = fmtInput(st.endDate);
+    }
+
+    window[cfg.prefix + 'Toggle'] = function(e) {
+      if (e) e.stopPropagation();
+      st.isOpen = !st.isOpen;
+      if (st.isOpen) st.openedAt = Date.now();
+      render();
+    };
+    window[cfg.prefix + 'Nav'] = function(dir) {
+      var d = new Date(st.leftYear, st.leftMonth + dir, 1);
+      st.leftYear = d.getFullYear(); st.leftMonth = d.getMonth(); render();
+    };
+    function applyNow(label) {
+      st.pendingStart = st.startDate; st.pendingEnd = st.endDate;
+      var lbl = document.getElementById(cfg.labelId);
+      if (lbl) lbl.textContent = fmtLabel(st.startDate, st.endDate, label || null);
+      st.isOpen = false; render();
+    }
+
+    window[cfg.prefix + 'ClickDay'] = function(y, m, d) {
+      var clicked = new Date(y, m, d);
+      if (!st.startDate || (st.startDate && st.endDate)) {
+        st.startDate = clicked; st.endDate = null; st.activePreset = null;
+        st.hoverDate = null; render();
+      } else {
+        if (clicked < st.startDate) { st.endDate = st.startDate; st.startDate = clicked; }
+        else if (sameDay(clicked, st.startDate)) { st.endDate = clicked; }
+        else { st.endDate = clicked; }
+        st.activePreset = null; st.hoverDate = null;
+        applyNow(null);
+      }
+    };
+    window[cfg.prefix + 'Hover'] = function(y, m, d) {
+      if (st.startDate && !st.endDate) { st.hoverDate = new Date(y, m, d); render(); }
+    };
+    window[cfg.prefix + 'HoverOut'] = function() { if (st.hoverDate) { st.hoverDate = null; render(); } };
+    window[cfg.prefix + 'Preset'] = function(label) {
+      var now = new Date(); now.setHours(0,0,0,0);
+      var s, e = new Date(now);
+      var p = PRESETS.filter(function(x) { return x.label === label; })[0];
+      if (!p) return;
+      if (p.days) { s = new Date(now); s.setDate(s.getDate() - p.days + 1); }
+      else if (p.type === 'thisMonth') { s = new Date(now.getFullYear(), now.getMonth(), 1); }
+      else if (p.type === 'last6Months') { s = new Date(now); s.setMonth(s.getMonth() - 6); }
+      else if (p.type === 'last12Months') { s = new Date(now); s.setFullYear(s.getFullYear() - 1); }
+      else if (p.type === 'thisYear') { s = new Date(now.getFullYear(), 0, 1); }
+      st.startDate = s; st.endDate = e; st.activePreset = label; st.hoverDate = null;
+      var lm = new Date(e); lm.setMonth(lm.getMonth() - 1);
+      st.leftYear = lm.getFullYear(); st.leftMonth = lm.getMonth();
+      applyNow(label);
+    };
+    window[cfg.prefix + 'Cancel'] = function() {
+      st.startDate = st.pendingStart; st.endDate = st.pendingEnd;
+      st.isOpen = false; render();
+    };
+    window[cfg.prefix + 'Apply'] = function() {
+      st.pendingStart = st.startDate; st.pendingEnd = st.endDate;
+      var lbl = document.getElementById(cfg.labelId);
+      if (lbl) lbl.textContent = fmtLabel(st.startDate, st.endDate, st.activePreset);
+      st.isOpen = false; render();
+    };
+
+    document.addEventListener('click', function(e) {
+      if (!st.isOpen) return;
+      var wrap = document.getElementById(cfg.wrapId);
+      if (!wrap || wrap.contains(e.target)) return;
+      if (Date.now() - st.openedAt > 200) { st.isOpen = false; render(); }
+    });
+
+    return render;
+  }
+
+  var renderDp   = makePicker({ prefix: 'dp',   wrapId: 'dp-wrap',    panelId: 'dp-panel',    monthsId: 'dp-months',    presetsId: 'dp-presets',    startValId: 'dp-start-val',    endValId: 'dp-end-val',    labelId: 'dp-trigger-label',    startOpen: true  });
+  var renderSbDp = makePicker({ prefix: 'sbDp', wrapId: 'sb-dp-wrap', panelId: 'sb-dp-panel', monthsId: 'sb-dp-months', presetsId: 'sb-dp-presets', startValId: 'sb-dp-start-val', endValId: 'sb-dp-end-val', labelId: 'sb-dp-trigger-label', startOpen: false });
+
+  document.addEventListener('DOMContentLoaded', function() { renderDp(); renderSbDp(); });
+  if (document.readyState !== 'loading') { renderDp(); renderSbDp(); }
+})();
 </script>
 </body>
 </html>
