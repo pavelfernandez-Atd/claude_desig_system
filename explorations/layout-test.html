@@ -178,6 +178,50 @@
 
     .kpi-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
 
+    /* Date picker */
+    .dp-wrap { position: relative; display: inline-block; }
+    .dp-panel {
+      display: none; position: absolute; z-index: 200; top: calc(100% + 6px); left: 0;
+      background: #ffffff; border-radius: 20px;
+      box-shadow: 0 0 16px rgba(23,42,68,0.2);
+      padding: 16px; flex-direction: row; gap: 0;
+      font-family: var(--font-base);
+    }
+    .dp-panel--open { display: flex; }
+    .dp-panel--right { left: auto; right: 0; }
+    .dp-body { display: flex; gap: 0; }
+    .dp-calendars { display: flex; flex-direction: column; gap: 16px; }
+    .dp-months { display: flex; gap: 16px; }
+    .dp-month { background: #fafafa; border-radius: 12px; overflow: hidden; display: flex; flex-direction: column; gap: 6px; padding-bottom: 8px; }
+    .dp-month__header { display: flex; align-items: center; justify-content: space-between; padding: 4px 16px; }
+    .dp-month__nav { width: 40px; height: 40px; border: none; background: transparent; cursor: pointer; border-radius: 6px; display: flex; align-items: center; justify-content: center; transition: background 0.15s; flex-shrink: 0; }
+    .dp-month__nav:hover { background: #EAF1F7; }
+    .dp-month__title { font-size: 16px; font-weight: 400; color: rgba(0,0,0,0.87); white-space: nowrap; }
+    .dp-dow-row { display: flex; justify-content: space-between; padding: 0 13px; }
+    .dp-dow { width: 24px; font-size: 12px; font-weight: 600; color: #496f97; text-align: center; line-height: 13px; }
+    .dp-dates { display: flex; flex-direction: column; gap: 2px; padding: 0 8px; }
+    .dp-date-row { display: flex; }
+    .dp-day { width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 400; color: rgba(0,0,0,0.87); cursor: pointer; border-radius: 0; transition: background 0.1s; box-sizing: border-box; user-select: none; flex-shrink: 0; }
+    .dp-day--empty { width: 32px; height: 32px; flex-shrink: 0; }
+    .dp-day:hover:not(.dp-day--start):not(.dp-day--end) { background: #EAF1F7; border-radius: 6px; z-index: 1; }
+    .dp-day--in-range { background: #dbe9f6; }
+    .dp-day--start { background: #0c8dea; color: #ffffff; border-radius: 6px 0 0 6px; }
+    .dp-day--end { background: #0c8dea; color: #ffffff; border-radius: 0 6px 6px 0; }
+    .dp-day--start.dp-day--end { border-radius: 6px; }
+    .dp-day--start + .dp-day--in-range { border-radius: 0; }
+    .dp-divider { width: 1px; background: #e0e0e0; margin: 0 16px; flex-shrink: 0; align-self: stretch; }
+    .dp-presets { display: flex; flex-direction: column; width: 136px; flex-shrink: 0; }
+    .dp-preset-btn { height: 40px; border: 1px solid transparent; background: transparent; cursor: pointer; font-family: var(--font-base); font-size: 13px; font-weight: 600; color: #334557; text-align: left; padding: 0 12px; border-radius: var(--radius-md); white-space: nowrap; transition: background 0.15s, color 0.15s; user-select: none; width: 100%; }
+    .dp-preset-btn:hover { background: #EAF1F7; }
+    .dp-preset-btn--active { background: #EAF1F7; }
+    .dp-preset-btn--active:hover { background: #dce8f2; }
+    .dp-footer { display: flex; align-items: center; gap: 45px; }
+    .dp-inputs { display: flex; gap: 9px; flex: 1; }
+    .dp-input-field { width: 140px; border: 1px solid #e0e0e0; border-radius: 8px; padding: 7px 12px; background: white; position: relative; box-sizing: border-box; }
+    .dp-input-label { position: absolute; top: -6px; left: 8px; background: white; padding: 0 4px; font-size: 12px; color: #858585; line-height: 12px; }
+    .dp-input-value { font-size: 14px; color: #181818; line-height: 24px; display: block; white-space: nowrap; }
+    .dp-actions { display: flex; gap: 8px; align-items: center; flex-shrink: 0; }
+
   </style>
 </head>
 <body>
@@ -327,13 +371,40 @@
             <span class="service-bar__subtitle">How AI Overviews impact search visibility and query complexity across key terms to prioritize content and PPC strategy.</span>
           </div>
           <div class="service-bar__actions">
-            <div class="service-bar__date">
-              <svg width="14" height="15" viewBox="0 0 14 15" fill="none" style="flex-shrink:0">
-                <rect x="0.5" y="1.5" width="13" height="13" rx="2" stroke="#2f78bd"/>
-                <path d="M0.5 5.5h13" stroke="#2f78bd"/>
-                <path d="M4 0.5v2M10 0.5v2" stroke="#2f78bd" stroke-linecap="round"/>
-              </svg>
-              <span class="service-bar__date-label">1 May <span class="year">2025</span> – 31 May <span class="year">2025</span></span>
+            <div class="dp-wrap" id="sb-dp-wrap">
+              <div class="service-bar__date" id="sb-dp-trigger" onclick="sbDpToggle(event)">
+                <span class="service-bar__date-label" id="sb-dp-trigger-label">Last 30 Days</span>
+                <svg width="14" height="15" viewBox="0 0 14 15" fill="none" style="flex-shrink:0">
+                  <rect x="0.5" y="1.5" width="13" height="13" rx="2" stroke="#2f78bd"/>
+                  <path d="M0.5 5.5h13" stroke="#2f78bd"/>
+                  <path d="M4 0.5v2M10 0.5v2" stroke="#2f78bd" stroke-linecap="round"/>
+                </svg>
+              </div>
+              <div class="dp-panel dp-panel--right" id="sb-dp-panel">
+                <div class="dp-body">
+                  <div class="dp-calendars">
+                    <div class="dp-months" id="sb-dp-months"></div>
+                    <div class="dp-footer">
+                      <div class="dp-inputs">
+                        <div class="dp-input-field">
+                          <span class="dp-input-label">Start Day</span>
+                          <span class="dp-input-value" id="sb-dp-start-val">—</span>
+                        </div>
+                        <div class="dp-input-field">
+                          <span class="dp-input-label">End Day</span>
+                          <span class="dp-input-value" id="sb-dp-end-val">—</span>
+                        </div>
+                      </div>
+                      <div class="dp-actions">
+                        <button class="btn btn--plain" onclick="sbDpCancel()">Cancel</button>
+                        <button class="btn btn--primary" onclick="sbDpApply()">Apply</button>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="dp-divider"></div>
+                  <div class="dp-presets" id="sb-dp-presets"></div>
+                </div>
+              </div>
             </div>
           <div class="service-bar__info-wrap kpi-info-wrap">
             <button class="service-bar__info-btn">
@@ -542,6 +613,148 @@
 
     </div>
   </div>
+
+  <script>
+  // Date picker
+  (function() {
+    var MONTHS_SHORT = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    var PRESETS = [
+      { label: 'Last 7 Days',    days: 7 },
+      { label: 'Last 14 Days',   days: 14 },
+      { label: 'Last 30 Days',   days: 30 },
+      { label: 'This Month',     type: 'thisMonth' },
+      { label: 'Last 6 Weeks',   days: 42 },
+      { label: 'Last 6 Months',  type: 'last6Months' },
+      { label: 'Last 12 Months', type: 'last12Months' },
+      { label: 'This Year',      type: 'thisYear' },
+    ];
+    function sameDay(a, b) { return a && b && a.getFullYear()===b.getFullYear() && a.getMonth()===b.getMonth() && a.getDate()===b.getDate(); }
+    function isBetween(d, a, b) {
+      if (!a || !b) return false;
+      var mn = a < b ? a : b, mx = a < b ? b : a;
+      return d > mn && d < mx;
+    }
+    function fmtInput(d) {
+      if (!d) return '—';
+      return MONTHS_SHORT[d.getMonth()] + ' ' + d.getDate() + ', ' + d.getFullYear();
+    }
+    function fmtLabel(s, e, preset) {
+      if (preset) return preset;
+      if (!s) return 'Select range';
+      if (!e || sameDay(s,e)) return MONTHS_SHORT[s.getMonth()] + ' ' + s.getDate() + ', ' + s.getFullYear();
+      var a = s < e ? s : e, b = s < e ? e : s;
+      if (a.getFullYear() === b.getFullYear())
+        return a.getDate() + ' ' + MONTHS_SHORT[a.getMonth()] + ' – ' + b.getDate() + ' ' + MONTHS_SHORT[b.getMonth()] + ' ' + b.getFullYear();
+      return a.getDate() + ' ' + MONTHS_SHORT[a.getMonth()] + ' ' + a.getFullYear() + ' – ' + b.getDate() + ' ' + MONTHS_SHORT[b.getMonth()] + ' ' + b.getFullYear();
+    }
+    function buildMonth(year, month, side, prefix, st) {
+      var first = new Date(year, month, 1);
+      var startDow = first.getDay();
+      var daysInMonth = new Date(year, month + 1, 0).getDate();
+      var effectiveStart = st.startDate, effectiveEnd = st.endDate;
+      if (st.startDate && !st.endDate && st.hoverDate) {
+        effectiveEnd = st.hoverDate;
+        if (effectiveEnd < effectiveStart) { var tmp = effectiveStart; effectiveStart = effectiveEnd; effectiveEnd = tmp; }
+      }
+      var html = '<div class="dp-month">';
+      html += '<div class="dp-month__header">';
+      html += '<button class="dp-month__nav" onclick="' + prefix + 'Nav(-1)"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M10 4L6 8l4 4" stroke="#334557" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>';
+      html += '<span class="dp-month__title">' + MONTHS_SHORT[month] + ' ' + year + '</span>';
+      if (side === 'right') {
+        html += '<button class="dp-month__nav" onclick="' + prefix + 'Nav(1)"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M6 4l4 4-4 4" stroke="#334557" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>';
+      } else {
+        html += '<div style="width:40px"></div>';
+      }
+      html += '</div>';
+      html += '<div class="dp-dow-row">';
+      ['Su','Mo','Tu','We','Th','Fr','Sa'].forEach(function(d) { html += '<span class="dp-dow">' + d + '</span>'; });
+      html += '</div><div class="dp-dates">';
+      var cells = [];
+      for (var i = 0; i < startDow; i++) cells.push(null);
+      for (var d = 1; d <= daysInMonth; d++) cells.push(new Date(year, month, d));
+      for (var i = 0; i < cells.length; i += 7) {
+        var row = cells.slice(i, i + 7);
+        html += '<div class="dp-date-row">';
+        row.forEach(function(cell) {
+          if (!cell) { html += '<div class="dp-day--empty"></div>'; return; }
+          var cls = 'dp-day';
+          var isStart = effectiveStart && sameDay(cell, effectiveStart);
+          var isEnd   = effectiveEnd   && sameDay(cell, effectiveEnd);
+          if (isStart) cls += ' dp-day--start';
+          if (isEnd)   cls += ' dp-day--end';
+          if (isBetween(cell, effectiveStart, effectiveEnd)) cls += ' dp-day--in-range';
+          var key = cell.getFullYear() + ',' + cell.getMonth() + ',' + cell.getDate();
+          html += '<div class="' + cls + '" onclick="' + prefix + 'ClickDay(' + key + ')" onmouseenter="' + prefix + 'Hover(' + key + ')" onmouseleave="' + prefix + 'HoverOut()">' + cell.getDate() + '</div>';
+        });
+        html += '</div>';
+      }
+      html += '</div></div>';
+      return html;
+    }
+    function makePicker(cfg) {
+      var today = new Date(); today.setHours(0,0,0,0);
+      var st = { leftYear: today.getFullYear(), leftMonth: today.getMonth() - 1 < 0 ? 11 : today.getMonth() - 1, startDate: null, endDate: null, hoverDate: null, activePreset: 'Last 30 Days', isOpen: false, openedAt: 0, pendingStart: null, pendingEnd: null };
+      (function() {
+        var end = new Date(today), start = new Date(end); start.setDate(start.getDate() - 29);
+        st.startDate = start; st.endDate = end; st.pendingStart = start; st.pendingEnd = end;
+        var lm = new Date(end); lm.setMonth(lm.getMonth() - 1);
+        st.leftYear = lm.getFullYear(); st.leftMonth = lm.getMonth();
+      })();
+      function rightMY() { var d = new Date(st.leftYear, st.leftMonth + 1, 1); return { year: d.getFullYear(), month: d.getMonth() }; }
+      function render() {
+        var panel = document.getElementById(cfg.panelId); if (!panel) return;
+        panel.classList.toggle('dp-panel--open', st.isOpen);
+        var rm = rightMY();
+        var me = document.getElementById(cfg.monthsId);
+        if (me) me.innerHTML = buildMonth(st.leftYear, st.leftMonth, 'left', cfg.prefix, st) + buildMonth(rm.year, rm.month, 'right', cfg.prefix, st);
+        var pe = document.getElementById(cfg.presetsId);
+        if (pe) pe.innerHTML = PRESETS.map(function(p) { var a = p.label === st.activePreset ? ' dp-preset-btn--active' : ''; return '<button class="dp-preset-btn' + a + '" onclick="' + cfg.prefix + 'Preset(\'' + p.label + '\')">' + p.label + '</button>'; }).join('');
+        var sv = document.getElementById(cfg.startValId); if (sv) sv.textContent = fmtInput(st.startDate);
+        var ev = document.getElementById(cfg.endValId);   if (ev) ev.textContent = fmtInput(st.endDate);
+      }
+      function applyNow(label) {
+        st.pendingStart = st.startDate; st.pendingEnd = st.endDate;
+        var lbl = document.getElementById(cfg.labelId); if (lbl) lbl.textContent = fmtLabel(st.startDate, st.endDate, label || null);
+        st.isOpen = false; render();
+      }
+      window[cfg.prefix + 'Toggle'] = function(e) { if (e) e.stopPropagation(); st.isOpen = !st.isOpen; if (st.isOpen) st.openedAt = Date.now(); render(); };
+      window[cfg.prefix + 'Nav'] = function(dir) { var d = new Date(st.leftYear, st.leftMonth + dir, 1); st.leftYear = d.getFullYear(); st.leftMonth = d.getMonth(); render(); };
+      window[cfg.prefix + 'ClickDay'] = function(y, m, d) {
+        var clicked = new Date(y, m, d);
+        if (!st.startDate || (st.startDate && st.endDate)) { st.startDate = clicked; st.endDate = null; st.activePreset = null; st.hoverDate = null; render(); }
+        else { if (clicked < st.startDate) { st.endDate = st.startDate; st.startDate = clicked; } else { st.endDate = clicked; } st.activePreset = null; st.hoverDate = null; applyNow(null); }
+      };
+      window[cfg.prefix + 'Hover'] = function(y, m, d) { if (st.startDate && !st.endDate) { st.hoverDate = new Date(y, m, d); render(); } };
+      window[cfg.prefix + 'HoverOut'] = function() { if (st.hoverDate) { st.hoverDate = null; render(); } };
+      window[cfg.prefix + 'Preset'] = function(label) {
+        var now = new Date(); now.setHours(0,0,0,0); var s, e = new Date(now);
+        var p = PRESETS.filter(function(x) { return x.label === label; })[0]; if (!p) return;
+        if (p.days) { s = new Date(now); s.setDate(s.getDate() - p.days + 1); }
+        else if (p.type === 'thisMonth') { s = new Date(now.getFullYear(), now.getMonth(), 1); }
+        else if (p.type === 'last6Months') { s = new Date(now); s.setMonth(s.getMonth() - 6); }
+        else if (p.type === 'last12Months') { s = new Date(now); s.setFullYear(s.getFullYear() - 1); }
+        else if (p.type === 'thisYear') { s = new Date(now.getFullYear(), 0, 1); }
+        st.startDate = s; st.endDate = e; st.activePreset = label; st.hoverDate = null;
+        var lm = new Date(e); lm.setMonth(lm.getMonth() - 1); st.leftYear = lm.getFullYear(); st.leftMonth = lm.getMonth();
+        applyNow(label);
+      };
+      window[cfg.prefix + 'Cancel'] = function() { st.startDate = st.pendingStart; st.endDate = st.pendingEnd; st.isOpen = false; render(); };
+      window[cfg.prefix + 'Apply'] = function() {
+        st.pendingStart = st.startDate; st.pendingEnd = st.endDate;
+        var lbl = document.getElementById(cfg.labelId); if (lbl) lbl.textContent = fmtLabel(st.startDate, st.endDate, st.activePreset);
+        st.isOpen = false; render();
+      };
+      document.addEventListener('click', function(e) {
+        if (!st.isOpen) return;
+        var wrap = document.getElementById(cfg.wrapId); if (!wrap || wrap.contains(e.target)) return;
+        if (Date.now() - st.openedAt > 200) { st.isOpen = false; render(); }
+      });
+      return render;
+    }
+    var renderSbDp = makePicker({ prefix: 'sbDp', wrapId: 'sb-dp-wrap', panelId: 'sb-dp-panel', monthsId: 'sb-dp-months', presetsId: 'sb-dp-presets', startValId: 'sb-dp-start-val', endValId: 'sb-dp-end-val', labelId: 'sb-dp-trigger-label' });
+    if (document.readyState !== 'loading') { renderSbDp(); } else { document.addEventListener('DOMContentLoaded', renderSbDp); }
+  })();
+  </script>
 
   <script>
   // Sparkline hover interaction
