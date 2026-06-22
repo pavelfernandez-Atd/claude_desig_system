@@ -7,6 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wdth,wght@0,75,300..700;0,100,300..700;1,75,300..700;1,100,300..700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="ds-components.css" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -1109,6 +1110,17 @@
 .ds-adv-dd__item-label { flex:1; font-family:var(--font-base); font-size:14px; color:#27365b; }
     .ds-adv-dd__badge { flex-shrink:0; width:16px; height:16px; border-radius:50%; border:1px solid #a0aab6; display:flex; align-items:center; justify-content:center; font-family:var(--font-base); font-size:8px; font-weight:700; color:#a0aab6; letter-spacing:-0.2px; }
     .ds-adv-dd__footer { display:flex; align-items:center; justify-content:flex-end; padding:10px 12px; border-top:1px solid #f0f4f8; }
+
+    /* === Multiple Selection Dropdown (.ds-multi-dd) === */
+    .ds-multi-dd__panel { width:580px; background:#ffffff; border-radius:12px; box-shadow:0 4px 20px rgba(27,48,96,0.10),0 1px 4px rgba(27,48,96,0.06); overflow:hidden; opacity:0; transform:translateY(-4px); transition:opacity 0.15s, transform 0.15s; }
+    .ds-multi-dd__panel--open { opacity:1; transform:translateY(0); }
+    .ds-multi-dd__columns { display:flex; align-items:stretch; }
+    .ds-multi-dd__col { flex:1; padding:16px 0 8px; min-width:0; }
+    .ds-multi-dd__col-title { font-family:var(--font-base); font-size:11px; font-weight:600; color:#485982; text-transform:uppercase; letter-spacing:0.5px; padding:0 16px 10px; }
+    .ds-multi-dd__sep { width:1px; background:#f0f4f8; flex-shrink:0; margin:12px 0; }
+    .ds-multi-dd__item { display:flex; align-items:center; gap:10px; padding:0 16px; height:36px; cursor:pointer; font-family:var(--font-base); font-size:14px; color:#27365b; user-select:none; transition:background 0.1s; }
+    .ds-multi-dd__item:hover { background:#f0f4f8; }
+    .ds-multi-dd__footer { display:flex; align-items:center; justify-content:flex-end; gap:8px; padding:10px 12px; border-top:1px solid #f0f4f8; }
 
     /* === Inline Bar Chart (.ibc) === */
     .ibc { display:flex; flex-direction:column; gap:16px; width:100%; }
@@ -3069,6 +3081,7 @@
         <a class="comp-sidebar-link" data-component="dropdown" style="cursor:pointer">Single Selection Dropdown</a>
         <a class="comp-sidebar-link" data-component="basic-dropdown" style="cursor:pointer">Action Trigger Dropdown</a>
         <a class="comp-sidebar-link" data-component="adv-dropdown" style="cursor:pointer">Filter Advanced Dropdown</a>
+        <a class="comp-sidebar-link" data-component="multi-dropdown" style="cursor:pointer">Multiple Selection Dropdown</a>
       </div>
       <div class="comp-sidebar-group" data-group="inputters" style="display:none">
         <a class="comp-sidebar-link" data-component="input-field" style="cursor:pointer">Input Field</a>
@@ -15701,6 +15714,284 @@ Prioritise authority reinforcement in declining citation segments</textarea>
 
 </section>
       </div><!-- /comp-panel-adv-dropdown -->
+
+      <div class="comp-panel" id="comp-panel-multi-dropdown" style="display:none">
+<section id="multi-dropdown" style="padding-top:24px">
+  <div class="section-header">
+    <h2>Multiple Selection Dropdown</h2>
+    <div class="divider"></div>
+  </div>
+  <p style="font-size:13px;color:var(--text-secondary-var);margin-bottom:24px">A multi-column filter panel combining checkboxes and radio groups in a single dropdown. Use when users need to set several independent filter dimensions in one interaction.</p>
+
+  <!-- 1. LIVE DEMO ─────────────────────────────────────────────── -->
+  <div style="margin-bottom:40px">
+    <div class="sub-label">Live Demo</div>
+    <div style="background:#ffffff;padding:40px 24px 220px;border-radius:12px;display:flex;gap:32px;flex-wrap:wrap;align-items:flex-start">
+      <div class="ds-dropdown" id="multi-dd-demo">
+        <button class="btn btn--outlined" id="multi-dd-demo-btn" onclick="multiDdToggle('multi-dd-demo')">
+          Filters
+          <svg class="ds-dropdown__trigger-chevron" width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 5l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="ds-multi-dd__panel" id="multi-dd-demo-panel" style="position:absolute;top:calc(100% + 2px);left:0;z-index:200;display:none">
+          <div class="ds-multi-dd__columns">
+
+            <!-- Col 1 — Checkboxes -->
+            <div class="ds-multi-dd__col">
+              <div class="ds-multi-dd__col-title">Campaign Type</div>
+              <label class="ds-multi-dd__item"><input type="checkbox" class="ds-checkbox-input" onchange="multiDdSyncReset('multi-dd-demo')"><span>Brand</span></label>
+              <label class="ds-multi-dd__item"><input type="checkbox" class="ds-checkbox-input" onchange="multiDdSyncReset('multi-dd-demo')"><span>Generic</span></label>
+              <label class="ds-multi-dd__item"><input type="checkbox" class="ds-checkbox-input" onchange="multiDdSyncReset('multi-dd-demo')"><span>Competitor</span></label>
+              <label class="ds-multi-dd__item"><input type="checkbox" class="ds-checkbox-input" onchange="multiDdSyncReset('multi-dd-demo')"><span>Long Tail</span></label>
+              <label class="ds-multi-dd__item"><input type="checkbox" class="ds-checkbox-input" onchange="multiDdSyncReset('multi-dd-demo')"><span>Retargeting</span></label>
+              <label class="ds-multi-dd__item"><input type="checkbox" class="ds-checkbox-input" onchange="multiDdSyncReset('multi-dd-demo')"><span>Performance Max</span></label>
+            </div>
+
+            <div class="ds-multi-dd__sep"></div>
+
+            <!-- Col 2 — Radio: Date Range -->
+            <div class="ds-multi-dd__col">
+              <div class="ds-multi-dd__col-title">Date Range</div>
+              <label class="ds-multi-dd__item" onclick="multiDdRadioSelect('multi-dd-demo','date',0)">
+                <div class="radio"><div class="radio__outer radio__outer--set"><div class="radio__inner"></div></div></div><span>Last 7 Days</span>
+              </label>
+              <label class="ds-multi-dd__item" onclick="multiDdRadioSelect('multi-dd-demo','date',1)">
+                <div class="radio"><div class="radio__outer radio__outer--default"></div></div><span>Last 30 Days</span>
+              </label>
+              <label class="ds-multi-dd__item" onclick="multiDdRadioSelect('multi-dd-demo','date',2)">
+                <div class="radio"><div class="radio__outer radio__outer--default"></div></div><span>Last 90 Days</span>
+              </label>
+              <label class="ds-multi-dd__item" onclick="multiDdRadioSelect('multi-dd-demo','date',3)">
+                <div class="radio"><div class="radio__outer radio__outer--default"></div></div><span>Custom Range…</span>
+              </label>
+            </div>
+
+            <div class="ds-multi-dd__sep"></div>
+
+            <!-- Col 3 — Radio: Device -->
+            <div class="ds-multi-dd__col">
+              <div class="ds-multi-dd__col-title">Device</div>
+              <label class="ds-multi-dd__item" onclick="multiDdRadioSelect('multi-dd-demo','device',0)">
+                <div class="radio"><div class="radio__outer radio__outer--set"><div class="radio__inner"></div></div></div><span>All Devices</span>
+              </label>
+              <label class="ds-multi-dd__item" onclick="multiDdRadioSelect('multi-dd-demo','device',1)">
+                <div class="radio"><div class="radio__outer radio__outer--default"></div></div><span>Desktop</span>
+              </label>
+              <label class="ds-multi-dd__item" onclick="multiDdRadioSelect('multi-dd-demo','device',2)">
+                <div class="radio"><div class="radio__outer radio__outer--default"></div></div><span>Mobile</span>
+              </label>
+              <label class="ds-multi-dd__item" onclick="multiDdRadioSelect('multi-dd-demo','device',3)">
+                <div class="radio"><div class="radio__outer radio__outer--default"></div></div><span>Tablet</span>
+              </label>
+            </div>
+
+          </div>
+          <div class="ds-multi-dd__footer">
+            <button class="btn btn--plain btn--sm ds-multi-dd__reset-btn" style="display:none" onclick="multiDdReset('multi-dd-demo')">Reset</button>
+            <button class="btn btn--primary btn--sm" onclick="multiDdApply('multi-dd-demo')">Apply</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. ANATOMY ──────────────────────────────────────────────── -->
+  <div style="margin-bottom:40px">
+    <div class="sub-label">Anatomy</div>
+    <div style="background:#ffffff;padding:24px;border-radius:12px;display:flex;gap:48px;flex-wrap:wrap;align-items:flex-start">
+      <div>
+        <button class="btn btn--outlined ds-dropdown__trigger--open" style="pointer-events:none">
+          Filters
+          <svg class="ds-dropdown__trigger-chevron" width="14" height="14" viewBox="0 0 14 14" fill="none" style="transform:rotate(180deg)"><path d="M3 5l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="ds-multi-dd__panel" style="position:static;opacity:1;transform:none;pointer-events:none;margin-top:2px">
+          <div class="ds-multi-dd__columns">
+            <div class="ds-multi-dd__col">
+              <div class="ds-multi-dd__col-title">Campaign Type</div>
+              <label class="ds-multi-dd__item"><input type="checkbox" class="ds-checkbox-input" checked><span>Brand</span></label>
+              <label class="ds-multi-dd__item"><input type="checkbox" class="ds-checkbox-input"><span>Generic</span></label>
+              <label class="ds-multi-dd__item"><input type="checkbox" class="ds-checkbox-input" checked><span>Competitor</span></label>
+              <label class="ds-multi-dd__item"><input type="checkbox" class="ds-checkbox-input"><span>Long Tail</span></label>
+              <label class="ds-multi-dd__item"><input type="checkbox" class="ds-checkbox-input"><span>Retargeting</span></label>
+              <label class="ds-multi-dd__item"><input type="checkbox" class="ds-checkbox-input"><span>Performance Max</span></label>
+            </div>
+            <div class="ds-multi-dd__sep"></div>
+            <div class="ds-multi-dd__col">
+              <div class="ds-multi-dd__col-title">Date Range</div>
+              <label class="ds-multi-dd__item">
+                <div class="radio"><div class="radio__outer radio__outer--default"></div></div><span>Last 7 Days</span>
+              </label>
+              <label class="ds-multi-dd__item">
+                <div class="radio"><div class="radio__outer radio__outer--set"><div class="radio__inner"></div></div></div><span>Last 30 Days</span>
+              </label>
+              <label class="ds-multi-dd__item">
+                <div class="radio"><div class="radio__outer radio__outer--default"></div></div><span>Last 90 Days</span>
+              </label>
+              <label class="ds-multi-dd__item">
+                <div class="radio"><div class="radio__outer radio__outer--default"></div></div><span>Custom Range…</span>
+              </label>
+            </div>
+            <div class="ds-multi-dd__sep"></div>
+            <div class="ds-multi-dd__col">
+              <div class="ds-multi-dd__col-title">Device</div>
+              <label class="ds-multi-dd__item">
+                <div class="radio"><div class="radio__outer radio__outer--set"><div class="radio__inner"></div></div></div><span>All Devices</span>
+              </label>
+              <label class="ds-multi-dd__item">
+                <div class="radio"><div class="radio__outer radio__outer--default"></div></div><span>Desktop</span>
+              </label>
+              <label class="ds-multi-dd__item">
+                <div class="radio"><div class="radio__outer radio__outer--default"></div></div><span>Mobile</span>
+              </label>
+              <label class="ds-multi-dd__item">
+                <div class="radio"><div class="radio__outer radio__outer--default"></div></div><span>Tablet</span>
+              </label>
+            </div>
+          </div>
+          <div class="ds-multi-dd__footer">
+            <button class="btn btn--plain btn--sm">Reset</button>
+            <button class="btn btn--primary btn--sm">Apply</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3. CSS CLASSES ──────────────────────────────────────────── -->
+  <div style="margin-bottom:40px">
+    <div class="sub-label">CSS Classes</div>
+    <div style="background:#ffffff;padding:24px;border-radius:12px;overflow-x:auto">
+      <table style="width:100%;border-collapse:collapse;font-family:var(--font-base);font-size:13px">
+        <thead><tr style="border-bottom:2px solid #f0f4f8"><th style="text-align:left;padding:8px 12px;color:#485982;font-weight:600">Class</th><th style="text-align:left;padding:8px 12px;color:#485982;font-weight:600">Description</th></tr></thead>
+        <tbody>
+          <tr style="border-bottom:1px solid #f0f4f8"><td style="padding:8px 12px"><code>.ds-multi-dd__panel</code></td><td style="padding:8px 12px;color:#6477a2">Floating panel — white, 580px, 12px radius, shadow</td></tr>
+          <tr style="border-bottom:1px solid #f0f4f8"><td style="padding:8px 12px"><code>.ds-multi-dd__panel--open</code></td><td style="padding:8px 12px;color:#6477a2">Visible state — opacity 1, no transform</td></tr>
+          <tr style="border-bottom:1px solid #f0f4f8"><td style="padding:8px 12px"><code>.ds-multi-dd__columns</code></td><td style="padding:8px 12px;color:#6477a2">Flex row — stretches column dividers full height</td></tr>
+          <tr style="border-bottom:1px solid #f0f4f8"><td style="padding:8px 12px"><code>.ds-multi-dd__col</code></td><td style="padding:8px 12px;color:#6477a2">Equal-width column — flex:1, 16px horizontal padding</td></tr>
+          <tr style="border-bottom:1px solid #f0f4f8"><td style="padding:8px 12px"><code>.ds-multi-dd__col-title</code></td><td style="padding:8px 12px;color:#6477a2">Column heading — 11px semibold uppercase #485982</td></tr>
+          <tr style="border-bottom:1px solid #f0f4f8"><td style="padding:8px 12px"><code>.ds-multi-dd__sep</code></td><td style="padding:8px 12px;color:#6477a2">1px vertical separator — #f0f4f8</td></tr>
+          <tr style="border-bottom:1px solid #f0f4f8"><td style="padding:8px 12px"><code>.ds-multi-dd__item</code></td><td style="padding:8px 12px;color:#6477a2">Row — 36px height, checkbox or radio + label text</td></tr>
+          <tr><td style="padding:8px 12px"><code>.ds-multi-dd__footer</code></td><td style="padding:8px 12px;color:#6477a2">Bottom row — Reset (conditional) + Apply, right-aligned</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <script>
+    function multiDdToggle(id) {
+      var panel = document.getElementById(id + '-panel');
+      var btn = document.getElementById(id + '-btn');
+      if (!panel) return;
+      var isOpen = panel.classList.contains('ds-multi-dd__panel--open');
+      document.querySelectorAll('.ds-multi-dd__panel--open').forEach(function(p) {
+        p.classList.remove('ds-multi-dd__panel--open');
+        setTimeout(function() { if (!p.classList.contains('ds-multi-dd__panel--open')) p.style.display = 'none'; }, 150);
+      });
+      document.querySelectorAll('.ds-dropdown__trigger--open').forEach(function(b) { b.classList.remove('ds-dropdown__trigger--open'); });
+      if (!isOpen) {
+        panel.style.display = 'block';
+        requestAnimationFrame(function() { requestAnimationFrame(function() { panel.classList.add('ds-multi-dd__panel--open'); }); });
+        if (btn) btn.classList.add('ds-dropdown__trigger--open');
+      }
+    }
+
+    function multiDdRadioSelect(id, group, idx) {
+      var panel = document.getElementById(id + '-panel');
+      if (!panel) return;
+      var cols = panel.querySelectorAll('.ds-multi-dd__col');
+      cols.forEach(function(col) {
+        var title = col.querySelector('.ds-multi-dd__col-title');
+        if (!title) return;
+        var items = col.querySelectorAll('.ds-multi-dd__item');
+        var firstHasRadio = items[0] && items[0].querySelector('.radio');
+        if (!firstHasRadio) return;
+        var titleText = title.textContent.toLowerCase().replace(/\s+/g,'');
+        var groupText = group.toLowerCase().replace(/\s+/g,'');
+        if (titleText.indexOf(groupText) === -1 && groupText.indexOf(titleText) === -1) return;
+        items.forEach(function(item, i) {
+          var outer = item.querySelector('.radio__outer');
+          if (!outer) return;
+          if (i === idx) {
+            outer.className = 'radio__outer radio__outer--set';
+            if (!outer.querySelector('.radio__inner')) {
+              var inner = document.createElement('div');
+              inner.className = 'radio__inner';
+              outer.appendChild(inner);
+            }
+          } else {
+            outer.className = 'radio__outer radio__outer--default';
+            var inner = outer.querySelector('.radio__inner');
+            if (inner) inner.remove();
+          }
+        });
+      });
+      multiDdSyncReset(id);
+    }
+
+    function multiDdSyncReset(id) {
+      var panel = document.getElementById(id + '-panel');
+      if (!panel) return;
+      var hasCheck = Array.from(panel.querySelectorAll('.ds-checkbox-input')).some(function(cb) { return cb.checked; });
+      var hasRadioNonDefault = false;
+      panel.querySelectorAll('.ds-multi-dd__col').forEach(function(col) {
+        var items = col.querySelectorAll('.ds-multi-dd__item');
+        var hasRadio = items[0] && items[0].querySelector('.radio');
+        if (!hasRadio) return;
+        var setIdx = Array.from(items).findIndex(function(item) { return item.querySelector('.radio__outer--set'); });
+        if (setIdx > 0) hasRadioNonDefault = true;
+      });
+      var resetBtn = panel.querySelector('.ds-multi-dd__reset-btn');
+      if (resetBtn) resetBtn.style.display = (hasCheck || hasRadioNonDefault) ? '' : 'none';
+    }
+
+    function multiDdReset(id) {
+      var panel = document.getElementById(id + '-panel');
+      if (!panel) return;
+      panel.querySelectorAll('.ds-checkbox-input').forEach(function(cb) { cb.checked = false; });
+      panel.querySelectorAll('.ds-multi-dd__col').forEach(function(col) {
+        var items = col.querySelectorAll('.ds-multi-dd__item');
+        var hasRadio = items[0] && items[0].querySelector('.radio');
+        if (!hasRadio) return;
+        items.forEach(function(item, i) {
+          var outer = item.querySelector('.radio__outer');
+          if (!outer) return;
+          if (i === 0) {
+            outer.className = 'radio__outer radio__outer--set';
+            if (!outer.querySelector('.radio__inner')) {
+              var inner = document.createElement('div'); inner.className = 'radio__inner'; outer.appendChild(inner);
+            }
+          } else {
+            outer.className = 'radio__outer radio__outer--default';
+            var inner = outer.querySelector('.radio__inner'); if (inner) inner.remove();
+          }
+        });
+      });
+      multiDdSyncReset(id);
+    }
+
+    function multiDdApply(id) {
+      var panel = document.getElementById(id + '-panel');
+      var btn = document.getElementById(id + '-btn');
+      if (panel) {
+        panel.classList.remove('ds-multi-dd__panel--open');
+        setTimeout(function() { if (!panel.classList.contains('ds-multi-dd__panel--open')) panel.style.display = 'none'; }, 150);
+      }
+      if (btn) btn.classList.remove('ds-dropdown__trigger--open');
+    }
+
+    document.addEventListener('click', function(e) {
+      if (e.target.closest('.ds-dropdown[id^="multi-dd"]') || e.target.closest('.ds-multi-dd__panel')) return;
+      document.querySelectorAll('.ds-multi-dd__panel--open').forEach(function(p) {
+        p.classList.remove('ds-multi-dd__panel--open');
+        setTimeout(function() { if (!p.classList.contains('ds-multi-dd__panel--open')) p.style.display = 'none'; }, 150);
+      });
+      document.querySelectorAll('[id^="multi-dd-"]').forEach(function(btn) {
+        if (btn.id.endsWith('-btn')) btn.classList.remove('ds-dropdown__trigger--open');
+      });
+    });
+  </script>
+
+</section>
+      </div><!-- /comp-panel-multi-dropdown -->
 
       <!-- ═══════════════════════════════════════════════════════════ -->
       <!-- INPUT FIELD                                                 -->
