@@ -178,6 +178,16 @@
 
     .kpi-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
 
+    /* Gauge */
+    .gauge { position:relative; width:248px; height:248px; flex-shrink:0; }
+    .gauge__svg { width:100%; height:100%; }
+    .gauge__label { position:absolute; inset:0; pointer-events:none; }
+    .gauge__icon { position:absolute; left:50%; bottom:calc(50% + 16px); transform:translateX(-50%); width:36px; height:36px; flex-shrink:0; }
+    .gauge__value-row { position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); display:flex; align-items:flex-end; line-height:1; }
+    .gauge__value { font-family:var(--font-base); font-size:50px; font-weight:300; color:#27365b; line-height:1; letter-spacing:-2px; }
+    .gauge__unit { font-family:var(--font-base); font-size:22px; font-weight:300; color:#27365b; line-height:1; padding-bottom:6px; padding-left:3px; }
+    .gauge__subtitle { position:absolute; left:50%; top:calc(50% + 22px); transform:translateX(-50%); font-family:var(--font-base); font-size:12px; font-weight:400; color:#6477a2; white-space:nowrap; line-height:14px; }
+
     /* Date picker */
     .dp-wrap { position: relative; display: inline-block; }
     .dp-panel {
@@ -608,31 +618,86 @@
       </div>
 
       <!-- Gauge + Timeline card -->
-      <div class="bg-white" style="background:#fff;border-radius:12px;padding:24px">
-        <div style="display:flex;align-items:center;gap:8px;margin-bottom:16px">
-          <div style="width:32px;height:32px;border-radius:50%;background:#93a1b6;display:flex;align-items:center;justify-content:center;flex-shrink:0">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="8" stroke="white" stroke-width="1.5"/><path d="M12 8v4l2.5 2.5" stroke="white" stroke-width="1.5" stroke-linecap="round"/></svg>
+      <div style="background:#fff;border-radius:12px;display:flex;flex-direction:column">
+        <div class="card-header">
+          <div class="card-header__title-section">
+            <div class="card-header__title-row">
+              <span class="card-header__title">AI Overview Frequency</span>
+            </div>
+            <span class="card-header__subtitle">Presence of AI Overview on search results relative to the total number of searches</span>
           </div>
-          <div style="display:flex;flex-direction:column;gap:2px;flex:1">
-            <span style="font-family:var(--font-base);font-size:16px;font-weight:600;color:rgba(0,0,0,0.87);line-height:1.2">AIO Coverage Over Time</span>
-            <span style="font-family:var(--font-base);font-size:13px;font-weight:400;color:#6b6b6b;line-height:1.2">Impression share vs. brand mentions — last 6 months</span>
+          <div class="card-header__actions">
+            <button class="card-header__action-btn" aria-label="Download CSV">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 2v8M5 7l3 3 3-3M3 12h10" stroke="#485982" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+            <button class="card-header__action-btn" aria-label="More information">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6" stroke="#485982" stroke-width="1.5"/><path d="M8 7v4M8 5.5v.5" stroke="#485982" stroke-width="1.5" stroke-linecap="round"/></svg>
+            </button>
           </div>
         </div>
-        <div class="chartset-donut-lines" id="lt-chartset">
-          <div>
-            <div class="donut-chart" id="lt-chartset-donut">
-              <svg class="donut-chart__svg" viewBox="0 0 248 248"></svg>
-              <div class="donut-chart__label">
-                <div class="donut-chart__value-row">
-                  <span class="donut-chart__value">68</span>
-                  <span class="donut-chart__unit">%</span>
+        <div style="height:1px;background:#f0f4f8;flex-shrink:0"></div>
+        <div style="padding:0;display:flex;flex-direction:column">
+          <div style="display:flex;gap:0;align-items:stretch;padding:24px">
+            <!-- Left: gauge -->
+            <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;padding-right:24px;flex-shrink:0">
+              <div class="gauge" id="lt-gauge" data-value="41">
+                <svg class="gauge__svg" viewBox="0 0 248 248" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="124" cy="124" r="115" fill="none" stroke="#fafafa" stroke-width="16"/>
+                  <circle cx="124" cy="124" r="94" fill="none" stroke="#dbd8ef" stroke-width="18"
+                          stroke-dasharray="442.9 147.7" transform="rotate(135,124,124)" stroke-linecap="round"/>
+                  <circle class="gauge__progress" cx="124" cy="124" r="94" fill="none" stroke="#b3a2e7" stroke-width="18"
+                          stroke-dasharray="0 590.6" transform="rotate(135,124,124)" stroke-linecap="round"/>
+                  <circle cx="124" cy="124" r="81" fill="#ffffff"/>
+                </svg>
+                <div class="gauge__label">
+                  <svg class="gauge__icon" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M22 5 L23.5 10.5 L29 12 L23.5 13.5 L22 19 L20.5 13.5 L15 12 L20.5 10.5 Z" fill="#b3a2e7"/>
+                    <path d="M11 15 L12 19 L16 20 L12 21 L11 25 L10 21 L6 20 L10 19 Z" fill="#b3a2e7"/>
+                    <path d="M26 23 L26.7 25.3 L29 26 L26.7 26.7 L26 29 L25.3 26.7 L23 26 L25.3 25.3 Z" fill="#b3a2e7"/>
+                  </svg>
+                  <div class="gauge__value-row">
+                    <span class="gauge__value">0</span>
+                    <span class="gauge__unit">%</span>
+                  </div>
+                  <span class="gauge__subtitle">AIO Avg. Frequency</span>
                 </div>
-                <span class="donut-chart__subtitle">AIO<br>Coverage</span>
               </div>
             </div>
-          </div>
-          <div class="chartset-timeline">
-            <svg class="chartset-timeline__svg" id="lt-chartset-svg"></svg>
+            <!-- Vertical divider -->
+            <div style="width:1px;background:#e8edf3;align-self:stretch;flex-shrink:0"></div>
+            <!-- Right: single timeline -->
+            <div style="flex:1;min-width:0;padding-left:24px;display:flex;flex-direction:column">
+              <div class="mclc" style="background:transparent;border-radius:0;padding-bottom:0;flex:1;display:flex;flex-direction:column">
+                <div class="mclc__body" style="padding:0;flex:1;display:flex;flex-direction:column">
+                  <div class="mclc__row" style="flex:1;height:auto;align-items:stretch">
+                    <div class="mclc__chart" style="height:100%;align-self:stretch">
+                      <div class="mclc__y-labels"><span>100</span><span>0</span></div>
+                      <div class="mclc__canvas-wrap">
+                        <div class="mclc__bands">
+                          <div class="mclc__band"></div><div class="mclc__band"></div>
+                          <div class="mclc__band"></div><div class="mclc__band"></div>
+                        </div>
+                        <svg class="mclc__svg" viewBox="0 0 100 100" preserveAspectRatio="none"
+                             data-color="#b3a2e7" data-ymin="0" data-ymax="100" data-start="2026-01-06"
+                             data-vals="0.28,0.31,0.29,0.33,0.30,0.35,0.32,0.36,0.34,0.38,0.35,0.40,0.37,0.41,0.38,0.42,0.39,0.40,0.41,0.38,0.40,0.39,0.41,0.40,0.42,0.41,0.43,0.42,0.41,0.41"></svg>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="mclc__x-axis">
+                    <div class="mclc__x-chart">
+                      <span class="mclc__x-y-spacer">100</span>
+                      <div class="mclc__x-labels">
+                        <span class="mclc__x-label">6 Jan</span>
+                        <span class="mclc__x-label">3 Feb</span>
+                        <span class="mclc__x-label">3 Mar</span>
+                        <span class="mclc__x-label">31 Mar</span>
+                        <span class="mclc__x-label">28 Apr</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -787,126 +852,119 @@
   </script>
 
   <script>
-  // Gauge + Timeline (chartset-donut-lines)
+  // Gauge + Timeline
   (function() {
-    function drawDonut(containerId, segments, total) {
-      var el = document.getElementById(containerId);
-      if (!el) return;
-      var svg = el.querySelector('svg');
-      if (!svg) return;
-      var cx = 124, cy = 124, r = 90, stroke = 28;
-      var circumference = 2 * Math.PI * r;
-      var offset = 0;
-      svg.innerHTML = '';
-      var bg = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
-      bg.setAttribute('cx', cx); bg.setAttribute('cy', cy); bg.setAttribute('r', r);
-      bg.setAttribute('fill', 'none'); bg.setAttribute('stroke', '#e8edf5');
-      bg.setAttribute('stroke-width', stroke);
-      svg.appendChild(bg);
-      segments.forEach(function(seg) {
-        var pct = seg.value / total;
-        var len = pct * circumference;
-        var circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
-        circle.setAttribute('cx', cx); circle.setAttribute('cy', cy); circle.setAttribute('r', r);
-        circle.setAttribute('fill', 'none');
-        circle.setAttribute('stroke', seg.color);
-        circle.setAttribute('stroke-width', stroke);
-        circle.setAttribute('stroke-dasharray', len + ' ' + (circumference - len));
-        circle.setAttribute('stroke-dashoffset', -offset * circumference / total + circumference * 0.25);
-        circle.setAttribute('stroke-linecap', 'round');
-        svg.appendChild(circle);
-        offset += seg.value;
+    // ── mclc ──────────────────────────────────────────────────────
+    function smoothPath(vals) {
+      var t = 0.35, n = vals.length;
+      var pts = vals.map(function(v,i){ return [i/(n-1)*100, (1-v)*100]; });
+      var d = 'M'+pts[0][0].toFixed(2)+','+pts[0][1].toFixed(2);
+      for (var i = 0; i < n-1; i++) {
+        var p0=pts[Math.max(0,i-1)], p1=pts[i], p2=pts[i+1], p3=pts[Math.min(n-1,i+2)];
+        d += ' C'+[
+          p1[0]+(p2[0]-p0[0])*t, p1[1]+(p2[1]-p0[1])*t,
+          p2[0]-(p3[0]-p1[0])*t, p2[1]-(p3[1]-p1[1])*t,
+          p2[0], p2[1]
+        ].map(function(x){ return x.toFixed(2); }).join(',');
+      }
+      return d;
+    }
+    function initMclcHover(svg) {
+      var wrap = svg.parentNode; if (!wrap) return;
+      var color  = svg.dataset.color  || '#6848c6';
+      var ymin   = parseFloat(svg.dataset.ymin || '0');
+      var ymax   = parseFloat(svg.dataset.ymax || '100');
+      var startStr = svg.dataset.start || '';
+      var nPts   = (svg.dataset.vals || '').split(',').length || 30;
+      var paths  = svg.querySelectorAll('path');
+      var line   = paths[paths.length - 1];
+      if (!line) return;
+      var MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+      function fmtDate(isoStr, offsetDays) {
+        if (!isoStr) return '';
+        var d = new Date(isoStr + 'T00:00:00');
+        d.setDate(d.getDate() + offsetDays);
+        return d.getDate() + ' ' + MONTHS[d.getMonth()] + ', ' + d.getFullYear();
+      }
+      var dot = document.createElement('div'); dot.className = 'mclc__hover-dot'; dot.style.background = color; wrap.appendChild(dot);
+      var tip = document.createElement('div'); tip.className = 'mclc__hover-tooltip'; wrap.appendChild(tip);
+      var totalLen = line.getTotalLength();
+      var vb = svg.viewBox.baseVal;
+      function positionAt(xFrac) {
+        var lo = 0, hi = totalLen;
+        for (var i = 0; i < 24; i++) { var mid=(lo+hi)/2; if(line.getPointAtLength(mid).x/vb.width<xFrac) lo=mid; else hi=mid; }
+        var pt = line.getPointAtLength((lo+hi)/2);
+        var svgR = svg.getBoundingClientRect(), wrapR = wrap.getBoundingClientRect();
+        var domX = (svgR.left-wrapR.left)+(pt.x/vb.width)*svgR.width;
+        var domY = (svgR.top-wrapR.top)+(pt.y/vb.height)*svgR.height;
+        dot.style.left=domX+'px'; dot.style.top=domY+'px';
+        tip.style.left=domX+'px'; tip.style.top=(domY-8)+'px';
+        var val = Math.round(ymin+(1-pt.y/vb.height)*(ymax-ymin)).toLocaleString();
+        var idx = Math.round(xFrac*(nPts-1));
+        var dateStr = fmtDate(startStr, idx);
+        tip.innerHTML = dateStr ? '<span style="display:block;font-weight:400;opacity:0.72;font-size:10px;line-height:1.3">'+dateStr+'</span>'+val : val;
+      }
+      wrap.addEventListener('mouseenter', function(){ dot.style.opacity='1'; tip.style.opacity='1'; });
+      wrap.addEventListener('mouseleave', function(){ dot.style.opacity='0'; tip.style.opacity='0'; });
+      wrap.addEventListener('mousemove', function(e){ var svgR=svg.getBoundingClientRect(); positionAt(Math.max(0.01,Math.min(0.99,(e.clientX-svgR.left)/svgR.width))); });
+    }
+    function mclcAnimateSvg(svg, delay) {
+      var defs = svg.querySelector('defs'); if (!defs) return;
+      var clipId = 'mclc-clip-' + Math.random().toString(36).slice(2,7);
+      var clipRect = document.createElementNS('http://www.w3.org/2000/svg','rect');
+      clipRect.setAttribute('x','-2'); clipRect.setAttribute('y','-20'); clipRect.setAttribute('width','0'); clipRect.setAttribute('height','140');
+      var clipPath = document.createElementNS('http://www.w3.org/2000/svg','clipPath');
+      clipPath.setAttribute('id',clipId); clipPath.appendChild(clipRect); defs.appendChild(clipPath);
+      svg.querySelectorAll('path').forEach(function(p){ p.setAttribute('clip-path','url(#'+clipId+')'); });
+      var duration = 900;
+      function ease(t){ return 1-Math.pow(1-t,3); }
+      setTimeout(function(){
+        var start=null;
+        function step(ts){ if(!start)start=ts; var t=Math.min((ts-start)/duration,1); clipRect.setAttribute('width',(ease(t)*105).toFixed(3)); if(t<1)requestAnimationFrame(step); }
+        requestAnimationFrame(step);
+      }, delay);
+    }
+    function mclcDrawAll(animate) {
+      document.querySelectorAll('.mclc__svg[data-vals]').forEach(function(svg, idx) {
+        if (svg.querySelector('path')) { if(animate) mclcAnimateSvg(svg, idx*120); return; }
+        var vals = svg.dataset.vals.split(',').map(Number);
+        var color = svg.dataset.color || '#6848c6';
+        var linePath = smoothPath(vals);
+        var areaPath = linePath + ' L100,100 L0,100 Z';
+        var gid = 'mg'+Math.random().toString(36).slice(2,8);
+        svg.innerHTML = '<defs><linearGradient id="'+gid+'" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="'+color+'" stop-opacity="0.22"/><stop offset="100%" stop-color="'+color+'" stop-opacity="0.02"/></linearGradient></defs>'
+          +'<path d="'+areaPath+'" fill="url(#'+gid+')" stroke="none"/>'
+          +'<path d="'+linePath+'" fill="none" stroke="'+color+'" stroke-width="2.5" stroke-linecap="round" vector-effect="non-scaling-stroke"/>';
+        initMclcHover(svg);
+        if (animate) mclcAnimateSvg(svg, idx*120);
       });
     }
-
-    function drawChartsetTimeline() {
-      var svg = document.getElementById('lt-chartset-svg');
-      if (!svg) return;
-      var container = svg.parentElement;
-      var W = container.clientWidth || 400;
-      var H = container.clientHeight || 236;
-      var PAD_L = 44, PAD_R = 12, PAD_T = 16, PAD_B = 28;
-      var chartW = W - PAD_L - PAD_R;
-      var chartH = H - PAD_T - PAD_B;
-      var data = [
-        { label: '1 Jan', values: [42, 28] },
-        { label: '1 Feb', values: [50, 30] },
-        { label: '1 Mar', values: [55, 32] },
-        { label: '1 Apr', values: [60, 35] },
-        { label: '1 May', values: [63, 38] },
-        { label: '1 Jun', values: [68, 41] }
-      ];
-      var colors = ['#4a9ef8', '#d47dd4'];
-      var allVals = data.reduce(function(a, d) { return a.concat(d.values); }, []);
-      var minV = Math.min.apply(null, allVals) - 5;
-      var maxV = Math.max.apply(null, allVals) + 5;
-      function px(i) { return PAD_L + (i / (data.length - 1)) * chartW; }
-      function py(v) { return PAD_T + (1 - (v - minV) / (maxV - minV)) * chartH; }
-      var ns = 'http://www.w3.org/2000/svg';
-      svg.setAttribute('width', W); svg.setAttribute('height', H);
-      svg.innerHTML = '';
-      [0.25, 0.5, 0.75, 1].forEach(function(f) {
-        var y = PAD_T + f * chartH;
-        var line = document.createElementNS(ns, 'line');
-        line.setAttribute('x1', PAD_L); line.setAttribute('x2', W - PAD_R);
-        line.setAttribute('y1', y); line.setAttribute('y2', y);
-        line.setAttribute('stroke', '#dce3ef'); line.setAttribute('stroke-width', '1');
-        svg.appendChild(line);
-      });
-      // Y-axis labels
-      [0.25, 0.5, 0.75, 1].forEach(function(f) {
-        var v = Math.round(maxV - f * (maxV - minV));
-        var y = PAD_T + f * chartH;
-        var t = document.createElementNS(ns, 'text');
-        t.setAttribute('x', PAD_L - 6); t.setAttribute('y', y + 4);
-        t.setAttribute('text-anchor', 'end');
-        t.setAttribute('font-family', 'Open Sans, sans-serif');
-        t.setAttribute('font-size', '11'); t.setAttribute('fill', '#858585');
-        t.textContent = v;
-        svg.appendChild(t);
-      });
-      colors.forEach(function(color, ci) {
-        var pts = data.map(function(d, i) { return px(i) + ',' + py(d.values[ci]); }).join(' ');
-        var poly = document.createElementNS(ns, 'polyline');
-        poly.setAttribute('points', pts); poly.setAttribute('fill', 'none');
-        poly.setAttribute('stroke', color); poly.setAttribute('stroke-width', '2.5');
-        svg.appendChild(poly);
-        data.forEach(function(d, i) {
-          var c = document.createElementNS(ns, 'circle');
-          c.setAttribute('cx', px(i)); c.setAttribute('cy', py(d.values[ci]));
-          c.setAttribute('r', '5'); c.setAttribute('fill', color);
-          c.setAttribute('stroke', 'white'); c.setAttribute('stroke-width', '2');
-          svg.appendChild(c);
-        });
-      });
-      [[0, 'start'], [data.length - 1, 'end']].forEach(function(pair) {
-        var t = document.createElementNS(ns, 'text');
-        t.setAttribute('x', px(pair[0]));
-        t.setAttribute('y', H - 4);
-        t.setAttribute('text-anchor', pair[1]);
-        t.setAttribute('font-family', 'Open Sans, sans-serif');
-        t.setAttribute('font-size', '11'); t.setAttribute('fill', '#858585');
-        t.textContent = data[pair[0]].label;
-        svg.appendChild(t);
-      });
+    // ── gauge ─────────────────────────────────────────────────────
+    var GAUGE_R = 94, GAUGE_C = 2*Math.PI*GAUGE_R, GAUGE_ARC = GAUGE_C*270/360;
+    function animateGauge(el, targetVal) {
+      var progress = el.querySelector('.gauge__progress');
+      var valueEl  = el.querySelector('.gauge__value');
+      if (!progress) return;
+      var startTime = null, duration = 1000;
+      function step(ts) {
+        if (!startTime) startTime = ts;
+        var t = Math.min((ts-startTime)/duration, 1);
+        var e = 1-Math.pow(1-t,3);
+        var len = GAUGE_ARC*(targetVal/100)*e;
+        progress.setAttribute('stroke-dasharray', len.toFixed(1)+' '+GAUGE_C.toFixed(1));
+        if (valueEl) valueEl.textContent = Math.round(targetVal*e);
+        if (t<1) requestAnimationFrame(step);
+      }
+      requestAnimationFrame(step);
     }
-
     function init() {
-      drawDonut('lt-chartset-donut', [
-        { value: 68, color: '#4a9ef8' },
-        { value: 20, color: '#b3a2e7' },
-        { value: 12, color: '#e0e5ef' }
-      ], 100);
-      drawChartsetTimeline();
-      var ro = new ResizeObserver(drawChartsetTimeline);
-      var svg = document.getElementById('lt-chartset-svg');
-      if (svg) ro.observe(svg.parentElement);
+      mclcDrawAll(true);
+      document.querySelectorAll('.gauge[data-value]').forEach(function(el){ animateGauge(el, parseFloat(el.dataset.value)||0); });
     }
-
-    if (document.readyState !== 'loading') { init(); }
-    else { document.addEventListener('DOMContentLoaded', init); }
+    if (document.readyState !== 'loading') { init(); } else { document.addEventListener('DOMContentLoaded', init); }
   })();
   </script>
+
 
   <script>
   // Sparkline hover interaction
