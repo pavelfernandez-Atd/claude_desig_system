@@ -408,7 +408,7 @@
       min-width: 0;
     }
     .kpi-card__info-icon {
-      width: 36px; height: 36px;
+      width: 20px; height: 20px;
       display: flex; align-items: center; justify-content: center;
       border-radius: var(--radius-md); border: none; background: transparent;
       flex-shrink: 0; cursor: pointer; user-select: none;
@@ -771,7 +771,7 @@
     /* ── SubTab component ──────────────────────────────────────── */
     .subtab {
       display: inline-flex; align-items: center; justify-content: center;
-      height: 24px; padding: 0 12px; border-radius: 200px;
+      padding: 4px 6px; border-radius: 200px;
       font-family: var(--font-base); font-size: 12px; font-weight: 600;
       color: #6477a2; cursor: pointer; gap: 4px; white-space: nowrap;
       user-select: none; transition: background 0.15s, color 0.15s, border-color 0.15s;
@@ -780,8 +780,6 @@
     .subtab:hover { background: #eaeff5; }
     .subtab--active { background: #7387a9; color: #ffffff; }
     .subtab--active:hover { background: #7387a9; }
-    .subtab--highlighted { background: #ffffff; border-color: #6477a2; }
-    .subtab--highlighted:hover { background: #f5f7fb; }
     .subtab__icon {
       width: 16px; height: 16px; flex-shrink: 0;
       display: flex; align-items: center; justify-content: center;
@@ -962,9 +960,9 @@
     .btn--plain:hover { background: #EAF1F7; }
     .btn--plain:active { background: #5BB3F9; color: #ffffff; }
 
-    .btn--outlined { background: #ffffff; border-color: #dbe9f6; color: #3079bd; }
-    .btn--outlined:hover { background: #e8f2fc; }
-    .btn--outlined:active { background: #d6e8ff; }
+    .btn--outlined { background: #ffffff; border: 1.5px solid #c4cdd5; color: #27365b; }
+    .btn--outlined:hover { background: #f9fafb; border-color: #8fa0b8; }
+    .btn--outlined:active { background: #f0f4f8; border-color: #6477a2; }
 
     .btn--red { background: #ea5160; color: #ffffff; }
     .btn--red:hover { background: #d94050; }
@@ -1047,7 +1045,70 @@
     .mclc__x-chart { display:flex; gap:8px; flex:1 0 0; min-width:0; }
     .mclc__x-y-spacer { font-family:'Open Sans',sans-serif; font-stretch:75%; font-size:13px; visibility:hidden; white-space:nowrap; flex-shrink:0; }
     .mclc__x-labels { flex:1; display:flex; justify-content:space-between; }
-    .mclc__x-label { font-family:var(--font-base); font-size:11px; color:#858585; white-space:nowrap; }
+    .mclc__x-label { font-family:'Open Sans',sans-serif; font-stretch:75%; font-size:11px; color:#858585; white-space:nowrap; }
+    /* === Input Field (.ds-input) === */
+    .ds-input { display:flex; flex-direction:column; gap:4px; font-family:var(--font-base); }
+    .ds-input__label { font-size:12px; font-weight:600; color:#485982; line-height:1.4; }
+    .ds-input__wrap { position:relative; display:flex; align-items:center; height:40px; border:1px solid #c4cdd5; border-radius:6px; background:#ffffff; transition:border-color 0.15s, box-shadow 0.15s; overflow:hidden; }
+    .ds-input__wrap:focus-within { border-color:#1565c0; box-shadow:0 0 0 3px rgba(21,101,192,0.12); }
+    .ds-input__input { flex:1; height:100%; border:none; outline:none; background:transparent; font-family:var(--font-base); font-size:14px; font-weight:400; color:#27365b; padding:0 12px; }
+    .ds-input__input::placeholder { color:#8fa0b8; }
+    .ds-input__prefix { display:flex; align-items:center; justify-content:center; padding-left:10px; color:#6477a2; flex-shrink:0; }
+    .ds-input__prefix + .ds-input__input { padding-left:6px; }
+    .ds-input__suffix { display:flex; align-items:center; justify-content:center; padding-right:10px; color:#6477a2; flex-shrink:0; cursor:pointer; }
+    .ds-input__action { display:flex; align-items:center; justify-content:center; width:32px; height:32px; border-radius:4px; border:none; background:transparent; cursor:pointer; color:#6477a2; flex-shrink:0; margin-right:4px; transition:background 0.12s; }
+    .ds-input__action:hover { background:#eaf1f7; color:#27365b; }
+    .ds-input__helper { font-size:12px; font-weight:400; color:#6477a2; line-height:1.4; }
+    .ds-input__error-msg { font-size:12px; font-weight:400; color:#de5a5a; line-height:1.4; }
+    /* State modifiers applied to .ds-input__wrap */
+    .ds-input__wrap--focused { border-color:#1565c0; box-shadow:0 0 0 3px rgba(21,101,192,0.12); }
+    .ds-input__wrap--filled { border-color:#a0aec0; }
+    .ds-input__wrap--error { border-color:#de5a5a; box-shadow:0 0 0 3px rgba(222,90,90,0.1); }
+    .ds-input__wrap--error:focus-within { border-color:#de5a5a; box-shadow:0 0 0 3px rgba(222,90,90,0.15); }
+    .ds-input__wrap--disabled { background:#f5f7fa; border-color:#dde1e9; cursor:not-allowed; }
+    .ds-input__wrap--disabled .ds-input__input { color:#a0aab6; cursor:not-allowed; }
+    .ds-input__wrap--readonly { background:#f9fafb; border-color:#dde1e9; }
+    .ds-input__wrap--readonly .ds-input__input { color:#485982; cursor:default; }
+
+    /* === Dropdown (.ds-dropdown) === */
+    .ds-dropdown { position:relative; display:inline-flex; }
+    .ds-dropdown__trigger { display:inline-flex; align-items:center; gap:6px; height:36px; padding:0 12px; border:1.5px solid #c4cdd5; border-radius:6px; background:#ffffff; font-family:var(--font-base); font-size:13px; font-weight:400; color:#27365b; cursor:pointer; transition:border-color 0.15s, background 0.15s; white-space:nowrap; user-select:none; }
+    .ds-dropdown__trigger:hover { border-color:#8fa0b8; background:#f9fafb; }
+    .ds-dropdown__trigger--open { border-color:#1565c0; color:#1565c0; background:#f0f5ff; }
+    .ds-dropdown__trigger-chevron { flex-shrink:0; transition:transform 0.18s; color:inherit; }
+    .ds-dropdown__trigger--open .ds-dropdown__trigger-chevron { transform:rotate(180deg); }
+    .ds-dropdown__menu { position:absolute; top:calc(100% + 2px); left:0; width:max-content; background:#ffffff; border-radius:12px; box-shadow:0 4px 20px rgba(27,48,96,0.10), 0 1px 4px rgba(27,48,96,0.06); padding:6px 0; z-index:200; opacity:0; pointer-events:none; transform:translateY(-4px); transition:opacity 0.15s, transform 0.15s; }
+    .ds-dropdown__menu--open { opacity:1; pointer-events:auto; transform:translateY(0); }
+    .ds-dropdown__item { display:flex; align-items:center; gap:8px; height:36px; padding:0 12px; font-family:var(--font-base); font-size:13px; font-weight:400; color:#27365b; cursor:pointer; transition:background 0.1s; white-space:nowrap; user-select:none; }
+    .ds-dropdown__item:hover { background:#f0f4f8; }
+    .ds-dropdown__item--selected { color:#1565c0; font-weight:600; }
+    .ds-dropdown__item--selected::after { content:''; display:block; width:6px; height:6px; border-radius:50%; background:#1565c0; margin-left:auto; flex-shrink:0; }
+    .ds-dropdown__item--disabled { color:#a0aab6; cursor:default; pointer-events:none; }
+    .ds-dropdown__divider { height:1px; background:#f0f4f8; margin:4px 0; }
+    .ds-dropdown__group-label { display:block; padding:8px 12px 4px; font-family:var(--font-base); font-size:11px; font-weight:600; color:#6477a2; text-transform:uppercase; letter-spacing:0.5px; }
+    .ds-dropdown__trigger--placeholder { color:#8fa0b8; }
+    .ds-dropdown__trigger--placeholder:hover { color:#6477a2; }
+    .ds-dropdown__placeholder-text { pointer-events:none; }
+
+    /* === Filter Advanced Dropdown (.ds-adv-dd) === */
+    .ds-adv-dd { position:relative; display:inline-block; }
+    .ds-adv-dd__panel { width:320px; background:#ffffff; border-radius:12px; box-shadow:0 4px 20px rgba(27,48,96,0.10),0 1px 4px rgba(27,48,96,0.06); overflow:hidden; }
+    .ds-adv-dd__search { display:flex; align-items:center; gap:8px; margin:12px; padding:8px 12px; border:1.5px solid #c4cdd5; border-radius:8px; transition:border-color 0.15s; }
+    .ds-adv-dd__search:focus-within { border-color:#1565c0; }
+    .ds-adv-dd__search-icon { color:#a0aab6; flex-shrink:0; }
+    .ds-adv-dd__search-input { flex:1; border:none; outline:none; background:transparent; font-family:var(--font-base); font-size:14px; color:#27365b; }
+    .ds-adv-dd__search-input::placeholder { color:#a0aab6; }
+    .ds-adv-dd__toolbar { display:flex; align-items:center; justify-content:space-between; padding:6px 12px 10px; }
+    .ds-adv-dd__list { max-height:264px; overflow-y:auto; border-top:1px solid #f0f4f8; margin-right:4px; }
+    .ds-adv-dd__list::-webkit-scrollbar { width:4px; }
+    .ds-adv-dd__list::-webkit-scrollbar-track { margin-top:4px; margin-bottom:4px; }
+    .ds-adv-dd__list::-webkit-scrollbar-thumb { background:#d3dbe6; border-radius:4px; }
+    .ds-adv-dd__item { display:flex !important; width:100%; box-sizing:border-box; align-items:center; gap:10px; padding:0 16px; height:44px; cursor:pointer; transition:background 0.1s; user-select:none; }
+    .ds-adv-dd__item:hover { background:#f0f4f8; }
+.ds-adv-dd__item-label { flex:1; font-family:var(--font-base); font-size:14px; color:#27365b; }
+    .ds-adv-dd__badge { flex-shrink:0; width:16px; height:16px; border-radius:50%; border:1px solid #a0aab6; display:flex; align-items:center; justify-content:center; font-family:var(--font-base); font-size:8px; font-weight:700; color:#a0aab6; letter-spacing:-0.2px; }
+    .ds-adv-dd__footer { display:flex; align-items:center; justify-content:flex-end; padding:10px 12px; border-top:1px solid #f0f4f8; }
+
     /* === Inline Bar Chart (.ibc) === */
     .ibc { display:flex; flex-direction:column; gap:16px; width:100%; }
     .ibc__rows { display:flex; flex-direction:column; gap:12px; }
@@ -1837,7 +1898,7 @@
     .mnv2__item-group { background: transparent; border-radius: 8px; display: flex; flex-direction: column; transition: background 0.25s cubic-bezier(0.4,0,0.2,1); }
     .mnv2__item-group--open { background: #eaf1f7; }
     .mnv2__item-group .mnv2__item { width: 100%; }
-    .mnv2__item-group .mnv2__item:hover { background: #eaf1f7; border-radius: 8px; }
+    .mnv2__item-group .mnv2__item:hover { background: rgba(0,0,0,0.04); }
     .mnv2__item-group--open .mnv2__item-arrow { transform: rotate(180deg); }
     .mnv2__subitems { display: flex; flex-direction: column; overflow: hidden; max-height: 0; padding: 0; transition: max-height 0.25s cubic-bezier(0.4,0,0.2,1), padding 0.25s cubic-bezier(0.4,0,0.2,1); }
     .mnv2__item-group--open .mnv2__subitems { max-height: 400px; padding: 4px 0 8px; }
@@ -3001,11 +3062,15 @@
         <a class="comp-sidebar-link" data-component="main-nav" style="cursor:pointer">Main Nav</a>
         <a class="comp-sidebar-link" data-component="service-bar" style="cursor:pointer">Service Bar</a>
         <a class="comp-sidebar-link" data-component="date-picker" style="cursor:pointer">Date Picker</a>
-        <a class="comp-sidebar-link" data-component="sub-tab" style="cursor:pointer">Sub Tab</a>
         <a class="comp-sidebar-link" data-component="tab-item" style="cursor:pointer">Tab Item</a>
+        <a class="comp-sidebar-link" data-component="sub-tab" style="cursor:pointer">Sub Tab</a>
         <a class="comp-sidebar-link" data-component="button" style="cursor:pointer">Button</a>
+        <a class="comp-sidebar-link" data-component="dropdown" style="cursor:pointer">Dropdown</a>
+        <a class="comp-sidebar-link" data-component="basic-dropdown" style="cursor:pointer">Basic Dropdown</a>
+        <a class="comp-sidebar-link" data-component="adv-dropdown" style="cursor:pointer">Filter Advanced Dropdown</a>
       </div>
       <div class="comp-sidebar-group" data-group="inputters" style="display:none">
+        <a class="comp-sidebar-link" data-component="input-field" style="cursor:pointer">Input Field</a>
         <a class="comp-sidebar-link" data-component="checkbox" style="cursor:pointer">Checkbox</a>
         <a class="comp-sidebar-link" data-component="radio-button" style="cursor:pointer">Radio Button</a>
         <a class="comp-sidebar-link" data-component="toggle" style="cursor:pointer">Toggle</a>
@@ -3029,7 +3094,7 @@
       <div class="comp-panel" id="comp-panel-app-bar">
         <section id="app-bar">
   <div class="section-header">
-    <h2>App Bar</h2>
+    <h2>App Bar <span style="font-size:14px;font-weight:400;color:#9baabb">(Deprecated)</span></h2>
     <div class="divider"></div>
 
   <!-- GitHub + Demo links -->
@@ -3352,10 +3417,6 @@
         <span class="subtab-row-label">Active</span>
         <div class="subtab subtab--active">SubTab</div>
       </div>
-      <div class="subtab-row">
-        <span class="subtab-row-label">Highlighted</span>
-        <div class="subtab subtab--highlighted">SubTab</div>
-      </div>
     </div>
 
     <div class="sub-label">States · With icon</div>
@@ -3378,13 +3439,6 @@
         <span class="subtab-row-label">Active</span>
         <div class="subtab subtab--active">
           <span class="subtab__icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6.5" stroke="#ffffff" stroke-width="1.25"/><path d="M5.5 8a2.5 2.5 0 015 0" stroke="#ffffff" stroke-width="1.25" stroke-linecap="round"/><circle cx="6" cy="6" r="1" fill="#ffffff"/><circle cx="10" cy="6" r="1" fill="#ffffff"/></svg></span>
-          SubTab
-        </div>
-      </div>
-      <div class="subtab-row">
-        <span class="subtab-row-label">Highlighted</span>
-        <div class="subtab subtab--highlighted">
-          <span class="subtab__icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6.5" stroke="#6477a2" stroke-width="1.25"/><path d="M5.5 8a2.5 2.5 0 015 0" stroke="#6477a2" stroke-width="1.25" stroke-linecap="round"/><circle cx="6" cy="6" r="1" fill="#6477a2"/><circle cx="10" cy="6" r="1" fill="#6477a2"/></svg></span>
           SubTab
         </div>
       </div>
@@ -3434,8 +3488,8 @@
         <tbody>
           <tr><td>neutral/25</td><td>#eaeff5</td><td>Hover background · Badge background</td></tr>
           <tr><td>neutral/300</td><td>#7387a9</td><td>Active background</td></tr>
-          <tr><td>neutral/400</td><td>#6477a2</td><td>Default text · Badge text · Highlighted border</td></tr>
-          <tr><td>white</td><td>#ffffff</td><td>Active text · Highlighted background</td></tr>
+          <tr><td>neutral/400</td><td>#6477a2</td><td>Default text · Badge text</td></tr>
+          <tr><td>white</td><td>#ffffff</td><td>Active text</td></tr>
           <tr><td>borderRadius.full</td><td>200px</td><td>Pill shape</td></tr>
           <tr><td>—</td><td>24px</td><td>Fixed height</td></tr>
           <tr><td>—</td><td>12px · SemiBold</td><td>Label typography</td></tr>
@@ -3454,8 +3508,7 @@
         <tbody>
           <tr><td>label</td><td>string</td><td>"SubTab"</td><td>Tab label text</td></tr>
           <tr><td>active</td><td>boolean</td><td>false</td><td>Selected state — dark fill, white text</td></tr>
-          <tr><td>highlighted</td><td>boolean</td><td>false</td><td>Outlined state — white bg with border (mutually exclusive with active)</td></tr>
-          <tr><td>icon</td><td>ReactNode</td><td>—</td><td>Optional 16×16 icon prepended to the label</td></tr>
+<tr><td>icon</td><td>ReactNode</td><td>—</td><td>Optional 16×16 icon prepended to the label</td></tr>
           <tr><td>count</td><td>number</td><td>—</td><td>Optional badge number shown after the label</td></tr>
           <tr><td>onClick</td><td>() =&gt; void</td><td>—</td><td>Click handler</td></tr>
           <tr><td>className</td><td>string</td><td>—</td><td>Extra class for layout overrides</td></tr>
@@ -3470,7 +3523,6 @@
     <div class="subtab-demo-wrap">
       <div class="subtab-demo-controls">
         <label><input type="checkbox" id="demo-active"> Active</label>
-        <label><input type="checkbox" id="demo-highlighted"> Highlighted</label>
         <label><input type="checkbox" id="demo-icon"> Icon</label>
         <label><input type="checkbox" id="demo-numbered"> Badge</label>
       </div>
@@ -4405,18 +4457,80 @@
       <!-- Row 3: Filter bar -->
       <div class="service-bar__filters">
         <div class="service-bar__filter-row">
-          <button class="btn btn--plain btn--sm">
-            All Devices
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="#334557" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </button>
-          <button class="btn btn--plain btn--sm">
-            Search Term Groups
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="#334557" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </button>
-          <button class="btn btn--plain btn--sm">
-            Search Terms
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="#334557" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </button>
+          <div class="ds-dropdown" id="sb-devices">
+            <button class="btn btn--plain btn--sm" id="sb-devices-btn" onclick="dsDropdownToggle('sb-devices')">
+              All Devices
+              <svg class="ds-dropdown__trigger-chevron" width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 5l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+            <div class="ds-dropdown__menu" id="sb-devices-menu">
+              <div class="ds-dropdown__item ds-dropdown__item--selected" onclick="dsDropdownSelect(this,'sb-devices','All Devices')">All Devices</div>
+              <div class="ds-dropdown__divider"></div>
+              <div class="ds-dropdown__item" onclick="dsDropdownSelect(this,'sb-devices','Desktop')">Desktop</div>
+              <div class="ds-dropdown__item" onclick="dsDropdownSelect(this,'sb-devices','Mobile')">Mobile</div>
+            </div>
+          </div>
+          <!-- Search Term Groups filter -->
+          <div class="ds-adv-dd" id="sb-stg">
+            <button class="btn btn--plain btn--sm" id="sb-stg-btn" onclick="advDdToggle('sb-stg')">
+              Search Term Groups
+              <svg class="ds-dropdown__trigger-chevron" width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 5l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+            <div class="ds-adv-dd__panel" id="sb-stg-panel" style="position:absolute;top:calc(100% + 2px);left:0;z-index:200;display:none">
+              <div class="ds-adv-dd__search">
+                <svg class="ds-adv-dd__search-icon" width="15" height="15" viewBox="0 0 15 15" fill="none"><circle cx="6.5" cy="6.5" r="5" stroke="currentColor" stroke-width="1.4"/><path d="M10.5 10.5l3 3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+                <input class="ds-adv-dd__search-input" placeholder="Search..." id="sb-stg-search" oninput="advDdFilter('sb-stg')">
+              </div>
+              <div class="ds-adv-dd__toolbar">
+                <div style="display:flex;align-items:center;background:#fafafa;border-radius:40px;padding:3px;gap:2px">
+                  <button class="subtab subtab--active" onclick="advDdToggleMode(this)">Include</button>
+                  <button class="subtab" onclick="advDdToggleMode(this)">Exclude</button>
+                </div>
+                <button class="btn btn--plain btn--sm" onclick="advDdSelectAll('sb-stg',this)">Select All</button>
+              </div>
+              <div class="ds-adv-dd__list" id="sb-stg-list">
+                <label class="ds-adv-dd__item ds-checkbox-label"><input type="checkbox" class="ds-checkbox-input"><span class="ds-adv-dd__item-label">Brand</span></label>
+                <label class="ds-adv-dd__item ds-checkbox-label"><input type="checkbox" class="ds-checkbox-input"><span class="ds-adv-dd__item-label">Generic</span><span class="ds-adv-dd__badge">1H</span></label>
+                <label class="ds-adv-dd__item ds-checkbox-label"><input type="checkbox" class="ds-checkbox-input"><span class="ds-adv-dd__item-label">Competitor</span><span class="ds-adv-dd__badge">1H</span></label>
+                <label class="ds-adv-dd__item ds-checkbox-label"><input type="checkbox" class="ds-checkbox-input"><span class="ds-adv-dd__item-label">Long Tail</span></label>
+                <label class="ds-adv-dd__item ds-checkbox-label"><input type="checkbox" class="ds-checkbox-input"><span class="ds-adv-dd__item-label">Retargeting</span></label>
+              </div>
+              <div class="ds-adv-dd__footer">
+                <button class="btn btn--primary btn--sm" onclick="advDdApply('sb-stg')">Apply</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Search Terms filter -->
+          <div class="ds-adv-dd" id="sb-st">
+            <button class="btn btn--plain btn--sm" id="sb-st-btn" onclick="advDdToggle('sb-st')">
+              Search Terms
+              <svg class="ds-dropdown__trigger-chevron" width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 5l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+            <div class="ds-adv-dd__panel" id="sb-st-panel" style="position:absolute;top:calc(100% + 2px);left:0;z-index:200;display:none">
+              <div class="ds-adv-dd__search">
+                <svg class="ds-adv-dd__search-icon" width="15" height="15" viewBox="0 0 15 15" fill="none"><circle cx="6.5" cy="6.5" r="5" stroke="currentColor" stroke-width="1.4"/><path d="M10.5 10.5l3 3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+                <input class="ds-adv-dd__search-input" placeholder="Search..." id="sb-st-search" oninput="advDdFilter('sb-st')">
+              </div>
+              <div class="ds-adv-dd__toolbar">
+                <div style="display:flex;align-items:center;background:#fafafa;border-radius:40px;padding:3px;gap:2px">
+                  <button class="subtab subtab--active" onclick="advDdToggleMode(this)">Include</button>
+                  <button class="subtab" onclick="advDdToggleMode(this)">Exclude</button>
+                </div>
+                <button class="btn btn--plain btn--sm" onclick="advDdSelectAll('sb-st',this)">Select All</button>
+              </div>
+              <div class="ds-adv-dd__list" id="sb-st-list">
+                <label class="ds-adv-dd__item ds-checkbox-label"><input type="checkbox" class="ds-checkbox-input"><span class="ds-adv-dd__item-label">car insurance quote</span><span class="ds-adv-dd__badge">1H</span></label>
+                <label class="ds-adv-dd__item ds-checkbox-label"><input type="checkbox" class="ds-checkbox-input"><span class="ds-adv-dd__item-label">cheap car insurance</span></label>
+                <label class="ds-adv-dd__item ds-checkbox-label"><input type="checkbox" class="ds-checkbox-input"><span class="ds-adv-dd__item-label">compare car insurance</span><span class="ds-adv-dd__badge">1H</span></label>
+                <label class="ds-adv-dd__item ds-checkbox-label"><input type="checkbox" class="ds-checkbox-input"><span class="ds-adv-dd__item-label">best car insurance uk</span></label>
+                <label class="ds-adv-dd__item ds-checkbox-label"><input type="checkbox" class="ds-checkbox-input"><span class="ds-adv-dd__item-label">third party insurance</span></label>
+                <label class="ds-adv-dd__item ds-checkbox-label"><input type="checkbox" class="ds-checkbox-input"><span class="ds-adv-dd__item-label">fully comprehensive</span><span class="ds-adv-dd__badge">1H</span></label>
+              </div>
+              <div class="ds-adv-dd__footer">
+                <button class="btn btn--primary btn--sm" onclick="advDdApply('sb-st')">Apply</button>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -4486,23 +4600,83 @@
     <div class="sub-label">Row 3 · Filter bar</div>
     <div class="service-bar__filters">
       <div class="service-bar__filter-row">
-        <button class="btn btn--plain btn--sm">
-          Industry
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="#334557" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </button>
-        <button class="btn btn--plain btn--sm">
-          Country
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="#334557" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </button>
-        <button class="btn btn--plain btn--sm">
-          Date Range
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="#334557" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </button>
-        <div class="service-bar__filter-spacer"></div>
-        <button class="btn btn--plain btn--sm">
-          Saved Filters
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="#334557" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </button>
+
+        <!-- All Devices — plain dropdown -->
+        <div class="ds-dropdown" id="anat-devices">
+          <button class="btn btn--plain btn--sm" id="anat-devices-btn" onclick="dsDropdownToggle('anat-devices')">
+            All Devices
+            <svg class="ds-dropdown__trigger-chevron" width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 5l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <div class="ds-dropdown__menu" id="anat-devices-menu">
+            <div class="ds-dropdown__item ds-dropdown__item--selected" onclick="dsDropdownSelect(this,'anat-devices','All Devices')">All Devices</div>
+            <div class="ds-dropdown__divider"></div>
+            <div class="ds-dropdown__item" onclick="dsDropdownSelect(this,'anat-devices','Desktop')">Desktop</div>
+            <div class="ds-dropdown__item" onclick="dsDropdownSelect(this,'anat-devices','Mobile')">Mobile</div>
+          </div>
+        </div>
+
+        <!-- Search Term Groups — Filter Advanced Dropdown -->
+        <div class="ds-adv-dd" id="anat-stg">
+          <button class="btn btn--plain btn--sm" id="anat-stg-btn" onclick="advDdToggle('anat-stg')">
+            Search Term Groups
+            <svg class="ds-dropdown__trigger-chevron" width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 5l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <div class="ds-adv-dd__panel" id="anat-stg-panel" style="position:absolute;top:calc(100% + 2px);left:0;z-index:200;display:none">
+            <div class="ds-adv-dd__search">
+              <svg class="ds-adv-dd__search-icon" width="15" height="15" viewBox="0 0 15 15" fill="none"><circle cx="6.5" cy="6.5" r="5" stroke="currentColor" stroke-width="1.4"/><path d="M10.5 10.5l3 3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+              <input class="ds-adv-dd__search-input" placeholder="Search..." id="anat-stg-search" oninput="advDdFilter('anat-stg')">
+            </div>
+            <div class="ds-adv-dd__toolbar">
+              <div style="display:flex;align-items:center;background:#fafafa;border-radius:40px;padding:3px;gap:2px">
+                <button class="subtab subtab--active" onclick="advDdToggleMode(this)">Include</button>
+                <button class="subtab" onclick="advDdToggleMode(this)">Exclude</button>
+              </div>
+              <button class="btn btn--plain btn--sm" onclick="advDdSelectAll('anat-stg',this)">Select All</button>
+            </div>
+            <div class="ds-adv-dd__list" id="anat-stg-list">
+              <label class="ds-adv-dd__item ds-checkbox-label"><input type="checkbox" class="ds-checkbox-input"><span class="ds-adv-dd__item-label">Brand</span></label>
+              <label class="ds-adv-dd__item ds-checkbox-label"><input type="checkbox" class="ds-checkbox-input"><span class="ds-adv-dd__item-label">Generic</span><span class="ds-adv-dd__badge">1H</span></label>
+              <label class="ds-adv-dd__item ds-checkbox-label"><input type="checkbox" class="ds-checkbox-input"><span class="ds-adv-dd__item-label">Competitor</span><span class="ds-adv-dd__badge">1H</span></label>
+              <label class="ds-adv-dd__item ds-checkbox-label"><input type="checkbox" class="ds-checkbox-input"><span class="ds-adv-dd__item-label">Long Tail</span></label>
+              <label class="ds-adv-dd__item ds-checkbox-label"><input type="checkbox" class="ds-checkbox-input"><span class="ds-adv-dd__item-label">Retargeting</span></label>
+            </div>
+            <div class="ds-adv-dd__footer">
+              <button class="btn btn--primary btn--sm" onclick="advDdApply('anat-stg')">Apply</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Search Terms — Filter Advanced Dropdown -->
+        <div class="ds-adv-dd" id="anat-st">
+          <button class="btn btn--plain btn--sm" id="anat-st-btn" onclick="advDdToggle('anat-st')">
+            Search Terms
+            <svg class="ds-dropdown__trigger-chevron" width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 5l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <div class="ds-adv-dd__panel" id="anat-st-panel" style="position:absolute;top:calc(100% + 2px);left:0;z-index:200;display:none">
+            <div class="ds-adv-dd__search">
+              <svg class="ds-adv-dd__search-icon" width="15" height="15" viewBox="0 0 15 15" fill="none"><circle cx="6.5" cy="6.5" r="5" stroke="currentColor" stroke-width="1.4"/><path d="M10.5 10.5l3 3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+              <input class="ds-adv-dd__search-input" placeholder="Search..." id="anat-st-search" oninput="advDdFilter('anat-st')">
+            </div>
+            <div class="ds-adv-dd__toolbar">
+              <div style="display:flex;align-items:center;background:#fafafa;border-radius:40px;padding:3px;gap:2px">
+                <button class="subtab subtab--active" onclick="advDdToggleMode(this)">Include</button>
+                <button class="subtab" onclick="advDdToggleMode(this)">Exclude</button>
+              </div>
+              <button class="btn btn--plain btn--sm" onclick="advDdSelectAll('anat-st',this)">Select All</button>
+            </div>
+            <div class="ds-adv-dd__list" id="anat-st-list">
+              <label class="ds-adv-dd__item ds-checkbox-label"><input type="checkbox" class="ds-checkbox-input"><span class="ds-adv-dd__item-label">car insurance quote</span><span class="ds-adv-dd__badge">1H</span></label>
+              <label class="ds-adv-dd__item ds-checkbox-label"><input type="checkbox" class="ds-checkbox-input"><span class="ds-adv-dd__item-label">cheap car insurance</span></label>
+              <label class="ds-adv-dd__item ds-checkbox-label"><input type="checkbox" class="ds-checkbox-input"><span class="ds-adv-dd__item-label">compare car insurance</span><span class="ds-adv-dd__badge">1H</span></label>
+              <label class="ds-adv-dd__item ds-checkbox-label"><input type="checkbox" class="ds-checkbox-input"><span class="ds-adv-dd__item-label">best car insurance uk</span></label>
+              <label class="ds-adv-dd__item ds-checkbox-label"><input type="checkbox" class="ds-checkbox-input"><span class="ds-adv-dd__item-label">third party insurance</span></label>
+            </div>
+            <div class="ds-adv-dd__footer">
+              <button class="btn btn--primary btn--sm" onclick="advDdApply('anat-st')">Apply</button>
+            </div>
+          </div>
+        </div>
+
       </div>
     </div>
   </div>
@@ -8227,7 +8401,33 @@ function accSetDisabled(id, disabled) {
     </table>
   </div>
 
-  <!-- 4. HTML USAGE ────────────────────────────────────────────── -->
+  <!-- 4. DESIGN TOKENS ───────────────────────────────────────────── -->
+  <div style="margin-bottom:40px">
+    <div class="sub-label">Design Tokens</div>
+    <table class="spec-table">
+      <thead><tr><th>Token</th><th>Value</th><th>Usage</th></tr></thead>
+      <tbody>
+        <tr><td>white</td><td>#ffffff</td><td>Component background</td></tr>
+        <tr><td>borderRadius.xl</td><td>12px</td><td>Container border-radius</td></tr>
+        <tr><td>—</td><td>93px</td><td>Chart row height</td></tr>
+        <tr><td>—</td><td>Open Sans Condensed (wdth 75)</td><td>Y-axis &amp; X-axis label font</td></tr>
+        <tr><td>—</td><td>13px / 400</td><td>Y-axis label font-size / weight</td></tr>
+        <tr><td>—</td><td>11px / 400</td><td>X-axis label font-size / weight</td></tr>
+        <tr><td>text/secondary</td><td>#858585</td><td>Axis label colour</td></tr>
+        <tr><td>—</td><td>20px</td><td>SVG top offset (clears Y max label)</td></tr>
+        <tr><td>—</td><td>8px</td><td>Gap between Y labels and canvas</td></tr>
+        <tr><td>—</td><td>#d9d9d9 @ 10%</td><td>Ghost band fill</td></tr>
+        <tr><td>—</td><td>32px</td><td>Ghost band width</td></tr>
+        <tr><td>—</td><td>40px</td><td>Ghost band horizontal padding</td></tr>
+        <tr><td>purple/600</td><td>#6848c6</td><td>Default series stroke colour</td></tr>
+        <tr><td>—</td><td>16px</td><td>Body padding-top</td></tr>
+        <tr><td>—</td><td>24px</td><td>Body padding-horizontal · Component padding-bottom</td></tr>
+        <tr><td>—</td><td>4px</td><td>Gap between chart row and x-axis</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- 5. HTML USAGE ────────────────────────────────────────────── -->
   <div style="margin-bottom:40px">
     <div class="sub-label">HTML Usage</div>
     <pre class="code-block">&lt;div class="mclc"&gt;
@@ -9289,9 +9489,17 @@ function accSetDisabled(id, disabled) {
             <span class="card-header__subtitle">Presence of AI Overview on search results relative to the total number of searches</span>
           </div>
           <div class="card-header__actions">
-            <button class="card-header__action-btn" aria-label="Download CSV">
-              <svg width="16" height="16"><use href="#icon-download"/></svg>
-            </button>
+            <div class="ds-dropdown" id="gt-download">
+              <button class="card-header__action-btn" id="gt-download-btn" onclick="dsDropdownToggle('gt-download')" aria-label="Download">
+                <svg width="16" height="16"><use href="#icon-download"/></svg>
+              </button>
+              <div class="ds-dropdown__menu" id="gt-download-menu" style="right:0;left:auto">
+                <div class="ds-dropdown__item" onclick="dsDropdownToggle('gt-download')">PNG</div>
+                <div class="ds-dropdown__item" onclick="dsDropdownToggle('gt-download')">JPEG</div>
+                <div class="ds-dropdown__item" onclick="dsDropdownToggle('gt-download')">SVG</div>
+                <div class="ds-dropdown__item" onclick="dsDropdownToggle('gt-download')">PDF</div>
+              </div>
+            </div>
             <button class="card-header__action-btn" aria-label="More information">
               <svg width="16" height="16"><use href="#icon-info"/></svg>
             </button>
@@ -9332,13 +9540,11 @@ function accSetDisabled(id, disabled) {
                   <span class="gauge__value">0</span>
                   <span class="gauge__unit">%</span>
                 </div>
-                <span class="gauge__subtitle">AIO Avg. Frequency</span>
+                <span class="gauge__subtitle">AIO Avg. Freq.</span>
               </div>
             </div>
           </div>
 
-          <!-- Vertical divider -->
-          <div style="width:1px;background:#e8edf3;align-self:stretch;flex-shrink:0"></div>
 
           <!-- Right: single timeline -->
           <div style="flex:1;min-width:0;padding-left:24px;display:flex;flex-direction:column">
@@ -9419,7 +9625,7 @@ function accSetDisabled(id, disabled) {
             <span class="gauge__value" id="gauge-live-val">0</span>
             <span class="gauge__unit">%</span>
           </div>
-          <span class="gauge__subtitle">AIO Avg. Frequency</span>
+          <span class="gauge__subtitle">AIO Avg. Freq.</span>
         </div>
       </div>
       <!-- Preset buttons -->
@@ -9450,7 +9656,7 @@ function accSetDisabled(id, disabled) {
           <div class="gauge__label">
             <svg class="gauge__icon" viewBox="0 0 36 36" fill="none"><path d="M22 5 L23.5 10.5 L29 12 L23.5 13.5 L22 19 L20.5 13.5 L15 12 L20.5 10.5 Z" fill="#b3a2e7"/><path d="M11 15 L12 19 L16 20 L12 21 L11 25 L10 21 L6 20 L10 19 Z" fill="#b3a2e7"/><path d="M26 23 L26.7 25.3 L29 26 L26.7 26.7 L26 29 L25.3 26.7 L23 26 L25.3 25.3 Z" fill="#b3a2e7"/></svg>
             <div class="gauge__value-row"><span class="gauge__value">0</span><span class="gauge__unit">%</span></div>
-            <span class="gauge__subtitle">AIO Avg. Frequency</span>
+            <span class="gauge__subtitle">AIO Avg. Freq.</span>
           </div>
         </div>
         <span style="font-size:12px;font-weight:600;color:#485982;font-family:'Open Sans',sans-serif">Big Gauge · 248px</span>
@@ -9468,7 +9674,7 @@ function accSetDisabled(id, disabled) {
           <div class="gauge__label">
             <svg class="gauge__icon" viewBox="0 0 36 36" fill="none"><path d="M22 5 L23.5 10.5 L29 12 L23.5 13.5 L22 19 L20.5 13.5 L15 12 L20.5 10.5 Z" fill="#b3a2e7"/><path d="M11 15 L12 19 L16 20 L12 21 L11 25 L10 21 L6 20 L10 19 Z" fill="#b3a2e7"/><path d="M26 23 L26.7 25.3 L29 26 L26.7 26.7 L26 29 L25.3 26.7 L23 26 L25.3 25.3 Z" fill="#b3a2e7"/></svg>
             <div class="gauge__value-row"><span class="gauge__value">0</span><span class="gauge__unit">%</span></div>
-            <span class="gauge__subtitle">AIO Avg. Frequency</span>
+            <span class="gauge__subtitle">AIO Avg. Freq.</span>
           </div>
         </div>
         <span style="font-size:12px;font-weight:600;color:#485982;font-family:'Open Sans',sans-serif">Medium Gauge · 200px</span>
@@ -14699,6 +14905,958 @@ Prioritise authority reinforcement in declining citation segments</textarea>
       </div><!-- /comp-panel-toggle -->
 
       <!-- ═══════════════════════════════════════════════════════════ -->
+      <!-- DROPDOWN                                                    -->
+      <!-- ═══════════════════════════════════════════════════════════ -->
+      <div class="comp-panel" id="comp-panel-dropdown" style="display:none">
+<section id="dropdown">
+  <div class="section-header">
+    <h2>Dropdown</h2>
+    <div class="divider"></div>
+  </div>
+  <p style="font-size:13px;color:var(--text-secondary-var);margin-bottom:24px">A plain-button trigger that reveals a floating list of selectable options. Supports a flat list, divider-separated items, and fully grouped sections with labels.</p>
+
+  <!-- 1. LIVE DEMO ─────────────────────────────────────────────── -->
+  <div style="margin-bottom:40px">
+    <div class="sub-label">Live Demo</div>
+    <div style="background:#ffffff;padding:40px 24px 140px;border-radius:12px;display:flex;gap:32px;flex-wrap:wrap;align-items:flex-start">
+
+      <!-- Simple list -->
+      <div style="display:flex;flex-direction:column;gap:8px;align-items:flex-start">
+        <span style="font-family:var(--font-base);font-size:11px;font-weight:600;color:#485982;text-transform:uppercase;letter-spacing:0.4px;margin-bottom:4px">Simple</span>
+        <div class="ds-dropdown" id="dd-simple">
+          <button class="btn btn--outlined" id="dd-simple-btn" onclick="dsDropdownToggle('dd-simple')">
+            All Industries
+            <svg class="ds-dropdown__trigger-chevron" width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 5l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <div class="ds-dropdown__menu" id="dd-simple-menu">
+            <div class="ds-dropdown__item ds-dropdown__item--selected" onclick="dsDropdownSelect(this,'dd-simple','All Industries')">All Industries</div>
+            <div class="ds-dropdown__item" onclick="dsDropdownSelect(this,'dd-simple','Automotive')">Automotive</div>
+            <div class="ds-dropdown__item" onclick="dsDropdownSelect(this,'dd-simple','Finance')">Finance</div>
+            <div class="ds-dropdown__item" onclick="dsDropdownSelect(this,'dd-simple','Travel')">Travel</div>
+            <div class="ds-dropdown__item" onclick="dsDropdownSelect(this,'dd-simple','Retail')">Retail</div>
+            <div class="ds-dropdown__item ds-dropdown__item--disabled">Luxury Goods</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Divided list -->
+      <div style="display:flex;flex-direction:column;gap:8px;align-items:flex-start">
+        <span style="font-family:var(--font-base);font-size:11px;font-weight:600;color:#485982;text-transform:uppercase;letter-spacing:0.4px;margin-bottom:4px">Divided</span>
+        <div class="ds-dropdown" id="dd-divided">
+          <button class="btn btn--outlined" id="dd-divided-btn" onclick="dsDropdownToggle('dd-divided')">
+            Last 30 Days
+            <svg class="ds-dropdown__trigger-chevron" width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 5l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <div class="ds-dropdown__menu" id="dd-divided-menu">
+            <div class="ds-dropdown__item" onclick="dsDropdownSelect(this,'dd-divided','Today')">Today</div>
+            <div class="ds-dropdown__item" onclick="dsDropdownSelect(this,'dd-divided','Yesterday')">Yesterday</div>
+            <div class="ds-dropdown__divider"></div>
+            <div class="ds-dropdown__item" onclick="dsDropdownSelect(this,'dd-divided','Last 7 Days')">Last 7 Days</div>
+            <div class="ds-dropdown__item ds-dropdown__item--selected" onclick="dsDropdownSelect(this,'dd-divided','Last 30 Days')">Last 30 Days</div>
+            <div class="ds-dropdown__item" onclick="dsDropdownSelect(this,'dd-divided','Last 90 Days')">Last 90 Days</div>
+            <div class="ds-dropdown__divider"></div>
+            <div class="ds-dropdown__item" onclick="dsDropdownSelect(this,'dd-divided','Custom Range')">Custom Range…</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Grouped list -->
+      <div style="display:flex;flex-direction:column;gap:8px;align-items:flex-start">
+        <span style="font-family:var(--font-base);font-size:11px;font-weight:600;color:#485982;text-transform:uppercase;letter-spacing:0.4px;margin-bottom:4px">Grouped</span>
+        <div class="ds-dropdown" id="dd-grouped">
+          <button class="btn btn--outlined" id="dd-grouped-btn" onclick="dsDropdownToggle('dd-grouped')">
+            All Devices
+            <svg class="ds-dropdown__trigger-chevron" width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 5l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <div class="ds-dropdown__menu" id="dd-grouped-menu">
+            <span class="ds-dropdown__group-label">Aggregate</span>
+            <div class="ds-dropdown__item ds-dropdown__item--selected" onclick="dsDropdownSelect(this,'dd-grouped','All Devices')">All Devices</div>
+            <div class="ds-dropdown__divider"></div>
+            <span class="ds-dropdown__group-label">Desktop</span>
+            <div class="ds-dropdown__item" onclick="dsDropdownSelect(this,'dd-grouped','Windows')">Windows</div>
+            <div class="ds-dropdown__item" onclick="dsDropdownSelect(this,'dd-grouped','Mac')">Mac</div>
+            <div class="ds-dropdown__divider"></div>
+            <span class="ds-dropdown__group-label">Mobile</span>
+            <div class="ds-dropdown__item" onclick="dsDropdownSelect(this,'dd-grouped','iOS')">iOS</div>
+            <div class="ds-dropdown__item" onclick="dsDropdownSelect(this,'dd-grouped','Android')">Android</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Plain trigger -->
+      <div style="display:flex;flex-direction:column;gap:8px;align-items:flex-start">
+        <span style="font-family:var(--font-base);font-size:11px;font-weight:600;color:#485982;text-transform:uppercase;letter-spacing:0.4px;margin-bottom:4px">Plain</span>
+        <div class="ds-dropdown" id="dd-plain">
+          <button class="btn btn--plain" id="dd-plain-btn" onclick="dsDropdownToggle('dd-plain')">
+            All Industries
+            <svg class="ds-dropdown__trigger-chevron" width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 5l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <div class="ds-dropdown__menu" id="dd-plain-menu">
+            <div class="ds-dropdown__item ds-dropdown__item--selected" onclick="dsDropdownSelect(this,'dd-plain','All Industries')">All Industries</div>
+            <div class="ds-dropdown__item" onclick="dsDropdownSelect(this,'dd-plain','Automotive')">Automotive</div>
+            <div class="ds-dropdown__item" onclick="dsDropdownSelect(this,'dd-plain','Finance')">Finance</div>
+            <div class="ds-dropdown__item" onclick="dsDropdownSelect(this,'dd-plain','Travel')">Travel</div>
+            <div class="ds-dropdown__item" onclick="dsDropdownSelect(this,'dd-plain','Retail')">Retail</div>
+            <div class="ds-dropdown__item ds-dropdown__item--disabled">Luxury Goods</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Icon-only (plain) trigger -->
+      <div style="display:flex;flex-direction:column;gap:8px;align-items:flex-start">
+        <span style="font-family:var(--font-base);font-size:11px;font-weight:600;color:#485982;text-transform:uppercase;letter-spacing:0.4px;margin-bottom:4px">Icon</span>
+        <div class="ds-dropdown" id="dd-format">
+          <button class="btn btn--plain btn--icon-only" id="dd-format-btn" onclick="dsDropdownToggle('dd-format')" aria-label="Download">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 2v8M5 7l3 3 3-3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M3 12h10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          </button>
+          <div class="ds-dropdown__menu" id="dd-format-menu">
+            <div class="ds-dropdown__item" onclick="dsDropdownSelect(this,'dd-format','PNG')">PNG</div>
+            <div class="ds-dropdown__item" onclick="dsDropdownSelect(this,'dd-format','JPEG')">JPEG</div>
+            <div class="ds-dropdown__item" onclick="dsDropdownSelect(this,'dd-format','SVG')">SVG</div>
+            <div class="ds-dropdown__item" onclick="dsDropdownSelect(this,'dd-format','PDF')">PDF</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 2. STATIC ANATOMY ──────────────────────────────────────────── -->
+  <div style="margin-bottom:40px">
+    <div class="sub-label">Anatomy</div>
+    <div style="background:#ffffff;padding:24px;border-radius:12px;display:flex;gap:48px;flex-wrap:wrap;align-items:flex-start">
+
+      <!-- Simple open -->
+      <div style="display:flex;flex-direction:column;gap:0;align-items:flex-start">
+        <span style="font-family:var(--font-base);font-size:11px;color:#858585;margin-bottom:6px">Flat list</span>
+        <button class="btn btn--outlined ds-dropdown__trigger--open" style="pointer-events:none">
+          Travel
+          <svg class="ds-dropdown__trigger-chevron" width="14" height="14" viewBox="0 0 14 14" fill="none" style="transform:rotate(180deg)"><path d="M3 5l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="ds-dropdown__menu" style="position:static;opacity:1;pointer-events:none;transform:none;margin-top:2px">
+          <div class="ds-dropdown__item">Automotive</div>
+          <div class="ds-dropdown__item">Finance</div>
+          <div class="ds-dropdown__item ds-dropdown__item--selected">Travel</div>
+          <div class="ds-dropdown__item">Retail</div>
+        </div>
+      </div>
+
+      <!-- Divided open -->
+      <div style="display:flex;flex-direction:column;gap:0;align-items:flex-start">
+        <span style="font-family:var(--font-base);font-size:11px;color:#858585;margin-bottom:6px">With dividers</span>
+        <button class="btn btn--outlined ds-dropdown__trigger--open" style="pointer-events:none">
+          Last 30 Days
+          <svg class="ds-dropdown__trigger-chevron" width="14" height="14" viewBox="0 0 14 14" fill="none" style="transform:rotate(180deg)"><path d="M3 5l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="ds-dropdown__menu" style="position:static;opacity:1;pointer-events:none;transform:none;margin-top:2px">
+          <div class="ds-dropdown__item">Today</div>
+          <div class="ds-dropdown__item">Yesterday</div>
+          <div class="ds-dropdown__divider"></div>
+          <div class="ds-dropdown__item">Last 7 Days</div>
+          <div class="ds-dropdown__item ds-dropdown__item--selected">Last 30 Days</div>
+          <div class="ds-dropdown__item">Last 90 Days</div>
+          <div class="ds-dropdown__divider"></div>
+          <div class="ds-dropdown__item">Custom Range…</div>
+        </div>
+      </div>
+
+      <!-- Unselected open -->
+      <div style="display:flex;flex-direction:column;gap:0;align-items:flex-start">
+        <span style="font-family:var(--font-base);font-size:11px;color:#858585;margin-bottom:6px">Icon</span>
+        <button class="btn btn--plain btn--icon-only ds-dropdown__trigger--open" style="pointer-events:none" aria-label="Download">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 2v8M5 7l3 3 3-3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M3 12h10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </button>
+        <div class="ds-dropdown__menu" style="position:static;opacity:1;pointer-events:none;transform:none;margin-top:2px">
+          <div class="ds-dropdown__item">PNG</div>
+          <div class="ds-dropdown__item">JPEG</div>
+          <div class="ds-dropdown__item">SVG</div>
+          <div class="ds-dropdown__item">PDF</div>
+        </div>
+      </div>
+
+      <!-- Grouped open -->
+      <div style="display:flex;flex-direction:column;gap:0;align-items:flex-start">
+        <span style="font-family:var(--font-base);font-size:11px;color:#858585;margin-bottom:6px">Grouped with labels</span>
+        <button class="btn btn--outlined ds-dropdown__trigger--open" style="pointer-events:none">
+          All Devices
+          <svg class="ds-dropdown__trigger-chevron" width="14" height="14" viewBox="0 0 14 14" fill="none" style="transform:rotate(180deg)"><path d="M3 5l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="ds-dropdown__menu" style="position:static;opacity:1;pointer-events:none;transform:none;margin-top:2px">
+          <span class="ds-dropdown__group-label">Aggregate</span>
+          <div class="ds-dropdown__item ds-dropdown__item--selected">All Devices</div>
+          <div class="ds-dropdown__divider"></div>
+          <span class="ds-dropdown__group-label">Desktop</span>
+          <div class="ds-dropdown__item">Windows</div>
+          <div class="ds-dropdown__item">Mac</div>
+          <div class="ds-dropdown__divider"></div>
+          <span class="ds-dropdown__group-label">Mobile</span>
+          <div class="ds-dropdown__item">iOS</div>
+          <div class="ds-dropdown__item">Android</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 3. CSS CLASSES ─────────────────────────────────────────────── -->
+  <div style="margin-bottom:40px">
+    <div class="sub-label">CSS Classes</div>
+    <table class="spec-table">
+      <thead><tr><th>Class</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td>.ds-dropdown</td><td>Root wrapper — relative, inline-flex. Positions the menu against the trigger.</td></tr>
+        <tr><td>.ds-dropdown__trigger</td><td>Plain button — 36px height, 1.5px border #c4cdd5, radius 6px, 14px regular #27365b. Add chevron SVG inside.</td></tr>
+        <tr><td>.ds-dropdown__trigger--open</td><td>Active state — blue border #1565c0, blue text, light blue bg. Chevron rotates 180°.</td></tr>
+        <tr><td>.ds-dropdown__trigger-chevron</td><td>SVG chevron — inherits colour, rotates on open via parent modifier.</td></tr>
+        <tr><td>.ds-dropdown__menu</td><td>Floating panel — white bg, radius 12px, soft shadow, 6px vertical padding. Hidden by default (opacity 0, translateY -4px).</td></tr>
+        <tr><td>.ds-dropdown__menu--open</td><td>Visible state — opacity 1, translateY 0.</td></tr>
+        <tr><td>.ds-dropdown__item</td><td>Row item — 36px height, 0 12px padding, 14px regular #27365b. Hover: #f0f4f8 bg.</td></tr>
+        <tr><td>.ds-dropdown__item--selected</td><td>Currently selected item — semibold #1565c0 text, blue dot indicator on right.</td></tr>
+        <tr><td>.ds-dropdown__item--disabled</td><td>Non-interactive item — muted #a0aab6, no pointer.</td></tr>
+        <tr><td>.ds-dropdown__divider</td><td>1px separator — #f0f4f8, 4px vertical margin.</td></tr>
+        <tr><td>.ds-dropdown__group-label</td><td>Section heading — 11px semibold #6477a2 uppercase. Not interactive.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- 4. DESIGN TOKENS ───────────────────────────────────────────── -->
+  <div style="margin-bottom:40px">
+    <div class="sub-label">Design Tokens</div>
+    <table class="spec-table">
+      <thead><tr><th>Token</th><th>Value</th><th>Usage</th></tr></thead>
+      <tbody>
+        <tr><td>—</td><td>36px</td><td>Trigger &amp; item height</td></tr>
+        <tr><td>borderRadius.sm</td><td>6px</td><td>Trigger border-radius</td></tr>
+        <tr><td>borderRadius.xl</td><td>12px</td><td>Menu border-radius</td></tr>
+        <tr><td>—</td><td>1.5px solid #c4cdd5</td><td>Trigger default border</td></tr>
+        <tr><td>fill.main</td><td>#1565c0</td><td>Trigger open border · selected text</td></tr>
+        <tr><td>—</td><td>0 4px 20px rgba(27,48,96,.10)</td><td>Menu shadow (primary layer)</td></tr>
+        <tr><td>—</td><td>0 1px 4px rgba(27,48,96,.06)</td><td>Menu shadow (ambient layer)</td></tr>
+        <tr><td>neutral/800</td><td>#27365b</td><td>Item text colour</td></tr>
+        <tr><td>—</td><td>#f0f4f8</td><td>Item hover bg · divider colour</td></tr>
+        <tr><td>neutral/400</td><td>#6477a2</td><td>Group label colour</td></tr>
+        <tr><td>—</td><td>14px / 400</td><td>Item font-size / weight</td></tr>
+        <tr><td>—</td><td>11px / 600</td><td>Group label font-size / weight</td></tr>
+        <tr><td>—</td><td>6px 0</td><td>Menu vertical padding</td></tr>
+        <tr><td>—</td><td>0 12px</td><td>Item horizontal padding</td></tr>
+        <tr><td>—</td><td>4px</td><td>Divider vertical margin</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- 5. HTML USAGE ──────────────────────────────────────────────── -->
+  <div style="margin-bottom:40px">
+    <div class="sub-label">HTML Usage</div>
+    <pre class="code-block">&lt;!-- Flat list --&gt;
+&lt;div class="ds-dropdown"&gt;
+  &lt;button class="ds-dropdown__trigger" onclick="dsDropdownToggle('my-dd')"&gt;
+    Label &lt;svg class="ds-dropdown__trigger-chevron"&gt;…&lt;/svg&gt;
+  &lt;/button&gt;
+  &lt;div class="ds-dropdown__menu" id="my-dd-menu"&gt;
+    &lt;div class="ds-dropdown__item ds-dropdown__item--selected"&gt;Option A&lt;/div&gt;
+    &lt;div class="ds-dropdown__item"&gt;Option B&lt;/div&gt;
+    &lt;div class="ds-dropdown__item ds-dropdown__item--disabled"&gt;Option C&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!-- With dividers --&gt;
+&lt;div class="ds-dropdown__menu"&gt;
+  &lt;div class="ds-dropdown__item"&gt;Today&lt;/div&gt;
+  &lt;div class="ds-dropdown__divider"&gt;&lt;/div&gt;
+  &lt;div class="ds-dropdown__item"&gt;Last 7 Days&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!-- Grouped with labels --&gt;
+&lt;div class="ds-dropdown__menu"&gt;
+  &lt;span class="ds-dropdown__group-label"&gt;Desktop&lt;/span&gt;
+  &lt;div class="ds-dropdown__item"&gt;Windows&lt;/div&gt;
+  &lt;div class="ds-dropdown__item"&gt;Mac&lt;/div&gt;
+  &lt;div class="ds-dropdown__divider"&gt;&lt;/div&gt;
+  &lt;span class="ds-dropdown__group-label"&gt;Mobile&lt;/span&gt;
+  &lt;div class="ds-dropdown__item"&gt;iOS&lt;/div&gt;
+  &lt;div class="ds-dropdown__item"&gt;Android&lt;/div&gt;
+&lt;/div&gt;</pre>
+  </div>
+
+  <script>
+    function dsDropdownToggle(id) {
+      var btn  = document.getElementById(id + '-btn');
+      var menu = document.getElementById(id + '-menu');
+      if (!btn || !menu) return;
+      var isOpen = menu.classList.contains('ds-dropdown__menu--open');
+      // close all first
+      document.querySelectorAll('.ds-dropdown__menu--open').forEach(function(m) {
+        m.classList.remove('ds-dropdown__menu--open');
+      });
+      document.querySelectorAll('.ds-dropdown__trigger--open').forEach(function(b) {
+        b.classList.remove('ds-dropdown__trigger--open');
+      });
+      if (!isOpen) {
+        menu.classList.add('ds-dropdown__menu--open');
+        btn.classList.add('ds-dropdown__trigger--open');
+      }
+    }
+    function dsDropdownSelect(item, id, label) {
+      var menu = document.getElementById(id + '-menu');
+      var btn  = document.getElementById(id + '-btn');
+      if (menu) {
+        menu.querySelectorAll('.ds-dropdown__item').forEach(function(el) {
+          el.classList.remove('ds-dropdown__item--selected');
+        });
+        item.classList.add('ds-dropdown__item--selected');
+      }
+      if (btn && !btn.classList.contains('btn--icon-only') && !btn.classList.contains('card-header__action-btn')) {
+        var placeholder = btn.querySelector('.ds-dropdown__placeholder-text');
+        if (placeholder) {
+          placeholder.replaceWith(document.createTextNode(label + ' '));
+        } else {
+          btn.childNodes[0].textContent = label + ' ';
+        }
+        btn.classList.remove('ds-dropdown__trigger--placeholder');
+      }
+      dsDropdownToggle(id);
+    }
+    // close on outside click
+    document.addEventListener('click', function(e) {
+      if (!e.target.closest('.ds-dropdown')) {
+        document.querySelectorAll('.ds-dropdown__menu--open').forEach(function(m) {
+          m.classList.remove('ds-dropdown__menu--open');
+        });
+        document.querySelectorAll('.ds-dropdown__trigger--open').forEach(function(b) {
+          b.classList.remove('ds-dropdown__trigger--open');
+        });
+      }
+    });
+  </script>
+
+</section>
+      </div><!-- /comp-panel-dropdown -->
+
+      <!-- ═══════════════════════════════════════════════════════════ -->
+      <!-- BASIC DROPDOWN                                              -->
+      <!-- ═══════════════════════════════════════════════════════════ -->
+      <div class="comp-panel" id="comp-panel-basic-dropdown" style="display:none">
+<section id="basic-dropdown">
+  <div class="section-header">
+    <h2>Basic Dropdown</h2>
+    <div class="divider"></div>
+  </div>
+  <p style="font-size:13px;color:var(--text-secondary-var);margin-bottom:24px">An executional dropdown — the trigger button never changes its label and no item is marked as selected. Use when the action is one-shot (e.g. download format, export type) rather than a persistent choice.</p>
+
+  <!-- 1. LIVE DEMO ─────────────────────────────────────────────── -->
+  <div style="margin-bottom:40px">
+    <div class="sub-label">Live Demo</div>
+    <div style="background:#ffffff;padding:40px 24px 140px;border-radius:12px;display:flex;gap:40px;flex-wrap:wrap;align-items:flex-start">
+
+      <!-- Icon trigger -->
+      <div style="display:flex;flex-direction:column;gap:8px;align-items:flex-start">
+        <span style="font-family:var(--font-base);font-size:11px;font-weight:600;color:#485982;text-transform:uppercase;letter-spacing:0.4px;margin-bottom:4px">Icon</span>
+        <div class="ds-dropdown" id="bdd-icon">
+          <button class="btn btn--plain btn--icon-only" id="bdd-icon-btn" onclick="dsDropdownToggle('bdd-icon')" aria-label="Download">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 2v8M5 7l3 3 3-3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M3 12h10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          </button>
+          <div class="ds-dropdown__menu" id="bdd-icon-menu">
+            <div class="ds-dropdown__item" onclick="dsDropdownToggle('bdd-icon')">PNG</div>
+            <div class="ds-dropdown__item" onclick="dsDropdownToggle('bdd-icon')">JPEG</div>
+            <div class="ds-dropdown__item" onclick="dsDropdownToggle('bdd-icon')">SVG</div>
+            <div class="ds-dropdown__item" onclick="dsDropdownToggle('bdd-icon')">PDF</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Outlined text trigger -->
+      <div style="display:flex;flex-direction:column;gap:8px;align-items:flex-start">
+        <span style="font-family:var(--font-base);font-size:11px;font-weight:600;color:#485982;text-transform:uppercase;letter-spacing:0.4px;margin-bottom:4px">Outlined</span>
+        <div class="ds-dropdown" id="bdd-outlined">
+          <button class="btn btn--outlined" id="bdd-outlined-btn" onclick="dsDropdownToggle('bdd-outlined')">
+            Export
+            <svg class="ds-dropdown__trigger-chevron" width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 5l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <div class="ds-dropdown__menu" id="bdd-outlined-menu">
+            <div class="ds-dropdown__item" onclick="dsDropdownToggle('bdd-outlined')">Export as CSV</div>
+            <div class="ds-dropdown__item" onclick="dsDropdownToggle('bdd-outlined')">Export as XLSX</div>
+            <div class="ds-dropdown__item" onclick="dsDropdownToggle('bdd-outlined')">Export as PDF</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Plain text trigger -->
+      <div style="display:flex;flex-direction:column;gap:8px;align-items:flex-start">
+        <span style="font-family:var(--font-base);font-size:11px;font-weight:600;color:#485982;text-transform:uppercase;letter-spacing:0.4px;margin-bottom:4px">Plain</span>
+        <div class="ds-dropdown" id="bdd-plain">
+          <button class="btn btn--plain" id="bdd-plain-btn" onclick="dsDropdownToggle('bdd-plain')">
+            More
+            <svg class="ds-dropdown__trigger-chevron" width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 5l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <div class="ds-dropdown__menu" id="bdd-plain-menu">
+            <div class="ds-dropdown__item" onclick="dsDropdownToggle('bdd-plain')">Duplicate</div>
+            <div class="ds-dropdown__item" onclick="dsDropdownToggle('bdd-plain')">Share link</div>
+            <div class="ds-dropdown__divider"></div>
+            <div class="ds-dropdown__item" onclick="dsDropdownToggle('bdd-plain')">Delete</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 2. ANATOMY ──────────────────────────────────────────────── -->
+  <div style="margin-bottom:40px">
+    <div class="sub-label">Anatomy</div>
+    <div style="background:#ffffff;padding:24px;border-radius:12px;display:flex;gap:48px;flex-wrap:wrap;align-items:flex-start">
+
+      <!-- Icon open -->
+      <div style="display:flex;flex-direction:column;gap:0;align-items:flex-start">
+        <span style="font-family:var(--font-base);font-size:11px;color:#858585;margin-bottom:6px">Icon</span>
+        <button class="btn btn--plain btn--icon-only ds-dropdown__trigger--open" style="pointer-events:none" aria-label="Download">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 2v8M5 7l3 3 3-3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M3 12h10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </button>
+        <div class="ds-dropdown__menu" style="position:static;opacity:1;pointer-events:none;transform:none;margin-top:2px">
+          <div class="ds-dropdown__item">PNG</div>
+          <div class="ds-dropdown__item">JPEG</div>
+          <div class="ds-dropdown__item">SVG</div>
+          <div class="ds-dropdown__item">PDF</div>
+        </div>
+      </div>
+
+      <!-- Outlined open -->
+      <div style="display:flex;flex-direction:column;gap:0;align-items:flex-start">
+        <span style="font-family:var(--font-base);font-size:11px;color:#858585;margin-bottom:6px">Outlined</span>
+        <button class="btn btn--outlined ds-dropdown__trigger--open" style="pointer-events:none">
+          Export
+          <svg class="ds-dropdown__trigger-chevron" width="14" height="14" viewBox="0 0 14 14" fill="none" style="transform:rotate(180deg)"><path d="M3 5l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="ds-dropdown__menu" style="position:static;opacity:1;pointer-events:none;transform:none;margin-top:2px">
+          <div class="ds-dropdown__item">Export as CSV</div>
+          <div class="ds-dropdown__item">Export as XLSX</div>
+          <div class="ds-dropdown__item">Export as PDF</div>
+        </div>
+      </div>
+
+      <!-- Plain open -->
+      <div style="display:flex;flex-direction:column;gap:0;align-items:flex-start">
+        <span style="font-family:var(--font-base);font-size:11px;color:#858585;margin-bottom:6px">Plain</span>
+        <button class="btn btn--plain ds-dropdown__trigger--open" style="pointer-events:none">
+          More
+          <svg class="ds-dropdown__trigger-chevron" width="14" height="14" viewBox="0 0 14 14" fill="none" style="transform:rotate(180deg)"><path d="M3 5l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="ds-dropdown__menu" style="position:static;opacity:1;pointer-events:none;transform:none;margin-top:2px">
+          <div class="ds-dropdown__item">Duplicate</div>
+          <div class="ds-dropdown__item">Share link</div>
+          <div class="ds-dropdown__divider"></div>
+          <div class="ds-dropdown__item">Delete</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 3. CSS CLASSES ─────────────────────────────────────────── -->
+  <div style="margin-bottom:40px">
+    <div class="sub-label">CSS Classes</div>
+    <table class="spec-table">
+      <thead><tr><th>Class</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td>.ds-dropdown</td><td>Root wrapper — same as the standard Dropdown component.</td></tr>
+        <tr><td>.btn + .btn--plain / .btn--outlined / .btn--icon-only</td><td>Trigger button — any button variant. Label never changes on item pick.</td></tr>
+        <tr><td>.ds-dropdown__trigger--open</td><td>Applied while the menu is open. Removed on close or item pick.</td></tr>
+        <tr><td>.ds-dropdown__menu</td><td>Floating panel — same styles as standard Dropdown.</td></tr>
+        <tr><td>.ds-dropdown__item</td><td>Row item — no <code>--selected</code> modifier used in this pattern.</td></tr>
+        <tr><td>.ds-dropdown__divider</td><td>Optional 1px separator between item groups.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- 4. DESIGN TOKENS ──────────────────────────────────────── -->
+  <div style="margin-bottom:40px">
+    <div class="sub-label">Design Tokens</div>
+    <p style="font-size:13px;color:var(--text-secondary-var);margin-bottom:12px">Shares all tokens with the standard Dropdown — trigger, menu, item, and divider values are identical. See the Dropdown component for the full token table.</p>
+  </div>
+
+  <!-- 5. HTML USAGE ─────────────────────────────────────────── -->
+  <div style="margin-bottom:40px">
+    <div class="sub-label">HTML Usage</div>
+    <pre class="code-block">&lt;!-- Icon trigger (executional — label never changes) --&gt;
+&lt;div class="ds-dropdown" id="my-dd"&gt;
+  &lt;button class="btn btn--plain btn--icon-only" id="my-dd-btn"
+          onclick="dsDropdownToggle('my-dd')" aria-label="Download"&gt;
+    &lt;svg …&gt;…&lt;/svg&gt;
+  &lt;/button&gt;
+  &lt;div class="ds-dropdown__menu" id="my-dd-menu"&gt;
+    &lt;div class="ds-dropdown__item" onclick="dsDropdownToggle('my-dd')"&gt;PNG&lt;/div&gt;
+    &lt;div class="ds-dropdown__item" onclick="dsDropdownToggle('my-dd')"&gt;JPEG&lt;/div&gt;
+    &lt;div class="ds-dropdown__item" onclick="dsDropdownToggle('my-dd')"&gt;SVG&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!-- Text trigger — same pattern, any btn variant --&gt;
+&lt;div class="ds-dropdown" id="my-dd2"&gt;
+  &lt;button class="btn btn--outlined" id="my-dd2-btn" onclick="dsDropdownToggle('my-dd2')"&gt;
+    Export
+    &lt;svg class="ds-dropdown__trigger-chevron" …&gt;…&lt;/svg&gt;
+  &lt;/button&gt;
+  &lt;div class="ds-dropdown__menu" id="my-dd2-menu"&gt;
+    &lt;div class="ds-dropdown__item" onclick="dsDropdownToggle('my-dd2')"&gt;Export as CSV&lt;/div&gt;
+    &lt;div class="ds-dropdown__item" onclick="dsDropdownToggle('my-dd2')"&gt;Export as PDF&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</pre>
+  </div>
+
+</section>
+      </div><!-- /comp-panel-basic-dropdown -->
+
+      <!-- ═══════════════════════════════════════════════════════════ -->
+      <!-- ADVANCED DROPDOWN                                           -->
+      <!-- ═══════════════════════════════════════════════════════════ -->
+      <div class="comp-panel" id="comp-panel-adv-dropdown" style="display:none">
+<section id="adv-dropdown">
+  <div class="section-header">
+    <h2>Filter Advanced Dropdown</h2>
+    <div class="divider"></div>
+  </div>
+  <p class="section-desc">A searchable, multi-select panel with include/exclude toggle and apply action. Used for filtering by campaign, topic, or any long list of options.</p>
+
+  <!-- 1. LIVE DEMO ─────────────────────────────────────────────── -->
+  <div style="margin-bottom:40px">
+    <div class="sub-label">Live Demo</div>
+    <div style="background:#ffffff;padding:40px 24px 40px;border-radius:12px;display:flex;gap:48px;flex-wrap:wrap;align-items:flex-start">
+
+      <!-- Trigger + panel -->
+      <div style="display:flex;flex-direction:column;gap:0;align-items:flex-start">
+        <div class="ds-adv-dd" id="adv-dd-demo">
+          <button class="btn btn--plain" onclick="advDdToggle('adv-dd-demo')" id="adv-dd-demo-btn">
+            Campaigns
+            <svg class="ds-dropdown__trigger-chevron" width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 5l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <div class="ds-adv-dd__panel" id="adv-dd-demo-panel" style="position:absolute;top:calc(100% + 2px);left:0;z-index:200;display:none">
+            <div class="ds-adv-dd__search">
+              <svg class="ds-adv-dd__search-icon" width="15" height="15" viewBox="0 0 15 15" fill="none"><circle cx="6.5" cy="6.5" r="5" stroke="currentColor" stroke-width="1.4"/><path d="M10.5 10.5l3 3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+              <input class="ds-adv-dd__search-input" placeholder="Search..." id="adv-dd-demo-search" oninput="advDdFilter('adv-dd-demo')">
+            </div>
+            <div class="ds-adv-dd__toolbar">
+              <div style="display:flex;align-items:center;background:#fafafa;border-radius:40px;padding:3px;gap:2px">
+                <button class="subtab subtab--active" onclick="advDdToggleMode(this)">Include</button>
+                <button class="subtab" onclick="advDdToggleMode(this)">Exclude</button>
+              </div>
+              <button class="btn btn--plain btn--sm" onclick="advDdSelectAll('adv-dd-demo',this)">Select All</button>
+            </div>
+            <div class="ds-adv-dd__list" id="adv-dd-demo-list">
+              <label class="ds-adv-dd__item ds-checkbox-label"><input type="checkbox" class="ds-checkbox-input"><span class="ds-adv-dd__item-label">Brand — UK</span></label>
+              <label class="ds-adv-dd__item ds-checkbox-label"><input type="checkbox" class="ds-checkbox-input"><span class="ds-adv-dd__item-label">Brand — US</span><span class="ds-adv-dd__badge">1H</span></label>
+              <label class="ds-adv-dd__item ds-checkbox-label"><input type="checkbox" class="ds-checkbox-input"><span class="ds-adv-dd__item-label">Competitor Conquesting</span><span class="ds-adv-dd__badge">1H</span></label>
+              <label class="ds-adv-dd__item ds-checkbox-label"><input type="checkbox" class="ds-checkbox-input"><span class="ds-adv-dd__item-label">Generic — Broad</span></label>
+              <label class="ds-adv-dd__item ds-checkbox-label"><input type="checkbox" class="ds-checkbox-input"><span class="ds-adv-dd__item-label">Generic — Exact</span><span class="ds-adv-dd__badge">1H</span></label>
+              <label class="ds-adv-dd__item ds-checkbox-label"><input type="checkbox" class="ds-checkbox-input"><span class="ds-adv-dd__item-label">Retargeting</span></label>
+              <label class="ds-adv-dd__item ds-checkbox-label"><input type="checkbox" class="ds-checkbox-input"><span class="ds-adv-dd__item-label">Shopping — Core</span><span class="ds-adv-dd__badge">1H</span></label>
+              <label class="ds-adv-dd__item ds-checkbox-label"><input type="checkbox" class="ds-checkbox-input"><span class="ds-adv-dd__item-label">Performance Max</span></label>
+            </div>
+            <div class="ds-adv-dd__footer">
+              <button class="btn btn--primary btn--sm" onclick="advDdApply('adv-dd-demo')">Apply</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 2. ANATOMY ──────────────────────────────────────────────── -->
+  <div style="margin-bottom:40px">
+    <div class="sub-label">Anatomy</div>
+    <div style="background:#ffffff;padding:24px;border-radius:12px;display:flex;gap:48px;flex-wrap:wrap;align-items:flex-start">
+
+      <div style="display:flex;flex-direction:column;gap:0;align-items:flex-start">
+        <div class="ds-adv-dd__panel" style="position:static;pointer-events:none">
+          <div class="ds-adv-dd__search" style="border-color:#1565c0">
+            <svg class="ds-adv-dd__search-icon" width="15" height="15" viewBox="0 0 15 15" fill="none"><circle cx="6.5" cy="6.5" r="5" stroke="currentColor" stroke-width="1.4"/><path d="M10.5 10.5l3 3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+            <input class="ds-adv-dd__search-input" placeholder="Search..." style="pointer-events:none">
+          </div>
+          <div class="ds-adv-dd__toolbar">
+            <div style="display:flex;gap:2px">
+              <button class="subtab subtab--active">Include</button>
+              <button class="subtab">Exclude</button>
+            </div>
+            <button class="btn btn--plain btn--sm">Select All</button>
+          </div>
+          <div class="ds-adv-dd__list" style="overflow:visible">
+            <label class="ds-adv-dd__item ds-checkbox-label"><input type="checkbox" class="ds-checkbox-input"><span class="ds-adv-dd__item-label">Brand — UK</span></label>
+            <label class="ds-adv-dd__item ds-checkbox-label"><input type="checkbox" class="ds-checkbox-input" checked><span class="ds-adv-dd__item-label">Brand — US</span><span class="ds-adv-dd__badge">1H</span></label>
+            <label class="ds-adv-dd__item ds-checkbox-label"><input type="checkbox" class="ds-checkbox-input"><span class="ds-adv-dd__item-label">Competitor Conquesting</span><span class="ds-adv-dd__badge">1H</span></label>
+            <label class="ds-adv-dd__item ds-checkbox-label"><input type="checkbox" class="ds-checkbox-input"><span class="ds-adv-dd__item-label">Generic — Broad</span></label>
+          </div>
+          <div class="ds-adv-dd__footer">
+            <button class="btn btn--primary btn--sm">Apply</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 3. CSS CLASSES ──────────────────────────────────────────── -->
+  <div style="margin-bottom:40px">
+    <div class="sub-label">CSS Classes</div>
+    <div style="background:#ffffff;padding:24px;border-radius:12px;overflow-x:auto">
+      <table style="width:100%;border-collapse:collapse;font-family:var(--font-base);font-size:13px">
+        <thead><tr style="border-bottom:2px solid #f0f4f8"><th style="text-align:left;padding:8px 12px;color:#485982;font-weight:600">Class</th><th style="text-align:left;padding:8px 12px;color:#485982;font-weight:600">Description</th></tr></thead>
+        <tbody>
+          <tr style="border-bottom:1px solid #f0f4f8"><td style="padding:8px 12px"><code>.ds-adv-dd</code></td><td style="padding:8px 12px;color:#6477a2">Wrapper — relative positioned container</td></tr>
+          <tr style="border-bottom:1px solid #f0f4f8"><td style="padding:8px 12px"><code>.ds-adv-dd__panel</code></td><td style="padding:8px 12px;color:#6477a2">Floating panel — white, 320px, 12px radius, shadow</td></tr>
+          <tr style="border-bottom:1px solid #f0f4f8"><td style="padding:8px 12px"><code>.ds-adv-dd__search</code></td><td style="padding:8px 12px;color:#6477a2">Search row — icon + text input, auto blue border on focus</td></tr>
+          <tr style="border-bottom:1px solid #f0f4f8"><td style="padding:8px 12px"><code>.ds-adv-dd__toolbar</code></td><td style="padding:8px 12px;color:#6477a2">Row containing toggle group and Select All</td></tr>
+          <tr style="border-bottom:1px solid #f0f4f8"><td style="padding:8px 12px"><code>.ds-adv-dd__toggle-btn--active</code></td><td style="padding:8px 12px;color:#6477a2">Active state on Include / Exclude toggle button</td></tr>
+          <tr style="border-bottom:1px solid #f0f4f8"><td style="padding:8px 12px"><code>.ds-adv-dd__item</code></td><td style="padding:8px 12px;color:#6477a2">List row — checkbox + label + optional badge</td></tr>
+          <tr style="border-bottom:1px solid #f0f4f8"><td style="padding:8px 12px"><code>.ds-adv-dd__badge</code></td><td style="padding:8px 12px;color:#6477a2">Circular badge (e.g. "1H") — blue outlined circle</td></tr>
+          <tr><td style="padding:8px 12px"><code>.ds-adv-dd__footer</code></td><td style="padding:8px 12px;color:#6477a2">Bottom row — right-aligned Apply button</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <script>
+    function advDdSyncSelectBtn(id) {
+      var list = document.getElementById(id + '-list');
+      var panel = document.getElementById(id + '-panel');
+      if (!list || !panel) return;
+      var cbs = list.querySelectorAll('.ds-checkbox-input');
+      var allChecked = cbs.length > 0 && Array.from(cbs).every(function(cb) { return cb.checked; });
+      var selectAllBtn = panel.querySelector('.btn--plain.btn--sm');
+      if (selectAllBtn) selectAllBtn.textContent = allChecked ? 'Reset' : 'Select All';
+    }
+    function advDdToggle(id) {
+      var panel = document.getElementById(id + '-panel');
+      var btn   = document.getElementById(id + '-btn');
+      var open  = panel.style.display === 'block';
+      panel.style.display = open ? 'none' : 'block';
+      if (btn) btn.classList.toggle('ds-dropdown__trigger--open', !open);
+      if (!open) {
+        var list = document.getElementById(id + '-list');
+        if (list && !list.dataset.advInit) {
+          list.dataset.advInit = '1';
+          list.addEventListener('change', function() { advDdSyncSelectBtn(id); });
+        }
+        advDdSyncSelectBtn(id);
+      }
+    }
+    function advDdToggleMode(btn) {
+      var group = btn.closest('div');
+      group.querySelectorAll('.subtab').forEach(function(b) { b.classList.remove('subtab--active'); });
+      btn.classList.add('subtab--active');
+    }
+    function advDdSelectAll(id, btn) {
+      var isReset = btn.textContent.trim() === 'Reset';
+      document.querySelectorAll('#' + id + '-list .ds-checkbox-input').forEach(function(cb) { cb.checked = !isReset; });
+      btn.textContent = isReset ? 'Select All' : 'Reset';
+    }
+    function advDdFilter(id) {
+      var q = document.getElementById(id + '-search').value.toLowerCase();
+      document.querySelectorAll('#' + id + '-list .ds-adv-dd__item').forEach(function(item) {
+        item.style.display = item.querySelector('.ds-adv-dd__item-label').textContent.toLowerCase().includes(q) ? '' : 'none';
+      });
+    }
+    function advDdApply(id) {
+      var checked = [];
+      document.querySelectorAll('#' + id + '-list .ds-checkbox-input:checked').forEach(function(cb) {
+        checked.push(cb.closest('.ds-adv-dd__item').querySelector('.ds-adv-dd__item-label').textContent);
+      });
+      var btn = document.getElementById(id + '-btn');
+      if (!btn.dataset.baseLabel) {
+        btn.dataset.baseLabel = btn.childNodes[0].textContent.trim();
+      }
+      var base = btn.dataset.baseLabel;
+      btn.childNodes[0].textContent = checked.length ? base + ' (' + checked.length + ') ' : base + ' ';
+      document.getElementById(id + '-panel').style.display = 'none';
+      btn.classList.remove('ds-dropdown__trigger--open');
+    }
+    // close on outside click
+    document.addEventListener('click', function(e) {
+      document.querySelectorAll('.ds-adv-dd').forEach(function(dd) {
+        if (!dd.contains(e.target)) {
+          var panel = dd.querySelector('.ds-adv-dd__panel[id]');
+          var btn   = dd.querySelector('[id$="-btn"]');
+          if (panel) panel.style.display = 'none';
+          if (btn)   btn.classList.remove('ds-dropdown__trigger--open');
+        }
+      });
+    });
+  </script>
+
+</section>
+      </div><!-- /comp-panel-adv-dropdown -->
+
+      <!-- ═══════════════════════════════════════════════════════════ -->
+      <!-- INPUT FIELD                                                 -->
+      <!-- ═══════════════════════════════════════════════════════════ -->
+      <div class="comp-panel" id="comp-panel-input-field" style="display:none">
+<section id="input-field">
+  <div class="section-header">
+    <h2>Input Field</h2>
+    <div class="divider"></div>
+  </div>
+  <p style="font-size:13px;color:var(--text-secondary-var);margin-bottom:24px">A single-line text input for collecting user-typed data. Covers the full interaction lifecycle — from empty through focused, filled, error, and disabled — plus label, helper text, and icon slot variants.</p>
+
+  <!-- 1. STATES ──────────────────────────────────────────────────── -->
+  <div style="margin-bottom:40px">
+    <div class="sub-label">States</div>
+    <div style="background:#ffffff;padding:24px;border-radius:12px;display:flex;gap:32px;flex-wrap:wrap;align-items:flex-start">
+
+      <!-- Default -->
+      <div style="display:flex;flex-direction:column;gap:8px;min-width:180px">
+        <div class="ds-input__wrap">
+          <input class="ds-input__input" type="text" placeholder="Placeholder text" tabindex="-1">
+        </div>
+        <span style="font-family:var(--font-base);font-size:11px;color:#858585;text-align:center">Default</span>
+      </div>
+
+      <!-- Focused -->
+      <div style="display:flex;flex-direction:column;gap:8px;min-width:180px">
+        <div class="ds-input__wrap ds-input__wrap--focused">
+          <input class="ds-input__input" type="text" placeholder="Placeholder text" tabindex="-1">
+        </div>
+        <span style="font-family:var(--font-base);font-size:11px;color:#858585;text-align:center">Focused</span>
+      </div>
+
+      <!-- Filled -->
+      <div style="display:flex;flex-direction:column;gap:8px;min-width:180px">
+        <div class="ds-input__wrap ds-input__wrap--filled">
+          <input class="ds-input__input" type="text" value="Entered value" tabindex="-1">
+        </div>
+        <span style="font-family:var(--font-base);font-size:11px;color:#858585;text-align:center">Filled</span>
+      </div>
+
+      <!-- Error -->
+      <div style="display:flex;flex-direction:column;gap:8px;min-width:180px">
+        <div class="ds-input__wrap ds-input__wrap--error">
+          <input class="ds-input__input" type="text" value="Invalid value" tabindex="-1">
+        </div>
+        <span style="font-family:var(--font-base);font-size:11px;color:#858585;text-align:center">Error</span>
+      </div>
+
+      <!-- Disabled -->
+      <div style="display:flex;flex-direction:column;gap:8px;min-width:180px">
+        <div class="ds-input__wrap ds-input__wrap--disabled">
+          <input class="ds-input__input" type="text" placeholder="Placeholder text" disabled tabindex="-1">
+        </div>
+        <span style="font-family:var(--font-base);font-size:11px;color:#858585;text-align:center">Disabled</span>
+      </div>
+
+      <!-- Read-only -->
+      <div style="display:flex;flex-direction:column;gap:8px;min-width:180px">
+        <div class="ds-input__wrap ds-input__wrap--readonly">
+          <input class="ds-input__input" type="text" value="Read-only value" readonly tabindex="-1">
+        </div>
+        <span style="font-family:var(--font-base);font-size:11px;color:#858585;text-align:center">Read-only</span>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 2. VARIANTS ────────────────────────────────────────────────── -->
+  <div style="margin-bottom:40px">
+    <div class="sub-label">Variants</div>
+    <div style="background:#ffffff;padding:24px;border-radius:12px;display:flex;flex-direction:column;gap:24px">
+
+      <!-- With label -->
+      <div style="display:flex;flex-direction:column;gap:16px">
+        <span style="font-family:var(--font-base);font-size:11px;font-weight:600;color:#485982;text-transform:uppercase;letter-spacing:0.4px">With Label</span>
+        <div style="max-width:320px">
+          <div class="ds-input">
+            <label class="ds-input__label">Search term</label>
+            <div class="ds-input__wrap">
+              <input class="ds-input__input" type="text" placeholder="e.g. running shoes">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- With helper text -->
+      <div style="display:flex;flex-direction:column;gap:16px">
+        <span style="font-family:var(--font-base);font-size:11px;font-weight:600;color:#485982;text-transform:uppercase;letter-spacing:0.4px">With Helper Text</span>
+        <div style="max-width:320px">
+          <div class="ds-input">
+            <label class="ds-input__label">Domain</label>
+            <div class="ds-input__wrap">
+              <input class="ds-input__input" type="text" placeholder="e.g. example.com">
+            </div>
+            <span class="ds-input__helper">Enter the root domain without https://</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- With error message -->
+      <div style="display:flex;flex-direction:column;gap:16px">
+        <span style="font-family:var(--font-base);font-size:11px;font-weight:600;color:#485982;text-transform:uppercase;letter-spacing:0.4px">With Error</span>
+        <div style="max-width:320px">
+          <div class="ds-input">
+            <label class="ds-input__label">Email address</label>
+            <div class="ds-input__wrap ds-input__wrap--error">
+              <input class="ds-input__input" type="text" value="not-an-email">
+            </div>
+            <span class="ds-input__error-msg">Please enter a valid email address</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- With prefix icon -->
+      <div style="display:flex;flex-direction:column;gap:16px">
+        <span style="font-family:var(--font-base);font-size:11px;font-weight:600;color:#485982;text-transform:uppercase;letter-spacing:0.4px">With Prefix Icon</span>
+        <div style="max-width:320px">
+          <div class="ds-input">
+            <label class="ds-input__label">Search</label>
+            <div class="ds-input__wrap">
+              <span class="ds-input__prefix">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="6.5" cy="6.5" r="4.5" stroke="#6477a2" stroke-width="1.3"/><path d="M10 10l3 3" stroke="#6477a2" stroke-width="1.3" stroke-linecap="round"/></svg>
+              </span>
+              <input class="ds-input__input" type="text" placeholder="Search terms…">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- With clear action -->
+      <div style="display:flex;flex-direction:column;gap:16px">
+        <span style="font-family:var(--font-base);font-size:11px;font-weight:600;color:#485982;text-transform:uppercase;letter-spacing:0.4px">With Action Button</span>
+        <div style="max-width:320px">
+          <div class="ds-input">
+            <label class="ds-input__label">Filter</label>
+            <div class="ds-input__wrap ds-input__wrap--filled">
+              <input class="ds-input__input" type="text" value="Brand keywords">
+              <button class="ds-input__action" aria-label="Clear">
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 2l10 10M12 2L2 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 3. INTERACTIVE DEMO ─────────────────────────────────────────── -->
+  <div style="margin-bottom:40px">
+    <div class="sub-label">Interactive Demo</div>
+    <div style="background:#ffffff;padding:24px;border-radius:12px;max-width:400px">
+      <div class="ds-input" id="input-demo">
+        <label class="ds-input__label" for="input-demo-field">Keyword</label>
+        <div class="ds-input__wrap" id="input-demo-wrap">
+          <span class="ds-input__prefix">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="6.5" cy="6.5" r="4.5" stroke="#6477a2" stroke-width="1.3"/><path d="M10 10l3 3" stroke="#6477a2" stroke-width="1.3" stroke-linecap="round"/></svg>
+          </span>
+          <input class="ds-input__input" id="input-demo-field" type="text" placeholder="Type a search term…">
+          <button class="ds-input__action" id="input-demo-clear" aria-label="Clear" style="display:none" onclick="document.getElementById('input-demo-field').value='';this.style.display='none';document.getElementById('input-demo-wrap').classList.remove('ds-input__wrap--filled');">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 2l10 10M12 2L2 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          </button>
+        </div>
+        <span class="ds-input__helper" id="input-demo-helper">Click the field and start typing</span>
+      </div>
+      <script>
+        (function() {
+          var field = document.getElementById('input-demo-field');
+          var clear = document.getElementById('input-demo-clear');
+          var wrap  = document.getElementById('input-demo-wrap');
+          var helper = document.getElementById('input-demo-helper');
+          field.addEventListener('input', function() {
+            var hasVal = field.value.length > 0;
+            clear.style.display = hasVal ? '' : 'none';
+            wrap.classList.toggle('ds-input__wrap--filled', hasVal);
+            helper.textContent = hasVal ? field.value.length + ' character' + (field.value.length > 1 ? 's' : '') : 'Click the field and start typing';
+          });
+        })();
+      </script>
+    </div>
+  </div>
+
+  <!-- 4. CSS CLASSES ─────────────────────────────────────────────── -->
+  <div style="margin-bottom:40px">
+    <div class="sub-label">CSS Classes</div>
+    <table class="spec-table">
+      <thead><tr><th>Class</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td>.ds-input</td><td>Root wrapper — flex column, gap 4px. Holds label + wrap + helper.</td></tr>
+        <tr><td>.ds-input__label</td><td>Field label — 12px semibold #485982, above the wrap</td></tr>
+        <tr><td>.ds-input__wrap</td><td>Input container — 40px height, 1px border #c4cdd5, radius 6px, white bg. Gains focus ring on :focus-within.</td></tr>
+        <tr><td>.ds-input__input</td><td>Native &lt;input&gt; — 14px regular #27365b, placeholder #8fa0b8, no border/outline, transparent bg</td></tr>
+        <tr><td>.ds-input__prefix</td><td>Left icon slot — 10px left padding, icon colour #6477a2</td></tr>
+        <tr><td>.ds-input__suffix</td><td>Right icon slot — 10px right padding, icon colour #6477a2</td></tr>
+        <tr><td>.ds-input__action</td><td>Right icon button — 32×32px, hover bg #eaf1f7, no border</td></tr>
+        <tr><td>.ds-input__helper</td><td>Helper text — 12px regular #6477a2, below wrap</td></tr>
+        <tr><td>.ds-input__error-msg</td><td>Error message — 12px regular #de5a5a, replaces helper on error</td></tr>
+        <tr><td>.ds-input__wrap--focused</td><td>Blue border #1565c0 + focus ring — use in static demos</td></tr>
+        <tr><td>.ds-input__wrap--filled</td><td>Border #a0aec0 — indicates a value has been entered</td></tr>
+        <tr><td>.ds-input__wrap--error</td><td>Red border #de5a5a + red focus ring</td></tr>
+        <tr><td>.ds-input__wrap--disabled</td><td>Bg #f5f7fa, border #dde1e9, text muted, no pointer</td></tr>
+        <tr><td>.ds-input__wrap--readonly</td><td>Bg #f9fafb, border #dde1e9, default cursor</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- 5. DESIGN TOKENS ───────────────────────────────────────────── -->
+  <div style="margin-bottom:40px">
+    <div class="sub-label">Design Tokens</div>
+    <table class="spec-table">
+      <thead><tr><th>Token</th><th>Value</th><th>Usage</th></tr></thead>
+      <tbody>
+        <tr><td>—</td><td>40px</td><td>Input height</td></tr>
+        <tr><td>borderRadius.sm</td><td>6px</td><td>Wrap border-radius</td></tr>
+        <tr><td>—</td><td>1px solid #c4cdd5</td><td>Default border</td></tr>
+        <tr><td>fill.main</td><td>#1565c0</td><td>Focused border colour</td></tr>
+        <tr><td>—</td><td>rgba(21,101,192,0.12)</td><td>Focus ring (box-shadow)</td></tr>
+        <tr><td>red/400</td><td>#de5a5a</td><td>Error border &amp; message colour</td></tr>
+        <tr><td>—</td><td>rgba(222,90,90,0.1)</td><td>Error focus ring</td></tr>
+        <tr><td>neutral/800</td><td>#27365b</td><td>Input text colour</td></tr>
+        <tr><td>—</td><td>#8fa0b8</td><td>Placeholder colour</td></tr>
+        <tr><td>neutral/600</td><td>#485982</td><td>Label colour</td></tr>
+        <tr><td>neutral/400</td><td>#6477a2</td><td>Helper text · icon colour</td></tr>
+        <tr><td>—</td><td>14px / 400</td><td>Input text size / weight</td></tr>
+        <tr><td>—</td><td>12px / 600</td><td>Label size / weight</td></tr>
+        <tr><td>—</td><td>12px / 400</td><td>Helper / error text size / weight</td></tr>
+        <tr><td>—</td><td>#f5f7fa</td><td>Disabled background</td></tr>
+        <tr><td>—</td><td>#f9fafb</td><td>Read-only background</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- 6. HTML USAGE ──────────────────────────────────────────────── -->
+  <div style="margin-bottom:40px">
+    <div class="sub-label">HTML Usage</div>
+    <pre class="code-block">&lt;!-- Basic input --&gt;
+&lt;div class="ds-input"&gt;
+  &lt;label class="ds-input__label"&gt;Field label&lt;/label&gt;
+  &lt;div class="ds-input__wrap"&gt;
+    &lt;input class="ds-input__input" type="text" placeholder="Placeholder"&gt;
+  &lt;/div&gt;
+  &lt;span class="ds-input__helper"&gt;Helper text&lt;/span&gt;
+&lt;/div&gt;
+
+&lt;!-- Error state --&gt;
+&lt;div class="ds-input"&gt;
+  &lt;label class="ds-input__label"&gt;Field label&lt;/label&gt;
+  &lt;div class="ds-input__wrap ds-input__wrap--error"&gt;
+    &lt;input class="ds-input__input" type="text" value="Invalid value"&gt;
+  &lt;/div&gt;
+  &lt;span class="ds-input__error-msg"&gt;Error message&lt;/span&gt;
+&lt;/div&gt;
+
+&lt;!-- With prefix icon --&gt;
+&lt;div class="ds-input"&gt;
+  &lt;div class="ds-input__wrap"&gt;
+    &lt;span class="ds-input__prefix"&gt;&lt;!-- svg icon --&gt;&lt;/span&gt;
+    &lt;input class="ds-input__input" type="text" placeholder="Search…"&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!-- Disabled --&gt;
+&lt;div class="ds-input"&gt;
+  &lt;div class="ds-input__wrap ds-input__wrap--disabled"&gt;
+    &lt;input class="ds-input__input" type="text" placeholder="Disabled" disabled&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</pre>
+  </div>
+
+</section>
+      </div><!-- /comp-panel-input-field -->
+
+      <!-- ═══════════════════════════════════════════════════════════ -->
       <!-- FIGMA MCP WORKFLOW                                          -->
       <!-- ═══════════════════════════════════════════════════════════ -->
       <div class="comp-panel" id="comp-panel-figma-workflow" style="display:none">
@@ -15623,14 +16781,12 @@ Prioritise authority reinforcement in declining citation segments</textarea>
   const demoIconSvg  = document.getElementById('demo-icon-svg');
 
   function updateDemo() {
-    const isActive      = document.getElementById('demo-active').checked;
-    const isHighlighted = document.getElementById('demo-highlighted').checked;
-    const showIcon      = document.getElementById('demo-icon').checked;
-    const showBadge     = document.getElementById('demo-numbered').checked;
+    const isActive  = document.getElementById('demo-active').checked;
+    const showIcon  = document.getElementById('demo-icon').checked;
+    const showBadge = document.getElementById('demo-numbered').checked;
 
     demoEl.className = 'subtab' +
-      (isActive      ? ' subtab--active'      : '') +
-      (isHighlighted && !isActive ? ' subtab--highlighted' : '');
+      (isActive ? ' subtab--active' : '');
 
     demoIconSlot.style.display = showIcon  ? '' : 'none';
     demoBadge.style.display    = showBadge ? '' : 'none';
@@ -15645,7 +16801,7 @@ Prioritise authority reinforcement in declining citation segments</textarea>
     });
   }
 
-  ['demo-active','demo-highlighted','demo-icon','demo-numbered'].forEach(id => {
+  ['demo-active','demo-icon','demo-numbered'].forEach(id => {
     document.getElementById(id).addEventListener('change', updateDemo);
   });
 
