@@ -15539,15 +15539,27 @@ Prioritise authority reinforcement in declining citation segments</textarea>
       var anyChecked = checkedCount > 0;
       var resetBtn = panel.querySelector('.ds-adv-dd__reset-btn');
       if (resetBtn) resetBtn.style.display = anyChecked ? '' : 'none';
-      panel.querySelectorAll('.ds-adv-dd__toolbar .subtab').forEach(function(btn) {
+      // Save current mode's state and update its badge
+      var activeBtn = panel.querySelector('.ds-adv-dd__toolbar .subtab--active');
+      if (activeBtn) {
+        var mode = activeBtn.childNodes[0].textContent.trim().toLowerCase();
+        if (!window._advDdState) window._advDdState = {};
+        if (!window._advDdState[id]) window._advDdState[id] = {};
+        var state = {};
+        cbs.forEach(function(cb, i) { state[i] = cb.checked; });
+        window._advDdState[id][mode] = state;
+        var activeBadge = activeBtn.querySelector('.subtab__badge');
+        if (activeBadge) { activeBadge.textContent = checkedCount; activeBadge.style.display = anyChecked ? '' : 'none'; }
+      }
+      // Show inactive tab's saved count independently
+      panel.querySelectorAll('.ds-adv-dd__toolbar .subtab:not(.subtab--active)').forEach(function(btn) {
         var badge = btn.querySelector('.subtab__badge');
         if (!badge) return;
-        if (btn.classList.contains('subtab--active') && anyChecked) {
-          badge.textContent = checkedCount;
-          badge.style.display = '';
-        } else {
-          badge.style.display = 'none';
-        }
+        var inactiveMode = btn.childNodes[0].textContent.trim().toLowerCase();
+        var saved = window._advDdState && window._advDdState[id] && window._advDdState[id][inactiveMode];
+        var savedCount = saved ? Object.values(saved).filter(Boolean).length : 0;
+        badge.textContent = savedCount;
+        badge.style.display = savedCount > 0 ? '' : 'none';
       });
     }
     function advDdClose(id) {
@@ -15578,10 +15590,33 @@ Prioritise authority reinforcement in declining citation segments</textarea>
     }
     function advDdToggleMode(btn) {
       var group = btn.closest('div');
+      var panel = btn.closest('[id$="-panel"]');
+      var id = panel ? panel.id.slice(0, -6) : null;
+      if (id) {
+        // Save current mode's checkbox state before switching
+        var currentBtn = group.querySelector('.subtab--active');
+        var list = document.getElementById(id + '-list');
+        if (currentBtn && list) {
+          var currentMode = currentBtn.childNodes[0].textContent.trim().toLowerCase();
+          var state = {};
+          list.querySelectorAll('.ds-checkbox-input').forEach(function(cb, i) { state[i] = cb.checked; });
+          if (!window._advDdState) window._advDdState = {};
+          if (!window._advDdState[id]) window._advDdState[id] = {};
+          window._advDdState[id][currentMode] = state;
+        }
+      }
       group.querySelectorAll('.subtab').forEach(function(b) { b.classList.remove('subtab--active'); });
       btn.classList.add('subtab--active');
-      var panel = btn.closest('[id$="-panel"]');
-      if (panel) advDdSyncSelectBtn(panel.id.slice(0, -6));
+      if (id) {
+        // Restore new mode's checkbox state
+        var newMode = btn.childNodes[0].textContent.trim().toLowerCase();
+        var list = document.getElementById(id + '-list');
+        if (list) {
+          var saved = window._advDdState && window._advDdState[id] && window._advDdState[id][newMode];
+          list.querySelectorAll('.ds-checkbox-input').forEach(function(cb, i) { cb.checked = saved ? (saved[i] || false) : false; });
+        }
+        advDdSyncSelectBtn(id);
+      }
     }
     function advDdSelectAll(id) {
       document.querySelectorAll('#' + id + '-list .ds-checkbox-input').forEach(function(cb) { cb.checked = true; });
