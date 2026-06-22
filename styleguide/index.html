@@ -15650,16 +15650,30 @@ Prioritise authority reinforcement in declining citation segments</textarea>
       });
     }
     function advDdApply(id) {
-      var checked = [];
-      document.querySelectorAll('#' + id + '-list .ds-checkbox-input:checked').forEach(function(cb) {
-        checked.push(cb.closest('.ds-adv-dd__item').querySelector('.ds-adv-dd__item-label').textContent);
-      });
-      var btn = document.getElementById(id + '-btn');
-      if (!btn.dataset.baseLabel) {
-        btn.dataset.baseLabel = btn.childNodes[0].textContent.trim();
+      // Save current mode's state before reading totals
+      var panel = document.getElementById(id + '-panel');
+      var list  = document.getElementById(id + '-list');
+      var activeBtn = panel ? panel.querySelector('.ds-adv-dd__toolbar .subtab--active') : null;
+      if (activeBtn && list) {
+        var currentMode = activeBtn.childNodes[0].textContent.trim().toLowerCase();
+        var state = {};
+        list.querySelectorAll('.ds-checkbox-input').forEach(function(cb, i) { state[i] = cb.checked; });
+        if (!window._advDdState) window._advDdState = {};
+        if (!window._advDdState[id]) window._advDdState[id] = {};
+        window._advDdState[id][currentMode] = state;
       }
+      // Count selections per mode
+      var s = window._advDdState && window._advDdState[id] || {};
+      var incCount = s['include'] ? Object.values(s['include']).filter(Boolean).length : 0;
+      var excCount = s['exclude'] ? Object.values(s['exclude']).filter(Boolean).length : 0;
+      var btn = document.getElementById(id + '-btn');
+      if (!btn) { advDdClose(id); return; }
+      if (!btn.dataset.baseLabel) btn.dataset.baseLabel = btn.childNodes[0].textContent.trim();
       var base = btn.dataset.baseLabel;
-      btn.childNodes[0].textContent = checked.length ? base + ' (' + checked.length + ') ' : base + ' ';
+      var parts = [];
+      if (incCount) parts.push(incCount + ' inc');
+      if (excCount) parts.push(excCount + ' exc');
+      btn.childNodes[0].textContent = parts.length ? base + ' (' + parts.join(' · ') + ') ' : base + ' ';
       advDdClose(id);
     }
     // close on outside click
