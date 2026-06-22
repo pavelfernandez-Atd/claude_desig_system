@@ -14931,7 +14931,7 @@ Prioritise authority reinforcement in declining citation segments</textarea>
   <!-- 1. LIVE DEMO ─────────────────────────────────────────────── -->
   <div style="margin-bottom:40px">
     <div class="sub-label">Live Demo</div>
-    <div style="background:#ffffff;padding:40px 24px 140px;border-radius:12px;display:flex;gap:32px;flex-wrap:wrap;align-items:flex-start">
+    <div style="background:#ffffff;padding:40px 24px 140px;border-radius:12px;display:flex;gap:48px;flex-wrap:wrap;align-items:flex-start">
 
       <!-- Simple list -->
       <div style="display:flex;flex-direction:column;gap:8px;align-items:flex-start">
@@ -14947,6 +14947,20 @@ Prioritise authority reinforcement in declining citation segments</textarea>
             <div class="ds-dropdown__item" onclick="dsDropdownSelect(this,'dd-simple','Finance')">Finance</div>
             <div class="ds-dropdown__item" onclick="dsDropdownSelect(this,'dd-simple','Travel')">Travel</div>
             <div class="ds-dropdown__item" onclick="dsDropdownSelect(this,'dd-simple','Retail')">Retail</div>
+            <div class="ds-dropdown__item ds-dropdown__item--disabled">Luxury Goods</div>
+          </div>
+        </div>
+        <div class="ds-dropdown" id="dd-simple-plain">
+          <button class="btn btn--plain" id="dd-simple-plain-btn" onclick="dsDropdownToggle('dd-simple-plain')">
+            All Industries
+            <svg class="ds-dropdown__trigger-chevron" width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 5l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <div class="ds-dropdown__menu" id="dd-simple-plain-menu">
+            <div class="ds-dropdown__item ds-dropdown__item--selected" onclick="dsDropdownSelect(this,'dd-simple-plain','All Industries')">All Industries</div>
+            <div class="ds-dropdown__item" onclick="dsDropdownSelect(this,'dd-simple-plain','Automotive')">Automotive</div>
+            <div class="ds-dropdown__item" onclick="dsDropdownSelect(this,'dd-simple-plain','Finance')">Finance</div>
+            <div class="ds-dropdown__item" onclick="dsDropdownSelect(this,'dd-simple-plain','Travel')">Travel</div>
+            <div class="ds-dropdown__item" onclick="dsDropdownSelect(this,'dd-simple-plain','Retail')">Retail</div>
             <div class="ds-dropdown__item ds-dropdown__item--disabled">Luxury Goods</div>
           </div>
         </div>
@@ -14969,6 +14983,22 @@ Prioritise authority reinforcement in declining citation segments</textarea>
             <div class="ds-dropdown__item" onclick="dsDropdownSelect(this,'dd-divided','Last 90 Days')">Last 90 Days</div>
             <div class="ds-dropdown__divider"></div>
             <div class="ds-dropdown__item" onclick="dsDropdownSelect(this,'dd-divided','Custom Range')">Custom Range…</div>
+          </div>
+        </div>
+        <div class="ds-dropdown" id="dd-divided-plain">
+          <button class="btn btn--plain" id="dd-divided-plain-btn" onclick="dsDropdownToggle('dd-divided-plain')">
+            Last 30 Days
+            <svg class="ds-dropdown__trigger-chevron" width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 5l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <div class="ds-dropdown__menu" id="dd-divided-plain-menu">
+            <div class="ds-dropdown__item" onclick="dsDropdownSelect(this,'dd-divided-plain','Today')">Today</div>
+            <div class="ds-dropdown__item" onclick="dsDropdownSelect(this,'dd-divided-plain','Yesterday')">Yesterday</div>
+            <div class="ds-dropdown__divider"></div>
+            <div class="ds-dropdown__item" onclick="dsDropdownSelect(this,'dd-divided-plain','Last 7 Days')">Last 7 Days</div>
+            <div class="ds-dropdown__item ds-dropdown__item--selected" onclick="dsDropdownSelect(this,'dd-divided-plain','Last 30 Days')">Last 30 Days</div>
+            <div class="ds-dropdown__item" onclick="dsDropdownSelect(this,'dd-divided-plain','Last 90 Days')">Last 90 Days</div>
+            <div class="ds-dropdown__divider"></div>
+            <div class="ds-dropdown__item" onclick="dsDropdownSelect(this,'dd-divided-plain','Custom Range')">Custom Range…</div>
           </div>
         </div>
       </div>
@@ -14994,23 +15024,22 @@ Prioritise authority reinforcement in declining citation segments</textarea>
             <div class="ds-dropdown__item" onclick="dsDropdownSelect(this,'dd-grouped','Android')">Android</div>
           </div>
         </div>
-      </div>
-
-      <!-- Plain trigger -->
-      <div style="display:flex;flex-direction:column;gap:8px;align-items:flex-start">
-        <span style="font-family:var(--font-base);font-size:11px;font-weight:600;color:#485982;text-transform:uppercase;letter-spacing:0.4px;margin-bottom:4px">Plain</span>
-        <div class="ds-dropdown" id="dd-plain">
-          <button class="btn btn--plain" id="dd-plain-btn" onclick="dsDropdownToggle('dd-plain')">
-            All Industries
+        <div class="ds-dropdown" id="dd-grouped-plain">
+          <button class="btn btn--plain" id="dd-grouped-plain-btn" onclick="dsDropdownToggle('dd-grouped-plain')">
+            All Devices
             <svg class="ds-dropdown__trigger-chevron" width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 5l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </button>
-          <div class="ds-dropdown__menu" id="dd-plain-menu">
-            <div class="ds-dropdown__item ds-dropdown__item--selected" onclick="dsDropdownSelect(this,'dd-plain','All Industries')">All Industries</div>
-            <div class="ds-dropdown__item" onclick="dsDropdownSelect(this,'dd-plain','Automotive')">Automotive</div>
-            <div class="ds-dropdown__item" onclick="dsDropdownSelect(this,'dd-plain','Finance')">Finance</div>
-            <div class="ds-dropdown__item" onclick="dsDropdownSelect(this,'dd-plain','Travel')">Travel</div>
-            <div class="ds-dropdown__item" onclick="dsDropdownSelect(this,'dd-plain','Retail')">Retail</div>
-            <div class="ds-dropdown__item ds-dropdown__item--disabled">Luxury Goods</div>
+          <div class="ds-dropdown__menu" id="dd-grouped-plain-menu">
+            <span class="ds-dropdown__group-label">Aggregate</span>
+            <div class="ds-dropdown__item ds-dropdown__item--selected" onclick="dsDropdownSelect(this,'dd-grouped-plain','All Devices')">All Devices</div>
+            <div class="ds-dropdown__divider"></div>
+            <span class="ds-dropdown__group-label">Desktop</span>
+            <div class="ds-dropdown__item" onclick="dsDropdownSelect(this,'dd-grouped-plain','Windows')">Windows</div>
+            <div class="ds-dropdown__item" onclick="dsDropdownSelect(this,'dd-grouped-plain','Mac')">Mac</div>
+            <div class="ds-dropdown__divider"></div>
+            <span class="ds-dropdown__group-label">Mobile</span>
+            <div class="ds-dropdown__item" onclick="dsDropdownSelect(this,'dd-grouped-plain','iOS')">iOS</div>
+            <div class="ds-dropdown__item" onclick="dsDropdownSelect(this,'dd-grouped-plain','Android')">Android</div>
           </div>
         </div>
       </div>
