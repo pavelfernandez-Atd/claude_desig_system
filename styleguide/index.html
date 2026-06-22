@@ -16622,23 +16622,30 @@ Prioritise authority reinforcement in declining citation segments</textarea>
 
 <script>
   const tabBtns = document.querySelectorAll('.tab-bar [data-tab]');
+  let _skipHashUpdate = false;
 
   // ── TAB SWITCHING ───────────────────────────────────────────
+  function activateTab(tab) {
+    tabBtns.forEach(b => b.classList.remove('active'));
+    const btn = document.querySelector(`.tab-bar [data-tab="${tab}"]`);
+    if (btn) btn.classList.add('active');
+    document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+    document.getElementById('tab-content-' + tab).classList.add('active');
+    document.querySelectorAll('.sub-nav').forEach(el => el.style.display = 'none');
+    const sn = document.getElementById('subnav-' + tab);
+    if (sn) sn.style.display = 'flex';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
   tabBtns.forEach(btn => {
     btn.addEventListener('click', () => {
       const tab = btn.dataset.tab;
-      tabBtns.forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
-      document.getElementById('tab-content-' + tab).classList.add('active');
-      document.querySelectorAll('.sub-nav').forEach(el => el.style.display = 'none');
-      const sn = document.getElementById('subnav-' + tab);
-      if (sn) sn.style.display = 'flex';
+      activateTab(tab);
       if (tab === 'components') {
-        // default to Cards > KPI Card
         activateCategory('cards');
+      } else {
+        history.replaceState(null, '', '#style-guide');
       }
-      window.scrollTo({ top: 0, behavior: 'smooth' });
     });
   });
 
@@ -16653,6 +16660,11 @@ Prioritise authority reinforcement in declining citation segments</textarea>
     if (comp === 'stacked-timeline') { requestAnimationFrame(function(){ if(window.sltUpdateAxisLabels) window.sltUpdateAxisLabels(); }); }
     if (comp === 'timeline-chart') { requestAnimationFrame(function(){ var s=document.getElementById('tc-svg'); if(s){var sc=s.getBoundingClientRect().width/740; if(sc) s.querySelectorAll('.tc-axis-label').forEach(function(t){t.setAttribute('font-size',(13/sc).toFixed(2));}); } }); }
     window.scrollTo({ top: 0, behavior: 'instant' });
+    if (!_skipHashUpdate && link) {
+      const group = link.closest('.comp-sidebar-group');
+      const cat = group ? group.dataset.group : null;
+      if (cat) history.replaceState(null, '', '#components/' + cat + '/' + comp);
+    }
   }
 
   function activateCategory(cat) {
@@ -16687,11 +16699,13 @@ Prioritise authority reinforcement in declining citation segments</textarea>
     const link = e.target.closest('.sub-nav a[href^="#"]');
     if (!link) return;
     e.preventDefault();
-    const target = document.getElementById(link.getAttribute('href').slice(1));
+    const sectionId = link.getAttribute('href').slice(1);
+    const target = document.getElementById(sectionId);
     if (!target) return;
     window.scrollTo({ top: target.getBoundingClientRect().top + window.scrollY - stickyOffset() - 16, behavior: 'smooth' });
     document.querySelectorAll('#subnav-style-guide a').forEach(a => a.classList.remove('active'));
     link.classList.add('active');
+    history.replaceState(null, '', '#style-guide/' + sectionId);
   });
 
   // ── SCROLL SPY ─────────────────────────────────────────────
@@ -17141,6 +17155,40 @@ Prioritise authority reinforcement in declining citation segments</textarea>
       });
     }
   })();
+
+  // ── HASH-BASED ROUTING ──────────────────────────────────────
+  function parseAndApplyHash() {
+    const hash = window.location.hash.slice(1);
+    if (!hash) return;
+    const parts = hash.split('/');
+    const tab = parts[0];
+    _skipHashUpdate = true;
+    try {
+      if (tab === 'style-guide') {
+        activateTab('style-guide');
+        if (parts[1]) {
+          const target = document.getElementById(parts[1]);
+          if (target) setTimeout(function() {
+            window.scrollTo({ top: target.getBoundingClientRect().top + window.scrollY - stickyOffset() - 16, behavior: 'smooth' });
+            document.querySelectorAll('#subnav-style-guide a').forEach(function(a) {
+              a.classList.toggle('active', a.getAttribute('href') === '#' + parts[1]);
+            });
+          }, 50);
+        }
+      } else if (tab === 'components') {
+        activateTab('components');
+        const cat = parts[1] || 'cards';
+        const comp = parts[2];
+        activateCategory(cat);
+        if (comp) activateComponent(comp);
+      }
+    } finally {
+      _skipHashUpdate = false;
+    }
+  }
+
+  window.addEventListener('hashchange', parseAndApplyHash);
+  parseAndApplyHash();
 </script>
 <div id="donut-arc-tip" style="display:none;position:fixed;background:#38476a;border-radius:6px;padding:8px 12px;box-shadow:0 2px 8px rgba(0,0,0,0.2);pointer-events:none;z-index:9999;align-items:center;gap:6px;white-space:nowrap">
   <span id="dat-dot" style="width:9px;height:9px;border-radius:50%;flex-shrink:0;display:inline-block"></span>
