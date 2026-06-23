@@ -1089,6 +1089,19 @@
     .ds-input--textarea .ds-input__input { padding:20px 12px 8px; resize:vertical; min-height:80px; line-height:1.5; }
     .ds-input--textarea .ds-input__float-label { top:14px; }
 
+    /* === Slider (.ds-slider) === */
+    .ds-slider { display:flex; flex-direction:column; gap:6px; font-family:var(--font-base); }
+    .ds-slider__track { position:relative; height:20px; border-radius:200px; background:#c4cdd5; box-shadow:0 0 0 3px rgba(0,0,0,0.07); }
+    .ds-slider__fill { position:absolute; top:0; left:0; height:100%; min-width:20px; border-radius:200px; background:#576993; pointer-events:none; }
+    .ds-slider__fill::after { content:''; position:absolute; right:2px; top:2px; width:16px; height:16px; border-radius:50%; background:#ffffff; }
+    .ds-slider__track:has(input:disabled) { opacity:0.4; }
+    .ds-slider__track:has(input:disabled) .ds-slider__fill { background:#8da0b8; }
+    .ds-slider__input { -webkit-appearance:none; appearance:none; position:absolute; top:0; left:0; width:100%; height:100%; opacity:0; cursor:pointer; margin:0; padding:0; }
+    .ds-slider__input:disabled { cursor:not-allowed; }
+    .ds-slider__labels { display:flex; justify-content:space-between; font-size:11px; color:#6477a2; }
+    .ds-slider__value { font-size:12px; font-weight:600; color:#27365b; text-align:right; }
+    .ds-slider__label { font-size:12px; font-weight:600; color:#485982; margin-bottom:4px; }
+
     /* === Filled Input Field (.ds-fillet) === */
     .ds-fillet { display:flex; flex-direction:column; gap:4px; font-family:var(--font-base); }
     .ds-fillet__wrap { position:relative; display:flex; align-items:stretch; height:40px; border-radius:8px; background:#e8eef5; transition:background 0.15s; overflow:visible; border:none; }
@@ -3163,6 +3176,7 @@
       <div class="comp-sidebar-group" data-group="inputters" style="display:none">
         <a class="comp-sidebar-link" data-component="input-field" style="cursor:pointer">Outlined Input Field</a>
         <a class="comp-sidebar-link" data-component="fillet-input" style="cursor:pointer">Filled Input Field</a>
+        <a class="comp-sidebar-link" data-component="slider" style="cursor:pointer">Slider</a>
         <a class="comp-sidebar-link" data-component="date-picker" style="cursor:pointer">Date Picker</a>
         <a class="comp-sidebar-link" data-component="checkbox" style="cursor:pointer">Checkbox</a>
         <a class="comp-sidebar-link" data-component="radio-button" style="cursor:pointer">Radio Button</a>
@@ -16771,6 +16785,162 @@ Prioritise authority reinforcement in declining citation segments</textarea>
       </div><!-- /comp-panel-fillet-input -->
 
       <!-- ═══════════════════════════════════════════════════════════ -->
+      <!-- SLIDER                                                       -->
+      <!-- ═══════════════════════════════════════════════════════════ -->
+      <div class="comp-panel" id="comp-panel-slider" style="display:none">
+<section id="slider">
+  <div class="section-header">
+    <h2>Slider</h2>
+    <div class="divider"></div>
+    <div style="display:flex;gap:8px;margin-top:16px;margin-bottom:24px;flex-wrap:wrap">
+      <a href="https://github.com/pavelfernandez-Atd/claude_desig_system/tree/main/components/slider"
+         target="_blank" rel="noopener"
+         style="display:inline-flex;align-items:center;gap:6px;padding:6px 12px;background:#24292e;color:#ffffff;border-radius:6px;font-size:12px;font-weight:600;font-family:var(--font-base);text-decoration:none">
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+        View on GitHub
+      </a>
+    </div>
+  </div>
+  <p style="font-size:13px;color:#6b6b6b;margin-bottom:32px;max-width:640px">A horizontal range control for selecting a numeric value within a defined min–max range. Supports single-value and labelled variants with live value feedback.</p>
+
+  <!-- 1. LIVE DEMO -->
+  <div style="margin-bottom:40px">
+    <div class="sub-label">Live Demo</div>
+    <div style="background:#ffffff;padding:32px;border-radius:12px;display:flex;flex-direction:column;gap:32px;max-width:480px">
+
+      <!-- Basic -->
+      <div class="ds-slider">
+        <div style="display:flex;justify-content:space-between;align-items:baseline">
+          <span class="ds-slider__label">Volume</span>
+          <span class="ds-slider__value" id="sl-live-1-val">40</span>
+        </div>
+        <input class="ds-slider__input" type="range" min="0" max="100" value="40" id="sl-live-1"
+          style="--val:40%"
+          oninput="this.style.setProperty('--val',this.value+'%');document.getElementById('sl-live-1-val').textContent=this.value">
+        <div class="ds-slider__labels"><span>0</span><span>100</span></div>
+      </div>
+
+      <!-- With steps -->
+      <div class="ds-slider">
+        <div style="display:flex;justify-content:space-between;align-items:baseline">
+          <span class="ds-slider__label">Quality (steps of 25)</span>
+          <span class="ds-slider__value" id="sl-live-2-val">50</span>
+        </div>
+        <input class="ds-slider__input" type="range" min="0" max="100" step="25" value="50" id="sl-live-2"
+          style="--val:50%"
+          oninput="this.style.setProperty('--val',this.value+'%');document.getElementById('sl-live-2-val').textContent=this.value">
+        <div class="ds-slider__labels"><span>0</span><span>25</span><span>50</span><span>75</span><span>100</span></div>
+      </div>
+
+      <!-- Disabled -->
+      <div class="ds-slider">
+        <div style="display:flex;justify-content:space-between;align-items:baseline">
+          <span class="ds-slider__label" style="color:#a0aab6">Brightness (disabled)</span>
+          <span class="ds-slider__value" style="color:#a0aab6">65</span>
+        </div>
+        <input class="ds-slider__input" type="range" min="0" max="100" value="65" disabled
+          style="--val:65%">
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 2. STATES -->
+  <div style="margin-bottom:40px">
+    <div class="sub-label">States</div>
+    <div style="background:#ffffff;padding:24px;border-radius:12px;display:flex;flex-direction:column;gap:24px;max-width:480px">
+
+      <div>
+        <div class="ds-slider__labels" style="margin-bottom:6px"><span style="font-size:11px;color:#858585">Default</span></div>
+        <input class="ds-slider__input" type="range" min="0" max="100" value="30" style="--val:30%" tabindex="-1">
+      </div>
+
+      <div>
+        <div class="ds-slider__labels" style="margin-bottom:6px"><span style="font-size:11px;color:#858585">Filled</span></div>
+        <input class="ds-slider__input" type="range" min="0" max="100" value="65" style="--val:65%" tabindex="-1">
+      </div>
+
+      <div>
+        <div class="ds-slider__labels" style="margin-bottom:6px"><span style="font-size:11px;color:#858585">Disabled</span></div>
+        <input class="ds-slider__input" type="range" min="0" max="100" value="40" style="--val:40%" disabled tabindex="-1">
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 3. VARIANTS -->
+  <div style="margin-bottom:40px">
+    <div class="sub-label">Variants</div>
+    <div style="background:#ffffff;padding:24px;border-radius:12px;display:flex;flex-direction:column;gap:28px">
+
+      <div style="display:flex;flex-direction:column;gap:16px">
+        <span style="font-family:var(--font-base);font-size:11px;font-weight:600;color:#485982;text-transform:uppercase;letter-spacing:0.4px">Basic</span>
+        <div style="max-width:320px">
+          <div class="ds-slider">
+            <input class="ds-slider__input" type="range" min="0" max="100" value="40" style="--val:40%"
+              oninput="this.style.setProperty('--val',this.value+'%')">
+          </div>
+        </div>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:16px">
+        <span style="font-family:var(--font-base);font-size:11px;font-weight:600;color:#485982;text-transform:uppercase;letter-spacing:0.4px">With Label and Value</span>
+        <div style="max-width:320px">
+          <div class="ds-slider">
+            <div style="display:flex;justify-content:space-between;align-items:baseline">
+              <span class="ds-slider__label">Threshold</span>
+              <span class="ds-slider__value" id="sl-var-val">60</span>
+            </div>
+            <input class="ds-slider__input" type="range" min="0" max="100" value="60" style="--val:60%"
+              oninput="this.style.setProperty('--val',this.value+'%');document.getElementById('sl-var-val').textContent=this.value">
+          </div>
+        </div>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:16px">
+        <span style="font-family:var(--font-base);font-size:11px;font-weight:600;color:#485982;text-transform:uppercase;letter-spacing:0.4px">With Min / Max Labels</span>
+        <div style="max-width:320px">
+          <div class="ds-slider">
+            <input class="ds-slider__input" type="range" min="0" max="100" value="45" style="--val:45%"
+              oninput="this.style.setProperty('--val',this.value+'%')">
+            <div class="ds-slider__labels"><span>Min</span><span>Max</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:16px">
+        <span style="font-family:var(--font-base);font-size:11px;font-weight:600;color:#485982;text-transform:uppercase;letter-spacing:0.4px">With Steps</span>
+        <div style="max-width:320px">
+          <div class="ds-slider">
+            <input class="ds-slider__input" type="range" min="0" max="100" step="25" value="50" style="--val:50%"
+              oninput="this.style.setProperty('--val',this.value+'%')">
+            <div class="ds-slider__labels"><span>0</span><span>25</span><span>50</span><span>75</span><span>100</span></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 4. CSS CLASSES -->
+  <div style="margin-bottom:40px">
+    <div class="sub-label">CSS Classes</div>
+    <table class="spec-table">
+      <thead><tr><th>Class</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td>.ds-slider</td><td>Root wrapper — flex column, gap 6px</td></tr>
+        <tr><td>.ds-slider__input</td><td>Native range input — 4px track, 16px thumb, blue fill via --val CSS custom property</td></tr>
+        <tr><td>.ds-slider__label</td><td>Field label — 12px semibold #485982, above the slider</td></tr>
+        <tr><td>.ds-slider__value</td><td>Live value display — 12px semibold #27365b, right-aligned</td></tr>
+        <tr><td>.ds-slider__labels</td><td>Min/max or step labels row — 11px regular #6477a2, space-between</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+</section>
+      </div><!-- /comp-panel-slider -->
+
+      <!-- ═══════════════════════════════════════════════════════════ -->
       <!-- FIGMA MCP WORKFLOW                                          -->
       <!-- ═══════════════════════════════════════════════════════════ -->
       <div class="comp-panel" id="comp-panel-figma-workflow" style="display:none">
@@ -18420,6 +18590,53 @@ document.querySelectorAll('.palette-chip-wrap').forEach(function(wrap) {
 
   document.addEventListener('DOMContentLoaded', function() { renderDp(); renderSbDp(); });
   if (document.readyState !== 'loading') { renderDp(); renderSbDp(); }
+})();
+</script>
+<script>
+(function() {
+  function dsSliderUpdate(input) {
+    var track = input.closest('.ds-slider__track');
+    if (!track) return;
+    var val = +input.value, min = +(input.min) || 0, max = +(input.max) || 100;
+    var pct = (val - min) / (max - min);
+    var trackW = track.offsetWidth;
+    var fill = track.querySelector('.ds-slider__fill');
+    if (fill) fill.style.width = Math.max(20, pct * trackW) + 'px';
+  }
+
+  function dsSliderInitAll() {
+    var ro = typeof ResizeObserver !== 'undefined' ? new ResizeObserver(function(entries) {
+      entries.forEach(function(entry) {
+        var input = entry.target.querySelector('.ds-slider__input');
+        if (input && entry.target.offsetWidth > 0) dsSliderUpdate(input);
+      });
+    }) : null;
+
+    document.querySelectorAll('.ds-slider__input').forEach(function(input) {
+      if (!input.closest('.ds-slider__track')) {
+        var track = document.createElement('div');
+        track.className = 'ds-slider__track';
+        var fill = document.createElement('div');
+        fill.className = 'ds-slider__fill';
+        input.parentNode.insertBefore(track, input);
+        track.appendChild(fill);
+        track.appendChild(input);
+      }
+      var track = input.closest('.ds-slider__track');
+      dsSliderUpdate(input);
+      if (ro && track) ro.observe(track);
+    });
+  }
+
+  document.addEventListener('input', function(e) {
+    if (e.target.classList.contains('ds-slider__input')) dsSliderUpdate(e.target);
+  });
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', dsSliderInitAll);
+  } else {
+    dsSliderInitAll();
+  }
 })();
 </script>
 </body>
