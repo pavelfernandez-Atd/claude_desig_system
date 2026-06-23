@@ -1084,13 +1084,13 @@
 
     /* === Filled Input Field (.ds-fillet) === */
     .ds-fillet { display:flex; flex-direction:column; gap:4px; font-family:var(--font-base); }
-    .ds-fillet__wrap { position:relative; display:flex; align-items:stretch; height:48px; border-radius:8px; background:#f0f4f8; transition:background 0.15s; overflow:visible; border:none; }
+    .ds-fillet__wrap { position:relative; display:flex; align-items:stretch; height:40px; border-radius:8px; background:#f0f4f8; transition:background 0.15s; overflow:visible; border:none; }
     .ds-fillet__wrap:focus-within { background:#e8eef5; box-shadow:0 0 0 3px rgba(21,101,192,0.10); }
-    .ds-fillet__input { flex:1; border:none; outline:none; background:transparent; font-family:var(--font-base); font-size:14px; font-weight:400; color:#27365b; padding:20px 12px 6px; box-sizing:border-box; }
+    .ds-fillet__input { flex:1; border:none; outline:none; background:transparent; font-family:var(--font-base); font-size:14px; font-weight:400; color:#27365b; padding:16px 12px 2px; box-sizing:border-box; }
     .ds-fillet__input::placeholder { color:transparent; }
     .ds-fillet__float-label { position:absolute; left:12px; top:50%; transform:translateY(-50%); font-size:14px; font-weight:400; color:#27365b; pointer-events:none; transition:top 0.15s, transform 0.15s, font-size 0.15s, color 0.15s; line-height:1; white-space:nowrap; }
     .ds-fillet__wrap:focus-within .ds-fillet__float-label,
-    .ds-fillet__input:not(:placeholder-shown) + .ds-fillet__float-label { top:9px; transform:translateY(0); font-size:11px; color:#27365b; }
+    .ds-fillet__input:not(:placeholder-shown) + .ds-fillet__float-label { top:5px; transform:translateY(0); font-size:11px; color:#27365b; }
     .ds-fillet__wrap:focus-within .ds-fillet__float-label { color:#27365b; }
     .ds-fillet__wrap--has-prefix .ds-fillet__float-label { left:38px; }
     .ds-fillet__prefix { display:flex; align-items:center; padding-left:10px; color:#6477a2; flex-shrink:0; padding-top:20px; box-sizing:border-box; }
