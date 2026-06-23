@@ -1900,6 +1900,9 @@
     .mnv2__acpanel-search { display: none; align-items: center; background: white; border-radius: 8px; padding: 0 12px; height: 40px; gap: 8px; }
     .mnv2__acpanel-search--visible { display: flex; }
     .mnv2__acpanel-search input { border: none; outline: none; font-family: 'Open Sans', sans-serif; font-size: 13px; color: #858585; flex: 1; background: transparent; }
+    .mnv2__acpanel-search-clear { flex-shrink:0; width:16px; height:16px; border:none; background:none; padding:0; cursor:pointer; color:#a0aab6; display:flex; align-items:center; justify-content:center; border-radius:50%; transition:color 0.1s, background 0.1s; }
+    .mnv2__acpanel-search-clear:hover { color:#27365b; background:#f0f4f8; }
+    .mnv2__acpanel-item--hidden { display:none; }
     .mnv2__acpanel-list { background: white; border-radius: 12px; padding: 16px; display: flex; flex-direction: column; gap: 2px; border: none; outline: none; box-sizing: border-box; }
     .mnv2__account:focus { outline: none; }
     .mnv2__acpanel-list--scroll { overflow-y: auto; }
@@ -16616,8 +16619,9 @@ Prioritise authority reinforcement in declining citation segments</textarea>
                 <span>Domain</span>
               </div>
               <div class="mnv2__acpanel-search">
-                <input type="text" placeholder="Search">
                 <img src="data:image/svg+xml;base64,PHN2ZyBwcmVzZXJ2ZUFzcGVjdFJhdGlvPSJub25lIiB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBvdmVyZmxvdz0idmlzaWJsZSIgc3R5bGU9ImRpc3BsYXk6IGJsb2NrOyIgdmlld0JveD0iMCAwIDIwIDIwIiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8ZyBpZD0iSWNvbi9TZWFyY2giPgo8cGF0aCBpZD0iJiMyMzk7JiMxMjg7JiMxMzA7IiBkPSJNMTUuMDA2NCA4LjQ5MDQ5QzE1LjAwNjQgOS45MjU4OSAxNC41Mzc0IDExLjI2NzcgMTMuNzU1NyAxMi4zMjg2TDE3LjY5NTIgMTYuMjkxNkMxOC4xMDE2IDE2LjY2NiAxOC4xMDE2IDE3LjMyMTMgMTcuNjk1MiAxNy42OTU4QzE3LjMyIDE4LjEwMTQgMTYuNjYzNCAxOC4xMDE0IDE2LjI4ODIgMTcuNjk1OEwxMi4zMTc1IDEzLjczMjhDMTEuMjU0NSAxNC41NDQxIDkuOTEwMTEgMTQuOTgxIDguNTAzMTggMTQuOTgxQzQuOTA3NjcgMTQuOTgxIDIgMTIuMDc5IDIgOC40OTA0OUMyIDQuOTMzMiA0LjkwNzY3IDIgOC41MDMxOCAyQzEyLjA2NzQgMiAxNS4wMDY0IDQuOTMzMiAxNS4wMDY0IDguNDkwNDlaTTguNTAzMTggMTIuOTgzOUMxMC4wOTc3IDEyLjk4MzkgMTEuNTY3MiAxMi4xNDE0IDEyLjM4MDEgMTAuNzM3MkMxMy4xOTMgOS4zNjQyMSAxMy4xOTMgNy42NDc5OCAxMi4zODAxIDYuMjQzNzhDMTEuNTY3MiA0Ljg3MDc5IDEwLjA5NzcgMy45OTcwNyA4LjUwMzE4IDMuOTk3MDdDNi44NzczOCAzLjk5NzA3IDUuNDA3OTEgNC44NzA3OSA0LjU5NTAyIDYuMjQzNzhDMy43ODIxMiA3LjY0Nzk4IDMuNzgyMTIgOS4zNjQyMSA0LjU5NTAyIDEwLjczNzJDNS40MDc5MSAxMi4xNDE0IDYuODc3MzggMTIuOTgzOSA4LjUwMzE4IDEyLjk4MzlaIiBmaWxsPSJ2YXIoLS1maWxsLTAsICM3NDhFQTMpIi8+CjwvZz4KPC9zdmc+Cg==" width="16" height="16" alt="">
+                <input type="text" placeholder="Search" id="mnv2-domain-search" oninput="mnvAcSearch(this,'mnv2-domain-list')">
+                <button class="mnv2__acpanel-search-clear" style="display:none" tabindex="-1" onclick="mnvAcClearSearch(this,'mnv2-domain-list')"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 2l8 8M10 2l-8 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button>
               </div>
               <div class="mnv2__acpanel-list" id="mnv2-domain-list">
                 <button class="mnv2__acpanel-item" data-domain="au">AU / Adthena.com</button>
@@ -16631,8 +16635,9 @@ Prioritise authority reinforcement in declining citation segments</textarea>
                 <span>Location</span>
               </div>
               <div class="mnv2__acpanel-search">
-                <input type="text" placeholder="Search">
                 <img src="data:image/svg+xml;base64,PHN2ZyBwcmVzZXJ2ZUFzcGVjdFJhdGlvPSJub25lIiB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBvdmVyZmxvdz0idmlzaWJsZSIgc3R5bGU9ImRpc3BsYXk6IGJsb2NrOyIgdmlld0JveD0iMCAwIDIwIDIwIiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8ZyBpZD0iSWNvbi9TZWFyY2giPgo8cGF0aCBpZD0iJiMyMzk7JiMxMjg7JiMxMzA7IiBkPSJNMTUuMDA2NCA4LjQ5MDQ5QzE1LjAwNjQgOS45MjU4OSAxNC41Mzc0IDExLjI2NzcgMTMuNzU1NyAxMi4zMjg2TDE3LjY5NTIgMTYuMjkxNkMxOC4xMDE2IDE2LjY2NiAxOC4xMDE2IDE3LjMyMTMgMTcuNjk1MiAxNy42OTU4QzE3LjMyIDE4LjEwMTQgMTYuNjYzNCAxOC4xMDE0IDE2LjI4ODIgMTcuNjk1OEwxMi4zMTc1IDEzLjczMjhDMTEuMjU0NSAxNC41NDQxIDkuOTEwMTEgMTQuOTgxIDguNTAzMTggMTQuOTgxQzQuOTA3NjcgMTQuOTgxIDIgMTIuMDc5IDIgOC40OTA0OUMyIDQuOTMzMiA0LjkwNzY3IDIgOC41MDMxOCAyQzEyLjA2NzQgMiAxNS4wMDY0IDQuOTMzMiAxNS4wMDY0IDguNDkwNDlaTTguNTAzMTggMTIuOTgzOUMxMC4wOTc3IDEyLjk4MzkgMTEuNTY3MiAxMi4xNDE0IDEyLjM4MDEgMTAuNzM3MkMxMy4xOTMgOS4zNjQyMSAxMy4xOTMgNy42NDc5OCAxMi4zODAxIDYuMjQzNzhDMTEuNTY3MiA0Ljg3MDc5IDEwLjA5NzcgMy45OTcwNyA4LjUwMzE4IDMuOTk3MDdDNi44NzczOCAzLjk5NzA3IDUuNDA3OTEgNC44NzA3OSA0LjU5NTAyIDYuMjQzNzhDMy43ODIxMiA3LjY0Nzk4IDMuNzgyMTIgOS4zNjQyMSA0LjU5NTAyIDEwLjczNzJDNS40MDc5MSAxMi4xNDE0IDYuODc3MzggMTIuOTgzOSA4LjUwMzE4IDEyLjk4MzlaIiBmaWxsPSJ2YXIoLS1maWxsLTAsICM3NDhFQTMpIi8+CjwvZz4KPC9zdmc+Cg==" width="16" height="16" alt="">
+                <input type="text" placeholder="Search" id="mnv2-loc-search" oninput="mnvAcSearch(this,'mnv2-loc-list')">
+                <button class="mnv2__acpanel-search-clear" style="display:none" tabindex="-1" onclick="mnvAcClearSearch(this,'mnv2-loc-list')"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 2l8 8M10 2l-8 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button>
               </div>
               <div class="mnv2__acpanel-list mnv2__acpanel-list--scroll" id="mnv2-loc-list">
                 <button class="mnv2__acpanel-item mnv2__acpanel-item--active">United Kingdom</button>
@@ -16908,6 +16913,30 @@ Prioritise authority reinforcement in declining citation segments</textarea>
         searchEl.classList.toggle('mnv2__acpanel-search--visible', count > 20);
       }
     }
+    window.mnvAcSearch = function(input, listId) {
+      var q = input.value.toLowerCase();
+      var clearBtn = input.parentElement.querySelector('.mnv2__acpanel-search-clear');
+      if (clearBtn) clearBtn.style.display = q ? '' : 'none';
+      document.querySelectorAll('#' + listId + ' .mnv2__acpanel-item').forEach(function(item) {
+        item.classList.toggle('mnv2__acpanel-item--hidden', !item.textContent.toLowerCase().includes(q));
+      });
+    };
+    window.mnvAcClearSearch = function(btn, listId) {
+      var input = btn.parentElement.querySelector('input');
+      input.value = '';
+      window.mnvAcSearch(input, listId);
+      input.focus();
+    };
+    function mnvAcResetSearches() {
+      ['mnv2-domain-search','mnv2-loc-search'].forEach(function(id) {
+        var input = document.getElementById(id);
+        if (input && input.value) {
+          input.value = '';
+          var listId = id === 'mnv2-domain-search' ? 'mnv2-domain-list' : 'mnv2-loc-list';
+          window.mnvAcSearch(input, listId);
+        }
+      });
+    }
 
     function renderLocations(domain) {
       var list = document.getElementById('mnv2-loc-list');
@@ -16980,11 +17009,13 @@ Prioritise authority reinforcement in declining citation segments</textarea>
       if (!acPanel.contains(e.target) && e.target !== acBtn) {
         acPanel.classList.remove('mnv2__acpanel--open');
         acBtn.classList.remove('open');
+        mnvAcResetSearches();
       }
     });
     acPanel.querySelector('.mnv2__acpanel-cancel')?.addEventListener('click', function() {
       acPanel.classList.remove('mnv2__acpanel--open');
       acBtn.classList.remove('open');
+      mnvAcResetSearches();
     });
     acPanel.querySelector('.mnv2__acpanel-apply')?.addEventListener('click', function() {
       var activeDomain = domainList?.querySelector('.mnv2__acpanel-item--active');
@@ -16996,6 +17027,7 @@ Prioritise authority reinforcement in declining citation segments</textarea>
       if (activeLocation) acBtn.querySelector('.mnv2__account-secondary').textContent = activeLocation.textContent.trim();
       acPanel.classList.remove('mnv2__acpanel--open');
       acBtn.classList.remove('open');
+      mnvAcResetSearches();
     });
   }
   // Toggle expandable groups
