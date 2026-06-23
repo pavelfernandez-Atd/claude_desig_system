@@ -16542,7 +16542,7 @@ Prioritise authority reinforcement in declining citation segments</textarea>
           <button class="mnv2__account" id="mnv2-account-btn">
             <span id="mnv2-account-flag" class="mnv2__account-flag"><svg width="16" height="11" viewBox="0 0 20 14" xmlns="http://www.w3.org/2000/svg" style="display:block"><defs><clipPath id="fc-uk"><rect width="20" height="14" rx="2"/></clipPath></defs><g clip-path="url(#fc-uk)"><rect width="20" height="14" fill="#012169"/><path stroke="white" stroke-width="5" d="M0 0L20 14M20 0L0 14"/><path stroke="#C8102E" stroke-width="2.5" d="M0 0L20 14M20 0L0 14"/><rect x="8.5" y="0" width="3" height="14" fill="white"/><rect x="0" y="5.5" width="20" height="3" fill="white"/><rect x="9.25" y="0" width="1.5" height="14" fill="#C8102E"/><rect x="0" y="6.25" width="20" height="1.5" fill="#C8102E"/></g></svg></span>
             <div class="mnv2__account-text">
-              <span class="mnv2__account-primary">Adthena</span>
+              <span class="mnv2__account-primary">Adthena.com</span>
               <span class="mnv2__account-secondary">London</span>
             </div>
             <img class="mnv2__account-arrow" src="data:image/svg+xml;base64,PHN2ZyBwcmVzZXJ2ZUFzcGVjdFJhdGlvPSJub25lIiB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBvdmVyZmxvdz0idmlzaWJsZSIgc3R5bGU9ImRpc3BsYXk6IGJsb2NrOyIgdmlld0JveD0iMCAwIDIwIDIwIiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8ZyBpZD0iSWNvbi9BbmdsZURvd24tT3V0bGluZSI+CjxwYXRoIGlkPSImIzIzOTsmIzEzMjsmIzEzNTsiIGQ9Ik0xMC40NzU1IDEyLjc4MzlDMTAuMjAzOCAxMy4wNzIgOS43OTYyIDEzLjA3MiA5LjU1MTYzIDEyLjc4MzlMNS4yMDM4IDguMTc0MDdDNC45MzIwNyA3LjkxNDc3IDQuOTMyMDcgNy40ODI1OSA1LjIwMzggNy4yMjMyOUM1LjQ0ODM3IDYuOTM1MTcgNS44NTU5OCA2LjkzNTE3IDYuMTAwNTQgNy4yMjMyOUw5Ljk4NjQxIDExLjM0MzNMMTMuODk5NSA3LjE5NDQ4QzE0LjE0NCA2LjkzNTE3IDE0LjU1MTYgNi45MzUxNyAxNC43OTYyIDcuMTk0NDhDMTUuMDY3OSA3LjQ4MjU5IDE1LjA2NzkgNy45MTQ3NyAxNC43OTYyIDguMTc0MDdMMTAuNDc1NSAxMi43ODM5WiIgZmlsbD0idmFyKC0tZmlsbC0wLCAjNjQ3N0EyKSIvPgo8L2c+Cjwvc3ZnPgo=" width="20" height="20" alt="">
@@ -17023,6 +17023,8 @@ Prioritise authority reinforcement in declining citation segments</textarea>
       if (activeDomain) {
         var flagEl = document.getElementById('mnv2-account-flag');
         if (flagEl) flagEl.innerHTML = domainFlagSVG[activeDomain.dataset.domain] || domainFlagSVG['uk'];
+        var domainLabel = activeDomain.textContent.trim().replace(/^.*\/\s*/, '');
+        acBtn.querySelector('.mnv2__account-primary').textContent = domainLabel;
       }
       if (activeLocation) acBtn.querySelector('.mnv2__account-secondary').textContent = activeLocation.textContent.trim();
       acPanel.classList.remove('mnv2__acpanel--open');
