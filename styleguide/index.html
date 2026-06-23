@@ -1051,7 +1051,7 @@
     .ds-input { display:flex; flex-direction:column; gap:4px; font-family:var(--font-base); }
     .ds-input__label { font-size:12px; font-weight:600; color:#485982; line-height:1.4; }
     .ds-input__wrap { position:relative; display:flex; align-items:center; height:40px; border:1px solid #c4cdd5; border-radius:6px; background:#ffffff; transition:border-color 0.15s, box-shadow 0.15s; overflow:visible; }
-    .ds-input__wrap:focus-within { border-color:#1565c0; }
+    .ds-input__wrap:focus-within { border-color:#1565c0; box-shadow:0 0 0 3px rgba(21,101,192,0.10); }
     .ds-input__input { flex:1; height:100%; border:none; outline:none; background:transparent; font-family:var(--font-base); font-size:14px; font-weight:400; color:#27365b; padding:0 12px; }
     .ds-input__input::placeholder { color:transparent; }
     /* Floating label — sits inside the input at rest, rises to the border on focus/fill */
@@ -1085,7 +1085,7 @@
     /* === Filled Input Field (.ds-fillet) === */
     .ds-fillet { display:flex; flex-direction:column; gap:4px; font-family:var(--font-base); }
     .ds-fillet__wrap { position:relative; display:flex; align-items:stretch; height:48px; border-radius:8px; background:#f0f4f8; transition:background 0.15s; overflow:visible; border:none; }
-    .ds-fillet__wrap:focus-within { background:#e8eef5; }
+    .ds-fillet__wrap:focus-within { background:#e8eef5; box-shadow:0 0 0 3px rgba(21,101,192,0.10); }
     .ds-fillet__input { flex:1; border:none; outline:none; background:transparent; font-family:var(--font-base); font-size:14px; font-weight:400; color:#27365b; padding:20px 12px 6px; box-sizing:border-box; }
     .ds-fillet__input::placeholder { color:transparent; }
     .ds-fillet__float-label { position:absolute; left:12px; top:50%; transform:translateY(-50%); font-size:14px; font-weight:400; color:#27365b; pointer-events:none; transition:top 0.15s, transform 0.15s, font-size 0.15s, color 0.15s; line-height:1; white-space:nowrap; }
