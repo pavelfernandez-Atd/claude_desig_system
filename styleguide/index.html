@@ -1082,6 +1082,34 @@
     .ds-input__wrap--readonly { background:#f9fafb; border-color:#dde1e9; }
     .ds-input__wrap--readonly .ds-input__input { color:#485982; cursor:default; }
 
+    /* === Fillet Input Field (.ds-fillet) === */
+    .ds-fillet { display:flex; flex-direction:column; gap:4px; font-family:var(--font-base); }
+    .ds-fillet__wrap { position:relative; display:flex; align-items:stretch; height:48px; border-radius:8px; background:#f0f4f8; transition:background 0.15s; overflow:visible; border:none; }
+    .ds-fillet__wrap:focus-within { background:#e8eef5; }
+    .ds-fillet__input { flex:1; border:none; outline:none; background:transparent; font-family:var(--font-base); font-size:14px; font-weight:400; color:#27365b; padding:20px 12px 6px; box-sizing:border-box; }
+    .ds-fillet__input::placeholder { color:transparent; }
+    .ds-fillet__float-label { position:absolute; left:12px; top:50%; transform:translateY(-50%); font-size:14px; font-weight:400; color:#8fa0b8; pointer-events:none; transition:top 0.15s, transform 0.15s, font-size 0.15s, color 0.15s; line-height:1; white-space:nowrap; }
+    .ds-fillet__wrap:focus-within .ds-fillet__float-label,
+    .ds-fillet__input:not(:placeholder-shown) + .ds-fillet__float-label { top:9px; transform:translateY(0); font-size:11px; color:#485982; }
+    .ds-fillet__wrap:focus-within .ds-fillet__float-label { color:#1565c0; }
+    .ds-fillet__wrap--has-prefix .ds-fillet__float-label { left:38px; }
+    .ds-fillet__prefix { display:flex; align-items:center; padding-left:10px; color:#6477a2; flex-shrink:0; padding-top:20px; box-sizing:border-box; }
+    .ds-fillet__prefix ~ .ds-fillet__input { padding-left:6px; }
+    .ds-fillet__action { display:flex; align-items:center; justify-content:center; width:32px; flex-shrink:0; margin-right:4px; border:none; background:transparent; cursor:pointer; color:#6477a2; border-radius:4px; transition:background 0.12s; margin-top:auto; margin-bottom:auto; height:32px; }
+    .ds-fillet__action:hover { background:rgba(100,119,162,0.1); color:#27365b; }
+    .ds-fillet__helper { font-size:12px; font-weight:400; color:#6477a2; line-height:1.4; }
+    .ds-fillet__error-msg { font-size:12px; font-weight:400; color:#de5a5a; line-height:1.4; }
+    .ds-fillet__wrap--filled { background:#f0f4f8; }
+    .ds-fillet__wrap--error { background:#fdf0f0; }
+    .ds-fillet__wrap--error .ds-fillet__float-label,
+    .ds-fillet__wrap--error .ds-fillet__input:not(:placeholder-shown) + .ds-fillet__float-label,
+    .ds-fillet__wrap--error:focus-within .ds-fillet__float-label { color:#de5a5a; }
+    .ds-fillet__wrap--disabled { background:#f5f7fa; cursor:not-allowed; }
+    .ds-fillet__wrap--disabled .ds-fillet__input { color:#a0aab6; cursor:not-allowed; }
+    .ds-fillet__wrap--disabled .ds-fillet__float-label { color:#a0aab6; }
+    .ds-fillet__wrap--readonly { background:#f5f7fa; }
+    .ds-fillet__wrap--readonly .ds-fillet__input { color:#485982; cursor:default; }
+
     /* === Dropdown (.ds-dropdown) === */
     .ds-dropdown { position:relative; display:inline-flex; }
     .ds-dropdown__trigger { display:inline-flex; align-items:center; gap:6px; height:36px; padding:0 12px; border:1.5px solid #c4cdd5; border-radius:6px; background:#ffffff; font-family:var(--font-base); font-size:13px; font-weight:400; color:#27365b; cursor:pointer; transition:border-color 0.15s, background 0.15s; white-space:nowrap; user-select:none; }
@@ -3118,6 +3146,7 @@
       </div>
       <div class="comp-sidebar-group" data-group="inputters" style="display:none">
         <a class="comp-sidebar-link" data-component="input-field" style="cursor:pointer">Input Field</a>
+        <a class="comp-sidebar-link" data-component="fillet-input" style="cursor:pointer">Fillet Input Field</a>
         <a class="comp-sidebar-link" data-component="checkbox" style="cursor:pointer">Checkbox</a>
         <a class="comp-sidebar-link" data-component="radio-button" style="cursor:pointer">Radio Button</a>
         <a class="comp-sidebar-link" data-component="toggle" style="cursor:pointer">Toggle</a>
@@ -16447,6 +16476,227 @@ Prioritise authority reinforcement in declining citation segments</textarea>
 
 </section>
       </div><!-- /comp-panel-input-field -->
+
+      <!-- ═══════════════════════════════════════════════════════════ -->
+      <!-- FILLET INPUT FIELD                                          -->
+      <!-- ═══════════════════════════════════════════════════════════ -->
+      <div class="comp-panel" id="comp-panel-fillet-input" style="display:none">
+<section id="fillet-input" style="padding-top:24px">
+  <div class="section-header">
+    <h2>Fillet Input Field</h2>
+    <div class="divider"></div>
+
+  <!-- GitHub + Demo links -->
+  <div style="display:flex;gap:8px;margin-top:16px;margin-bottom:24px;flex-wrap:wrap">
+    <a href="https://github.com/pavelfernandez-Atd/claude_desig_system/tree/main/components/fillet-input"
+       target="_blank" rel="noopener noreferrer"
+       onclick="window.open(this.href,'_blank','noopener');return false;"
+       style="display:inline-flex;align-items:center;gap:6px;padding:6px 12px;border-radius:6px;background:#24292f;color:#fff;font-size:12px;font-weight:600;text-decoration:none;font-family:'Open Sans',sans-serif">
+      <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+      View on GitHub
+    </a>
+    <a href="https://htmlpreview.github.io/?https://github.com/pavelfernandez-Atd/claude_desig_system/blob/main/components/fillet-input/demo.html"
+       target="_blank" rel="noopener noreferrer"
+       onclick="window.open(this.href,'_blank','noopener');return false;"
+       style="display:inline-flex;align-items:center;gap:6px;padding:6px 12px;border-radius:6px;background:#0969da;color:#fff;font-size:12px;font-weight:600;text-decoration:none;font-family:'Open Sans',sans-serif">
+      <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M8 1a7 7 0 100 14A7 7 0 008 1zM0 8a8 8 0 1116 0A8 8 0 010 8zm6.5-.25A.75.75 0 017.25 7h1a.75.75 0 01.75.75v2.75h.25a.75.75 0 010 1.5h-2a.75.75 0 010-1.5h.25v-2h-.25a.75.75 0 01-.75-.75zM8 6a1 1 0 100-2 1 1 0 000 2z"/></svg>
+      Preview Demo
+    </a>
+  </div>
+  </div>
+  <p style="font-size:13px;color:var(--text-secondary-var);margin-bottom:24px">A filled-style text input with a soft neutral background and no visible border. The floating label animates inside the fill area. Use in search bars, inline filters, or anywhere a softer, borderless look fits the surrounding UI.</p>
+
+  <!-- 1. LIVE DEMO ───────────────────────────────────────────────── -->
+  <div style="margin-bottom:40px">
+    <div class="sub-label">Live Demo</div>
+    <div style="background:#ffffff;padding:32px;border-radius:12px;display:flex;justify-content:center">
+      <div style="width:100%;max-width:400px;display:flex;flex-direction:column;gap:20px">
+        <div class="ds-fillet">
+          <div class="ds-fillet__wrap">
+            <input class="ds-fillet__input" type="text" placeholder=" " id="fil-live-1">
+            <label class="ds-fillet__float-label" for="fil-live-1">Search term</label>
+          </div>
+        </div>
+        <div class="ds-fillet">
+          <div class="ds-fillet__wrap ds-fillet__wrap--has-prefix" id="fil-live-wrap">
+            <span class="ds-fillet__prefix">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="6.5" cy="6.5" r="4.5" stroke="#6477a2" stroke-width="1.3"/><path d="M10 10l3 3" stroke="#6477a2" stroke-width="1.3" stroke-linecap="round"/></svg>
+            </span>
+            <input class="ds-fillet__input" id="fil-live-2" type="text" placeholder=" "
+              oninput="(function(el){var c=document.getElementById('fil-live-clear');c.style.display=el.value?'':'none';document.getElementById('fil-live-wrap').classList.toggle('ds-fillet__wrap--filled',!!el.value)})(this)">
+            <label class="ds-fillet__float-label" for="fil-live-2">Keyword</label>
+            <button class="ds-fillet__action" id="fil-live-clear" aria-label="Clear" style="display:none"
+              onclick="var f=document.getElementById('fil-live-2');f.value='';this.style.display='none';document.getElementById('fil-live-wrap').classList.remove('ds-fillet__wrap--filled');f.focus()">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 2l10 10M12 2L2 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+            </button>
+          </div>
+        </div>
+        <div class="ds-fillet">
+          <div class="ds-fillet__wrap ds-fillet__wrap--error" id="fil-live-3-wrap">
+            <input class="ds-fillet__input" type="text" placeholder=" " value="not-an-email" id="fil-live-3"
+              oninput="(function(el){var wrap=document.getElementById('fil-live-3-wrap');var msg=document.getElementById('fil-live-3-msg');var valid=/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(el.value);wrap.classList.toggle('ds-fillet__wrap--error',el.value.length>0&&!valid);wrap.classList.toggle('ds-fillet__wrap--filled',valid);msg.style.display=(el.value.length>0&&!valid)?'':'none';})(this)">
+            <label class="ds-fillet__float-label" for="fil-live-3">Email address</label>
+          </div>
+          <span class="ds-fillet__error-msg" id="fil-live-3-msg">Please enter a valid email address</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. STATES ──────────────────────────────────────────────────── -->
+  <div style="margin-bottom:40px">
+    <div class="sub-label">States</div>
+    <div style="background:#ffffff;padding:24px;border-radius:12px;display:flex;gap:32px;flex-wrap:wrap;align-items:flex-start">
+
+      <!-- Default -->
+      <div style="display:flex;flex-direction:column;gap:8px;min-width:180px">
+        <div class="ds-fillet__wrap">
+          <input class="ds-fillet__input" type="text" placeholder=" " id="fil-st-default" tabindex="-1">
+          <label class="ds-fillet__float-label" for="fil-st-default">Label</label>
+        </div>
+        <span style="font-family:var(--font-base);font-size:11px;color:#858585;text-align:left;padding-left:12px">Default</span>
+      </div>
+
+      <!-- Focused -->
+      <div style="display:flex;flex-direction:column;gap:8px;min-width:180px">
+        <div class="ds-fillet__wrap" style="background:#e8eef5;">
+          <input class="ds-fillet__input" type="text" placeholder=" " id="fil-st-focused" tabindex="-1">
+          <label class="ds-fillet__float-label" for="fil-st-focused" style="top:9px;transform:translateY(0);font-size:11px;color:#1565c0">Label</label>
+        </div>
+        <span style="font-family:var(--font-base);font-size:11px;color:#858585;text-align:left;padding-left:12px">Focused</span>
+      </div>
+
+      <!-- Filled -->
+      <div style="display:flex;flex-direction:column;gap:8px;min-width:180px">
+        <div class="ds-fillet__wrap ds-fillet__wrap--filled">
+          <input class="ds-fillet__input" type="text" placeholder=" " value="Entered value" id="fil-st-filled" tabindex="-1">
+          <label class="ds-fillet__float-label" for="fil-st-filled">Label</label>
+        </div>
+        <span style="font-family:var(--font-base);font-size:11px;color:#858585;text-align:left;padding-left:12px">Filled</span>
+      </div>
+
+      <!-- Error -->
+      <div style="display:flex;flex-direction:column;gap:8px;min-width:180px">
+        <div class="ds-fillet__wrap ds-fillet__wrap--error">
+          <input class="ds-fillet__input" type="text" placeholder=" " value="Invalid value" id="fil-st-error" tabindex="-1">
+          <label class="ds-fillet__float-label" for="fil-st-error">Label</label>
+        </div>
+        <span style="font-family:var(--font-base);font-size:11px;color:#858585;text-align:left;padding-left:12px">Error</span>
+      </div>
+
+      <!-- Disabled -->
+      <div style="display:flex;flex-direction:column;gap:8px;min-width:180px">
+        <div class="ds-fillet__wrap ds-fillet__wrap--disabled">
+          <input class="ds-fillet__input" type="text" placeholder=" " id="fil-st-disabled" disabled tabindex="-1">
+          <label class="ds-fillet__float-label" for="fil-st-disabled">Label</label>
+        </div>
+        <span style="font-family:var(--font-base);font-size:11px;color:#858585;text-align:left;padding-left:12px">Disabled</span>
+      </div>
+
+      <!-- Read-only -->
+      <div style="display:flex;flex-direction:column;gap:8px;min-width:180px">
+        <div class="ds-fillet__wrap ds-fillet__wrap--readonly">
+          <input class="ds-fillet__input" type="text" placeholder=" " value="Read-only value" id="fil-st-readonly" readonly tabindex="-1">
+          <label class="ds-fillet__float-label" for="fil-st-readonly">Label</label>
+        </div>
+        <span style="font-family:var(--font-base);font-size:11px;color:#858585;text-align:left;padding-left:12px">Read-only</span>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 3. VARIANTS ────────────────────────────────────────────────── -->
+  <div style="margin-bottom:40px">
+    <div class="sub-label">Variants</div>
+    <div style="background:#ffffff;padding:24px;border-radius:12px;display:flex;flex-direction:column;gap:24px">
+
+      <!-- With floating label -->
+      <div style="display:flex;flex-direction:column;gap:16px">
+        <span style="font-family:var(--font-base);font-size:11px;font-weight:600;color:#485982;text-transform:uppercase;letter-spacing:0.4px">With Floating Label</span>
+        <div style="max-width:320px">
+          <div class="ds-fillet">
+            <div class="ds-fillet__wrap">
+              <input class="ds-fillet__input" type="text" placeholder=" " id="fil-var-label">
+              <label class="ds-fillet__float-label" for="fil-var-label">Search term</label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- With helper text -->
+      <div style="display:flex;flex-direction:column;gap:16px">
+        <span style="font-family:var(--font-base);font-size:11px;font-weight:600;color:#485982;text-transform:uppercase;letter-spacing:0.4px">With Helper Text</span>
+        <div style="max-width:320px">
+          <div class="ds-fillet">
+            <div class="ds-fillet__wrap">
+              <input class="ds-fillet__input" type="text" placeholder=" " id="fil-var-helper">
+              <label class="ds-fillet__float-label" for="fil-var-helper">Domain</label>
+            </div>
+            <span class="ds-fillet__helper">Enter the root domain without https://</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- With prefix icon -->
+      <div style="display:flex;flex-direction:column;gap:16px">
+        <span style="font-family:var(--font-base);font-size:11px;font-weight:600;color:#485982;text-transform:uppercase;letter-spacing:0.4px">With Prefix Icon</span>
+        <div style="max-width:320px">
+          <div class="ds-fillet">
+            <div class="ds-fillet__wrap ds-fillet__wrap--has-prefix">
+              <span class="ds-fillet__prefix">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="6.5" cy="6.5" r="4.5" stroke="#6477a2" stroke-width="1.3"/><path d="M10 10l3 3" stroke="#6477a2" stroke-width="1.3" stroke-linecap="round"/></svg>
+              </span>
+              <input class="ds-fillet__input" type="text" placeholder=" " id="fil-var-prefix">
+              <label class="ds-fillet__float-label" for="fil-var-prefix">Search</label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- With action button -->
+      <div style="display:flex;flex-direction:column;gap:16px">
+        <span style="font-family:var(--font-base);font-size:11px;font-weight:600;color:#485982;text-transform:uppercase;letter-spacing:0.4px">With Action Button</span>
+        <div style="max-width:320px">
+          <div class="ds-fillet">
+            <div class="ds-fillet__wrap ds-fillet__wrap--filled">
+              <input class="ds-fillet__input" type="text" placeholder=" " value="Brand keywords" id="fil-var-action">
+              <label class="ds-fillet__float-label" for="fil-var-action">Filter</label>
+              <button class="ds-fillet__action" aria-label="Clear">
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 2l10 10M12 2L2 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 4. CSS CLASSES ─────────────────────────────────────────────── -->
+  <div style="margin-bottom:40px">
+    <div class="sub-label">CSS Classes</div>
+    <table class="spec-table">
+      <thead><tr><th>Class</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td>.ds-fillet</td><td>Root wrapper — flex column, gap 4px</td></tr>
+        <tr><td>.ds-fillet__wrap</td><td>Input container — 48px height, 8px radius, background #f0f4f8, no border. Darkens on :focus-within.</td></tr>
+        <tr><td>.ds-fillet__input</td><td>Native &lt;input&gt; — 14px regular #27365b, padding-top 20px to clear the floating label</td></tr>
+        <tr><td>.ds-fillet__float-label</td><td>Floating label — rests centred, animates to top:9px on focus/fill</td></tr>
+        <tr><td>.ds-fillet__prefix</td><td>Left icon slot</td></tr>
+        <tr><td>.ds-fillet__action</td><td>Right icon button — 32×32px, hover bg rgba</td></tr>
+        <tr><td>.ds-fillet__helper</td><td>Helper text — 12px regular #6477a2</td></tr>
+        <tr><td>.ds-fillet__error-msg</td><td>Error message — 12px regular #de5a5a</td></tr>
+        <tr><td>.ds-fillet__wrap--filled</td><td>Keeps default background — no border change needed</td></tr>
+        <tr><td>.ds-fillet__wrap--error</td><td>Background #fdf0f0 (soft red tint), label colour #de5a5a</td></tr>
+        <tr><td>.ds-fillet__wrap--disabled</td><td>Background #f5f7fa, muted text, no pointer</td></tr>
+        <tr><td>.ds-fillet__wrap--readonly</td><td>Background #f5f7fa, default cursor</td></tr>
+        <tr><td>.ds-fillet__wrap--has-prefix</td><td>Shifts float label right to clear the icon (left: 38px)</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+</section>
+      </div><!-- /comp-panel-fillet-input -->
 
       <!-- ═══════════════════════════════════════════════════════════ -->
       <!-- FIGMA MCP WORKFLOW                                          -->
