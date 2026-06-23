@@ -15727,9 +15727,9 @@ Prioritise authority reinforcement in declining citation segments</textarea>
       if (!btn.dataset.baseLabel) btn.dataset.baseLabel = btn.childNodes[0].textContent.trim();
       var base = btn.dataset.baseLabel;
       var parts = [];
-      if (incCount) parts.push(incCount + ' inc');
-      if (excCount) parts.push(excCount + ' exc');
-      btn.childNodes[0].textContent = parts.length ? base + ' (' + parts.join(' · ') + ') ' : base + ' ';
+      if (incCount) parts.push('+' + incCount);
+      if (excCount) parts.push('-' + excCount);
+      btn.childNodes[0].textContent = parts.length ? base + ' (' + parts.join('/') + ') ' : base + ' ';
       advDdClose(id);
     }
     // close on outside click
