@@ -1100,6 +1100,9 @@
     .ds-adv-dd__search-icon { color:#a0aab6; flex-shrink:0; }
     .ds-adv-dd__search-input { flex:1; border:none; outline:none; background:transparent; font-family:var(--font-base); font-size:14px; color:#27365b; }
     .ds-adv-dd__search-input::placeholder { color:#a0aab6; }
+    .ds-adv-dd__search-clear { flex-shrink:0; width:16px; height:16px; border:none; background:none; padding:0; cursor:pointer; color:#a0aab6; display:flex; align-items:center; justify-content:center; border-radius:50%; transition:color 0.1s, background 0.1s; }
+    .ds-adv-dd__search-clear:hover { color:#27365b; background:#f0f4f8; }
+    .ds-adv-dd__item--hidden { display:none !important; }
     .ds-adv-dd__toolbar { display:flex; align-items:center; justify-content:space-between; padding:6px 12px 10px; }
     .ds-adv-dd__list { max-height:264px; overflow-y:auto; border-top:1px solid #f0f4f8; margin-right:4px; }
     .ds-adv-dd__list::-webkit-scrollbar { width:4px; }
@@ -4508,6 +4511,7 @@
               <div class="ds-adv-dd__search">
                 <svg class="ds-adv-dd__search-icon" width="15" height="15" viewBox="0 0 15 15" fill="none"><circle cx="6.5" cy="6.5" r="5" stroke="currentColor" stroke-width="1.4"/><path d="M10.5 10.5l3 3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
                 <input class="ds-adv-dd__search-input" placeholder="Search..." id="sb-stg-search" oninput="advDdFilter('sb-stg')">
+                <button class="ds-adv-dd__search-clear" onclick="advDdClearSearch('sb-stg')" style="display:none" tabindex="-1"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 2l8 8M10 2l-8 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button>
               </div>
               <div class="ds-adv-dd__toolbar">
                 <div style="display:flex;align-items:center;background:#fafafa;border-radius:40px;padding:5px;gap:2px">
@@ -4542,6 +4546,7 @@
               <div class="ds-adv-dd__search">
                 <svg class="ds-adv-dd__search-icon" width="15" height="15" viewBox="0 0 15 15" fill="none"><circle cx="6.5" cy="6.5" r="5" stroke="currentColor" stroke-width="1.4"/><path d="M10.5 10.5l3 3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
                 <input class="ds-adv-dd__search-input" placeholder="Search..." id="sb-st-search" oninput="advDdFilter('sb-st')">
+                <button class="ds-adv-dd__search-clear" onclick="advDdClearSearch('sb-st')" style="display:none" tabindex="-1"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 2l8 8M10 2l-8 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button>
               </div>
               <div class="ds-adv-dd__toolbar">
                 <div style="display:flex;align-items:center;background:#fafafa;border-radius:40px;padding:5px;gap:2px">
@@ -4660,6 +4665,7 @@
             <div class="ds-adv-dd__search">
               <svg class="ds-adv-dd__search-icon" width="15" height="15" viewBox="0 0 15 15" fill="none"><circle cx="6.5" cy="6.5" r="5" stroke="currentColor" stroke-width="1.4"/><path d="M10.5 10.5l3 3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
               <input class="ds-adv-dd__search-input" placeholder="Search..." id="anat-stg-search" oninput="advDdFilter('anat-stg')">
+              <button class="ds-adv-dd__search-clear" onclick="advDdClearSearch('anat-stg')" style="display:none" tabindex="-1"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 2l8 8M10 2l-8 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button>
             </div>
             <div class="ds-adv-dd__toolbar">
               <div style="display:flex;align-items:center;background:#fafafa;border-radius:40px;padding:5px;gap:2px">
@@ -4694,6 +4700,7 @@
             <div class="ds-adv-dd__search">
               <svg class="ds-adv-dd__search-icon" width="15" height="15" viewBox="0 0 15 15" fill="none"><circle cx="6.5" cy="6.5" r="5" stroke="currentColor" stroke-width="1.4"/><path d="M10.5 10.5l3 3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
               <input class="ds-adv-dd__search-input" placeholder="Search..." id="anat-st-search" oninput="advDdFilter('anat-st')">
+              <button class="ds-adv-dd__search-clear" onclick="advDdClearSearch('anat-st')" style="display:none" tabindex="-1"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 2l8 8M10 2l-8 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button>
             </div>
             <div class="ds-adv-dd__toolbar">
               <div style="display:flex;align-items:center;background:#fafafa;border-radius:40px;padding:5px;gap:2px">
@@ -15472,6 +15479,7 @@ Prioritise authority reinforcement in declining citation segments</textarea>
             <div class="ds-adv-dd__search">
               <svg class="ds-adv-dd__search-icon" width="15" height="15" viewBox="0 0 15 15" fill="none"><circle cx="6.5" cy="6.5" r="5" stroke="currentColor" stroke-width="1.4"/><path d="M10.5 10.5l3 3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
               <input class="ds-adv-dd__search-input" placeholder="Search..." id="adv-dd-demo-search" oninput="advDdFilter('adv-dd-demo')">
+              <button class="ds-adv-dd__search-clear" onclick="advDdClearSearch('adv-dd-demo')" style="display:none" tabindex="-1"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 2l8 8M10 2l-8 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button>
             </div>
             <div class="ds-adv-dd__toolbar">
               <div style="display:flex;align-items:center;background:#fafafa;border-radius:40px;padding:5px;gap:2px">
@@ -15604,6 +15612,8 @@ Prioritise authority reinforcement in declining citation segments</textarea>
       panel.classList.remove('ds-adv-dd__panel--open');
       setTimeout(function() { if (!panel.classList.contains('ds-adv-dd__panel--open')) panel.style.display = 'none'; }, 150);
       if (btn) btn.classList.remove('ds-dropdown__trigger--open');
+      var input = document.getElementById(id + '-search');
+      if (input && input.value) { input.value = ''; advDdFilter(id); }
     }
     function advDdToggle(id) {
       var panel = document.getElementById(id + '-panel');
@@ -15679,10 +15689,20 @@ Prioritise authority reinforcement in declining citation segments</textarea>
       advDdSyncSelectBtn(id);
     }
     function advDdFilter(id) {
-      var q = document.getElementById(id + '-search').value.toLowerCase();
+      var input = document.getElementById(id + '-search');
+      var q = input.value.toLowerCase();
+      var clearBtn = input.parentElement.querySelector('.ds-adv-dd__search-clear');
+      if (clearBtn) clearBtn.style.display = q ? '' : 'none';
       document.querySelectorAll('#' + id + '-list .ds-adv-dd__item').forEach(function(item) {
-        item.style.display = item.querySelector('.ds-adv-dd__item-label').textContent.toLowerCase().includes(q) ? '' : 'none';
+        var matches = item.querySelector('.ds-adv-dd__item-label').textContent.toLowerCase().includes(q);
+        item.classList.toggle('ds-adv-dd__item--hidden', !matches);
       });
+    }
+    function advDdClearSearch(id) {
+      var input = document.getElementById(id + '-search');
+      input.value = '';
+      advDdFilter(id);
+      input.focus();
     }
     function advDdApply(id) {
       // Save current mode's state before reading totals
