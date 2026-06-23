@@ -16053,10 +16053,63 @@ Prioritise authority reinforcement in declining citation segments</textarea>
   <div class="section-header">
     <h2>Input Field</h2>
     <div class="divider"></div>
-  </div>
-  <p style="font-size:13px;color:var(--text-secondary-var);margin-bottom:24px">A single-line text input for collecting user-typed data. Covers the full interaction lifecycle — from empty through focused, filled, error, and disabled — plus label, helper text, and icon slot variants.</p>
 
-  <!-- 1. STATES ──────────────────────────────────────────────────── -->
+  <!-- GitHub + Demo links -->
+  <div style="display:flex;gap:8px;margin-bottom:24px;flex-wrap:wrap;margin-top:16px">
+    <a href="https://github.com/pavelfernandez-Atd/claude_desig_system/tree/main/components/input-field"
+       target="_blank" rel="noopener noreferrer"
+       onclick="window.open(this.href,'_blank','noopener');return false;"
+       style="display:inline-flex;align-items:center;gap:6px;padding:6px 12px;border-radius:6px;background:#24292f;color:#fff;font-size:12px;font-weight:600;text-decoration:none;font-family:'Open Sans',sans-serif">
+      <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+      View on GitHub
+    </a>
+    <a href="https://htmlpreview.github.io/?https://github.com/pavelfernandez-Atd/claude_desig_system/blob/main/components/input-field/demo.html"
+       target="_blank" rel="noopener noreferrer"
+       onclick="window.open(this.href,'_blank','noopener');return false;"
+       style="display:inline-flex;align-items:center;gap:6px;padding:6px 12px;border-radius:6px;background:#0969da;color:#fff;font-size:12px;font-weight:600;text-decoration:none;font-family:'Open Sans',sans-serif">
+      <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M8 1a7 7 0 100 14A7 7 0 008 1zM0 8a8 8 0 1116 0A8 8 0 010 8zm6.5-.25A.75.75 0 017.25 7h1a.75.75 0 01.75.75v2.75h.25a.75.75 0 010 1.5h-2a.75.75 0 010-1.5h.25v-2h-.25a.75.75 0 01-.75-.75zM8 6a1 1 0 100-2 1 1 0 000 2z"/></svg>
+      Preview Demo
+    </a>
+  </div>
+  </div>
+  <p style="font-size:13px;color:var(--text-secondary-var);margin-bottom:24px">A single-line text input for collecting user-typed data. Covers the full interaction lifecycle — from empty through focused, filled, error, and disabled — plus floating label, helper text, and icon slot variants.</p>
+
+  <!-- 1. LIVE COMPONENT ───────────────────────────────────────────── -->
+  <div style="margin-bottom:40px">
+    <div class="sub-label">Live Component</div>
+    <div style="background:#ffffff;padding:32px;border-radius:12px;display:flex;justify-content:center">
+      <div style="width:100%;max-width:400px;display:flex;flex-direction:column;gap:20px">
+        <div class="ds-input">
+          <div class="ds-input__wrap">
+            <input class="ds-input__input" type="text" placeholder=" " id="inp-live-1">
+            <label class="ds-input__float-label" for="inp-live-1">Search term</label>
+          </div>
+          <span class="ds-input__helper">Click the field to see the label float</span>
+        </div>
+        <div class="ds-input">
+          <div class="ds-input__wrap ds-input__wrap--has-prefix" id="inp-live-wrap">
+            <span class="ds-input__prefix">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="6.5" cy="6.5" r="4.5" stroke="#6477a2" stroke-width="1.3"/><path d="M10 10l3 3" stroke="#6477a2" stroke-width="1.3" stroke-linecap="round"/></svg>
+            </span>
+            <input class="ds-input__input" id="inp-live-2" type="text" placeholder=" " oninput="(function(el){var c=document.getElementById('inp-live-clear');c.style.display=el.value?'':'none';document.getElementById('inp-live-wrap').classList.toggle('ds-input__wrap--filled',!!el.value)})(this)">
+            <label class="ds-input__float-label" for="inp-live-2">Keyword</label>
+            <button class="ds-input__action" id="inp-live-clear" aria-label="Clear" style="display:none" onclick="var f=document.getElementById('inp-live-2');f.value='';this.style.display='none';document.getElementById('inp-live-wrap').classList.remove('ds-input__wrap--filled');f.focus()">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 2l10 10M12 2L2 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+            </button>
+          </div>
+        </div>
+        <div class="ds-input">
+          <div class="ds-input__wrap ds-input__wrap--error">
+            <input class="ds-input__input" type="text" placeholder=" " value="not-an-email" id="inp-live-3">
+            <label class="ds-input__float-label" for="inp-live-3">Email address</label>
+          </div>
+          <span class="ds-input__error-msg">Please enter a valid email address</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. STATES ──────────────────────────────────────────────────── -->
   <div style="margin-bottom:40px">
     <div class="sub-label">States</div>
     <div style="background:#ffffff;padding:24px;border-radius:12px;display:flex;gap:32px;flex-wrap:wrap;align-items:flex-start">
@@ -16118,7 +16171,7 @@ Prioritise authority reinforcement in declining citation segments</textarea>
     </div>
   </div>
 
-  <!-- 2. VARIANTS ────────────────────────────────────────────────── -->
+  <!-- 3. VARIANTS ────────────────────────────────────────────────── -->
   <div style="margin-bottom:40px">
     <div class="sub-label">Variants</div>
     <div style="background:#ffffff;padding:24px;border-radius:12px;display:flex;flex-direction:column;gap:24px">
@@ -16199,7 +16252,7 @@ Prioritise authority reinforcement in declining citation segments</textarea>
     </div>
   </div>
 
-  <!-- 3. INTERACTIVE DEMO ─────────────────────────────────────────── -->
+  <!-- 4. INTERACTIVE DEMO ─────────────────────────────────────────── -->
   <div style="margin-bottom:40px">
     <div class="sub-label">Interactive Demo</div>
     <div style="background:#ffffff;padding:24px;border-radius:12px;max-width:400px">
@@ -16233,7 +16286,7 @@ Prioritise authority reinforcement in declining citation segments</textarea>
     </div>
   </div>
 
-  <!-- 4. CSS CLASSES ─────────────────────────────────────────────── -->
+  <!-- 5. CSS CLASSES ─────────────────────────────────────────────── -->
   <div style="margin-bottom:40px">
     <div class="sub-label">CSS Classes</div>
     <table class="spec-table">
