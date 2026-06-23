@@ -16146,9 +16146,9 @@ Prioritise authority reinforcement in declining citation segments</textarea>
   </div>
   <p style="font-size:13px;color:var(--text-secondary-var);margin-bottom:24px">A single-line text input for collecting user-typed data. Covers the full interaction lifecycle — from empty through focused, filled, error, and disabled — plus floating label, helper text, and icon slot variants.</p>
 
-  <!-- 1. LIVE COMPONENT ───────────────────────────────────────────── -->
+  <!-- 1. LIVE DEMO ───────────────────────────────────────────────── -->
   <div style="margin-bottom:40px">
-    <div class="sub-label">Live Component</div>
+    <div class="sub-label">Live Demo</div>
     <div style="background:#ffffff;padding:32px;border-radius:12px;display:flex;justify-content:center">
       <div style="width:100%;max-width:400px;display:flex;flex-direction:column;gap:20px">
         <div class="ds-input">
@@ -16156,7 +16156,6 @@ Prioritise authority reinforcement in declining citation segments</textarea>
             <input class="ds-input__input" type="text" placeholder=" " id="inp-live-1">
             <label class="ds-input__float-label" for="inp-live-1">Search term</label>
           </div>
-          <span class="ds-input__helper">Click the field to see the label float</span>
         </div>
         <div class="ds-input">
           <div class="ds-input__wrap ds-input__wrap--has-prefix" id="inp-live-wrap">
@@ -16171,11 +16170,12 @@ Prioritise authority reinforcement in declining citation segments</textarea>
           </div>
         </div>
         <div class="ds-input">
-          <div class="ds-input__wrap ds-input__wrap--error">
-            <input class="ds-input__input" type="text" placeholder=" " value="not-an-email" id="inp-live-3">
+          <div class="ds-input__wrap ds-input__wrap--error" id="inp-live-3-wrap">
+            <input class="ds-input__input" type="text" placeholder=" " value="not-an-email" id="inp-live-3"
+              oninput="(function(el){var wrap=document.getElementById('inp-live-3-wrap');var msg=document.getElementById('inp-live-3-msg');var valid=/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(el.value);wrap.classList.toggle('ds-input__wrap--error',el.value.length>0&&!valid);wrap.classList.toggle('ds-input__wrap--filled',valid);msg.style.display=(el.value.length>0&&!valid)?'':'none';})(this)">
             <label class="ds-input__float-label" for="inp-live-3">Email address</label>
           </div>
-          <span class="ds-input__error-msg">Please enter a valid email address</span>
+          <span class="ds-input__error-msg" id="inp-live-3-msg">Please enter a valid email address</span>
         </div>
       </div>
     </div>
