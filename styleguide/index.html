@@ -1051,7 +1051,7 @@
     .ds-input { display:flex; flex-direction:column; gap:4px; font-family:var(--font-base); }
     .ds-input__label { font-size:12px; font-weight:600; color:#485982; line-height:1.4; }
     .ds-input__wrap { position:relative; display:flex; align-items:center; height:40px; border:1px solid #c4cdd5; border-radius:6px; background:#ffffff; transition:border-color 0.15s, box-shadow 0.15s; overflow:visible; }
-    .ds-input__wrap:focus-within { border-color:#1565c0; box-shadow:0 0 0 3px rgba(21,101,192,0.12); }
+    .ds-input__wrap:focus-within { border-color:#1565c0; }
     .ds-input__input { flex:1; height:100%; border:none; outline:none; background:transparent; font-family:var(--font-base); font-size:14px; font-weight:400; color:#27365b; padding:0 12px; }
     .ds-input__input::placeholder { color:transparent; }
     /* Floating label — sits inside the input at rest, rises to the border on focus/fill */
@@ -1068,7 +1068,7 @@
     .ds-input__helper { font-size:12px; font-weight:400; color:#6477a2; line-height:1.4; }
     .ds-input__error-msg { font-size:12px; font-weight:400; color:#de5a5a; line-height:1.4; }
     /* State modifiers applied to .ds-input__wrap */
-    .ds-input__wrap--focused { border-color:#1565c0; box-shadow:0 0 0 3px rgba(21,101,192,0.12); }
+    .ds-input__wrap--focused { border-color:#1565c0; }
     .ds-input__wrap--focused .ds-input__float-label { top:0; font-size:11px; background:#ffffff; padding:0 4px; color:#1565c0; transform:translateY(-50%); }
     .ds-input__wrap--filled { border-color:#a0aec0; }
     .ds-input__wrap--error { border-color:#de5a5a; box-shadow:0 0 0 3px rgba(222,90,90,0.1); }
@@ -16067,7 +16067,7 @@ Prioritise authority reinforcement in declining citation segments</textarea>
           <input class="ds-input__input" type="text" placeholder=" " id="inp-st-default" tabindex="-1">
           <label class="ds-input__float-label" for="inp-st-default">Label</label>
         </div>
-        <span style="font-family:var(--font-base);font-size:11px;color:#858585;text-align:center">Default</span>
+        <span style="font-family:var(--font-base);font-size:11px;color:#858585;text-align:left;padding-left:12px">Default</span>
       </div>
 
       <!-- Focused -->
@@ -16076,7 +16076,7 @@ Prioritise authority reinforcement in declining citation segments</textarea>
           <input class="ds-input__input" type="text" placeholder=" " id="inp-st-focused" tabindex="-1">
           <label class="ds-input__float-label" for="inp-st-focused">Label</label>
         </div>
-        <span style="font-family:var(--font-base);font-size:11px;color:#858585;text-align:center">Focused</span>
+        <span style="font-family:var(--font-base);font-size:11px;color:#858585;text-align:left;padding-left:12px">Focused</span>
       </div>
 
       <!-- Filled -->
@@ -16085,7 +16085,7 @@ Prioritise authority reinforcement in declining citation segments</textarea>
           <input class="ds-input__input" type="text" placeholder=" " value="Entered value" id="inp-st-filled" tabindex="-1">
           <label class="ds-input__float-label" for="inp-st-filled">Label</label>
         </div>
-        <span style="font-family:var(--font-base);font-size:11px;color:#858585;text-align:center">Filled</span>
+        <span style="font-family:var(--font-base);font-size:11px;color:#858585;text-align:left;padding-left:12px">Filled</span>
       </div>
 
       <!-- Error -->
@@ -16094,7 +16094,7 @@ Prioritise authority reinforcement in declining citation segments</textarea>
           <input class="ds-input__input" type="text" placeholder=" " value="Invalid value" id="inp-st-error" tabindex="-1">
           <label class="ds-input__float-label" for="inp-st-error">Label</label>
         </div>
-        <span style="font-family:var(--font-base);font-size:11px;color:#858585;text-align:center">Error</span>
+        <span style="font-family:var(--font-base);font-size:11px;color:#858585;text-align:left;padding-left:12px">Error</span>
       </div>
 
       <!-- Disabled -->
@@ -16103,7 +16103,7 @@ Prioritise authority reinforcement in declining citation segments</textarea>
           <input class="ds-input__input" type="text" placeholder=" " id="inp-st-disabled" disabled tabindex="-1">
           <label class="ds-input__float-label" for="inp-st-disabled">Label</label>
         </div>
-        <span style="font-family:var(--font-base);font-size:11px;color:#858585;text-align:center">Disabled</span>
+        <span style="font-family:var(--font-base);font-size:11px;color:#858585;text-align:left;padding-left:12px">Disabled</span>
       </div>
 
       <!-- Read-only -->
@@ -16112,7 +16112,7 @@ Prioritise authority reinforcement in declining citation segments</textarea>
           <input class="ds-input__input" type="text" placeholder=" " value="Read-only value" id="inp-st-readonly" readonly tabindex="-1">
           <label class="ds-input__float-label" for="inp-st-readonly">Label</label>
         </div>
-        <span style="font-family:var(--font-base);font-size:11px;color:#858585;text-align:center">Read-only</span>
+        <span style="font-family:var(--font-base);font-size:11px;color:#858585;text-align:left;padding-left:12px">Read-only</span>
       </div>
 
     </div>
