@@ -1422,6 +1422,17 @@
     .ds-count-chip__label { padding:0 4px; line-height:12px; }
     .ds-count-chip__icon { width:16px; height:16px; flex-shrink:0; display:flex; align-items:center; justify-content:center; }
     .ds-count-chip__icon svg { display:block; }
+    /* Count Chip — hover tooltip */
+    .ds-count-chip-wrap { position:relative; display:inline-flex; cursor:default; }
+    .ds-count-chip-tooltip { position:absolute; bottom:calc(100% + 2px); left:50%; transform:translateX(-50%); display:flex; flex-direction:column; align-items:center; filter:drop-shadow(0 0 8px rgba(23,42,68,0.2)); opacity:0; pointer-events:none; transition:opacity 0.15s ease; z-index:200; white-space:nowrap; }
+    .ds-count-chip-wrap:hover .ds-count-chip-tooltip { opacity:1; pointer-events:auto; }
+    .ds-count-chip-tooltip__body { background:#fff; border-radius:12px; padding:16px 20px; }
+    .ds-count-chip-tooltip__list { max-height:185px; overflow-y:auto; display:flex; flex-direction:column; }
+    .ds-count-chip-tooltip__item { display:flex; align-items:center; gap:6px; padding:4px 0; }
+    .ds-count-chip-tooltip__item + .ds-count-chip-tooltip__item { border-top:1px solid #eeeeee; }
+    .ds-count-chip-tooltip__favicon { width:16px; height:16px; border-radius:2px; flex-shrink:0; }
+    .ds-count-chip-tooltip__name { font-family:'Open Sans',sans-serif; font-size:13px; font-weight:400; color:#181818; line-height:18px; }
+    .ds-count-chip-tooltip__caret { width:0; height:0; border-left:12px solid transparent; border-right:12px solid transparent; border-top:8px solid #fff; flex-shrink:0; }
 
     /* Chip Small variant */
     .ds-chip--sm { height:20px; font-size:12px; padding:2px 4px; }
@@ -14310,6 +14321,38 @@ Prioritise authority reinforcement in declining citation segments</textarea>
         <div style="font-size:11px;font-weight:600;color:#6477a2;text-transform:uppercase;letter-spacing:0.6px;margin-bottom:12px">Triple digit</div>
         <div style="display:flex;gap:12px;flex-wrap:wrap;align-items:center">
           <span class="ds-count-chip"><span class="ds-count-chip__label">100</span><span class="ds-count-chip__icon"><svg width="16" height="16" viewBox="0 0 14.4 11.2" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7.21251 0C9.21425 0 10.8407 0.925 12.0167 2.025C13.1927 3.1 13.9684 4.4 14.3437 5.3C14.4188 5.5 14.4188 5.725 14.3437 5.925C13.9684 6.8 13.1927 8.1 12.0167 9.2C10.8407 10.3 9.21425 11.2 7.21251 11.2C5.18575 11.2 3.55934 10.3 2.38332 9.2C1.2073 8.1 0.431625 6.8 0.0562989 5.925C-0.0187663 5.725 -0.0187663 5.5 0.0562989 5.3C0.431625 4.4 1.2073 3.1 2.38332 2.025C3.55934 0.925 5.18575 0 7.21251 0ZM3.60938 5.6C3.60938 6.9 4.28497 8.075 5.41095 8.725C6.5119 9.375 7.8881 9.375 9.01407 8.725C10.115 8.075 10.8156 6.9 10.8156 5.6C10.8156 4.325 10.115 3.15 9.01407 2.5C7.8881 1.85 6.5119 1.85 5.41095 2.5C4.28497 3.15 3.60938 4.325 3.60938 5.6ZM7.21251 4C7.21251 3.825 7.16247 3.675 7.11242 3.5C7.06238 3.375 7.16247 3.2 7.3126 3.2C8.31347 3.25 9.23927 3.95 9.51451 5C9.86481 6.275 9.11416 7.575 7.81303 7.925C6.53692 8.275 5.21077 7.5 4.88549 6.225C4.83545 6.05 4.81043 5.875 4.81043 5.725C4.7854 5.575 4.96056 5.475 5.08566 5.525C5.26082 5.575 5.41095 5.6 5.61112 5.6C6.48688 5.6 7.21251 4.9 7.21251 4Z" fill="currentColor"/></svg></span></span> <span class="ds-count-chip"><span class="ds-count-chip__label">247</span><span class="ds-count-chip__icon"><svg width="16" height="16" viewBox="0 0 14.4 11.2" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7.21251 0C9.21425 0 10.8407 0.925 12.0167 2.025C13.1927 3.1 13.9684 4.4 14.3437 5.3C14.4188 5.5 14.4188 5.725 14.3437 5.925C13.9684 6.8 13.1927 8.1 12.0167 9.2C10.8407 10.3 9.21425 11.2 7.21251 11.2C5.18575 11.2 3.55934 10.3 2.38332 9.2C1.2073 8.1 0.431625 6.8 0.0562989 5.925C-0.0187663 5.725 -0.0187663 5.5 0.0562989 5.3C0.431625 4.4 1.2073 3.1 2.38332 2.025C3.55934 0.925 5.18575 0 7.21251 0ZM3.60938 5.6C3.60938 6.9 4.28497 8.075 5.41095 8.725C6.5119 9.375 7.8881 9.375 9.01407 8.725C10.115 8.075 10.8156 6.9 10.8156 5.6C10.8156 4.325 10.115 3.15 9.01407 2.5C7.8881 1.85 6.5119 1.85 5.41095 2.5C4.28497 3.15 3.60938 4.325 3.60938 5.6ZM7.21251 4C7.21251 3.825 7.16247 3.675 7.11242 3.5C7.06238 3.375 7.16247 3.2 7.3126 3.2C8.31347 3.25 9.23927 3.95 9.51451 5C9.86481 6.275 9.11416 7.575 7.81303 7.925C6.53692 8.275 5.21077 7.5 4.88549 6.225C4.83545 6.05 4.81043 5.875 4.81043 5.725C4.7854 5.575 4.96056 5.475 5.08566 5.525C5.26082 5.575 5.41095 5.6 5.61112 5.6C6.48688 5.6 7.21251 4.9 7.21251 4Z" fill="currentColor"/></svg></span></span> <span class="ds-count-chip"><span class="ds-count-chip__label">999</span><span class="ds-count-chip__icon"><svg width="16" height="16" viewBox="0 0 14.4 11.2" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7.21251 0C9.21425 0 10.8407 0.925 12.0167 2.025C13.1927 3.1 13.9684 4.4 14.3437 5.3C14.4188 5.5 14.4188 5.725 14.3437 5.925C13.9684 6.8 13.1927 8.1 12.0167 9.2C10.8407 10.3 9.21425 11.2 7.21251 11.2C5.18575 11.2 3.55934 10.3 2.38332 9.2C1.2073 8.1 0.431625 6.8 0.0562989 5.925C-0.0187663 5.725 -0.0187663 5.5 0.0562989 5.3C0.431625 4.4 1.2073 3.1 2.38332 2.025C3.55934 0.925 5.18575 0 7.21251 0ZM3.60938 5.6C3.60938 6.9 4.28497 8.075 5.41095 8.725C6.5119 9.375 7.8881 9.375 9.01407 8.725C10.115 8.075 10.8156 6.9 10.8156 5.6C10.8156 4.325 10.115 3.15 9.01407 2.5C7.8881 1.85 6.5119 1.85 5.41095 2.5C4.28497 3.15 3.60938 4.325 3.60938 5.6ZM7.21251 4C7.21251 3.825 7.16247 3.675 7.11242 3.5C7.06238 3.375 7.16247 3.2 7.3126 3.2C8.31347 3.25 9.23927 3.95 9.51451 5C9.86481 6.275 9.11416 7.575 7.81303 7.925C6.53692 8.275 5.21077 7.5 4.88549 6.225C4.83545 6.05 4.81043 5.875 4.81043 5.725C4.7854 5.575 4.96056 5.475 5.08566 5.525C5.26082 5.575 5.41095 5.6 5.61112 5.6C6.48688 5.6 7.21251 4.9 7.21251 4Z" fill="currentColor"/></svg></span></span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- TOOLTIP BEHAVIOR -->
+  <div style="font-size:11px;font-weight:600;letter-spacing:0.8px;text-transform:uppercase;color:#6477a2;margin:0 0 12px">TOOLTIP BEHAVIOR</div>
+  <div style="background:#fff;border:1px solid rgba(0,0,0,0.06);border-radius:12px;padding:24px;margin-bottom:32px">
+    <p style="font-size:13px;color:var(--text-secondary-var);margin:0 0 16px">Hovering the chip reveals a scrollable list of the items behind the count — e.g. the brands appearing in an AI Overview. Hover the chip below to see it.</p>
+    <div style="padding-top:210px;display:flex">
+      <div class="ds-count-chip-wrap">
+        <span class="ds-count-chip">
+          <span class="ds-count-chip__label">10</span>
+          <span class="ds-count-chip__icon"><svg width="16" height="16" viewBox="0 0 14.4 11.2" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7.21251 0C9.21425 0 10.8407 0.925 12.0167 2.025C13.1927 3.1 13.9684 4.4 14.3437 5.3C14.4188 5.5 14.4188 5.725 14.3437 5.925C13.9684 6.8 13.1927 8.1 12.0167 9.2C10.8407 10.3 9.21425 11.2 7.21251 11.2C5.18575 11.2 3.55934 10.3 2.38332 9.2C1.2073 8.1 0.431625 6.8 0.0562989 5.925C-0.0187663 5.725 -0.0187663 5.5 0.0562989 5.3C0.431625 4.4 1.2073 3.1 2.38332 2.025C3.55934 0.925 5.18575 0 7.21251 0ZM3.60938 5.6C3.60938 6.9 4.28497 8.075 5.41095 8.725C6.5119 9.375 7.8881 9.375 9.01407 8.725C10.115 8.075 10.8156 6.9 10.8156 5.6C10.8156 4.325 10.115 3.15 9.01407 2.5C7.8881 1.85 6.5119 1.85 5.41095 2.5C4.28497 3.15 3.60938 4.325 3.60938 5.6ZM7.21251 4C7.21251 3.825 7.16247 3.675 7.11242 3.5C7.06238 3.375 7.16247 3.2 7.3126 3.2C8.31347 3.25 9.23927 3.95 9.51451 5C9.86481 6.275 9.11416 7.575 7.81303 7.925C6.53692 8.275 5.21077 7.5 4.88549 6.225C4.83545 6.05 4.81043 5.875 4.81043 5.725C4.7854 5.575 4.96056 5.475 5.08566 5.525C5.26082 5.575 5.41095 5.6 5.61112 5.6C6.48688 5.6 7.21251 4.9 7.21251 4Z" fill="currentColor"/></svg></span>
+        </span>
+        <div class="ds-count-chip-tooltip">
+          <div class="ds-count-chip-tooltip__body">
+            <div class="ds-count-chip-tooltip__list">
+            <div class="ds-count-chip-tooltip__item"><img class="ds-count-chip-tooltip__favicon" src="https://www.google.com/s2/favicons?domain=expedia.com&sz=16" alt=""><span class="ds-count-chip-tooltip__name">expedia</span></div>
+            <div class="ds-count-chip-tooltip__item"><img class="ds-count-chip-tooltip__favicon" src="https://www.google.com/s2/favicons?domain=tripadvisor.com&sz=16" alt=""><span class="ds-count-chip-tooltip__name">tripadvisor</span></div>
+            <div class="ds-count-chip-tooltip__item"><img class="ds-count-chip-tooltip__favicon" src="https://www.google.com/s2/favicons?domain=hotels.com&sz=16" alt=""><span class="ds-count-chip-tooltip__name">hotels.com</span></div>
+            <div class="ds-count-chip-tooltip__item"><img class="ds-count-chip-tooltip__favicon" src="https://www.google.com/s2/favicons?domain=kayak.com&sz=16" alt=""><span class="ds-count-chip-tooltip__name">kayak.com</span></div>
+            <div class="ds-count-chip-tooltip__item"><img class="ds-count-chip-tooltip__favicon" src="https://www.google.com/s2/favicons?domain=skyscanner.com&sz=16" alt=""><span class="ds-count-chip-tooltip__name">skyscanner</span></div>
+            <div class="ds-count-chip-tooltip__item"><img class="ds-count-chip-tooltip__favicon" src="https://www.google.com/s2/favicons?domain=timeout.com&sz=16" alt=""><span class="ds-count-chip-tooltip__name">time out</span></div>
+            <div class="ds-count-chip-tooltip__item"><img class="ds-count-chip-tooltip__favicon" src="https://www.google.com/s2/favicons?domain=telegraph.co.uk&sz=16" alt=""><span class="ds-count-chip-tooltip__name">telegraph</span></div>
+            <div class="ds-count-chip-tooltip__item"><img class="ds-count-chip-tooltip__favicon" src="https://www.google.com/s2/favicons?domain=cnn.com&sz=16" alt=""><span class="ds-count-chip-tooltip__name">cnn traveller</span></div>
+            <div class="ds-count-chip-tooltip__item"><img class="ds-count-chip-tooltip__favicon" src="https://www.google.com/s2/favicons?domain=mrandmrssmith.com&sz=16" alt=""><span class="ds-count-chip-tooltip__name">mr & mrs smith</span></div>
+            <div class="ds-count-chip-tooltip__item"><img class="ds-count-chip-tooltip__favicon" src="https://www.google.com/s2/favicons?domain=travelocity.com&sz=16" alt=""><span class="ds-count-chip-tooltip__name">travelocity</span></div>
+            </div>
+          </div>
+          <div class="ds-count-chip-tooltip__caret"></div>
         </div>
       </div>
     </div>
