@@ -1284,7 +1284,11 @@
     .tct__impr-bar-wrap { height:6px; border-radius:200px; background:#f0f2f7; overflow:hidden; }
     .tct__impr-bar { height:100%; background:#64abfb; border-radius:200px; }
     .tct__impr-val { font-size:12px; color:#38476a; text-align:right; }
-    .tct__sort-icon { flex-shrink:0; opacity:0.7; }
+    .tct__sort-icon { flex-shrink:0; opacity:0; transition:opacity 0.15s, transform 0.15s; }
+    .tct__col-label--sortable:hover .tct__sort-icon { opacity:0.7; }
+    .tct__col-label--sorted { color:#3079bd !important; }
+    .tct__col-label--sorted .tct__sort-icon { opacity:1; color:#3079bd; }
+    .tct__col-label--sorted.tct__col-label--asc .tct__sort-icon { transform:rotate(180deg); }
 
     /* === Simple Timeline (.simple-timeline) === */
     .simple-timeline { width:100%; display:block; position:relative; }
@@ -11966,12 +11970,12 @@ const DATES = ['27 Apr, 2026', '28 Apr, 2026', ... '26 May, 2026'];
           <span class="tct__col-label">Competitor</span>
           <div style="display:grid;grid-template-columns:1fr 68px 68px 68px;align-items:center;gap:16px;">
             <span class="tct__col-label">Position mix</span>
-            <span class="tct__col-label tct__col-label--above tct__col-label--sortable" data-sort="above">Above<svg class="tct__sort-icon" width="10" height="12" viewBox="0 0 10 12" fill="none"><path d="M5 1v10M2 4l3-3 3 3M2 8l3 3 3-3" stroke="#6477a2" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-            <span class="tct__col-label tct__col-label--inside tct__col-label--sortable" data-sort="inside">Inside<svg class="tct__sort-icon" width="10" height="12" viewBox="0 0 10 12" fill="none"><path d="M5 1v10M2 4l3-3 3 3M2 8l3 3 3-3" stroke="#6477a2" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-            <span class="tct__col-label tct__col-label--below tct__col-label--sortable" data-sort="below">Below<svg class="tct__sort-icon" width="10" height="12" viewBox="0 0 10 12" fill="none"><path d="M5 1v10M2 4l3-3 3 3M2 8l3 3 3-3" stroke="#6477a2" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            <span class="tct__col-label tct__col-label--above tct__col-label--sortable" data-sort="above">Above<svg class="tct__sort-icon" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            <span class="tct__col-label tct__col-label--inside tct__col-label--sortable" data-sort="inside">Inside<svg class="tct__sort-icon" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            <span class="tct__col-label tct__col-label--below tct__col-label--sortable" data-sort="below">Below<svg class="tct__sort-icon" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
           </div>
           <div style="padding-left:20px;">
-            <span class="tct__col-label tct__col-label--sortable" data-sort="impr" style="display:inline-flex;align-items:center;gap:3px;">Est. AIO Impressions<svg class="tct__sort-icon" width="10" height="12" viewBox="0 0 10 12" fill="none" style="opacity:1;"><path d="M5 1v10M2 8l3 3 3-3" stroke="#6477a2" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            <span class="tct__col-label tct__col-label--sortable" data-sort="impr" style="display:inline-flex;align-items:center;gap:3px;">Est. AIO Impressions<svg class="tct__sort-icon" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
           </div>
         </div>
         <!-- Rows rendered by JS -->
@@ -12095,12 +12099,12 @@ const DATES = ['27 Apr, 2026', '28 Apr, 2026', ... '26 May, 2026'];
         +'</div>';
       container.appendChild(el);
     });
-    // update sort icons
-    document.querySelectorAll('#tct-header .tct__sort-icon').forEach(function(icon){
-      var col=icon.closest('[data-sort]').dataset.sort;
+    // update sort icons — mirrors ds-table__th--sorted / --asc pattern
+    document.querySelectorAll('#tct-header [data-sort]').forEach(function(label){
+      var col=label.dataset.sort;
       var isActive=(col===sortCol);
-      icon.style.opacity=isActive?'1':'0.7';
-      icon.innerHTML=isActive?(sortDir==='desc'?'<path d="M5 1v10M2 8l3 3 3-3" stroke="#6477a2" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>':'<path d="M5 1v10M2 4l3-3 3 3" stroke="#6477a2" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>'):'<path d="M5 1v10M2 4l3-3 3 3M2 8l3 3 3-3" stroke="#6477a2" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>';
+      label.classList.toggle('tct__col-label--sorted', isActive);
+      label.classList.toggle('tct__col-label--asc', isActive && sortDir==='asc');
     });
   }
 
