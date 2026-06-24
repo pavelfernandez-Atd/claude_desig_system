@@ -975,6 +975,13 @@
     .btn--plain-white:hover { background: rgba(255,255,255,0.12); }
     .btn--plain-dark { background: transparent; color: #485982; }
     .btn--plain-dark:hover { background: #EAF1F7; }
+    .btn--plain:disabled, .btn--plain.btn--disabled { color: #E4E8F2 !important; }
+    .btn--plain-light { background: transparent; color: #6477a2; }
+    .btn--plain-light:hover { background: #EAF1F7; }
+    .btn--plain-light:active { background: #5BB3F9; color: #ffffff; }
+    .btn--plain-light:disabled, .btn--plain-light.btn--disabled { color: #E4E8F2 !important; }
+    .btn--plain-dark:disabled, .btn--plain-dark.btn--disabled { color: #E4E8F2 !important; }
+    .btn--plain-white:disabled, .btn--plain-white.btn--disabled { color: rgba(255,255,255,0.2) !important; }
 
     .btn--icon-only  { padding: 0; width: 40px; }
     .btn--icon-only.btn--sm { width: 30px; }
@@ -1284,11 +1291,16 @@
     .tct__impr-bar-wrap { height:6px; border-radius:200px; background:#f0f2f7; overflow:hidden; }
     .tct__impr-bar { height:100%; background:#64abfb; border-radius:200px; }
     .tct__impr-val { font-size:12px; color:#38476a; text-align:right; }
-    .tct__sort-icon { flex-shrink:0; opacity:0; transition:opacity 0.15s, transform 0.15s; }
-    .tct__col-label--sortable:hover .tct__sort-icon { opacity:0.7; }
+    .tct__sort-icon { flex-shrink:0; vertical-align:middle; }
+    .tct__sort-icon .sort-arrow-up, .tct__sort-icon .sort-arrow-down { opacity:0.5; transition:opacity 0.15s, transform 0.15s; }
+    .tct__col-label--sortable:hover .sort-arrow-up,
+    .tct__col-label--sortable:hover .sort-arrow-down { opacity:0.85; }
     .tct__col-label--sorted { color:#3079bd !important; }
-    .tct__col-label--sorted .tct__sort-icon { opacity:1; color:#3079bd; }
-    .tct__col-label--sorted.tct__col-label--asc .tct__sort-icon { transform:rotate(180deg); }
+    .tct__col-label--sorted .tct__sort-icon { color:#3079bd; }
+    .tct__col-label--sorted .sort-arrow-up { opacity:0; }
+    .tct__col-label--sorted .sort-arrow-down { opacity:1; transform:translateX(-3px); }
+    .tct__col-label--sorted.tct__col-label--asc .sort-arrow-up { opacity:1; transform:translateX(3px); }
+    .tct__col-label--sorted.tct__col-label--asc .sort-arrow-down { opacity:0; transform:none; }
 
     /* === Simple Timeline (.simple-timeline) === */
     .simple-timeline { width:100%; display:block; position:relative; }
@@ -1368,6 +1380,26 @@
     .action-banner__body ul { margin:0; padding-left:20px; list-style:disc; }
     .action-banner__body li { line-height:15px; }
 
+    /* ── Alert / Banner (.ds-alert) ────────────────────────────────── */
+    .ds-alert { display:flex; align-items:center; gap:6px; padding:8px 12px; border-radius:8px; font-family:var(--font-base); box-sizing:border-box; width:100%; }
+    .ds-alert__icon { flex-shrink:0; width:16px; height:16px; }
+    .ds-alert__body { flex:1; min-width:0; display:flex; flex-direction:column; overflow:hidden; }
+    .ds-alert__title { font-size:15px; font-weight:600; line-height:18px; margin:0; }
+    .ds-alert__message { font-size:14px; font-weight:400; line-height:19px; margin:0; }
+    .ds-alert__actions { flex-shrink:0; display:flex; align-items:center; justify-content:flex-end; height:36px; padding-left:16px; padding-top:3px; padding-bottom:3px; gap:2px; }
+    .ds-alert__close { width:30px; height:30px; border:none; border-radius:6px; background:transparent; cursor:pointer; display:flex; align-items:center; justify-content:center; }
+    .ds-alert__close:hover { background:rgba(0,0,0,0.08); }
+    .ds-alert--error   { background:#f9e9e9; }
+    .ds-alert--warning { background:#fdf0e5; }
+    .ds-alert--info    { background:#e5f3f4; }
+    .ds-alert--success { background:#eaf2ea; }
+    .ds-alert--insights { background:#f0f7ff; }
+    .ds-alert--error .ds-alert__title, .ds-alert--error .ds-alert__message { color:#4f1010; }
+    .ds-alert--warning .ds-alert__title, .ds-alert--warning .ds-alert__message { color:#8b1c1c; }
+    .ds-alert--info .ds-alert__title, .ds-alert--info .ds-alert__message { color:#005662; }
+    .ds-alert--success .ds-alert__title, .ds-alert--success .ds-alert__message { color:#006236; }
+    .ds-alert--insights .ds-alert__title, .ds-alert--insights .ds-alert__message { color:#485982; }
+
     /* === Chip (.ds-chip) === */
     .ds-chip { display:inline-flex; align-items:center; height:24px; padding:2px 6px; border-radius:16px; font-family:var(--font-base); font-size:13px; font-weight:400; line-height:12px; white-space:nowrap; box-sizing:border-box; border:1px solid transparent; cursor:default; }
     .ds-chip__icon { width:16px; height:16px; flex-shrink:0; display:flex; align-items:center; justify-content:center; }
@@ -1446,26 +1478,33 @@
 
     /* === Table Component (.ds-table-card / .ds-table) === */
     .ds-table-card { background:#fff; border-radius:12px; overflow:hidden; width:100%; }
-    .ds-table-card__header { display:flex; align-items:center; gap:8px; padding:20px 24px; min-height:80px; box-sizing:border-box; }
+    .ds-table-card__header { display:flex; align-items:center; gap:8px; padding:20px 24px 10px; min-height:80px; box-sizing:border-box; }
     .ds-table-card__title-group { flex:1; display:flex; flex-direction:column; gap:2px; }
     .ds-table-card__title-row { display:flex; align-items:center; gap:6px; }
-    .ds-table-card__title { font-family:'Open Sans',Helvetica,sans-serif; font-size:16px; font-weight:600; color:rgba(0,0,0,0.87); line-height:17px; }
-    .ds-table-card__count { display:inline-flex; align-items:center; justify-content:center; height:20px; padding:0 6px; border-radius:16px; background:#e8f2fc; font-family:'Open Sans',Helvetica,sans-serif; font-size:12px; font-weight:600; color:#3589e9; flex-shrink:0; }
-    .ds-table-card__subtitle { font-family:'Open Sans',Helvetica,sans-serif; font-size:13px; color:#6b6b6b; line-height:14px; }
+    .ds-table-card__title { font-family:var(--font-base); font-size:16px; font-weight:600; color:rgba(0,0,0,0.87); line-height:17px; }
+    .ds-table-card__count { display:inline-flex; align-items:center; justify-content:center; height:20px; padding:0 6px; border-radius:16px; background:#e8f2fc; font-family:var(--font-base); font-size:12px; font-weight:600; color:#3589e9; flex-shrink:0; }
+    .ds-table-card__subtitle { font-family:var(--font-base); font-size:13px; font-weight:400; color:#6b6b6b; line-height:16px; }
     .ds-table-card__actions { display:flex; align-items:center; gap:2px; padding:10px 0 10px 12px; }
     .ds-table-card__icon-btn { display:flex; align-items:center; justify-content:center; width:30px; height:30px; border-radius:6px; color:#6477a2; cursor:pointer; background:none; border:none; padding:0; }
     .ds-table-card__icon-btn:hover { background:#f5f5f5; }
+    .ds-table-card__info-wrap { position:relative; display:inline-flex; flex-shrink:0; }
+    .ds-table-card__info-wrap .kpi-info-tooltip { bottom:auto; top:calc(100% + 6px); left:auto; right:0; transform:none; }
+    .ds-table-card__info-wrap .kpi-info-tooltip .tooltip-info__arrow { margin-left:auto; margin-right:7px; }
     .ds-table-wrap { width:100%; overflow-x:auto; padding:0 24px; box-sizing:border-box; }
     .ds-table { width:100%; border-collapse:separate; border-spacing:0; font-family:'Open Sans',Helvetica,sans-serif; min-width:640px; }
-    .ds-table thead th { background:#f3f5f7; border-bottom:1px solid rgba(0,0,0,0.12); height:60px; padding:10px; font-size:14px; font-weight:600; color:#6477a2; text-align:left; vertical-align:middle; white-space:nowrap; box-sizing:border-box; }
-    .ds-table thead th:first-child { border-radius:12px 0 0 0; }
-    .ds-table thead th:last-child { border-radius:0 12px 0 0; }
-    .ds-table thead th.ds-table__th--sorted { color:#3079bd; }
+    .ds-table thead th { background:#f3f5f7; border-bottom:1px solid rgba(0,0,0,0.12); padding:12px 10px; font-size:13px; font-weight:600; color:#6477a2; text-align:left; vertical-align:middle; white-space:nowrap; box-sizing:border-box; }
+    .ds-table thead th:first-child { border-radius:8px 0 0 0; }
+    .ds-table thead th:last-child { border-radius:0 8px 0 0; }
+
     .ds-table__th-inner { display:inline-flex; align-items:center; gap:2px; cursor:pointer; user-select:none; }
-    .ds-table__sort { width:16px; height:16px; color:#6477a2; opacity:0; flex-shrink:0; transition:transform 0.15s, opacity 0.15s; vertical-align:middle; }
-    .ds-table thead th.ds-table__th--sorted .ds-table__sort { opacity:1; color:#3079bd; }
-    .ds-table thead th.ds-table__th--sorted.ds-table__th--asc .ds-table__sort { transform:rotate(180deg); }
-    .ds-table__th-inner:hover .ds-table__sort { opacity:0.7; }
+    .ds-table__sort { width:14px; height:12px; color:#6477a2; flex-shrink:0; vertical-align:middle; }
+    .ds-table__sort .sort-arrow-up, .ds-table__sort .sort-arrow-down { opacity:0.5; transition:opacity 0.15s, transform 0.15s; }
+    .ds-table thead th.ds-table__th--sorted .ds-table__sort { color:#3079bd; }
+    .ds-table thead th.ds-table__th--sorted .sort-arrow-up { opacity:0; }
+    .ds-table thead th.ds-table__th--sorted .sort-arrow-down { opacity:1; transform:translateX(-3px); }
+    .ds-table thead th.ds-table__th--sorted.ds-table__th--asc .sort-arrow-up { opacity:1; transform:translateX(3px); }
+    .ds-table thead th.ds-table__th--sorted.ds-table__th--asc .sort-arrow-down { opacity:0; transform:none; }
+    .ds-table__th-inner:hover .sort-arrow-up, .ds-table__th-inner:hover .sort-arrow-down { opacity:0.85; }
     .ds-table tbody tr { height:45px; }
     .ds-table tbody tr:nth-child(odd) td { background:#ffffff; }
     .ds-table tbody tr:nth-child(even) td { background:#f9f9f9; }
@@ -1486,8 +1525,8 @@
     .ds-table__sentiment--neutral     { background:#e7ecf4; color:#576993; }
     .ds-table__sentiment--unfavourable{ background:#fce8e8; color:#b84646; }
     /* Pagination */
-    .ds-table__pagination { display:flex; align-items:center; justify-content:flex-end; gap:40px; height:50px; padding:0 15px 0 8px; background:#fff; }
-    .ds-table__rows-selector { display:flex; align-items:center; }
+    .ds-table__pagination { display:flex; align-items:center; justify-content:flex-end; gap:0; height:50px; padding:0 16px; background:#fff; }
+    .ds-table__rows-selector { display:flex; align-items:center; padding-right:16px; margin-right:16px; border-right:1px solid rgba(0,0,0,0.1); }
     .ds-table__rows-label { font-family:'Open Sans',Helvetica,sans-serif; font-size:12px; color:#6b6b6b; line-height:1.66; white-space:nowrap; }
     .ds-table__rows-btn { display:flex; align-items:center; gap:4px; height:30px; padding:0 12px; border-radius:6px; font-family:'Open Sans',Helvetica,sans-serif; font-size:14px; font-weight:600; color:#6b6b6b; cursor:pointer; background:none; border:none; }
     .ds-table__rows-btn:hover { background:#f5f5f5; }
@@ -1495,9 +1534,9 @@
     .ds-table__page-info { display:flex; align-items:center; gap:5px; font-family:'Open Sans',Helvetica,sans-serif; font-size:14px; color:#2b2b2b; }
     .ds-table__page-input { width:29px; height:20px; border:1px solid #d2d2d2; border-radius:2px; text-align:center; font-family:'Open Sans',Helvetica,sans-serif; font-size:14px; color:#2b2b2b; padding:0; box-sizing:border-box; }
     .ds-table__page-nav { display:flex; gap:10px; }
-    .ds-table__nav-btn { width:25px; height:25px; display:flex; align-items:center; justify-content:center; cursor:pointer; color:#2b2b2b; background:none; border:none; border-radius:4px; padding:0; }
-    .ds-table__nav-btn:hover:not(:disabled) { background:#f5f5f5; }
-    .ds-table__nav-btn:disabled { opacity:0.3; cursor:not-allowed; }
+    .ds-table__nav-btn { display:flex; align-items:center; justify-content:center; cursor:pointer; background:none; border:none; padding:0; }
+    .ds-table__nav-btn:hover:not(:disabled) { background:#EAF1F7; }
+    .ds-table__nav-btn:disabled { color:#E4E8F2; cursor:not-allowed; }
 
     /* === AIO Mentions Sample (.mentions-sample) === */
     .mentions-sample { background:#ffffff; border-radius:12px; display:flex; flex-direction:column; width:100%; box-sizing:border-box; overflow:hidden; }
@@ -2263,10 +2302,21 @@
   <div class="swatch-group">
     <div class="sub-label">Alerts — Semantic</div>
     <div class="swatch-row">
-      <div class="swatch"><div class="swatch-chip" style="background:#ef6c00"></div><span class="swatch-name">warning.main</span><span class="swatch-value">#ef6c00</span></div>
-      <div class="swatch"><div class="swatch-chip" style="background:#fdf0e5"></div><span class="swatch-name">warning.bg</span><span class="swatch-value">#fdf0e5</span></div>
-      <div class="swatch"><div class="swatch-chip" style="background:#c62828"></div><span class="swatch-name">error.main</span><span class="swatch-value">#c62828</span></div>
+      <div class="swatch"><div class="swatch-chip" style="background:#c62828"></div><span class="swatch-name">error.icon</span><span class="swatch-value">#c62828</span></div>
+      <div class="swatch"><div class="swatch-chip" style="background:#4f1010"></div><span class="swatch-name">error.text</span><span class="swatch-value">#4f1010</span></div>
       <div class="swatch"><div class="swatch-chip" style="background:#f9e9e9"></div><span class="swatch-name">error.bg</span><span class="swatch-value">#f9e9e9</span></div>
+      <div class="swatch"><div class="swatch-chip" style="background:#ef6c00"></div><span class="swatch-name">warning.icon</span><span class="swatch-value">#ef6c00</span></div>
+      <div class="swatch"><div class="swatch-chip" style="background:#8b1c1c"></div><span class="swatch-name">warning.text</span><span class="swatch-value">#8b1c1c</span></div>
+      <div class="swatch"><div class="swatch-chip" style="background:#fdf0e5"></div><span class="swatch-name">warning.bg</span><span class="swatch-value">#fdf0e5</span></div>
+      <div class="swatch"><div class="swatch-chip" style="background:#00838f"></div><span class="swatch-name">info.icon</span><span class="swatch-value">#00838f</span></div>
+      <div class="swatch"><div class="swatch-chip" style="background:#005662"></div><span class="swatch-name">info.text</span><span class="swatch-value">#005662</span></div>
+      <div class="swatch"><div class="swatch-chip" style="background:#e5f3f4"></div><span class="swatch-name">info.bg</span><span class="swatch-value">#e5f3f4</span></div>
+      <div class="swatch"><div class="swatch-chip" style="background:#49a665"></div><span class="swatch-name">success.icon</span><span class="swatch-value">#49a665</span></div>
+      <div class="swatch"><div class="swatch-chip" style="background:#006236"></div><span class="swatch-name">success.text</span><span class="swatch-value">#006236</span></div>
+      <div class="swatch"><div class="swatch-chip" style="background:#eaf2ea"></div><span class="swatch-name">success.bg</span><span class="swatch-value">#eaf2ea</span></div>
+      <div class="swatch"><div class="swatch-chip" style="background:#559cec"></div><span class="swatch-name">insights.icon</span><span class="swatch-value">#559cec</span></div>
+      <div class="swatch"><div class="swatch-chip" style="background:#485982"></div><span class="swatch-name">insights.text</span><span class="swatch-value">#485982</span></div>
+      <div class="swatch"><div class="swatch-chip" style="background:#f0f7ff"></div><span class="swatch-name">insights.bg</span><span class="swatch-value">#f0f7ff</span></div>
     </div>
   </div>
 
@@ -2838,9 +2888,8 @@
 <!-- ── ICONS ──────────────────────────────────────────────────── -->
 <section id="icons">
   <h2>Icons</h2>
-  <p>All icons come from the <strong>Icon/</strong> namespace in the design system. Three weights are available for most icons: <strong>Filled</strong>, <strong>Outline</strong>, and <strong>Light</strong>.</p>
+  <p>Icons used across the Adthena product. Colour defaults to <strong>Neutral 400</strong> but any colour and size can be used depending on context.</p>
   <div class="icon-intro-meta">
-    <span class="icon-chip">Filled · Outline · Light</span>
     <span class="icon-chip">Figma node 31595:15275</span>
   </div>
 
@@ -2956,6 +3005,50 @@
       <div class="icon-cell">
         <svg width="20" height="20" viewBox="0 0 14.4 11.2" fill="none"><path d="M7.21251 0C9.21425 0 10.8407 0.925 12.0167 2.025C13.1927 3.1 13.9684 4.4 14.3437 5.3C14.4188 5.5 14.4188 5.725 14.3437 5.925C13.9684 6.8 13.1927 8.1 12.0167 9.2C10.8407 10.3 9.21425 11.2 7.21251 11.2C5.18575 11.2 3.55934 10.3 2.38332 9.2C1.2073 8.1 0.431625 6.8 0.0562989 5.925C-0.0187663 5.725 -0.0187663 5.5 0.0562989 5.3C0.431625 4.4 1.2073 3.1 2.38332 2.025C3.55934 0.925 5.18575 0 7.21251 0ZM3.60938 5.6C3.60938 6.9 4.28497 8.075 5.41095 8.725C6.5119 9.375 7.8881 9.375 9.01407 8.725C10.115 8.075 10.8156 6.9 10.8156 5.6C10.8156 4.325 10.115 3.15 9.01407 2.5C7.8881 1.85 6.5119 1.85 5.41095 2.5C4.28497 3.15 3.60938 4.325 3.60938 5.6ZM7.21251 4C7.21251 3.825 7.16247 3.675 7.11242 3.5C7.06238 3.375 7.16247 3.2 7.3126 3.2C8.31347 3.25 9.23927 3.95 9.51451 5C9.86481 6.275 9.11416 7.575 7.81303 7.925C6.53692 8.275 5.21077 7.5 4.88549 6.225C4.83545 6.05 4.81043 5.875 4.81043 5.725C4.7854 5.575 4.96056 5.475 5.08566 5.525C5.26082 5.575 5.41095 5.6 5.61112 5.6C6.48688 5.6 7.21251 4.9 7.21251 4Z" fill="#6477a2"/></svg>
         <span class="icon-label">Eye</span>
+      </div>
+      <div class="icon-cell">
+        <svg width="20" height="20" viewBox="0 0 16 16" fill="none"><path d="M8 2v8M5.5 8l2.5 2.5L10.5 8M3 13h10" stroke="#6477a2" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span class="icon-label">Download</span>
+      </div>
+      <div class="icon-cell">
+        <svg width="20" height="20" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6.5" stroke="#6477a2" stroke-width="1.5"/><path d="M8 7.5v4" stroke="#6477a2" stroke-width="1.5" stroke-linecap="round"/><circle cx="8" cy="5.5" r=".75" fill="#6477a2"/></svg>
+        <span class="icon-label">Info</span>
+      </div>
+      <div class="icon-cell">
+        <svg width="20" height="20" viewBox="0 0 14 14" fill="none"><path d="M9 11L5 7l4-4" stroke="#6477a2" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span class="icon-label">Chevron Left</span>
+      </div>
+      <div class="icon-cell">
+        <svg width="20" height="20" viewBox="0 0 14 14" fill="none"><path d="M5 3l4 4-4 4" stroke="#6477a2" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span class="icon-label">Chevron Right</span>
+      </div>
+      <div class="icon-cell">
+        <svg width="20" height="20" viewBox="0 0 14 14" fill="none"><path d="M3 9l4-4 4 4" stroke="#6477a2" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span class="icon-label">Chevron Up</span>
+      </div>
+      <div class="icon-cell">
+        <svg width="20" height="20" viewBox="0 0 14 14" fill="none"><path d="M3 5l4 4 4-4" stroke="#6477a2" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span class="icon-label">Chevron Down</span>
+      </div>
+      <div class="icon-cell">
+        <img src="assets/alert-error.svg" width="20" height="20" alt="">
+        <span class="icon-label">Alert Error</span>
+      </div>
+      <div class="icon-cell">
+        <img src="assets/alert-warning.svg" width="20" height="20" alt="">
+        <span class="icon-label">Alert Warning</span>
+      </div>
+      <div class="icon-cell">
+        <img src="assets/alert-info.svg" width="20" height="20" alt="">
+        <span class="icon-label">Alert Info</span>
+      </div>
+      <div class="icon-cell">
+        <img src="assets/alert-insights.svg" width="20" height="20" alt="">
+        <span class="icon-label">Alert Insights</span>
+      </div>
+      <div class="icon-cell">
+        <img src="assets/alert-success.svg" width="20" height="20" alt="">
+        <span class="icon-label">Alert Success</span>
       </div>
     </div>
   </div>
@@ -3222,6 +3315,7 @@
         <div class="comp-sidebar-caption">Banners</div>
         <a class="comp-sidebar-link" data-component="insight-banner" style="cursor:pointer">Insight Banner</a>
         <a class="comp-sidebar-link" data-component="action-banner" style="cursor:pointer">Action Banner</a>
+        <a class="comp-sidebar-link" data-component="alert" style="cursor:pointer">Banners &amp; Snackbars</a>
         <div class="comp-sidebar-divider"></div>
         <div class="comp-sidebar-caption">Dashboard</div>
         <a class="comp-sidebar-link" data-component="widget-header" style="cursor:pointer">Widget Header</a>
@@ -5216,6 +5310,14 @@
         <button class="btn btn--outlined">Button</button>
       </div>
       <div class="subtab-row">
+        <span class="subtab-row-label" style="width:100px">Plain Light</span>
+        <button class="btn btn--plain-light">
+          <span class="btn__icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          Button
+        </button>
+        <button class="btn btn--plain-light">Button</button>
+      </div>
+      <div class="subtab-row">
         <span class="subtab-row-label" style="width:100px">Plain Dark</span>
         <button class="btn btn--plain-dark">
           <span class="btn__icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
@@ -5258,6 +5360,13 @@
       <div class="subtab-row">
         <span class="subtab-row-label" style="width:100px">Plain</span>
         <button class="btn btn--plain btn--sm">
+          <span class="btn__icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M13 8H3M7 4L3 8l4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          Button
+        </button>
+      </div>
+      <div class="subtab-row">
+        <span class="subtab-row-label" style="width:100px">Plain Light</span>
+        <button class="btn btn--plain-light btn--sm">
           <span class="btn__icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M13 8H3M7 4L3 8l4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
           Button
         </button>
@@ -5318,6 +5427,15 @@
           <span class="btn__icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
         </button>
         <button class="btn btn--plain btn--icon-only btn--sm">
+          <span class="btn__icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        </button>
+      </div>
+      <div class="subtab-row">
+        <span class="subtab-row-label" style="width:120px">Icon (plain light)</span>
+        <button class="btn btn--plain-light btn--icon-only">
+          <span class="btn__icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        </button>
+        <button class="btn btn--plain-light btn--icon-only btn--sm">
           <span class="btn__icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
         </button>
       </div>
@@ -5412,6 +5530,7 @@
           <tr><td>.btn--secondary</td><td>Light blue fill — secondary action</td></tr>
           <tr><td>.btn--plain</td><td>Transparent — inline text action</td></tr>
           <tr><td>.btn--outlined</td><td>White fill + blue stroke border</td></tr>
+          <tr><td>.btn--plain-light</td><td>Transparent — neutral/400 (#6477a2) text, de-emphasised actions</td></tr>
           <tr><td>.btn--plain-dark</td><td>Transparent — muted navy text, light surfaces</td></tr>
           <tr><td>.btn--plain-white</td><td>Transparent — white text, on dark surfaces</td></tr>
           <tr><td>.btn--red</td><td>Red fill — destructive/critical action</td></tr>
@@ -8120,7 +8239,7 @@ function accSetDisabled(id, disabled) {
     <h2>Table</h2>
     <div class="divider"></div>
   </div>
-  <p style="font-size:13px;color:var(--text-secondary-var);margin-bottom:24px">A data display component for presenting structured information in sortable rows and columns. Supports multiple cell types — text, count chip, progress bar, and sentiment chip — with zebra striping, hover states, and pagination.</p>
+  <p style="font-size:13px;color:var(--text-secondary-var);margin-bottom:24px">A data display component for presenting structured information in sortable rows and columns. Supports multiple cell types — text, count chip, progress bar, and chip — with zebra striping, hover states, and pagination.</p>
 
   <div style="display:flex;gap:8px;margin-bottom:24px;flex-wrap:wrap">
     <a href="https://github.com/pavelfernandez-Atd/claude_desig_system/tree/main/components/table"
@@ -8151,8 +8270,14 @@ function accSetDisabled(id, disabled) {
           <span class="ds-table-card__subtitle">Brand visibility in AI Overviews by Search Terms</span>
         </div>
         <div class="ds-table-card__actions">
-          <button class="ds-table-card__icon-btn" title="Download CSV"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 2v8M5 7l3 3 3-3M3 13h10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-          <button class="ds-table-card__icon-btn" title="Info"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6.5" stroke="currentColor" stroke-width="1.2"/><path d="M8 7.5v4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><circle cx="8" cy="5.2" r=".75" fill="currentColor"/></svg></button>
+          <button class="btn btn--plain-light btn--icon-only btn--sm" title="Download CSV"><svg width="16" height="16"><use href="#icon-download"/></svg></button>
+          <div class="ds-table-card__info-wrap kpi-info-wrap">
+            <button class="btn btn--plain-light btn--icon-only btn--sm" aria-label="More information"><svg width="16" height="16"><use href="#icon-info"/></svg></button>
+            <div class="tooltip-info tooltip-info--arrow-top kpi-info-tooltip">
+              <div class="tooltip-info__body">Brand visibility in AI Overviews by Search Terms — showing cited brands count, citation frequency and sentiment per keyword.</div>
+              <svg class="tooltip-info__arrow" width="78" height="10" viewBox="0 0 78 10" fill="none"><path d="M24 0H54C54 0 52.203 0 49 2.4096C45.7745 4.83616 42.0352 7.68387 40.1758 9.10226C39.4766 9.63566 38.5145 9.65177 37.8035 9.13418C36.0242 7.83892 32.5121 5.25297 29 2.5C25.8106 0 24 0 24 0Z" fill="white"/></svg>
+            </div>
+          </div>
         </div>
       </div>
       <!-- Table -->
@@ -8161,16 +8286,16 @@ function accSetDisabled(id, disabled) {
           <thead>
             <tr>
               <th class="ds-table__th" data-col="0" style="width:340px">
-                <div class="ds-table__th-inner">Search Term <svg class="ds-table__sort" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+                <div class="ds-table__th-inner">Search Term <svg class="ds-table__sort" width="14" height="12" viewBox="0 0 14 12" fill="none"><path class="sort-arrow-up" d="M4 11V4.5M1.5 4.5L4 2 6.5 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path class="sort-arrow-down" d="M10 1V7.5M7.5 7.5L10 10 12.5 7.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
               </th>
-              <th class="ds-table__th" data-col="1" style="width:110px">
-                <div class="ds-table__th-inner">Cited<br>Brands <svg class="ds-table__sort" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+              <th class="ds-table__th" data-col="1" style="width:200px">
+                <div class="ds-table__th-inner">Your Brand Citations Frequency <svg class="ds-table__sort" width="14" height="12" viewBox="0 0 14 12" fill="none"><path class="sort-arrow-up" d="M4 11V4.5M1.5 4.5L4 2 6.5 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path class="sort-arrow-down" d="M10 1V7.5M7.5 7.5L10 10 12.5 7.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
               </th>
-              <th class="ds-table__th" data-col="2" style="width:200px">
-                <div class="ds-table__th-inner">Your Brand Citations Frequency <svg class="ds-table__sort" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+              <th class="ds-table__th" data-col="2">
+                <div class="ds-table__th-inner">Sentiment <svg class="ds-table__sort" width="14" height="12" viewBox="0 0 14 12" fill="none"><path class="sort-arrow-up" d="M4 11V4.5M1.5 4.5L4 2 6.5 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path class="sort-arrow-down" d="M10 1V7.5M7.5 7.5L10 10 12.5 7.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
               </th>
-              <th class="ds-table__th" data-col="3">
-                <div class="ds-table__th-inner">Sentiment <svg class="ds-table__sort" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+              <th class="ds-table__th" data-col="3" style="width:140px">
+                <div class="ds-table__th-inner">Cited Brands <svg class="ds-table__sort" width="14" height="12" viewBox="0 0 14 12" fill="none"><path class="sort-arrow-up" d="M4 11V4.5M1.5 4.5L4 2 6.5 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path class="sort-arrow-down" d="M10 1V7.5M7.5 7.5L10 10 12.5 7.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
               </th>
             </tr>
           </thead>
@@ -8182,16 +8307,22 @@ function accSetDisabled(id, disabled) {
       <div class="ds-table__pagination">
         <div class="ds-table__rows-selector">
           <span class="ds-table__rows-label">Rows per page:</span>
-          <button class="ds-table__rows-btn" id="table-demo-rows-btn">5 <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 5l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          <div class="ds-dropdown" style="position:relative;">
+            <button class="btn btn--plain-light btn--sm" id="table-rpp-btn" onclick="dsDropdownToggle('table-rpp')">10 <svg class="ds-dropdown__trigger-chevron" width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 5l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+            <div class="ds-dropdown__menu" id="table-rpp-menu" style="min-width:72px;bottom:calc(100% + 4px);top:auto;">
+              <div class="ds-dropdown__item ds-dropdown__item--selected" onclick="tableSetRpp(this,10,'table-rpp')">10</div>
+              <div class="ds-dropdown__item" onclick="tableSetRpp(this,20,'table-rpp')">20</div>
+              <div class="ds-dropdown__item" onclick="tableSetRpp(this,30,'table-rpp')">30</div>
+            </div>
+          </div>
         </div>
         <div class="ds-table__page-controls">
           <div class="ds-table__page-info">
-            <input class="ds-table__page-input" id="table-demo-page-input" type="number" min="1" value="1">
-            <span id="table-demo-page-total">of 2</span>
+            <span id="table-demo-page-info" style="font-size:13px;color:#6477a2;white-space:nowrap">1/1</span>
           </div>
           <div class="ds-table__page-nav">
-            <button class="ds-table__nav-btn" id="table-demo-prev" title="Previous page"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M9 11L5 7l4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-            <button class="ds-table__nav-btn" id="table-demo-next" title="Next page"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M5 3l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+            <button class="btn btn--plain-light btn--sm ds-table__nav-btn" id="table-demo-prev" title="Previous page"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M9 11L5 7l4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+            <button class="btn btn--plain-light btn--sm ds-table__nav-btn" id="table-demo-next" title="Next page"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M5 3l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
           </div>
         </div>
       </div>
@@ -8209,7 +8340,7 @@ function accSetDisabled(id, disabled) {
       </div>
       <div style="display:flex;flex-direction:column;gap:8px">
         <div style="font-size:11px;font-weight:600;color:#6477a2;text-transform:uppercase;letter-spacing:0.6px;margin-bottom:4px">Count Chip</div>
-        <span class="ds-count-chip"><span class="ds-count-chip__label">22</span><span class="ds-count-chip__icon"><svg width="16" height="16" viewBox="0 0 14.4 11.2" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7.21251 0C9.21425 0 10.8407 0.925 12.0167 2.025C13.1927 3.1 13.9684 4.4 14.3437 5.3C14.4188 5.5 14.4188 5.725 14.3437 5.925C13.9684 6.8 13.1927 8.1 12.0167 9.2C10.8407 10.3 9.21425 11.2 7.21251 11.2C5.18575 11.2 3.55934 10.3 2.38332 9.2C1.2073 8.1 0.431625 6.8 0.0562989 5.925C-0.0187663 5.725 -0.0187663 5.5 0.0562989 5.3C0.431625 4.4 1.2073 3.1 2.38332 2.025C3.55934 0.925 5.18575 0 7.21251 0ZM3.60938 5.6C3.60938 6.9 4.28497 8.075 5.41095 8.725C6.5119 9.375 7.8881 9.375 9.01407 8.725C10.115 8.075 10.8156 6.9 10.8156 5.6C10.8156 4.325 10.115 3.15 9.01407 2.5C7.8881 1.85 6.5119 1.85 5.41095 2.5C4.28497 3.15 3.60938 4.325 3.60938 5.6ZM7.21251 4C7.21251 3.825 7.16247 3.675 7.11242 3.5C7.06238 3.375 7.16247 3.2 7.3126 3.2C8.31347 3.25 9.23927 3.95 9.51451 5C9.86481 6.275 9.11416 7.575 7.81303 7.925C6.53692 8.275 5.21077 7.5 4.88549 6.225C4.83545 6.05 4.81043 5.875 4.81043 5.725C4.7854 5.575 4.96056 5.475 5.08566 5.525C5.26082 5.575 5.41095 5.6 5.61112 5.6C6.48688 5.6 7.21251 4.9 7.21251 4Z" fill="currentColor"/></svg></span></span>
+        <span class="ds-count-chip" style="align-self:flex-start"><span class="ds-count-chip__label">22</span><span class="ds-count-chip__icon"><svg width="16" height="16" viewBox="0 0 14.4 11.2" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7.21251 0C9.21425 0 10.8407 0.925 12.0167 2.025C13.1927 3.1 13.9684 4.4 14.3437 5.3C14.4188 5.5 14.4188 5.725 14.3437 5.925C13.9684 6.8 13.1927 8.1 12.0167 9.2C10.8407 10.3 9.21425 11.2 7.21251 11.2C5.18575 11.2 3.55934 10.3 2.38332 9.2C1.2073 8.1 0.431625 6.8 0.0562989 5.925C-0.0187663 5.725 -0.0187663 5.5 0.0562989 5.3C0.431625 4.4 1.2073 3.1 2.38332 2.025C3.55934 0.925 5.18575 0 7.21251 0ZM3.60938 5.6C3.60938 6.9 4.28497 8.075 5.41095 8.725C6.5119 9.375 7.8881 9.375 9.01407 8.725C10.115 8.075 10.8156 6.9 10.8156 5.6C10.8156 4.325 10.115 3.15 9.01407 2.5C7.8881 1.85 6.5119 1.85 5.41095 2.5C4.28497 3.15 3.60938 4.325 3.60938 5.6ZM7.21251 4C7.21251 3.825 7.16247 3.675 7.11242 3.5C7.06238 3.375 7.16247 3.2 7.3126 3.2C8.31347 3.25 9.23927 3.95 9.51451 5C9.86481 6.275 9.11416 7.575 7.81303 7.925C6.53692 8.275 5.21077 7.5 4.88549 6.225C4.83545 6.05 4.81043 5.875 4.81043 5.725C4.7854 5.575 4.96056 5.475 5.08566 5.525C5.26082 5.575 5.41095 5.6 5.61112 5.6C6.48688 5.6 7.21251 4.9 7.21251 4Z" fill="currentColor"/></svg></span></span>
         <div style="font-size:11px;color:#6b6b6b;margin-top:4px">Neutral bg #e7ecf4, text #576993, eye icon</div>
       </div>
       <div style="display:flex;flex-direction:column;gap:8px">
@@ -8221,13 +8352,13 @@ function accSetDisabled(id, disabled) {
         <div style="font-size:11px;color:#6b6b6b;margin-top:4px">Magenta #d47dd4 fill on #d1d3ea track, 8px height</div>
       </div>
       <div style="display:flex;flex-direction:column;gap:12px">
-        <div style="font-size:11px;font-weight:600;color:#6477a2;text-transform:uppercase;letter-spacing:0.6px;margin-bottom:4px">Sentiment Chip</div>
+        <div style="font-size:11px;font-weight:600;color:#6477a2;text-transform:uppercase;letter-spacing:0.6px;margin-bottom:4px">Chip</div>
         <div style="display:flex;gap:8px;flex-wrap:wrap">
-          <span class="ds-table__sentiment ds-table__sentiment--favourable">Favourable</span>
-          <span class="ds-table__sentiment ds-table__sentiment--neutral">Neutral</span>
-          <span class="ds-table__sentiment ds-table__sentiment--unfavourable">Unfavourable</span>
+          <div class="ds-chip ds-chip--light ds-chip--green ds-chip--sm"><span class="ds-chip__label">Favourable</span></div>
+          <div class="ds-chip ds-chip--light ds-chip--neutral ds-chip--sm"><span class="ds-chip__label">Neutral</span></div>
+          <div class="ds-chip ds-chip--light ds-chip--red ds-chip--sm"><span class="ds-chip__label">Unfavourable</span></div>
         </div>
-        <div style="font-size:11px;color:#6b6b6b">Olive / Neutral / Red colour variants</div>
+        <div style="font-size:11px;color:#6b6b6b">ds-chip --light --sm — any colour from the Chip component</div>
       </div>
     </div>
   </div>
@@ -8250,12 +8381,14 @@ function accSetDisabled(id, disabled) {
         <tr style="border-bottom:1px solid #f0f0f0;background:#fafafa"><td style="padding:8px 12px;color:#27365b">Zebra row</td><td style="padding:8px 12px;font-family:monospace;color:#1565c0">#f9f9f9</td><td style="padding:8px 12px;color:#6b6b6b">Even row background</td></tr>
         <tr style="border-bottom:1px solid #f0f0f0"><td style="padding:8px 12px;color:#27365b">Row hover</td><td style="padding:8px 12px;font-family:monospace;color:#1565c0">#eaf4ff</td><td style="padding:8px 12px;color:#6b6b6b">states.selectedSoft</td></tr>
         <tr style="border-bottom:1px solid #f0f0f0;background:#fafafa"><td style="padding:8px 12px;color:#27365b">Row height</td><td style="padding:8px 12px;font-family:monospace;color:#1565c0">45px</td><td style="padding:8px 12px;color:#6b6b6b">tbody tr</td></tr>
-        <tr style="border-bottom:1px solid #f0f0f0"><td style="padding:8px 12px;color:#27365b">Header height</td><td style="padding:8px 12px;font-family:monospace;color:#1565c0">60px</td><td style="padding:8px 12px;color:#6b6b6b">thead tr</td></tr>
+        <tr style="border-bottom:1px solid #f0f0f0"><td style="padding:8px 12px;color:#27365b">Header padding</td><td style="padding:8px 12px;font-family:monospace;color:#1565c0">12px 10px</td><td style="padding:8px 12px;color:#6b6b6b">thead th vertical / horizontal</td></tr>
         <tr style="border-bottom:1px solid #f0f0f0;background:#fafafa"><td style="padding:8px 12px;color:#27365b">Cell font size</td><td style="padding:8px 12px;font-family:monospace;color:#1565c0">14px</td><td style="padding:8px 12px;color:#6b6b6b">Open Sans Regular</td></tr>
         <tr style="border-bottom:1px solid #f0f0f0"><td style="padding:8px 12px;color:#27365b">Progress bar fill</td><td style="padding:8px 12px;font-family:monospace;color:#1565c0">#d47dd4</td><td style="padding:8px 12px;color:#6b6b6b">magenta/300 — citations frequency</td></tr>
         <tr style="border-bottom:1px solid #f0f0f0;background:#fafafa"><td style="padding:8px 12px;color:#27365b">Progress bar track</td><td style="padding:8px 12px;font-family:monospace;color:#1565c0">#d1d3ea</td><td style="padding:8px 12px;color:#6b6b6b">Bar background</td></tr>
         <tr style="border-bottom:1px solid #f0f0f0"><td style="padding:8px 12px;color:#27365b">Card border radius</td><td style="padding:8px 12px;font-family:monospace;color:#1565c0">12px</td><td style="padding:8px 12px;color:#6b6b6b">rounded-xl — same as all DS cards</td></tr>
         <tr style="border-bottom:1px solid #f0f0f0;background:#fafafa"><td style="padding:8px 12px;color:#27365b">Table side padding</td><td style="padding:8px 12px;font-family:monospace;color:#1565c0">24px</td><td style="padding:8px 12px;color:#6b6b6b">Card edge to table edge</td></tr>
+        <tr style="border-bottom:1px solid #f0f0f0"><td style="padding:8px 12px;color:#27365b">Pagination padding</td><td style="padding:8px 12px;font-family:monospace;color:#1565c0">0 16px</td><td style="padding:8px 12px;color:#6b6b6b">Footer bar horizontal padding</td></tr>
+        <tr style="border-bottom:1px solid #f0f0f0;background:#fafafa"><td style="padding:8px 12px;color:#27365b">Nav icon disabled</td><td style="padding:8px 12px;font-family:monospace;color:#1565c0">#E4E8F2</td><td style="padding:8px 12px;color:#6b6b6b">neutral/50 — disabled prev/next icon colour</td></tr>
       </tbody>
     </table>
   </div>
@@ -8278,10 +8411,7 @@ function accSetDisabled(id, disabled) {
         <tr style="border-bottom:1px solid #f0f0f0"><td style="padding:8px 12px;font-family:monospace;color:#1565c0">.ds-table__th--asc</td><td style="padding:8px 12px;color:#6b6b6b">Sort ascending — icon rotates 180deg</td></tr>
         <tr style="border-bottom:1px solid #f0f0f0;background:#fafafa"><td style="padding:8px 12px;font-family:monospace;color:#1565c0">.ds-table__count-chip</td><td style="padding:8px 12px;color:#6b6b6b">Neutral count + eye icon chip</td></tr>
         <tr style="border-bottom:1px solid #f0f0f0"><td style="padding:8px 12px;font-family:monospace;color:#1565c0">.ds-table__bar-wrap</td><td style="padding:8px 12px;color:#6b6b6b">Progress bar container — percentage + track</td></tr>
-        <tr style="border-bottom:1px solid #f0f0f0;background:#fafafa"><td style="padding:8px 12px;font-family:monospace;color:#1565c0">.ds-table__sentiment</td><td style="padding:8px 12px;color:#6b6b6b">Base sentiment chip — add modifier for colour</td></tr>
-        <tr style="border-bottom:1px solid #f0f0f0"><td style="padding:8px 12px;font-family:monospace;color:#1565c0">.ds-table__sentiment--favourable</td><td style="padding:8px 12px;color:#6b6b6b">Olive bg, dark green text</td></tr>
-        <tr style="border-bottom:1px solid #f0f0f0;background:#fafafa"><td style="padding:8px 12px;font-family:monospace;color:#1565c0">.ds-table__sentiment--neutral</td><td style="padding:8px 12px;color:#6b6b6b">Neutral blue bg + text</td></tr>
-        <tr style="border-bottom:1px solid #f0f0f0"><td style="padding:8px 12px;font-family:monospace;color:#1565c0">.ds-table__sentiment--unfavourable</td><td style="padding:8px 12px;color:#6b6b6b">Light red bg + dark red text</td></tr>
+        <tr style="border-bottom:1px solid #f0f0f0;background:#fafafa"><td style="padding:8px 12px;font-family:monospace;color:#1565c0">.ds-chip .ds-chip--light .ds-chip--sm</td><td style="padding:8px 12px;color:#6b6b6b">Chip component — use any colour modifier (--green, --red, --neutral, etc.)</td></tr>
         <tr style="border-bottom:1px solid #f0f0f0;background:#fafafa"><td style="padding:8px 12px;font-family:monospace;color:#1565c0">.ds-table__pagination</td><td style="padding:8px 12px;color:#6b6b6b">Pagination bar — 50px, right-aligned controls</td></tr>
       </tbody>
     </table>
@@ -11970,12 +12100,12 @@ const DATES = ['27 Apr, 2026', '28 Apr, 2026', ... '26 May, 2026'];
           <span class="tct__col-label">Competitor</span>
           <div style="display:grid;grid-template-columns:1fr 68px 68px 68px;align-items:center;gap:16px;">
             <span class="tct__col-label">Position mix</span>
-            <span class="tct__col-label tct__col-label--above tct__col-label--sortable" data-sort="above">Above<svg class="tct__sort-icon" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-            <span class="tct__col-label tct__col-label--inside tct__col-label--sortable" data-sort="inside">Inside<svg class="tct__sort-icon" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-            <span class="tct__col-label tct__col-label--below tct__col-label--sortable" data-sort="below">Below<svg class="tct__sort-icon" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            <span class="tct__col-label tct__col-label--above tct__col-label--sortable" data-sort="above">Above<svg class="tct__sort-icon" width="14" height="12" viewBox="0 0 14 12" fill="none"><path class="sort-arrow-up" d="M4 11V4.5M1.5 4.5L4 2 6.5 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path class="sort-arrow-down" d="M10 1V7.5M7.5 7.5L10 10 12.5 7.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            <span class="tct__col-label tct__col-label--inside tct__col-label--sortable" data-sort="inside">Inside<svg class="tct__sort-icon" width="14" height="12" viewBox="0 0 14 12" fill="none"><path class="sort-arrow-up" d="M4 11V4.5M1.5 4.5L4 2 6.5 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path class="sort-arrow-down" d="M10 1V7.5M7.5 7.5L10 10 12.5 7.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            <span class="tct__col-label tct__col-label--below tct__col-label--sortable" data-sort="below">Below<svg class="tct__sort-icon" width="14" height="12" viewBox="0 0 14 12" fill="none"><path class="sort-arrow-up" d="M4 11V4.5M1.5 4.5L4 2 6.5 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path class="sort-arrow-down" d="M10 1V7.5M7.5 7.5L10 10 12.5 7.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
           </div>
           <div style="padding-left:20px;">
-            <span class="tct__col-label tct__col-label--sortable" data-sort="impr" style="display:inline-flex;align-items:center;gap:3px;">Est. AIO Impressions<svg class="tct__sort-icon" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            <span class="tct__col-label tct__col-label--sortable" data-sort="impr" style="display:inline-flex;align-items:center;gap:3px;">Est. AIO Impressions<svg class="tct__sort-icon" width="14" height="12" viewBox="0 0 14 12" fill="none"><path class="sort-arrow-up" d="M4 11V4.5M1.5 4.5L4 2 6.5 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path class="sort-arrow-down" d="M10 1V7.5M7.5 7.5L10 10 12.5 7.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
           </div>
         </div>
         <!-- Rows rendered by JS -->
@@ -13685,6 +13815,344 @@ Prioritise authority reinforcement in declining citation segments</textarea>
 </section>
       </div>
 
+      <div class="comp-panel" id="comp-panel-alert" style="display:none">
+<section id="alert">
+  <div class="section-header">
+    <h2>Banners &amp; Snackbars</h2>
+    <div class="divider"></div>
+  </div>
+  <p style="font-size:13px;color:var(--text-secondary-var);margin-bottom:24px">Contextual alert banners used to communicate status, errors, warnings, and informational messages. Five severity levels share a consistent anatomy: icon + text body (optional title + message) + optional right-side actions and close button.</p>
+
+  <!-- GitHub + Figma links -->
+  <div style="display:flex;gap:8px;margin-bottom:24px;flex-wrap:wrap">
+    <a href="https://github.com/pavelfernandez-Atd/claude_desig_system/tree/main/components/alert"
+       target="_blank" rel="noopener noreferrer"
+       onclick="window.open(this.href,'_blank','noopener');return false;"
+       style="display:inline-flex;align-items:center;gap:6px;padding:6px 12px;border-radius:6px;background:#24292e;color:#fff;font-size:12px;font-weight:600;text-decoration:none">
+      <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+      View on GitHub
+    </a>
+    <a href="https://www.figma.com/design/ugMYx2Jf3KY7uZmha2U0WP/Claude-DS?node-id=278-19282"
+       target="_blank" rel="noopener noreferrer"
+       onclick="window.open(this.href,'_blank','noopener');return false;"
+       style="display:inline-flex;align-items:center;gap:6px;padding:6px 12px;border-radius:6px;border:1px solid rgba(0,0,0,0.15);background:#fff;color:#333;font-size:12px;font-weight:600;text-decoration:none">
+      <svg width="14" height="14" viewBox="0 0 38 57" fill="none"><path d="M19 28.5a9.5 9.5 0 1 1 19 0 9.5 9.5 0 0 1-19 0z" fill="#1ABCFE"/><path d="M0 47.5A9.5 9.5 0 0 1 9.5 38H19v9.5a9.5 9.5 0 0 1-19 0z" fill="#0ACF83"/><path d="M19 0v19h9.5a9.5 9.5 0 0 0 0-19H19z" fill="#FF7262"/><path d="M0 9.5A9.5 9.5 0 0 0 9.5 19H19V0H9.5A9.5 9.5 0 0 0 0 9.5z" fill="#F24E1E"/><path d="M0 28.5A9.5 9.5 0 0 0 9.5 38H19V19H9.5A9.5 9.5 0 0 0 0 28.5z" fill="#A259FF"/></svg>
+      View in Figma
+    </a>
+  </div>
+
+  <!-- 1. DEFAULT (message only) -->
+  <div style="margin-bottom:40px">
+    <div class="sub-label">Default — Message only</div>
+    <div style="display:flex;flex-direction:column;gap:8px;max-width:480px">
+
+      <!-- message only, all 5 severities -->
+<div class="ds-alert ds-alert--error">
+  <div class="ds-alert__icon"><img src="assets/alert-error.svg" width="16" height="16" alt=""></div>
+  <div class="ds-alert__body">
+    <p class="ds-alert__message">Error message</p>
+  </div>
+</div>
+<div class="ds-alert ds-alert--warning">
+  <div class="ds-alert__icon"><img src="assets/alert-warning.svg" width="16" height="16" alt=""></div>
+  <div class="ds-alert__body">
+    <p class="ds-alert__message">Warning message</p>
+  </div>
+</div>
+<div class="ds-alert ds-alert--info">
+  <div class="ds-alert__icon"><img src="assets/alert-info.svg" width="16" height="16" alt=""></div>
+  <div class="ds-alert__body">
+    <p class="ds-alert__message">Info message</p>
+  </div>
+</div>
+<div class="ds-alert ds-alert--insights">
+  <div class="ds-alert__icon"><img src="assets/alert-insights.svg" width="16" height="16" alt=""></div>
+  <div class="ds-alert__body">
+    <p class="ds-alert__message">Insights message</p>
+  </div>
+</div>
+<div class="ds-alert ds-alert--success">
+  <div class="ds-alert__icon"><img src="assets/alert-success.svg" width="16" height="16" alt=""></div>
+  <div class="ds-alert__body">
+    <p class="ds-alert__message">Success message</p>
+  </div>
+</div>
+    </div>
+  </div>
+
+  <!-- 2. WITH ACTIONS -->
+  <div style="margin-bottom:40px">
+    <div class="sub-label">With actions</div>
+    <div style="display:flex;flex-direction:column;gap:8px;max-width:480px">
+
+<div class="ds-alert ds-alert--error">
+  <div class="ds-alert__icon"><img src="assets/alert-error.svg" width="16" height="16" alt=""></div>
+  <div class="ds-alert__body">
+    <p class="ds-alert__message">Error message</p>
+  </div>
+  <div class="ds-alert__actions">
+    <button class="btn btn--sm btn--plain">Button</button>
+  </div>
+</div>
+<div class="ds-alert ds-alert--warning">
+  <div class="ds-alert__icon"><img src="assets/alert-warning.svg" width="16" height="16" alt=""></div>
+  <div class="ds-alert__body">
+    <p class="ds-alert__message">Warning message</p>
+  </div>
+  <div class="ds-alert__actions">
+    <button class="btn btn--sm btn--plain">Button</button>
+  </div>
+</div>
+<div class="ds-alert ds-alert--info">
+  <div class="ds-alert__icon"><img src="assets/alert-info.svg" width="16" height="16" alt=""></div>
+  <div class="ds-alert__body">
+    <p class="ds-alert__message">Info message</p>
+  </div>
+  <div class="ds-alert__actions">
+    <button class="btn btn--sm btn--plain">Button</button>
+  </div>
+</div>
+<div class="ds-alert ds-alert--success">
+  <div class="ds-alert__icon"><img src="assets/alert-success.svg" width="16" height="16" alt=""></div>
+  <div class="ds-alert__body">
+    <p class="ds-alert__message">Success message</p>
+  </div>
+  <div class="ds-alert__actions">
+    <button class="btn btn--sm btn--plain">Button</button>
+  </div>
+</div>
+    </div>
+  </div>
+
+  <!-- 3. WITH CLOSE -->
+  <div style="margin-bottom:40px">
+    <div class="sub-label">With close</div>
+    <div style="display:flex;flex-direction:column;gap:8px;max-width:480px">
+
+<div class="ds-alert ds-alert--error">
+  <div class="ds-alert__icon"><img src="assets/alert-error.svg" width="16" height="16" alt=""></div>
+  <div class="ds-alert__body">
+    <p class="ds-alert__message">Error message</p>
+  </div>
+  <div class="ds-alert__actions">
+    <button class="ds-alert__close"><img src="assets/alert-close.svg" width="12" height="12" alt=""></button>
+  </div>
+</div>
+<div class="ds-alert ds-alert--warning">
+  <div class="ds-alert__icon"><img src="assets/alert-warning.svg" width="16" height="16" alt=""></div>
+  <div class="ds-alert__body">
+    <p class="ds-alert__message">Warning message</p>
+  </div>
+  <div class="ds-alert__actions">
+    <button class="ds-alert__close"><img src="assets/alert-close.svg" width="12" height="12" alt=""></button>
+  </div>
+</div>
+<div class="ds-alert ds-alert--info">
+  <div class="ds-alert__icon"><img src="assets/alert-info.svg" width="16" height="16" alt=""></div>
+  <div class="ds-alert__body">
+    <p class="ds-alert__message">Info message</p>
+  </div>
+  <div class="ds-alert__actions">
+    <button class="ds-alert__close"><img src="assets/alert-close.svg" width="12" height="12" alt=""></button>
+  </div>
+</div>
+<div class="ds-alert ds-alert--success">
+  <div class="ds-alert__icon"><img src="assets/alert-success.svg" width="16" height="16" alt=""></div>
+  <div class="ds-alert__body">
+    <p class="ds-alert__message">Success message</p>
+  </div>
+  <div class="ds-alert__actions">
+    <button class="ds-alert__close"><img src="assets/alert-close.svg" width="12" height="12" alt=""></button>
+  </div>
+</div>
+    </div>
+  </div>
+
+  <!-- 4. ACTIONS + CLOSE -->
+  <div style="margin-bottom:40px">
+    <div class="sub-label">Actions + close</div>
+    <div style="display:flex;flex-direction:column;gap:8px;max-width:480px">
+
+<div class="ds-alert ds-alert--error">
+  <div class="ds-alert__icon"><img src="assets/alert-error.svg" width="16" height="16" alt=""></div>
+  <div class="ds-alert__body">
+    <p class="ds-alert__message">Error message</p>
+  </div>
+  <div class="ds-alert__actions">
+    <button class="btn btn--sm btn--plain">Button</button>
+    <button class="ds-alert__close"><img src="assets/alert-close.svg" width="12" height="12" alt=""></button>
+  </div>
+</div>
+<div class="ds-alert ds-alert--warning">
+  <div class="ds-alert__icon"><img src="assets/alert-warning.svg" width="16" height="16" alt=""></div>
+  <div class="ds-alert__body">
+    <p class="ds-alert__message">Warning message</p>
+  </div>
+  <div class="ds-alert__actions">
+    <button class="btn btn--sm btn--plain">Button</button>
+    <button class="ds-alert__close"><img src="assets/alert-close.svg" width="12" height="12" alt=""></button>
+  </div>
+</div>
+<div class="ds-alert ds-alert--info">
+  <div class="ds-alert__icon"><img src="assets/alert-info.svg" width="16" height="16" alt=""></div>
+  <div class="ds-alert__body">
+    <p class="ds-alert__message">Info message</p>
+  </div>
+  <div class="ds-alert__actions">
+    <button class="btn btn--sm btn--plain">Button</button>
+    <button class="ds-alert__close"><img src="assets/alert-close.svg" width="12" height="12" alt=""></button>
+  </div>
+</div>
+<div class="ds-alert ds-alert--success">
+  <div class="ds-alert__icon"><img src="assets/alert-success.svg" width="16" height="16" alt=""></div>
+  <div class="ds-alert__body">
+    <p class="ds-alert__message">Success message</p>
+  </div>
+  <div class="ds-alert__actions">
+    <button class="btn btn--sm btn--plain">Button</button>
+    <button class="ds-alert__close"><img src="assets/alert-close.svg" width="12" height="12" alt=""></button>
+  </div>
+</div>
+    </div>
+  </div>
+
+  <!-- 5. WITH TITLE -->
+  <div style="margin-bottom:40px">
+    <div class="sub-label">Title + message + actions + close</div>
+    <div style="display:flex;flex-direction:column;gap:8px;max-width:480px">
+
+<div class="ds-alert ds-alert--error">
+  <div class="ds-alert__icon"><img src="assets/alert-error.svg" width="16" height="16" alt=""></div>
+  <div class="ds-alert__body">
+    <p class="ds-alert__title">Title</p>
+    <p class="ds-alert__message">Error message</p>
+  </div>
+  <div class="ds-alert__actions">
+    <button class="btn btn--sm btn--plain">Button</button>
+    <button class="ds-alert__close"><img src="assets/alert-close.svg" width="12" height="12" alt=""></button>
+  </div>
+</div>
+<div class="ds-alert ds-alert--warning">
+  <div class="ds-alert__icon"><img src="assets/alert-warning.svg" width="16" height="16" alt=""></div>
+  <div class="ds-alert__body">
+    <p class="ds-alert__title">Title</p>
+    <p class="ds-alert__message">Warning message</p>
+  </div>
+  <div class="ds-alert__actions">
+    <button class="btn btn--sm btn--plain">Button</button>
+    <button class="ds-alert__close"><img src="assets/alert-close.svg" width="12" height="12" alt=""></button>
+  </div>
+</div>
+<div class="ds-alert ds-alert--info">
+  <div class="ds-alert__icon"><img src="assets/alert-info.svg" width="16" height="16" alt=""></div>
+  <div class="ds-alert__body">
+    <p class="ds-alert__title">Title</p>
+    <p class="ds-alert__message">Info message</p>
+  </div>
+  <div class="ds-alert__actions">
+    <button class="btn btn--sm btn--plain">Button</button>
+    <button class="ds-alert__close"><img src="assets/alert-close.svg" width="12" height="12" alt=""></button>
+  </div>
+</div>
+<div class="ds-alert ds-alert--success">
+  <div class="ds-alert__icon"><img src="assets/alert-success.svg" width="16" height="16" alt=""></div>
+  <div class="ds-alert__body">
+    <p class="ds-alert__title">Title</p>
+    <p class="ds-alert__message">Success message</p>
+  </div>
+  <div class="ds-alert__actions">
+    <button class="btn btn--sm btn--plain">Button</button>
+    <button class="ds-alert__close"><img src="assets/alert-close.svg" width="12" height="12" alt=""></button>
+  </div>
+</div>
+    </div>
+  </div>
+
+  <!-- 6. DESIGN TOKENS -->
+  <div style="margin-bottom:40px">
+    <div class="sub-label">Design Tokens</div>
+    <div class="spec-table-wrap">
+      <table class="spec-table">
+        <thead><tr><th>Token</th><th>Value</th><th>Usage</th></tr></thead>
+        <tbody>
+          <tr><td>Container padding</td><td>8px 12px</td><td>py-8 px-12</td></tr>
+          <tr><td>Container radius</td><td>8px</td><td>border-radius</td></tr>
+          <tr><td>Gap (icon ↔ body)</td><td>4px</td><td>flex gap</td></tr>
+          <tr><td>Icon size</td><td>22 × 22px</td><td>ds-alert__icon</td></tr>
+          <tr><td>Title</td><td>15px / 600 / line-height 18px</td><td>ds-alert__title</td></tr>
+          <tr><td>Message</td><td>14px / 400 / line-height 19px</td><td>ds-alert__message</td></tr>
+          <tr><td>Actions col padding-left</td><td>16px</td><td>separator space</td></tr>
+          <tr><td>Action button height</td><td>30px</td><td>14px / 600 / color #3079bd</td></tr>
+          <tr><td>Close button size</td><td>30 × 30px</td><td>ds-alert__close</td></tr>
+          <tr><td>Error bg</td><td>#f9e9e9</td><td>ds-alert--error</td></tr>
+          <tr><td>Error text</td><td>#4f1010</td><td>title + message</td></tr>
+          <tr><td>Error icon</td><td>#C62828</td><td>FA circle-exclamation</td></tr>
+          <tr><td>Warning bg</td><td>#fdf0e5</td><td>ds-alert--warning</td></tr>
+          <tr><td>Warning text</td><td>#8b1c1c</td><td>title + message</td></tr>
+          <tr><td>Warning icon</td><td>#EF6C00</td><td>FA triangle-exclamation</td></tr>
+          <tr><td>Info bg</td><td>#e5f3f4</td><td>ds-alert--info</td></tr>
+          <tr><td>Info text</td><td>#005662</td><td>title + message</td></tr>
+          <tr><td>Info icon</td><td>#00838F</td><td>FA circle-info</td></tr>
+          <tr><td>Success bg</td><td>#eaf2ea</td><td>ds-alert--success</td></tr>
+          <tr><td>Success text</td><td>#006236</td><td>title + message</td></tr>
+          <tr><td>Success icon</td><td>#49A665</td><td>FA circle-check</td></tr>
+          <tr><td>Insights bg</td><td>#f0f7ff</td><td>ds-alert--insights</td></tr>
+          <tr><td>Insights text</td><td>#485982</td><td>title + message</td></tr>
+          <tr><td>Insights icon</td><td>#559CEC</td><td>FA circle-info (blue)</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- 7. CSS CLASSES -->
+  <div style="margin-bottom:40px">
+    <div class="sub-label">CSS Classes</div>
+    <div class="spec-table-wrap">
+      <table class="spec-table">
+        <thead><tr><th>Class</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr><td>.ds-alert</td><td>Root — flex row, gap 4px, px 12px py 8px, radius 8px</td></tr>
+          <tr><td>.ds-alert--error</td><td>Error — #f9e9e9 bg, #4f1010 text</td></tr>
+          <tr><td>.ds-alert--warning</td><td>Warning — #fdf0e5 bg, #8b1c1c text</td></tr>
+          <tr><td>.ds-alert--info</td><td>Info — #e5f3f4 bg, #005662 text</td></tr>
+          <tr><td>.ds-alert--success</td><td>Success — #eaf2ea bg, #006236 text</td></tr>
+          <tr><td>.ds-alert--insights</td><td>Insights — #f0f7ff bg, #485982 text</td></tr>
+          <tr><td>.ds-alert__icon</td><td>Icon slot — 22×22px, align-self flex-start</td></tr>
+          <tr><td>.ds-alert__body</td><td>Text column — flex:1, flex-direction column</td></tr>
+          <tr><td>.ds-alert__title</td><td>Title — 15px / 600 / line-height 18px</td></tr>
+          <tr><td>.ds-alert__message</td><td>Message — 14px / 400 / line-height 19px</td></tr>
+          <tr><td>.ds-alert__actions</td><td>Right-side actions column — height 36px, pl 16px</td></tr>
+          <tr><td>.ds-alert__btn</td><td>Action button — 30px height, 14px/600, #3079bd</td></tr>
+          <tr><td>.ds-alert__close</td><td>Close — 30×30px icon button</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- 8. ANATOMY -->
+  <div style="margin-bottom:40px">
+    <div class="sub-label">Anatomy &amp; Dimensions</div>
+    <div class="spec-table-wrap">
+      <table class="spec-table">
+        <thead><tr><th>Part</th><th>Value</th></tr></thead>
+        <tbody>
+          <tr><td>Container padding</td><td>8px vertical / 12px horizontal</td></tr>
+          <tr><td>Gap (icon ↔ body)</td><td>4px</td></tr>
+          <tr><td>Container border-radius</td><td>8px</td></tr>
+          <tr><td>Icon size</td><td>22 × 22px</td></tr>
+          <tr><td>Title</td><td>Open Sans 15px / SemiBold / line-height 18px</td></tr>
+          <tr><td>Message</td><td>Open Sans 14px / Regular / line-height 19px</td></tr>
+          <tr><td>Actions area left padding</td><td>16px</td></tr>
+          <tr><td>Action button</td><td>30px height / 12px horizontal padding / radius 6px</td></tr>
+          <tr><td>Close button</td><td>30 × 30px / radius 6px</td></tr>
+          <tr><td>Figma node</td><td>278:19282 (Claude-DS)</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</section>
+      </div>
       <div class="comp-panel" id="comp-panel-chip" style="display:none">
 <section id="chip">
   <div class="section-header">
@@ -19178,17 +19646,40 @@ document.querySelectorAll('.palette-chip-wrap').forEach(function(wrap) {
       {term:'online pharmacy prescription UK', brands:3,  freq:17, sentiment:'Neutral',     domains:['boots.com','pharmacy2u.co.uk','lloydsdirect.co.uk']},
       {term:'compare energy tariffs UK',       brands:22, freq:52, sentiment:'Unfavourable',domains:['moneysupermarket.com','uswitch.com','comparethemarket.com','eon.com','britishgas.co.uk','edfenergy.com','bulb.co.uk','octopusenergy.com']},
       {term:'personal banking mobile apps',    brands:19, freq:63, sentiment:'Favourable',  domains:['monzo.com','starlingbank.com','revolut.com','n26.com','nationwide.co.uk','barclays.co.uk','lloydsbank.com','natwest.com']},
-      {term:'car insurance young drivers',     brands:11, freq:29, sentiment:'Neutral',     domains:['comparethemarket.com','gocompare.com','admiral.com','marmalade.co.uk','confused.com','ingenie.com','tesco.com']}
+      {term:'car insurance young drivers',     brands:11, freq:29, sentiment:'Neutral',     domains:['comparethemarket.com','gocompare.com','admiral.com','marmalade.co.uk','confused.com','ingenie.com','tesco.com']},
+      {term:'best credit cards UK 2026',       brands:26, freq:61, sentiment:'Favourable',  domains:['moneysupermarket.com','comparethemarket.com','uswitch.com','moneyfacts.co.uk','barclays.co.uk','lloydsbank.com','amex.co.uk','virgin.com']},
+      {term:'cheap flights to Barcelona',      brands:14, freq:48, sentiment:'Neutral',     domains:['skyscanner.net','kayak.co.uk','momondo.com','booking.com','ryanair.com','easyjet.com','britishairways.com','expedia.co.uk']},
+      {term:'pet insurance comparison UK',     brands:9,  freq:22, sentiment:'Favourable',  domains:['comparethemarket.com','gocompare.com','petplan.co.uk','bought-by-many.com','tesco.com','argos.co.uk']},
+      {term:'best mortgage rates 2026',        brands:33, freq:71, sentiment:'Favourable',  domains:['moneysupermarket.com','hsbc.co.uk','barclays.co.uk','nationwide.co.uk','natwest.com','lloydsbank.com','santander.co.uk','halifax.co.uk','virginmoney.com']},
+      {term:'electric cars under 30000',       brands:17, freq:44, sentiment:'Favourable',  domains:['autotrader.co.uk','car.co.uk','parkers.co.uk','tesla.com','nissan.co.uk','volkswagen.co.uk','renault.co.uk','mg.co.uk']},
+      {term:'gym membership near me',          brands:7,  freq:33, sentiment:'Neutral',     domains:['puregym.com','thegymgroup.com','davidlloyd.co.uk','virginactive.co.uk','anytimefitness.co.uk']},
+      {term:'best VPN services UK',            brands:12, freq:55, sentiment:'Favourable',  domains:['nordvpn.com','expressvpn.com','surfshark.com','cyberghostvpn.com','privateinternetaccess.com','protonvpn.com']},
+      {term:'home insurance buildings cover',  brands:5,  freq:18, sentiment:'Unfavourable',domains:['aviva.com','directline.com','admiral.com','axa.co.uk','lloydsbank.com']},
+      {term:'online grocery delivery UK',      brands:8,  freq:67, sentiment:'Favourable',  domains:['tesco.com','sainsburys.co.uk','asda.com','morrisons.com','ocado.com','waitrose.com','aldi.co.uk','lidl.co.uk']},
+      {term:'best laptop for students 2026',   brands:21, freq:49, sentiment:'Favourable',  domains:['apple.com','lenovo.com','hp.com','dell.com','microsoft.com','currys.co.uk','argos.co.uk','amazon.co.uk','very.co.uk']},
+      {term:'HMRC self assessment tax return', brands:4,  freq:36, sentiment:'Neutral',     domains:['gov.uk','sage.com','quickbooks.com','xero.com']},
+      {term:'best protein powder UK',          brands:16, freq:42, sentiment:'Favourable',  domains:['myprotein.com','bulk.com','hollandandbarrett.com','optimumnutrition.com','scitec.com','phd-nutrition.com','amazon.co.uk']},
+      {term:'compare life insurance quotes',   brands:13, freq:27, sentiment:'Neutral',     domains:['comparethemarket.com','moneysupermarket.com','legal-general.com','aviva.com','royallondon.com','zurich.co.uk','vitality.co.uk']},
+      {term:'best antivirus software 2026',    brands:10, freq:58, sentiment:'Favourable',  domains:['norton.com','mcafee.com','kaspersky.com','bitdefender.com','avast.com','malwarebytes.com','eset.com']},
+      {term:'cheap car hire Malaga',           brands:19, freq:35, sentiment:'Unfavourable',domains:['rentalcars.com','kayak.co.uk','europcar.com','hertz.co.uk','enterprise.co.uk','budget.co.uk','sixt.co.uk','easyjet.com','ryanair.com']},
+      {term:'online trading platforms UK',     brands:24, freq:53, sentiment:'Neutral',     domains:['hargreaves-lansdown.co.uk','hl.co.uk','ig.com','etoro.com','freetrade.io','trading212.com','interactive-brokers.co.uk','ajtbell.co.uk']},
+      {term:'best running shoes for men',      brands:14, freq:46, sentiment:'Favourable',  domains:['nike.com','adidas.co.uk','new-balance.co.uk','asics.co.uk','brooks-running.com','hoka.com','runnersneed.com']},
+      {term:'solar panel installation cost',   brands:6,  freq:31, sentiment:'Neutral',     domains:['which.co.uk','greenmatch.co.uk','evergreenenergy.co.uk','solarguide.co.uk','eon.com','british-gas.co.uk']},
+      {term:'accountants for small business',  brands:9,  freq:24, sentiment:'Favourable',  domains:['sage.com','quickbooks.com','xero.com','freeagent.com','clearbooks.co.uk','accountingweb.co.uk']},
+      {term:'best smart home devices 2026',    brands:28, freq:60, sentiment:'Favourable',  domains:['amazon.co.uk','apple.com','google.co.uk','philips.co.uk','samsung.com','tp-link.com','ring.com','netatmo.com','nest.com','hive.co.uk']}
     ];
 
-    var sortCol = -1, sortDir = 'none', rpp = 5, page = 1;
+    var sortCol = 1, sortDir = 'desc', rpp = 10, page = 1;
 
-    function sentClass(s) { return 'ds-table__sentiment ds-table__sentiment--' + s.toLowerCase(); }
+    function sentChip(s) {
+      var color = {Favourable:'green', Neutral:'neutral', Unfavourable:'red'}[s] || 'grey';
+      return '<div class="ds-chip ds-chip--light ds-chip--' + color + ' ds-chip--sm"><span class="ds-chip__label">' + s + '</span></div>';
+    }
 
     function renderBody() {
       var d = DATA.slice();
       if (sortCol >= 0 && sortDir !== 'none') {
-        var keys = ['term','brands','freq','sentiment'];
+        var keys = ['term','freq','sentiment','brands'];
         var key = keys[sortCol];
         d.sort(function(a,b){
           var cmp = typeof a[key]==='string' ? a[key].localeCompare(b[key]) : a[key]-b[key];
@@ -19204,18 +19695,16 @@ document.querySelectorAll('.palette-chip-wrap').forEach(function(wrap) {
       tbody.innerHTML = rows.map(function(r){
         return '<tr class="ds-table__tr">' +
           '<td class="ds-table__td ds-table__td--term" style="max-width:320px;overflow:hidden;text-overflow:ellipsis">' + r.term + '</td>' +
-          '<td class="ds-table__td">' + chipWithTooltip(r.brands, r.domains) + '</td>' +
           '<td class="ds-table__td"><div class="ds-table__bar-wrap"><span class="ds-table__bar-pct">' + r.freq + '%</span><div class="ds-table__bar-track"><div class="ds-table__bar-fill" style="width:' + r.freq + '%"></div></div></div></td>' +
-          '<td class="ds-table__td"><span class="' + sentClass(r.sentiment) + '">' + r.sentiment + '</span></td>' +
+          '<td class="ds-table__td">' + sentChip(r.sentiment) + '</td>' +
+          '<td class="ds-table__td">' + chipWithTooltip(r.brands, r.domains) + '</td>' +
           '</tr>';
       }).join('');
       // pagination
-      var inp = document.getElementById('table-demo-page-input');
-      var tot = document.getElementById('table-demo-page-total');
+      var pageInfo = document.getElementById('table-demo-page-info');
       var prev = document.getElementById('table-demo-prev');
       var next = document.getElementById('table-demo-next');
-      if (inp) inp.value = page;
-      if (tot) tot.textContent = 'of ' + total;
+      if (pageInfo) pageInfo.textContent = page + '/' + total;
       if (prev) prev.disabled = page <= 1;
       if (next) next.disabled = page >= total;
     }
@@ -19266,42 +19755,38 @@ document.querySelectorAll('.palette-chip-wrap').forEach(function(wrap) {
 
     function initTable() {
       var ths = document.querySelectorAll('#table-demo thead th');
+      // Apply initial sort state
+      ths.forEach(function(t){ t.classList.remove('ds-table__th--sorted','ds-table__th--asc'); });
+      ths[sortCol].classList.add('ds-table__th--sorted');
       ths.forEach(function(th) {
         th.querySelector('.ds-table__th-inner').addEventListener('click', function() {
           var col = +th.dataset.col;
           if (sortCol !== col) { sortCol = col; sortDir = 'desc'; }
-          else if (sortDir === 'desc') { sortDir = 'asc'; }
-          else { sortDir = 'none'; sortCol = -1; }
+          else { sortDir = sortDir === 'desc' ? 'asc' : 'desc'; }
           ths.forEach(function(t){ t.classList.remove('ds-table__th--sorted','ds-table__th--asc'); });
-          if (sortCol >= 0) {
-            th.classList.add('ds-table__th--sorted');
-            if (sortDir === 'asc') th.classList.add('ds-table__th--asc');
-          }
+          th.classList.add('ds-table__th--sorted');
+          if (sortDir === 'asc') th.classList.add('ds-table__th--asc');
           page = 1;
           renderBody();
         });
       });
       var prev = document.getElementById('table-demo-prev');
       var next = document.getElementById('table-demo-next');
-      var inp  = document.getElementById('table-demo-page-input');
-      var rBtn = document.getElementById('table-demo-rows-btn');
       if (prev) prev.addEventListener('click', function(){ if(page>1){page--;renderBody();} });
       if (next) next.addEventListener('click', function(){
         var total=Math.ceil(DATA.length/rpp); if(page<total){page++;renderBody();}
       });
-      if (inp) inp.addEventListener('change', function(){
-        var v=+this.value, total=Math.ceil(DATA.length/rpp);
-        page=Math.max(1,Math.min(total,v)); renderBody();
-      });
-      var RPP_OPTIONS = [5,10,25];
-      var rppIdx = 0;
-      if (rBtn) rBtn.addEventListener('click', function(){
-        rppIdx = (rppIdx+1) % RPP_OPTIONS.length;
-        rpp = RPP_OPTIONS[rppIdx];
-        page = 1;
-        this.innerHTML = rpp + ' ' + CHEVD;
-        renderBody();
-      });
+      window.tableSetRpp = function(item, val, ddId) {
+        rpp = val; page = 1; renderBody();
+        var btn = document.getElementById(ddId + '-btn');
+        if (btn) btn.childNodes[0].textContent = val + ' ';
+        var menu = document.getElementById(ddId + '-menu');
+        if (menu) {
+          menu.querySelectorAll('.ds-dropdown__item').forEach(function(el){ el.classList.remove('ds-dropdown__item--selected'); });
+          item.classList.add('ds-dropdown__item--selected');
+        }
+        dsDropdownToggle(ddId);
+      };
       renderBody();
     }
 
