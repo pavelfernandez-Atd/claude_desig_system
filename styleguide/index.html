@@ -19159,17 +19159,22 @@ document.querySelectorAll('.palette-chip-wrap').forEach(function(wrap) {
   (function() {
     var EYE = '<svg width="16" height="16" viewBox="0 0 14.4 11.2" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7.21251 0C9.21425 0 10.8407 0.925 12.0167 2.025C13.1927 3.1 13.9684 4.4 14.3437 5.3C14.4188 5.5 14.4188 5.725 14.3437 5.925C13.9684 6.8 13.1927 8.1 12.0167 9.2C10.8407 10.3 9.21425 11.2 7.21251 11.2C5.18575 11.2 3.55934 10.3 2.38332 9.2C1.2073 8.1 0.431625 6.8 0.0562989 5.925C-0.0187663 5.725 -0.0187663 5.5 0.0562989 5.3C0.431625 4.4 1.2073 3.1 2.38332 2.025C3.55934 0.925 5.18575 0 7.21251 0ZM3.60938 5.6C3.60938 6.9 4.28497 8.075 5.41095 8.725C6.5119 9.375 7.8881 9.375 9.01407 8.725C10.115 8.075 10.8156 6.9 10.8156 5.6C10.8156 4.325 10.115 3.15 9.01407 2.5C7.8881 1.85 6.5119 1.85 5.41095 2.5C4.28497 3.15 3.60938 4.325 3.60938 5.6ZM7.21251 4C7.21251 3.825 7.16247 3.675 7.11242 3.5C7.06238 3.375 7.16247 3.2 7.3126 3.2C8.31347 3.25 9.23927 3.95 9.51451 5C9.86481 6.275 9.11416 7.575 7.81303 7.925C6.53692 8.275 5.21077 7.5 4.88549 6.225C4.83545 6.05 4.81043 5.875 4.81043 5.725C4.7854 5.575 4.96056 5.475 5.08566 5.525C5.26082 5.575 5.41095 5.6 5.61112 5.6C6.48688 5.6 7.21251 4.9 7.21251 4Z" fill="currentColor"/></svg>';
     var CHEVD = '<svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 5l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+    function chipWithTooltip(count, domains) {
+      return '<div class="ds-count-chip-wrap ds-count-chip-wrap--table" data-domains=\'' + JSON.stringify(domains || []) + '\'>' +
+        '<span class="ds-count-chip"><span class="ds-count-chip__label">' + count + '</span><span class="ds-count-chip__icon">' + EYE + '</span></span>' +
+        '</div>';
+    }
     var DATA = [
-      {term:'best car insurance comparison',  brands:22, freq:57, sentiment:'Favourable'},
-      {term:'broadband deals UK 2026',         brands:18, freq:40, sentiment:'Favourable'},
-      {term:'cheap travel insurance online',   brands:31, freq:54, sentiment:'Neutral'},
-      {term:'compare home insurance quotes',   brands:8,  freq:12, sentiment:'Unfavourable'},
-      {term:'best savings account rates',      brands:22, freq:38, sentiment:'Favourable'},
-      {term:'luxury fashion brands 2026',      brands:15, freq:52, sentiment:'Favourable'},
-      {term:'online pharmacy prescription UK', brands:3,  freq:17, sentiment:'Neutral'},
-      {term:'compare energy tariffs UK',       brands:22, freq:52, sentiment:'Unfavourable'},
-      {term:'personal banking mobile apps',    brands:19, freq:63, sentiment:'Favourable'},
-      {term:'car insurance young drivers',     brands:11, freq:29, sentiment:'Neutral'}
+      {term:'best car insurance comparison',  brands:22, freq:57, sentiment:'Favourable',  domains:['comparethemarket.com','moneysupermarket.com','gocompare.com','admiral.com','confused.com','directline.com','aviva.com','churchill.com','quotezone.co.uk','esure.com']},
+      {term:'broadband deals UK 2026',         brands:18, freq:40, sentiment:'Favourable',  domains:['bt.com','sky.com','virginmedia.com','talktalk.co.uk','plusnet.com','ee.co.uk','vodafone.co.uk','hyperoptic.com']},
+      {term:'cheap travel insurance online',   brands:31, freq:54, sentiment:'Neutral',     domains:['comparethemarket.com','moneysupermarket.com','gocompare.com','aviva.com','allianz.co.uk','insureandgo.com','postoffice.co.uk','holidaysafe.co.uk']},
+      {term:'compare home insurance quotes',   brands:8,  freq:12, sentiment:'Unfavourable',domains:['comparethemarket.com','moneysupermarket.com','admiral.com','aviva.com','directline.com']},
+      {term:'best savings account rates',      brands:22, freq:38, sentiment:'Favourable',  domains:['nationwide.co.uk','barclays.co.uk','lloydsbank.com','natwest.com','santander.co.uk','halifax.co.uk','monzo.com','starlingbank.com']},
+      {term:'luxury fashion brands 2026',      brands:15, freq:52, sentiment:'Favourable',  domains:['net-a-porter.com','farfetch.com','mytheresa.com','matchesfashion.com','selfridges.com','harveynichols.com']},
+      {term:'online pharmacy prescription UK', brands:3,  freq:17, sentiment:'Neutral',     domains:['boots.com','pharmacy2u.co.uk','lloydsdirect.co.uk']},
+      {term:'compare energy tariffs UK',       brands:22, freq:52, sentiment:'Unfavourable',domains:['moneysupermarket.com','uswitch.com','comparethemarket.com','eon.com','britishgas.co.uk','edfenergy.com','bulb.co.uk','octopusenergy.com']},
+      {term:'personal banking mobile apps',    brands:19, freq:63, sentiment:'Favourable',  domains:['monzo.com','starlingbank.com','revolut.com','n26.com','nationwide.co.uk','barclays.co.uk','lloydsbank.com','natwest.com']},
+      {term:'car insurance young drivers',     brands:11, freq:29, sentiment:'Neutral',     domains:['comparethemarket.com','gocompare.com','admiral.com','marmalade.co.uk','confused.com','ingenie.com','tesco.com']}
     ];
 
     var sortCol = -1, sortDir = 'none', rpp = 5, page = 1;
@@ -19195,7 +19200,7 @@ document.querySelectorAll('.palette-chip-wrap').forEach(function(wrap) {
       tbody.innerHTML = rows.map(function(r){
         return '<tr class="ds-table__tr">' +
           '<td class="ds-table__td ds-table__td--term" style="max-width:320px;overflow:hidden;text-overflow:ellipsis">' + r.term + '</td>' +
-          '<td class="ds-table__td"><span class="ds-count-chip"><span class="ds-count-chip__label">' + r.brands + '</span><span class="ds-count-chip__icon">' + EYE + '</span></span></td>' +
+          '<td class="ds-table__td">' + chipWithTooltip(r.brands, r.domains) + '</td>' +
           '<td class="ds-table__td"><div class="ds-table__bar-wrap"><span class="ds-table__bar-pct">' + r.freq + '%</span><div class="ds-table__bar-track"><div class="ds-table__bar-fill" style="width:' + r.freq + '%"></div></div></div></td>' +
           '<td class="ds-table__td"><span class="' + sentClass(r.sentiment) + '">' + r.sentiment + '</span></td>' +
           '</tr>';
@@ -19210,6 +19215,50 @@ document.querySelectorAll('.palette-chip-wrap').forEach(function(wrap) {
       if (prev) prev.disabled = page <= 1;
       if (next) next.disabled = page >= total;
     }
+
+    // Fixed-position tooltip for table chips (avoids overflow:hidden clipping)
+    var ttEl = (function() {
+      var el = document.createElement('div');
+      el.id = 'ds-cc-table-tip';
+      el.style.cssText = 'position:fixed;z-index:9999;pointer-events:none;opacity:0;transition:opacity 0.15s ease;display:flex;flex-direction:column;align-items:center;filter:drop-shadow(0 0 8px rgba(23,42,68,0.2))';
+      el.innerHTML = '<div class="ds-count-chip-tooltip__body"><div class="ds-count-chip-tooltip__list" id="ds-cc-table-tip-list"></div></div><div class="ds-count-chip-tooltip__caret"></div>';
+      document.body.appendChild(el);
+      return el;
+    }());
+
+    document.addEventListener('mouseenter', function(e) {
+      var wrap = e.target.closest('.ds-count-chip-wrap--table');
+      if (!wrap) return;
+      var domains = JSON.parse(wrap.dataset.domains || '[]');
+      var list = document.getElementById('ds-cc-table-tip-list');
+      list.innerHTML = domains.map(function(d) {
+        var name = d.replace(/\.(com|co\.uk|co|org|net)$/, '');
+        return '<div class="ds-count-chip-tooltip__item">' +
+          '<img class="ds-count-chip-tooltip__favicon" src="https://www.google.com/s2/favicons?domain=' + d + '&sz=16" alt="">' +
+          '<span class="ds-count-chip-tooltip__name">' + name + '</span></div>';
+      }).join('');
+      var r = wrap.getBoundingClientRect();
+      // position: center above the chip
+      ttEl.style.opacity = '0';
+      ttEl.style.display = 'flex';
+      requestAnimationFrame(function() {
+        var tw = ttEl.offsetWidth;
+        var th = ttEl.offsetHeight;
+        var left = r.left + r.width / 2 - tw / 2;
+        var top  = r.top - th - 2;
+        // keep within viewport
+        left = Math.max(8, Math.min(left, window.innerWidth - tw - 8));
+        ttEl.style.left = left + 'px';
+        ttEl.style.top  = top + 'px';
+        ttEl.style.opacity = '1';
+      });
+    }, true);
+
+    document.addEventListener('mouseleave', function(e) {
+      if (e.target.closest && e.target.closest('.ds-count-chip-wrap--table')) {
+        ttEl.style.opacity = '0';
+      }
+    }, true);
 
     function initTable() {
       var ths = document.querySelectorAll('#table-demo thead th');
