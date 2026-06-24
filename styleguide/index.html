@@ -2144,14 +2144,10 @@
 
 <!-- ── SECONDARY SUB-NAV: Style Guide ───────────────────────── -->
 <nav class="sub-nav" id="subnav-style-guide">
-  <a href="#colors" class="active">Colors</a>
-  <a href="#typography">Typography</a>
-  <a href="#spacing">Spacing</a>
-  <a href="#border-radius">Border Radius</a>
-  <a href="#shadows">Shadows</a>
-  <a href="#breakpoints">Breakpoints</a>
-  <a href="#icons">Icons</a>
-  <a href="#logos">Logos</a>
+  <a data-sgpage="colors" class="active" style="cursor:pointer">Colors</a>
+  <a data-sgpage="typography" style="cursor:pointer">Typography</a>
+  <a data-sgpage="icons" style="cursor:pointer">Icons &amp; Logos</a>
+  <a data-sgpage="definitions" style="cursor:pointer">Definitions</a>
 </nav>
 
 <!-- ── SECONDARY SUB-NAV: Components ───────────────────────── -->
@@ -2167,6 +2163,7 @@
 
 <div id="tab-content-style-guide" class="tab-content active content">
 
+<div class="sg-page" id="sg-page-colors">
 <!-- ═══════════════════════════════════════════════════════════════
      COLORS
 ════════════════════════════════════════════════════════════════ -->
@@ -2556,6 +2553,9 @@
   </div>
 </section>
 
+</div><!-- /sg-page-colors -->
+
+<div class="sg-page" id="sg-page-typography" style="display:none">
 <!-- ═══════════════════════════════════════════════════════════════
      TYPOGRAPHY
 ════════════════════════════════════════════════════════════════ -->
@@ -2682,6 +2682,9 @@
   </div>
 </section>
 
+</div><!-- /sg-page-typography -->
+
+<div class="sg-page" id="sg-page-definitions" style="display:none">
 <!-- ═══════════════════════════════════════════════════════════════
      SPACING
 ════════════════════════════════════════════════════════════════ -->
@@ -2838,6 +2841,9 @@
   <div class="bp-row"><span class="bp-name">2xl</span><span class="bp-val">1536px</span><div class="bp-bar-bg"><div class="bp-bar" style="width:100%"></div></div></div>
 </section>
 
+</div><!-- /sg-page-definitions -->
+
+<div class="sg-page" id="sg-page-icons" style="display:none">
 <!-- ── ICONS ──────────────────────────────────────────────────── -->
 <section id="icons">
   <h2>Icons</h2>
@@ -3207,6 +3213,8 @@
   </div>
 
 </section>
+
+</div><!-- /sg-page-icons -->
 
 </div><!-- /tab-content-style-guide -->
 
@@ -18412,7 +18420,7 @@ Prioritise authority reinforcement in declining citation segments</textarea>
       if (tab === 'components') {
         activateCategory('cards');
       } else {
-        history.replaceState(null, '', '#style-guide');
+        activateSgPage('colors');
       }
     });
   });
@@ -18456,38 +18464,27 @@ Prioritise authority reinforcement in declining citation segments</textarea>
     link.addEventListener('click', () => activateComponent(link.dataset.component));
   });
 
-  // ── SMOOTH SCROLL FOR SUB-NAV LINKS ────────────────────────
+  // ── STYLE GUIDE PAGE SWITCHING ─────────────────────────────
   function stickyOffset() {
     const tb = document.querySelector('.tab-bar');
     const sn = document.querySelector('.sub-nav:not([style*="display: none"]):not([style*="display:none"])');
     return (tb ? tb.offsetHeight : 0) + (sn ? sn.offsetHeight : 0);
   }
 
-  document.addEventListener('click', e => {
-    const link = e.target.closest('.sub-nav a[href^="#"]');
-    if (!link) return;
-    e.preventDefault();
-    const sectionId = link.getAttribute('href').slice(1);
-    const target = document.getElementById(sectionId);
-    if (!target) return;
-    window.scrollTo({ top: target.getBoundingClientRect().top + window.scrollY - stickyOffset() - 16, behavior: 'smooth' });
-    document.querySelectorAll('#subnav-style-guide a').forEach(a => a.classList.remove('active'));
-    link.classList.add('active');
-    history.replaceState(null, '', '#style-guide/' + sectionId);
-  });
-
-  // ── SCROLL SPY ─────────────────────────────────────────────
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(e => {
-      if (!e.isIntersecting) return;
-      document.querySelectorAll('#subnav-style-guide a').forEach(a => {
-        if (a.getAttribute('href') === '#' + e.target.id) a.classList.add('active');
-        else a.classList.remove('active');
-      });
+  function activateSgPage(pageId) {
+    document.querySelectorAll('.sg-page').forEach(p => p.style.display = 'none');
+    const page = document.getElementById('sg-page-' + pageId);
+    if (page) page.style.display = '';
+    document.querySelectorAll('#subnav-style-guide [data-sgpage]').forEach(a => {
+      a.classList.toggle('active', a.dataset.sgpage === pageId);
     });
-  }, { rootMargin: '-40% 0px -55% 0px' });
+    window.scrollTo({ top: 0, behavior: 'instant' });
+    if (!_skipHashUpdate) history.replaceState(null, '', '#style-guide/' + pageId);
+  }
 
-  document.querySelectorAll('section[id]').forEach(s => observer.observe(s));
+  document.querySelectorAll('#subnav-style-guide [data-sgpage]').forEach(link => {
+    link.addEventListener('click', () => activateSgPage(link.dataset.sgpage));
+  });
 
   // ── LIVE DEMO BUTTONS ───────────────────────────────────────
   document.querySelectorAll('.demo-btn').forEach(btn => {
@@ -18802,15 +18799,8 @@ Prioritise authority reinforcement in declining citation segments</textarea>
     try {
       if (tab === 'style-guide') {
         activateTab('style-guide');
-        if (parts[1]) {
-          const target = document.getElementById(parts[1]);
-          if (target) setTimeout(function() {
-            window.scrollTo({ top: target.getBoundingClientRect().top + window.scrollY - stickyOffset() - 16, behavior: 'smooth' });
-            document.querySelectorAll('#subnav-style-guide a').forEach(function(a) {
-              a.classList.toggle('active', a.getAttribute('href') === '#' + parts[1]);
-            });
-          }, 50);
-        }
+        const sgPage = parts[1] || 'colors';
+        activateSgPage(sgPage);
       } else if (tab === 'components') {
         activateTab('components');
         const cat = parts[1] || 'cards';
