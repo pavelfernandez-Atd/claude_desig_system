@@ -8205,7 +8205,7 @@ function accSetDisabled(id, disabled) {
       </div>
       <div style="display:flex;flex-direction:column;gap:8px">
         <div style="font-size:11px;font-weight:600;color:#6477a2;text-transform:uppercase;letter-spacing:0.6px;margin-bottom:4px">Count Chip</div>
-        <span class="ds-table__count-chip">22 <svg width="14" height="11" viewBox="0 0 14 11" fill="none"><path d="M7 1C3.5 1 1 5.5 1 5.5S3.5 10 7 10 13 5.5 13 5.5 10.5 1 7 1z" stroke="currentColor" stroke-width="1.1"/><circle cx="7" cy="5.5" r="1.8" stroke="currentColor" stroke-width="1.1"/></svg></span>
+        <span class="ds-count-chip"><span class="ds-count-chip__label">22</span><span class="ds-count-chip__icon"><svg width="16" height="16" viewBox="0 0 14.4 11.2" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7.21251 0C9.21425 0 10.8407 0.925 12.0167 2.025C13.1927 3.1 13.9684 4.4 14.3437 5.3C14.4188 5.5 14.4188 5.725 14.3437 5.925C13.9684 6.8 13.1927 8.1 12.0167 9.2C10.8407 10.3 9.21425 11.2 7.21251 11.2C5.18575 11.2 3.55934 10.3 2.38332 9.2C1.2073 8.1 0.431625 6.8 0.0562989 5.925C-0.0187663 5.725 -0.0187663 5.5 0.0562989 5.3C0.431625 4.4 1.2073 3.1 2.38332 2.025C3.55934 0.925 5.18575 0 7.21251 0ZM3.60938 5.6C3.60938 6.9 4.28497 8.075 5.41095 8.725C6.5119 9.375 7.8881 9.375 9.01407 8.725C10.115 8.075 10.8156 6.9 10.8156 5.6C10.8156 4.325 10.115 3.15 9.01407 2.5C7.8881 1.85 6.5119 1.85 5.41095 2.5C4.28497 3.15 3.60938 4.325 3.60938 5.6ZM7.21251 4C7.21251 3.825 7.16247 3.675 7.11242 3.5C7.06238 3.375 7.16247 3.2 7.3126 3.2C8.31347 3.25 9.23927 3.95 9.51451 5C9.86481 6.275 9.11416 7.575 7.81303 7.925C6.53692 8.275 5.21077 7.5 4.88549 6.225C4.83545 6.05 4.81043 5.875 4.81043 5.725C4.7854 5.575 4.96056 5.475 5.08566 5.525C5.26082 5.575 5.41095 5.6 5.61112 5.6C6.48688 5.6 7.21251 4.9 7.21251 4Z" fill="currentColor"/></svg></span></span>
         <div style="font-size:11px;color:#6b6b6b;margin-top:4px">Neutral bg #e7ecf4, text #576993, eye icon</div>
       </div>
       <div style="display:flex;flex-direction:column;gap:8px">
@@ -19157,7 +19157,7 @@ document.querySelectorAll('.palette-chip-wrap').forEach(function(wrap) {
 </script>
 <script>
   (function() {
-    var EYE = '<svg width="14" height="11" viewBox="0 0 14 11" fill="none"><path d="M7 1C3.5 1 1 5.5 1 5.5S3.5 10 7 10 13 5.5 13 5.5 10.5 1 7 1z" stroke="currentColor" stroke-width="1.1"/><circle cx="7" cy="5.5" r="1.8" stroke="currentColor" stroke-width="1.1"/></svg>';
+    var EYE = '<svg width="16" height="16" viewBox="0 0 14.4 11.2" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7.21251 0C9.21425 0 10.8407 0.925 12.0167 2.025C13.1927 3.1 13.9684 4.4 14.3437 5.3C14.4188 5.5 14.4188 5.725 14.3437 5.925C13.9684 6.8 13.1927 8.1 12.0167 9.2C10.8407 10.3 9.21425 11.2 7.21251 11.2C5.18575 11.2 3.55934 10.3 2.38332 9.2C1.2073 8.1 0.431625 6.8 0.0562989 5.925C-0.0187663 5.725 -0.0187663 5.5 0.0562989 5.3C0.431625 4.4 1.2073 3.1 2.38332 2.025C3.55934 0.925 5.18575 0 7.21251 0ZM3.60938 5.6C3.60938 6.9 4.28497 8.075 5.41095 8.725C6.5119 9.375 7.8881 9.375 9.01407 8.725C10.115 8.075 10.8156 6.9 10.8156 5.6C10.8156 4.325 10.115 3.15 9.01407 2.5C7.8881 1.85 6.5119 1.85 5.41095 2.5C4.28497 3.15 3.60938 4.325 3.60938 5.6ZM7.21251 4C7.21251 3.825 7.16247 3.675 7.11242 3.5C7.06238 3.375 7.16247 3.2 7.3126 3.2C8.31347 3.25 9.23927 3.95 9.51451 5C9.86481 6.275 9.11416 7.575 7.81303 7.925C6.53692 8.275 5.21077 7.5 4.88549 6.225C4.83545 6.05 4.81043 5.875 4.81043 5.725C4.7854 5.575 4.96056 5.475 5.08566 5.525C5.26082 5.575 5.41095 5.6 5.61112 5.6C6.48688 5.6 7.21251 4.9 7.21251 4Z" fill="currentColor"/></svg>';
     var CHEVD = '<svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 5l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
     var DATA = [
       {term:'best car insurance comparison',  brands:22, freq:57, sentiment:'Favourable'},
@@ -19195,7 +19195,7 @@ document.querySelectorAll('.palette-chip-wrap').forEach(function(wrap) {
       tbody.innerHTML = rows.map(function(r){
         return '<tr class="ds-table__tr">' +
           '<td class="ds-table__td ds-table__td--term" style="max-width:320px;overflow:hidden;text-overflow:ellipsis">' + r.term + '</td>' +
-          '<td class="ds-table__td"><span class="ds-table__count-chip">' + r.brands + ' ' + EYE + '</span></td>' +
+          '<td class="ds-table__td"><span class="ds-count-chip"><span class="ds-count-chip__label">' + r.brands + '</span><span class="ds-count-chip__icon">' + EYE + '</span></span></td>' +
           '<td class="ds-table__td"><div class="ds-table__bar-wrap"><span class="ds-table__bar-pct">' + r.freq + '%</span><div class="ds-table__bar-track"><div class="ds-table__bar-fill" style="width:' + r.freq + '%"></div></div></div></td>' +
           '<td class="ds-table__td"><span class="' + sentClass(r.sentiment) + '">' + r.sentiment + '</span></td>' +
           '</tr>';
