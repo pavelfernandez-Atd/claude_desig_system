@@ -198,15 +198,10 @@ body {
   min-width: 0;
 }
 .kpi-card__info-icon {
-  width: 16px; height: 16px;
-  border: 1.5px solid #6477a2;
-  border-radius: 50%;
+  width: 20px; height: 20px;
   display: flex; align-items: center; justify-content: center;
-  font-size: 9px; font-weight: 700;
-  color: #6477a2;
-  flex-shrink: 0;
-  cursor: pointer;
-  user-select: none;
+  border-radius: var(--radius-md); border: none; background: transparent;
+  flex-shrink: 0; cursor: pointer; user-select: none;
 }
 .kpi-card__info-icon:hover { background: #eaeff5; }
 .kpi-info-wrap {
@@ -234,14 +229,14 @@ body {
 .kpi-card__row  { display: flex; align-items: center; gap: 12px; width: 100%; }
 .kpi-card__values { display: flex; gap: 4px; align-items: center; flex-shrink: 0; }
 .kpi-card__values--full { flex: 1; min-width: 0; }
-.kpi-card__bar { width: 4px; border-radius: 200px; background: #b1d1f6; align-self: stretch; flex-shrink: 0; }
+.kpi-card__bar { width: 4px; border-radius: 200px; background: #d3dbe6; align-self: stretch; flex-shrink: 0; }
 .kpi-card__value {
   font-family: var(--font-base);
   font-size: 44px;
   font-weight: 300;
   line-height: 44px;
   letter-spacing: -3px;
-  color: #3589e9;
+  color: #6477a2;
   flex-shrink: 0;
 }
 .kpi-card__value--label {
@@ -463,7 +458,7 @@ body {
 .btn--secondary:disabled, .btn--secondary.btn--disabled { background: #b2bfcc !important; color: #ffffff !important; }
 
 .btn--plain { background: transparent; color: #334557; }
-.btn--plain:hover { background: #e8f2fc; border-color: #dbe9f6; }
+.btn--plain:hover { background: #EAF1F7; }
 .btn--plain:active { background: #5BB3F9; color: #ffffff; }
 
 .btn--outlined { background: #ffffff; border-color: #dbe9f6; color: #3079bd; }
@@ -548,7 +543,7 @@ body {
 .mclc__bands { position:absolute; inset:0; display:flex; align-items:stretch; justify-content:space-between; padding:0 40px; opacity:0.1; pointer-events:none; }
 .mclc__band { width:32px; background:#d9d9d9; }
 .mclc__svg { position:absolute; top:20px; left:0; width:100%; height:calc(100% - 20px); overflow:visible; }
-.mclc__hover-dot { position:absolute; width:10px; height:10px; border-radius:50%; border:2px solid #fff; box-shadow:0 1px 4px rgba(0,0,0,0.2); transform:translate(-50%,-50%); pointer-events:none; opacity:0; transition:opacity 0.1s; z-index:4; }
+.mclc__hover-dot { position:absolute; width:12px; height:12px; border-radius:50%; border:2px solid #fff; box-shadow:0 1px 4px rgba(0,0,0,0.2); transform:translate(-50%,-50%); pointer-events:none; opacity:0; transition:opacity 0.1s; z-index:4; }
 .mclc__hover-tooltip { position:absolute; background:rgba(0,0,0,0.8); color:#fff; font-family:'Open Sans',Helvetica,sans-serif; font-size:12px; font-weight:600; padding:4px 8px; border-radius:4px; transform:translate(-50%,-100%); pointer-events:none; opacity:0; transition:opacity 0.1s; white-space:nowrap; z-index:5; text-align:center; line-height:1.5; }
 .mclc__x-axis { display:flex; align-items:center; gap:10px; padding-top:4px; }
 .mclc__x-kpi-spacer { width:148px; flex-shrink:0; }
@@ -649,7 +644,7 @@ body {
 .ds-chip__label { padding:0 4px; }
 .ds-chip--outlined.ds-chip--grey    { border-color:#757575; color:#757575; }
 .ds-chip--outlined.ds-chip--purple  { border-color:#6848c6; color:#5b3aba; }
-.ds-chip--outlined.ds-chip--blue    { border-color:#3589e9; color:#1565c0; }
+.ds-chip--outlined.ds-chip--blue    { border-color:#3589e9; color:#334557; }
 .ds-chip--outlined.ds-chip--magenta { border-color:#c95ec9; color:#a036a0; }
 .ds-chip--outlined.ds-chip--crimson { border-color:#e3457c; color:#762876; }
 .ds-chip--outlined.ds-chip--green   { border-color:#40af46; color:#246127; }
@@ -663,7 +658,7 @@ body {
 .ds-chip--outlined.ds-chip--neutral { border-color:#c0cde0; color:#38476a; }
 .ds-chip--light.ds-chip--grey    { background:#eeeeee; color:#616161; }
 .ds-chip--light.ds-chip--purple  { background:#f0ebfa; color:#5b3aba; }
-.ds-chip--light.ds-chip--blue    { background:#cee4ff; color:#1565c0; }
+.ds-chip--light.ds-chip--blue    { background:#cee4ff; color:#334557; }
 .ds-chip--light.ds-chip--magenta { background:#f5defc; color:#932adf; }
 .ds-chip--light.ds-chip--crimson { background:#ffe5ee; color:#c11d56; }
 .ds-chip--light.ds-chip--green   { background:#e9f7e9; color:#2e7d32; }
